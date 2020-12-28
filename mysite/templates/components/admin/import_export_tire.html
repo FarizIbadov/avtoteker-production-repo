@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %}
+<div class="import-export">
+    <div class="import-export__row">
+        <div class="import-export__col">
+            {% crispy form.imports %}
+        </div>
+        <div class="import-export__col">
+            {% crispy form.exports %}
+        </div>
+    </div>
+</div>
+
+

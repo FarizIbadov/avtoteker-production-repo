@@ -1,0 +1,16 @@
+{
+    "python.pythonPath": "/usr/local/bin/python",
+    "python.linting.enabled": false,
+    "python.linting.pylintEnabled": true,
+    "python.languageServer": "Jedi",   
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": false,
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "120",
+    ],  
+    "python.formatting.blackPath": "/usr/local/bin/black",
+    "[python]": {
+        "editor.formatOnSave": true,
+    },
+}

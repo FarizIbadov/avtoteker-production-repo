@@ -1,0 +1,15 @@
+{% extends "../config/admin-base.html" %} 
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% include "../components/modal.html" %}
+
+    <div class="tireapp-detail">
+        <div class="tireapp-detail__row">
+            <a class="tireapp-detail__back-btn" href="{% url 'custom-admin:tireapp:home' %}">Back</a>
+            <a class="tireapp-detail__edit-btn" href="{{object.get_edit_url}}">Edit</a>
+            <button class="tireapp-detail__delete-btn" data-toggle="modal" data-target="#delete">Delete</button>
+        </div>
+    </div>
+    
+{% endblock content %}

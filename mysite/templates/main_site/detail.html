@@ -1,0 +1,199 @@
+{% extends "../config/main-base.html" %}
+{% load rating %}
+{% load taksit_kredit %}
+
+{% block content %}
+    {% include "../components/order-modal-form.html" %}
+    {% include "../components/main-site/tire-search.html" %}
+    <div class="container mb-5">
+        <div class="main-list__main-row">
+            <div class="main-list__col-12 px-0">
+                <div class="main-list__card border-0">
+                    <!-- <div class="main-list__side-info">
+                        <small class="main-list__side-single">3 ay {{object.kredit_3_dif|floatformat}}%</small>
+                        <small class="main-list__side-single">6 taksit</small>
+                        <small class="main-list__side-single">1 illik pulsuz servis</small>
+                    </div> -->
+                    <div class="main-list__sub-row">
+                            <img class="main-list__item-logo" src="{{object.brand.image.url}}" alt="{{object.brand}}">
+                    </div>
+                    <p class="main-list__card-text text-right pr-4">{{object.serie}}</p>
+                    <p class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</p>
+                    <div class="main-list__sub-row--2">
+                        <div class="main-list__col-sm">
+                            <img src="{{object.image.url}}" class="main-list__img" alt="{{object.brand}}">
+                        </div>
+                        <div class="main-list__col-sm--2">
+                            <div class="main-list__card-body">
+                                <div class="main-list__card-text--2">
+                                    {{object.get_filters|safe}}
+                                </div>
+                                <div class="mt-1">
+                                    {% include "../components/main-site/image.html" with object=object.season %}
+                                </div>
+                                <div class="mt-1">
+                                    {% include "../components/main-site/image.html" with object=object.brand.country %}
+                                    {% include "../components/main-site/image.html" with object=object.manufacturer %}
+                                </div>
+                                <div class="main-list__price-info">
+                                    <div class="price">
+                                        <span class="red-line-trought font-larger">
+                                            {{object.USDNO|floatformat}}
+                                        </span>
+                                    </div>  
+                                    <div class="price text-center  pr-1">
+                                        <span class="text-red font-xl">{{object.USD|floatformat}}</span>
+                                        <span class="manat">₼</span>
+                                    </div>
+                                    {% if object.taksit_active %}  
+                                        {{ object|get_taksit|safe}}
+                                    {% elif object.kredit_active %}
+                                        {{ object|get_kredit|safe}}
+                                    {% endif %}
+                                </div>
+                                <div class="main-list__btn-box">
+                                    <button type="button" data-toggle="modal"
+                                    data-target="#order" class="main-list__cart-btn"
+                                    data-max="{{object.quantity}}"
+                                    data-id="{{object.id}}">
+                                        {% include "../components/main-site/cart.html" %}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="d-flex mt-2">
+                    <div class="detail-banner mr-1 bg-my-primary">
+                        Montaj+Balans
+                    </div>
+                    <div class="detail-banner bg-light">
+                        {{object.montaj_balance|floatformat}} azn / ədəd
+                    </div>
+                </div>
+                <div class="d-flex mt-2">
+                    <div class="detail-banner mr-1 bg-my-primary">
+                        Disk şın təmiri
+                    </div>
+                    <div class="detail-banner bg-light">
+                        10-15 azn / ədəd
+                    </div>
+                </div>
+                <div class="d-flex mt-2">
+                    <div class="detail-banner mr-1 bg-my-primary">
+                        Razval
+                    </div>
+                    <div class="detail-banner bg-light">
+                        {{object.razval|floatformat}} azn
+                    </div>
+                </div>
+              
+                {% if object.brand.free_service %}
+                <div class="d-flex mt-2">
+                    <div class="detail-banner mr-1 bg-my-primary">
+                        Bir illik servis
+                    </div>
+                    <div class="detail-banner bg-light">
+                        hədiyyə
+                    </div>
+                </div>
+                {% endif %}
+                  <div class="d-flex mt-2">
+                    <div class="detail-banner mr-1 bg-my-primary">
+                        2 / 4 təkər üçün ventil
+                    </div>
+                    <div class="detail-banner bg-light">
+                        3 / 5 azn
+                    </div>
+                </div>
+                {% if object.brand.extra_one_year_warranty %}
+                <div class="d-flex mt-2">
+                    <div class="detail-banner mr-1 bg-my-primary">
+                        Əlavə bir il zəmanət
+                    </div>
+                    <div class="detail-banner bg-light">
+                        {{object.brand.extra_one_year_warranty}}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row mb-3 mt-5">
+            <div class="col">
+                {{object.serie.description|safe}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-4 d-flex align-items-center">
+                <div class="detail-rating-box pt-1">
+                    <div class="detail-rating-row">
+                        <div class="rating-label">Dry</div>
+                        <div class="rating-value">
+                            {{object.serie.dry|get_rating|safe}}
+                        </div>
+                    </div>
+                    <div class="detail-rating-row">
+                        <div class="rating-label">Wet</div>
+                        <div class="rating-value">
+                            {{object.serie.wet|get_rating|safe}}
+                        </div>
+                    </div>
+                    <div class="detail-rating-row">
+                        <div class="rating-label">Offroad</div>
+                        <div class="rating-value">
+                            {{object.serie.offroad|get_rating|safe}}
+                        </div>
+                    </div>
+                    <div class="detail-rating-row">
+                        <div class="rating-label">Comfort</div>
+                        <div class="rating-value">
+                            {{object.serie.comfort|get_rating|safe}}
+                        </div>
+                    </div>
+                    <div class="detail-rating-row">
+                        <div class="rating-label">Noise</div>
+                        <div class="rating-value">
+                            {{object.serie.noise|get_rating|safe}}
+                        </div>
+                    </div>
+                    <div class="detail-rating-row">
+                        <div class="rating-label">Treadware</div>
+                        <div class="rating-value">
+                            {{object.serie.treadware|get_rating|safe}}
+                        </div>
+                    </div>
+                    <div class="detail-rating-row">
+                        <div class="rating-label">Value</div>
+                        <div class="rating-value">
+                            {{object.serie.value|get_rating|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 detail-extra">
+                {{object.serie.extra|safe}}
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <div class="col-md px-0">
+                    <div class="d-flex justify-content-between align-items-center ">
+                        <div>
+                            <h5 class="mb-0">About {{object.brand.title}}</h5>
+                        </div>
+                        <div class="detail-brand-img">
+                            <img class="w-100" src="{{object.brand.image.url}}" alt="{{object.brand.title}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 px-0 mt-3">
+                    {{object.brand.description|safe}}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

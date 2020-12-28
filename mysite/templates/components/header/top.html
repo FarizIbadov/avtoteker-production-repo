@@ -1,0 +1,33 @@
+{% load social_tags %}
+{% get_social_media as social_media_list %}
+{% get_phone as phone %}
+{% get_address as address %}
+
+<nav class="header__top">
+      <div class="header__top__container">
+        <div class="header__top__top-row">
+            <div class="header__top__col--4">
+              <div class="header__top__sub-row header__top__sub-row--left">
+                {% for social_media in social_media_list %}
+                  <div class="header__top__col--1">
+                    {% include "../icon.html" with icon=social_media.name link=social_media.href style="dark" %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="header__top__col--8">
+                <div class="header__top__sub-row">
+                    <div class="header__top__col--12">
+                        {% include "../icon.html" with icon="phone" style="light" link=phone.number %}
+                        <span class="header__top__phone">
+                          {{phone}}
+                        </span>
+                    </div>
+                    <div class="header__top__col--12">
+                      {{address.address}}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+</nav>

@@ -1,0 +1,30 @@
+{% extends '../config/admin-base.html' %}
+
+{% block content %}
+<div class="specific-detail">
+    {% include "../components/modal.html" %}
+    <div class="specific-detail__card">
+        <img src="{{object.image.url}}" class="specific-detail__card-img" alt="{{object.title}}">
+        <div class="specific-detail__card-body">
+        <h1 class="specific-detail__card-title">
+            {{object.title}}
+            {% if is_serie %}
+             - {{ object.brand.title }}
+            {% endif %}
+        </h1>
+        {% if object.description %}
+        <p class="specific-detail__card-text">{{object.description|safe}}</p>
+        {% endif %}
+        <hr>
+            <div class="specific-detail__btn-box">
+                <a href="{{ list_url }}" class="specific-detail__btn-secondary">
+                    {% include "../components/arrow.html" with  style="specific-detail__arrow" %} 
+                    Back
+                </a>
+                <a href="{{object.get_edit_url}}" class="specific-detail__btn-outline-secondary">Update</a>
+                <button type="button" class="specific-detail__btn-danger" data-toggle="modal" data-target="#delete">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

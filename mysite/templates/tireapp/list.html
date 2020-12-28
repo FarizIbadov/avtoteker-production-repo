@@ -1,0 +1,46 @@
+{% extends "../config/admin-base.html" %} 
+{% load crispy_forms_tags %}
+{% load url_tags %}
+{% block content %}
+{% include "../components/admin/import_export_tire.html" %}
+      <table class="tireapp__table">
+        <thead class="tireapp__table-head">
+          <tr>
+            <th scope="col"><a class="tireapp__table-head-col-link" href="{% url_encoder request order=None %}">#</a></th>
+            {% for header_field in object_list.header %}
+              {{header_field|safe}}
+            {% endfor %}
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody class="tireapp__table-body">
+          {% if object_list %}
+          {% for tire in object_list.body %}
+          <tr> 
+            <th scope="row">
+              <span>{{tire.id}}</span>
+            </th>
+            <td>{{tire.brand.url|safe}}</td>
+            <td>{{tire.serie.url|safe}}</td>
+            <td class="hidden-at-mobile">{{tire.get_size_for_admin}}</td>
+            <td>{{tire.USDNO}}</td>
+            <td class="hidden-at-mobile">{{tire.USD}}</td>
+            <td class="hidden-at-mobile">{{tire.quantity}}</td>
+            <td class="text-center">
+                <a href="{{tire.get_absolute_url}}" class="btn btn-sm btn-my-secondary">Detail</a>
+            </td>
+          </tr>
+          {% endfor %}    
+          {% endif %}
+        </tbody>
+      </table>
+
+      <div class="container-fluid">
+        {% crispy page_by_form %}
+      </div>
+      {% include "../components/pagination.html" %}
+  
+      <div class="text-center mb-3">
+          <a href="{% url 'custom-admin:tireapp:tire-add' %}" class="btn btn-my-secondary">Add Tire</a>
+      </div>
+{% endblock %}

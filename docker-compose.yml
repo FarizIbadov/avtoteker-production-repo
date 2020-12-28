@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    volumes:
+      - static_data:/vol/web
+    environment:
+      - SECRET=j56@jyc()*qnyl1vj^yf5_a5c27kfp5ysf^yeoxl#ul4hn^j^(
+      - POSTGRES_DB=avtoteker
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=3151936f
+      - DEBUG=0
+      - ALLOWED_HOSTS=127.0.0.1,localhost
+    depends_on:
+      - db
+
+  proxy:
+    build:
+      context: ./proxy
+    volumes:
+      - static_data:/vol/static
+    ports:
+      - "8080:8080"
+    depends_on:
+      - web
+
+  db:
+    image: postgres:12.5-alpine
+    environment:
+      - POSTGRES_DB=avtoteker
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=3151936f
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+volumes:
+  static_data:
+  pgdata:
