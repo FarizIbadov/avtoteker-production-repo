@@ -132,8 +132,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = "/vol/web/static/"
-MEDIA_ROOT = "/vol/web/static/media"
+STATIC_ROOT = "/vol/web/"
+MEDIA_ROOT = "/vol/web/media"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
