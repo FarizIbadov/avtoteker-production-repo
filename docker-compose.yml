@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   web:
+    container_name: avtoteker-web
     build: .
     volumes:
       - static_data:/vol/web
@@ -10,22 +11,24 @@ services:
       - POSTGRES_DB=avtoteker
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=3151936f
-      - DEBUG=0
+      - DEBUG=1
       - ALLOWED_HOSTS=127.0.0.1,localhost
     depends_on:
       - db
 
   proxy:
+    container_name: avtoteker-proxy
     build:
       context: ./proxy
     volumes:
-      - static_data:/vol/static
+      - static_data:/vol/
     ports:
       - "8080:8080"
     depends_on:
       - web
 
   db:
+    container_name: avtoteker-db
     image: postgres:12.5-alpine
     environment:
       - POSTGRES_DB=avtoteker
