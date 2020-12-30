@@ -11,7 +11,7 @@ services:
       - POSTGRES_DB=avtoteker
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=3151936f
-      - DEBUG=1
+      - DEBUG=0
       - ALLOWED_HOSTS=127.0.0.1,localhost
     depends_on:
       - db
