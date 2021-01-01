@@ -5,6 +5,7 @@ from specific.models import Brand, Country, Serie, Season
 from mysite.utils import compress
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+from django.core.exceptions import ValidationError
 
 
 class Size(models.Model):
@@ -113,7 +114,7 @@ class Tire(models.Model):
     year = models.PositiveSmallIntegerField(null=True)
     Class = models.PositiveSmallIntegerField(default=1, choices=CLASS_CHOICES)
 
-    image = models.ImageField(default="default.png", upload_to="product")
+    image = models.ImageField(default="default/default.png", upload_to="product")
     quantity = models.PositiveIntegerField(default=4)
 
     def get_tire_info(self):
@@ -172,3 +173,24 @@ class Tire(models.Model):
 
     def get_filters(self):
         return "<div>%s</div>  <div class='ml-2'>%s %s</div>"  % (self.year,self.weight,self.speed)
+
+
+class DefaultImage(models.Model):
+    image = models.ImageField(upload_to="default")
+
+    def clean(self,*args, **kwargs):
+        extension = self.image.name.split('.')[-1]
+        if extension != 'png':
+            raise ValidationError('Please provide a png file')
+        super(DefaultImage, self).clean(*args, **kwargs)
+
+    def save(self,*args, **kwargs):
+        self.image.name = "default.png"
+        DefaultImage.objects.all().delete()
+        super(DefaultImage, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.image.name
+
+
+    
