@@ -135,7 +135,7 @@ class Tire(models.Model):
 
     def save(self, *args, **kwargs):
         super().save()
-        compress(self.image.path, (690, 300))
+        compress(self.image.path, (690, 690))
 
     def get_absolute_url(self):
         return reverse(
