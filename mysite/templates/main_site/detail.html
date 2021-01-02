@@ -1,7 +1,10 @@
-{% extends "../config/main-base.html" %} {% load rating %} {% load taksit_kredit
-%} {% load static %} {% block content %} {% include
-"../components/order-modal-form.html" %} {% include
-"../components/main-site/tire-search.html" %}
+{% extends "../config/main-base.html" %} 
+{% load rating %} 
+{% load taksit_kredit %}
+
+{% block content %} 
+{% include "../components/order-modal-form.html" %}
+{% include "../components/main-site/tire-search.html" %}
 <div class="container mb-5">
   <div class="main-list__main-row">
     <div class="main-list__col-12 px-0">
@@ -24,19 +27,12 @@
         </p>
         <div class="main-list__sub-row--2">
           <div class="main-list__col-sm">
-            <!-- {% if object.image %} -->
             <img
               src="{{object.image.url}}"
               class="main-list__img"
               alt="{{object.brand}}"
             />
-            <!-- {% else %} -->
-            <!-- <img
-              src="{% static 'default.png' %}"
-              class="main-list__img"
-              alt="{{object.brand}}"
-            /> -->
-            <!-- {% endif %} -->
+ 
           </div>
           <div class="main-list__col-sm--2">
             <div class="main-list__card-body">
@@ -44,14 +40,11 @@
                 {{object.get_filters|safe}}
               </div>
               <div class="mt-1">
-                {% include "../components/main-site/image.html" with
-                object=object.season %}
+                {% include "../components/main-site/image.html" with object=object.season %}
               </div>
               <div class="mt-1">
-                {% include "../components/main-site/image.html" with
-                object=object.brand.country %} {% include
-                "../components/main-site/image.html" with
-                object=object.manufacturer %}
+                {% include "../components/main-site/image.html" with object=object.brand.country %} 
+                {% include "../components/main-site/image.html" with object=object.manufacturer %}
               </div>
               <div class="main-list__price-info">
                 <div class="price">
@@ -65,9 +58,11 @@
                   >
                   <span class="manat">₼</span>
                 </div>
-                {% if object.taksit_active %} {{ object|get_taksit|safe}} {%
-                elif object.kredit_active %} {{ object|get_kredit|safe}} {%
-                endif %}
+                {% if object.taksit_active %} 
+                  {{ object|get_taksit|safe}} 
+                {% elif object.kredit_active %} 
+                  {{ object|get_kredit|safe}} 
+                {% endif %}
               </div>
               <div class="main-list__btn-box">
                 <button
