@@ -23,19 +23,13 @@
                     <p class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</p>
                     <div class="main-list__sub-row--2">
                         <div class="main-list__col-sm">
-                            <!-- {% if object.image %} -->
+
                                 <img
                                 src="{{object.image.url}}"
                                 class="main-list__img"
                                 alt="{{object.brand}}"
                                 />
-                            <!-- {% else %} -->
-                                <!-- <img
-                                src="{% static 'default.png' %}"
-                                class="main-list__img"
-                                alt="{{object.brand}}"
-                                />
-                                {% endif %} -->
+    
                         </div>
                         <div class="main-list__col-sm--2">
                             <div class="main-list__card-body">
