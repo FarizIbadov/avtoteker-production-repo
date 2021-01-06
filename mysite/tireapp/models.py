@@ -6,6 +6,7 @@ from mysite.utils import compress
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.core.exceptions import ValidationError
+from django.core.files import File
 
 
 class Size(models.Model):
@@ -114,7 +115,7 @@ class Tire(models.Model):
     year = models.PositiveSmallIntegerField(null=True)
     Class = models.PositiveSmallIntegerField(default=1, choices=CLASS_CHOICES)
 
-    image = models.ImageField(default="default/default.png", upload_to="product")
+    image = models.ImageField(upload_to="product")
     quantity = models.PositiveIntegerField(default=4)
 
     def get_tire_info(self):
@@ -134,6 +135,14 @@ class Tire(models.Model):
         )
 
     def save(self, *args, **kwargs):
+        if not self.image:
+            new_file_name = self.serie.image.name.split('/')[-1]
+            new_file = File(
+                self.serie.image,
+                new_file_name
+            )
+            self.image = new_file
+    
         super().save()
         compress(self.image.path, (690, 690))
 

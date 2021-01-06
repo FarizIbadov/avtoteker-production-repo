@@ -178,7 +178,7 @@ class TireResource(resources.ModelResource):
     )
 
     size = fields.Field(attribute="size", widget=widgets.CustomSizeWidget())
-    
+
 
     class Meta:
         model = Tire

@@ -17,7 +17,7 @@
                         <small class="main-list__side-single">1 illik pulsuz servis</small>
                     </div> -->
                     <div class="main-list__sub-row">
-                            <img class="main-list__item-logo" src="{{object.brand.image.url}}" alt="{{object.brand}}">
+                            <img class="main-list__item-logo mb-1" src="{{object.brand.image.url}}" alt="{{object.brand}}">
                     </div>
                     <p class="main-list__card-text text-right pr-4">{{object.serie}}</p>
                     <p class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</p>
@@ -36,20 +36,23 @@
                                 <div class="main-list__card-text--2">
                                     {{object.get_filters|safe}}
                                 </div>
-                                <div class="mt-1">
+                                <div class="main-list__card-text--2">
+                                    {{object.tradeware}}
+                                </div>
+                                <div class="mt-2">
                                     {% include "../components/main-site/image.html" with object=object.season %}
                                 </div>
-                                <div class="mt-1">
+                                <div class="mt-2 mb-4">
                                     {% include "../components/main-site/image.html" with object=object.brand.country %}
                                     {% include "../components/main-site/image.html" with object=object.manufacturer %}
                                 </div>
                                 <div class="main-list__price-info">
                                     <div class="price">
-                                        <span class="red-line-trought font-larger">
+                                        <span class="red-line-trought  font-larger--2 opacity-8">
                                             {{object.USDNO|floatformat}}
                                         </span>
                                     </div>  
-                                    <div class="price text-center  pr-1">
+                                    <div class="price text-right">
                                         <span class="text-red font-xl">{{object.USD|floatformat}}</span>
                                         <span class="manat">₼</span>
                                     </div>  

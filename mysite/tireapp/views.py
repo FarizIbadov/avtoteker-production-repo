@@ -112,18 +112,15 @@ class TireExcelView(View):
         if not excel_form.is_valid():
             messages.error(request, "Provide .xlsx, .xls file!", extra_tags="danger")
         else:
-            new_file = excel_form.cleaned_data.get("_file")
-            file_format = new_file._name.split(".")[-1]
-            dataset.load(new_file.read(), format=file_format)
-            result = tire_resource.import_data(dataset, dry_run=True)
-
-            if not result.has_errors():
-                tire_resource.import_data(dataset, dry_run=False)
+            try:
+                new_file = excel_form.cleaned_data.get("_file")
+                file_format = new_file._name.split(".")[-1]
+                dataset.load(new_file.read(), format=file_format)
+                tire_resource.import_data(dataset, dry_run=False,raise_errors=True)
                 messages.success(
                     request, "File was imported successfully!", extra_tags="success"
                 )
-            else:
+            except Exception:
                 messages.error(request, "Invalid content!", extra_tags="danger")
-                # print(result.row_errors()[0][1][0].__dict__)
 
         return redirect("custom-admin:tireapp:home")

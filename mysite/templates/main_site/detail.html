@@ -16,7 +16,7 @@
                     </div> -->
         <div class="main-list__sub-row">
           <img
-            class="main-list__item-logo"
+            class="main-list__item-logo mb-1"
             src="{{object.brand.image.url}}"
             alt="{{object.brand}}"
           />
@@ -39,20 +39,23 @@
               <div class="main-list__card-text--2">
                 {{object.get_filters|safe}}
               </div>
-              <div class="mt-1">
+              <div class="main-list__card-text--2">
+                  {{object.tradeware}}
+              </div>
+              <div class="mt-2">
                 {% include "../components/main-site/image.html" with object=object.season %}
               </div>
-              <div class="mt-1">
+              <div class="mt-2 mb-4">
                 {% include "../components/main-site/image.html" with object=object.brand.country %} 
                 {% include "../components/main-site/image.html" with object=object.manufacturer %}
               </div>
               <div class="main-list__price-info">
                 <div class="price">
-                  <span class="red-line-trought font-larger">
+                  <span class="red-line-trought font-larger--2 opacity-8">
                     {{object.USDNO|floatformat}}
                   </span>
                 </div>
-                <div class="price text-center pr-1">
+                <div class="price text-right">
                   <span class="text-red font-xl"
                     >{{object.USD|floatformat}}</span
                   >
@@ -69,7 +72,7 @@
                   type="button"
                   data-toggle="modal"
                   data-target="#order"
-                  class="main-list__cart-btn"
+                  class="main-list__cart-btn mr-0"
                   data-max="{{object.quantity}}"
                   data-id="{{object.id}}"
                 >
@@ -91,8 +94,8 @@
         </div>
       </div>
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-my-primary">Disk şın təmiri</div>
-        <div class="detail-banner bg-light">10-15 azn / ədəd</div>
+        <div class="detail-banner mr-1 bg-my-primary">Disk və şın təmiri</div>
+        <div class="detail-banner bg-light">10 - 15 azn / ədəd</div>
       </div>
       <div class="d-flex mt-2">
         <div class="detail-banner mr-1 bg-my-primary">Razval</div>
