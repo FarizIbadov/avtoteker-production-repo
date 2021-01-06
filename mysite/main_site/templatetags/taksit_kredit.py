@@ -38,7 +38,6 @@ def get_kredit_taksit_template(value,word):
     first_part = """
         <div class="price text-right">
             <span class="text-red">ayda %s</span>
-            <span class="manat">₼</span>
         </div>  
     """ % (value['value'])
     second_part = """
