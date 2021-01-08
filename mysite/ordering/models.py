@@ -4,10 +4,10 @@ from django.utils import timezone
 
 class Order(models.Model):
     PAYMENT_CHOICES = [
-        (1,'Nəğd'),
-        (2,'Kart İlə'),
+        (1,'Nağd'),
+        (2,'Kart ilə'),
         (3,'Kreditlə'),
-        (4,'Birkart İlə'),
+        (4,'BirKart / TamKart ilə'),
     ]
 
     tire = models.ForeignKey(Tire,on_delete=models.CASCADE)

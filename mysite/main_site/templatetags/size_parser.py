@@ -8,9 +8,9 @@ register = template.Library()
 
 @register.simple_tag(name="parse_size")
 def parse_size():
-    width_obj = SizeField("width")
-    height_obj = SizeField("height")
-    radius_obj = SizeField("radius")
+    width_obj = SizeField("width","en")
+    height_obj = SizeField("height","hündürlük")
+    radius_obj = SizeField("radius","radius")
     return (width_obj, height_obj, radius_obj)
 
 @register.simple_tag(name="get_brand")
@@ -21,8 +21,9 @@ def get_brand():
 class SizeField:
     queryset = Size.objects.all()
 
-    def __init__(self, field):
+    def __init__(self, field,name):
         self.field = field
+        self.name = name
         self.list = self.get_field_list()
 
     def get_field_list(self):

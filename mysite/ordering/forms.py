@@ -45,3 +45,8 @@ class OrderForm(forms.ModelForm):
             "is_purchased": forms.HiddenInput(),
             "tire": forms.HiddenInput(),
         }
+        labels = {
+            "quantity":"Say",
+            "payment_type":"Ödənış üsulu",
+            "phone":"Mobil nömrəsi"
+        }
