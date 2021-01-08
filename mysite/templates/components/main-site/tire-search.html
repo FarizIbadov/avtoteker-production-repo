@@ -1,26 +1,36 @@
-{% load size_parser %}
-{% parse_size as sizes %}
-{% get_brand as brands %}
+{% load size_parser %} {% parse_size request as sizes %}
 
-<form action="{% url 'list' %}" method="get" class="tire-search">
-    <h2 class="tire-search__heading">{{tire_search_title}}</h2>
-    <div class="tire-search__container">
-        <div class="tire-search__row">
-        {% for size in sizes %}
-            <div class="tire-search__col-md">
-                <select name="{{size.field}}" class="tire-search__select">
-                    <option value="">{{size.name|capfirst}}</option>
-                    {% for dimention in size.list %}
-                        <option value="{{dimention}}">{{dimention}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        {% endfor %}
-        </div>
-        
+<form
+  action="{% url 'list' %}"
+  method="get"
+  class="tire-search"
+  id="tire-search"
+>
+  <h2 class="tire-search__heading">{{tire_search_title}}</h2>
+  <div class="tire-search__container">
+    <div class="tire-search__row">
+      {% for size in sizes %}
+      <div class="tire-search__col-md">
+        <select name="{{size.field}}" class="tire-search__select" id="tire-search">
+            <option value="">{{size.name|capfirst}}</option>
+            {% for dimention in size.list %} 
+              {% if dimention == size.default %}
+                <option value="{{dimention}}" selected>{{dimention}}</option>
+              {% else %}
+                <option value="{{dimention}}">{{dimention}}</option>
+              {% endif %} 
+          {% endfor %}
+        </select>
+      </div>
+      {% endfor %}
     </div>
-    <div class="tire-search__btn-group">
-        <button class="tire-search__btn tire-search__btn--main" type="submit">Tap</button>
-        <button class="tire-search__btn tire-search__btn--outline" type="reset">Yenidən</button>
-    </div>
+  </div>
+  <div class="tire-search__btn-group">
+    <button class="tire-search__btn tire-search__btn--main" type="submit">
+      Tap
+    </button>
+    <button class="tire-search__btn tire-search__btn--outline" type="reset">
+      Yenidən
+    </button>
+  </div>
 </form>
