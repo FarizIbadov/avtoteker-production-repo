@@ -115,7 +115,7 @@ class Tire(models.Model):
     year = models.PositiveSmallIntegerField(null=True)
     Class = models.PositiveSmallIntegerField(default=1, choices=CLASS_CHOICES)
 
-    image = models.ImageField(upload_to="product")
+    image = models.ImageField(blank=True,upload_to="product")
     quantity = models.PositiveIntegerField(default=4)
 
     def get_tire_info(self):
