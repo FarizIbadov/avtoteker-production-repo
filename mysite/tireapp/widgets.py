@@ -13,16 +13,16 @@ class CustomBooleanWidget(BooleanWidget):
 
 class CustomBrandWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        country = row.get("origin").capitalize()
-        title = value.capitalize()
+        country = row.get("origin")
+        title = value
         brand = Brand.objects.get(title=title, country__title=country)
         return brand
 
 
 class CustomSerieWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        country = row.get("origin").capitalize()
-        brand = row.get("brand").capitalize()
+        country = row.get("origin")
+        brand = row.get("brand")
         serie = Serie.objects.get(
             title=value, brand__title=brand, brand__country__title=country
         )
@@ -31,7 +31,7 @@ class CustomSerieWidget(Widget):
 
 class CustomCountryWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        title = value.capitalize()
+        title = value
         country = Country.objects.get(title=title)
         return country
 
@@ -44,7 +44,7 @@ class CustomClassWidget(Widget):
 
     def clean(self, value, row=None, *args, **kwargs):
         Classes = {"Econom": 1, "Orta": 2, "Premium": 3}
-        cap_word = value.capitalize()
+        cap_word = value
         index = Classes.get(cap_word, 2)
         return index
 
@@ -58,7 +58,7 @@ class CustomSizeWidget(Widget):
 
 class CustomSeasonWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        title = value.capitalize()
+        title = value
         season = Season.objects.get(title=title)
         return season
 
