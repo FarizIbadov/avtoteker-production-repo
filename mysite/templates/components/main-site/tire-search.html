@@ -11,7 +11,7 @@
     <div class="tire-search__row">
       {% for size in sizes %}
       <div class="tire-search__col-md">
-        <select name="{{size.field}}" class="tire-search__select" id="tire-search">
+        <select name="{{size.field}}" class="tire-search__select" >
             <option value="">{{size.name|capfirst}}</option>
             {% for dimention in size.list %} 
               {% if dimention == size.default %}
