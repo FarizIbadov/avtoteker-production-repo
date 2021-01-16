@@ -17,6 +17,9 @@ class Size(models.Model):
     def __str__(self):
         return "%s\\%s\\%s" % (self.width, self.height, self.radius)
 
+    def get_size_for_title(self):
+        return "%s/%s/%s" % (self.width,self.height,self.radius)
+
 
 class Tire(models.Model):
     CLASS_CHOICES = [
@@ -117,6 +120,7 @@ class Tire(models.Model):
 
     image = models.ImageField(blank=True,upload_to="product")
     quantity = models.PositiveIntegerField(default=4)
+    release_date = models.CharField(blank=True,null=True,max_length=30)
 
     def get_tire_info(self):
         return "%s - %s - %s - %s" % (

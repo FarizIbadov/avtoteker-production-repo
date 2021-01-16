@@ -47,9 +47,9 @@
       gtag("config", "G-02CQDQT5BW");
       </script>
       <!-- Event snippet for BAG1ORDER conversion page In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. --> <script> function gtag_report_conversion(url) { var callback = function () { if (typeof(url) != 'undefined') { window.location = url; } }; gtag('event', 'conversion', { 'send_to': 'AW-748783498/HaZ5CKmw7u8BEIqPhuUC', 'value': 1.0, 'currency': 'USD', 'event_callback': callback }); return false; } </script>
-      <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-      <script src="{% static 'js/bundle.js' %}" defer></script>
-    {% include "../components/title.html" %}
+      <link rel="stylesheet" href="{% static 'main.css' %}" />
+      <script src="{% static 'bundle.js' %}" defer></script>
+      
   </head>
   <body>
     {% include "../components/header/nav.html" %}

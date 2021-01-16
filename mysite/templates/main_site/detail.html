@@ -6,10 +6,7 @@
   <meta name="description" content="Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. #teker #təkər
 
   BirKartla və TamKartla 6 ayadək faizsiz taksitlə.">
-
-  <meta property="og:title" content="#teker #təkər | Avtotəkər | Horizon, Vitour, Dunlop, Yokohama, Continental" />
-
-  <meta property="og:description" content="Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. #teker #təkər" />
+  <title>{{object.brand.title}} {{object.serie.title}} {{object.size.get_size_for_title}} / #teker #təkər | Avtotəkər</title>
 {% endblock seo %}
 
 {% block content %} 
@@ -19,6 +16,9 @@
   <div class="main-list__main-row">
     <div class="main-list__col-12 px-0">
       <div class="main-list__card border-0">
+        {% if object.release_date %}
+        <h4 class="main-list__header--detail">Gözlənilir {{object.release_date}}</h4>
+        {% endif %}
         <!-- <div class="main-list__side-info">
                         <small class="main-list__side-single">3 ay {{object.kredit_3_dif|floatformat}}%</small>
                         <small class="main-list__side-single">6 taksit</small>
@@ -97,7 +97,7 @@
     </div>
   </div>
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="d-flex mt-2">
         <div class="detail-banner mr-1 bg-my-primary">Montaj+Balans</div>
         <div class="detail-banner bg-light">

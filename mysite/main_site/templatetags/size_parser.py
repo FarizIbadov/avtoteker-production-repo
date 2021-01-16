@@ -28,6 +28,20 @@ def parse_size(request):
     radius_obj = SizeField("radius",radius_text,radius_def)
     return (width_obj, height_obj, radius_obj)
 
+@register.simple_tag(name="parse_size_for_title")
+def parse_size_for_title(request):
+    width = request.GET.get('width')
+    height = request.GET.get('height')
+    radius = request.GET.get('radius')
+
+    if not width:
+        width = '-'
+    if not height:
+        height = '-'
+    if not radius:
+        radius = '-'
+
+    return "%s/%s/%s" % (width,height,radius)
 
 class SizeField:
     queryset = Size.objects.all()

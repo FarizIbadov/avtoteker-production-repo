@@ -151,6 +151,7 @@ class TireForm(CleanedData, forms.ModelForm):
                     Field("taksit_12", css_class="form-control-sm"), "taksit_12_active"
                 ),
             ),
+            'release_date',
             Row(
                 # Column("description"),
                 Column(

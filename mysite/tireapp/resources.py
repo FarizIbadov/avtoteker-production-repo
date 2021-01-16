@@ -178,7 +178,10 @@ class TireResource(resources.ModelResource):
     )
 
     size = fields.Field(attribute="size", widget=widgets.CustomSizeWidget())
-
+    release_date = fields.Field(
+        attribute="release_date",
+        widget=resource_widget.CharWidget()
+    )
 
     class Meta:
         model = Tire
@@ -227,6 +230,7 @@ class TireResource(resources.ModelResource):
             "USDNO",
             "USD",
             "USDOFF",
+            "release_date"
         )
         skip_unchanged = True
 
@@ -278,4 +282,5 @@ class TireResource(resources.ModelResource):
             "kredit_12_dif",
             "kredit_12_active",
             "quantity",
+            "release_date"
         )
