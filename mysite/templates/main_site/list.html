@@ -19,8 +19,8 @@
     <div class="main-list">
         <div class="main-list__main-row">
             {% for object in object_list %}
-            <section class="main-list__col-12">
-                <div class="main-list__card">
+            <div class="main-list__col-12">
+                <section class="main-list__card">
                     {% if object.release_date %}
                         <h4 class="main-list__header">Gözlənilir {{object.release_date}}</h4>
                     {% endif %}
@@ -88,8 +88,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
             {% endfor %}
         </div>
     </div>
