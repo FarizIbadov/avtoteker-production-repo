@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "specific.apps.SpecificConfig",
     "main_site.apps.MainSiteConfig",
     "faviconapp.apps.FaviconappConfig",
+    "metaapp.apps.MetaappConfig",
     "django_cleanup.apps.CleanupConfig",
     "crispy_forms",
     "import_export",
