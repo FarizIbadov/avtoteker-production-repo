@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "tireapp.apps.TireappConfig",
     "specific.apps.SpecificConfig",
     "main_site.apps.MainSiteConfig",
+    "faviconapp.apps.FaviconappConfig",
     "django_cleanup.apps.CleanupConfig",
     "crispy_forms",
     "import_export",
