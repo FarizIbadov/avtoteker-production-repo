@@ -5,5 +5,8 @@ register = template.Library()
 
 @register.simple_tag(name='get_favicon')
 def get_favicon():
-    favicon_obj = Favicon.objects.get(active=True)
-    return favicon_obj
+    favicon_obj = Favicon.objects.filter(active=True).first()
+    if favicon_obj:
+        return favicon_obj.icon.url
+    else:
+        return ""
