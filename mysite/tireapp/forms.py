@@ -23,7 +23,7 @@ class TireForm(CleanedData, forms.ModelForm):
 
         if kwargs.get("instance"):
             self.submit_label = "Update"
-            self.prev_url = kwargs["instance"].get_absolute_url()
+            self.prev_url = reverse("custom-admin:tireapp:tire-detail",kwargs={'pk':kwargs["instance"].id})
             size = kwargs["instance"].size
             if size:
                 self.fields["width"].initial = size.width

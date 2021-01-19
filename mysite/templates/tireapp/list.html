@@ -27,7 +27,7 @@
             <td class="hidden-at-mobile">{{tire.USD}}</td>
             <td class="hidden-at-mobile">{{tire.quantity}}</td>
             <td class="text-center">
-                <a href="{{tire.get_absolute_url}}" class="btn btn-sm btn-my-secondary">Detail</a>
+                <a href="{% url 'custom-admin:tireapp:tire-detail' tire.id %}" class="btn btn-sm btn-my-secondary">Detail</a>
             </td>
           </tr>
           {% endfor %}    

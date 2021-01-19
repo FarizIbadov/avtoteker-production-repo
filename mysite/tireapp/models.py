@@ -152,7 +152,7 @@ class Tire(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            "custom-admin:tireapp:tire-detail", kwargs={"pk": self.id}
+            "detail", kwargs={"pk": self.id}
         )
 
     def get_edit_url(self):
