@@ -1,0 +1,37 @@
+{% load slider %}
+{% get_slider as slider %}
+
+{% if not slider.is_empty %}
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    {% for item in slider %}
+      {% if forloop.first %}
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      {% else %}
+        <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter}}"></li>
+      {% endif %}
+    {% endfor %}
+  </ol>
+  <div class="carousel-inner">
+    {% for item in slider %}
+      {% if forloop.first %}
+      <div class="carousel-item active" data-interval="{{item.duration}}">
+      <img src="{{item.image.url}}" class="d-block w-100" alt="{{item.name}}">
+    </div>
+      {% else %}
+    <div class="carousel-item" data-interval="{{item.duration}}">
+      <img src="{{item.image.url}}" class="d-block w-100" alt="{{item.name}}">
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+{% endif %}

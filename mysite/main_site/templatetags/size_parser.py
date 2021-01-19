@@ -43,6 +43,22 @@ def parse_size_for_title(request):
 
     return "%s/%s/%s" % (width,height,radius)
 
+@register.simple_tag(name="parse_size_for_meta")
+def parse_size_for_meta(request):
+    width = request.GET.get('width')
+    height = request.GET.get('height')
+    radius = request.GET.get('radius')
+
+    if not width:
+        return ""
+    if not height:
+        return ""
+    if not radius:
+        return ""
+        
+    size = "%s/%s/%s" % (width,height,radius)
+    return size
+
 class SizeField:
     queryset = Size.objects.all()
 

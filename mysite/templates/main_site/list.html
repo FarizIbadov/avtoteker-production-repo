@@ -3,10 +3,11 @@
 {% load size_parser %}
 
 {% block seo %}
-  <meta name="description" content="Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. #teker #təkər
+  {% parse_size_for_meta request as size %}
 
-  BirKartla və TamKartla 6 ayadək faizsiz taksitlə.">
-
+  {% if size %}
+    <meta name="description" content="{{size}} #teker #təkər.Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. BirKartla və TamKartla 6 ayadək faizsiz taksitlə.">
+  {% endif %}
 
   <title>{% parse_size_for_title request %} | #teker #təkər | Avtotəkər</title>
 
