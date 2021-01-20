@@ -58,8 +58,7 @@ class CustomSizeWidget(Widget):
 
 class CustomSeasonWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        title = value
-        season = Season.objects.get(title=title)
+        season = Season.objects.get(title=value)
         return season
 
 
@@ -70,5 +69,9 @@ class CustomDecimalWidget(DecimalWidget):
     def clean(self, value, row=None, *args, **kwargs):
         new_value = super().clean(value)
         if not new_value:
-            new_value = row.get("price") / self.month
+            if row.get('sale active') == '+':
+                new_value = row.get("sale") / self.month
+            else:
+                new_value = row.get("price") / self.month
+
         return new_value
