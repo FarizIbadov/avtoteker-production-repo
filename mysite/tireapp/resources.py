@@ -162,6 +162,12 @@ class TireResource(resources.ModelResource):
     USD = fields.Field(
         column_name="sale", attribute="USD", widget=resource_widget.DecimalWidget()
     )
+    USD_active = fields.Field(
+        column_name="sale active",
+        attribute="USD_active",
+        widget=widgets.CustomBooleanWidget()
+    )
+
     USDOFF = fields.Field(
         column_name="Price Difference",
         attribute="USDOFF",
@@ -229,6 +235,7 @@ class TireResource(resources.ModelResource):
             "taksit_12_active",
             "USDNO",
             "USD",
+            "USD_active",
             "USDOFF",
             "release_date"
         )
@@ -252,6 +259,7 @@ class TireResource(resources.ModelResource):
             "speed",
             "USDNO",
             "USD",
+            "USD_active",
             "USDOFF",
             "montaj_balance",
             "razval",

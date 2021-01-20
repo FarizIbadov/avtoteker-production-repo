@@ -60,17 +60,22 @@
                 {% include "../components/main-site/image.html" with object=object.manufacturer %}
               </div>
               <div class="main-list__price-info">
-                <div class="price">
-                  <span class="red-line-trought font-larger--2 opacity-8">
-                    {{object.USDNO|floatformat}}
-                  </span>
-                </div>
-                <div class="price text-right">
-                  <span class="text-red font-xl"
-                    >{{object.USD|floatformat}}</span
-                  >
-                  <span class="manat">₼</span>
-                </div>
+                {% if object.USD_active %}
+                  <div class="price">
+                      <span class="red-line-trought  font-larger--2 opacity-8">
+                          {{object.USDNO|floatformat}}
+                      </span>
+                  </div>  
+                  <div class="price text-right">
+                      <span class="text-red font-xl">{{object.USD|floatformat}}</span>
+                      <span class="manat">₼</span>
+                  </div>  
+                {% else %}
+                  <div class="price text-right">
+                      <span class="text-red font-xl">{{object.USDNO|floatformat}}</span>
+                      <span class="manat">₼</span>
+                  </div>  
+                {% endif %}
                 {% if object.taksit_active %} 
                   {{ object|get_taksit|safe}} 
                 {% elif object.kredit_active %} 
