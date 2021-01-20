@@ -2,7 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 
 class Favicon(models.Model):
-    icon = models.FileField('favicon')
+    icon = models.FileField(upload_to='favicon')
     active = models.BooleanField(default=True)
 
     def clean(self,*args, **kwargs):
