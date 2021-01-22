@@ -18,6 +18,7 @@ services:
       - db
 
   proxy:
+    restart: on-failure
     container_name: avtoteker-proxy
     build:
       context: ./proxy
@@ -30,6 +31,7 @@ services:
       - web
 
   db:
+    restart: on-failure
     container_name: avtoteker-db
     image: postgres:12.5-alpine
     environment:
