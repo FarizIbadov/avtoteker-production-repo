@@ -3,11 +3,13 @@
 
 {% if not brands.is_empty %}
 <div class="brand-carousel">
-    <h2 class="slick-heading">Our Partners</h2>
-    <section class="customer-logos slider">
+    <h2 class="slick-heading">Our Brands</h2>
+    <div class="customer-logos slider">
         {% for brand in brands %}
-        <div class="slide"><img src="{{brand.image.url}}" alt="{{brand.title}}"></div>
+        <div class="slide">
+            <img src="{{brand.image.url}}" alt="{{brand.title}}">
+        </div>
         {% endfor %}
-    </section>
+    </div>
 </div>
 {% endif %}
