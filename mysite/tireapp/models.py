@@ -122,6 +122,10 @@ class Tire(models.Model):
     quantity = models.PositiveIntegerField(default=4)
     release_date = models.CharField(blank=True,null=True,max_length=30)
 
+    db = models.PositiveSmallIntegerField(default=72)
+    fuel = models.CharField(max_length=5,default="B")
+    contact = models.CharField(max_length=5,default="B")
+
     def get_tire_info(self):
         return "%s - %s - %s - %s" % (
             self.brand,

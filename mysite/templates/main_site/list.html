@@ -1,11 +1,12 @@
 {% extends "../config/main-base.html" %}
+{% load static %}
 {% load taksit_kredit %}
 {% load size_parser %}
 
 {% block seo %}
   {% parse_size_for_meta request as size %}
 
-  {% if size %}
+  {% if size and not object_list.is_empty %}
     <meta name="description" content="{{size}} #teker #təkər.Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. BirKartla və TamKartla 6 ayadək faizsiz taksitlə.">
   {% endif %}
 
@@ -23,13 +24,16 @@
             <div class="main-list__col-12">
                 <section class="main-list__card">
                     {% if object.release_date %}
-                        <h4 class="main-list__header"><span class="text-my-primary">Gözlənilir</span> {{object.release_date}}</h4>
+                        <h4 class="main-list__header"><span class="text-my-primary">Gözlənilir:</span> {{object.release_date}}</h4>
                     {% endif %}
-                    <!-- <div class="main-list__side-info">
-                        <small class="main-list__side-single">3 ay {{object.kredit_3_dif|floatformat}}%</small>
-                        <small class="main-list__side-single">6 taksit</small>
-                        <small class="main-list__side-single">1 illik pulsuz servis</small>
-                    </div> -->
+                    <div class="main-list__side-info">
+                        {% if object.kredit_3_active and object.kredit_3_dif == 0  %}
+                        <small title="3 ay faizsiz kreditlə" class="main-list__side-single">3 ay {{object.kredit_3_dif|floatformat}}%</small>
+                        {% endif %}
+                        {% if object.brand.free_service %}
+                        <small title="1 illik pulsuz servis - nağd alış zamanı 4  təkər alınan halda" class="main-list__side-single">1 il servis</small>
+                        {% endif %}
+                    </div>
                     <div class="main-list__sub-row">
                             <img class="main-list__item-logo mb-1" src="{{object.brand.image.url}}" alt="{{object.brand}}">
                     </div>
@@ -48,7 +52,11 @@
                         <div class="main-list__col-sm--2">
                             <div class="main-list__card-body">
                                 <div class="main-list__card-text--2">
-                                    {{object.get_filters|safe}}
+                                    <div class='ml-2'>
+                                        {% if object.year == 2020 or object.year == 2021 %}
+                                            {{object.year}}
+                                        {% endif %}
+                                    {{object.weight}} {{object.speed}}</div>
                                 </div>
                                 <div class="main-list__card-text--2">
                                     {{object.tradeware}}
@@ -60,7 +68,7 @@
                                     {% include "../components/main-site/image.html" with object=object.brand.country %}
                                     {% include "../components/main-site/image.html" with object=object.manufacturer %}
                                 </div>
-                                <div class="main-list__price-info">
+                                <div class="main-list__price-info mr-1">
                                     {% if object.USD_active %}
                                     <div class="price">
                                         <span class="red-line-trought  font-larger--2 opacity-8">
@@ -69,12 +77,16 @@
                                     </div>  
                                     <div class="price text-right">
                                         <span class="text-red font-xl">{{object.USD|floatformat}}</span>
-                                        <span class="manat">₼</span>
+                                        <span class="manat">
+                                            <img src="{% static 'img/manat.png' %}" alt="₼">
+                                        </span>
                                     </div>  
                                     {% else %}
-                                    <div class="price text-right">
+                                     <div class="price text-right">
                                         <span class="text-red font-xl">{{object.USDNO|floatformat}}</span>
-                                        <span class="manat">₼</span>
+                                        <span class="manat">
+                                            <img src="{% static 'img/manat.png' %}" alt="₼">
+                                        </span>
                                     </div>  
                                     {% endif %}
 
@@ -90,7 +102,7 @@
                                     data-max="{{object.quantity}}"
                                     data-price="{{object.USD}}"
                                     data-id="{{object.id}}">
-                                        {% include "../components/main-site/cart.html" %}
+                                        Sifariş et
                                     </button>
                                     <a href="{% url 'detail' object.id %}" class="main-list__detail-btn">Ətraflı</a>
                                 </div>

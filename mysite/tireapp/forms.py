@@ -153,7 +153,11 @@ class TireForm(CleanedData, forms.ModelForm):
             ),
             'release_date',
             Row(
-                # Column("description"),
+                Column("db"),
+                Column("fuel"),
+                Column("contact")
+            ),
+            Row(
                 Column(
                     "image",
                     "quantity",

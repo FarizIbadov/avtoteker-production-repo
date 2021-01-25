@@ -189,6 +189,10 @@ class TireResource(resources.ModelResource):
         widget=resource_widget.CharWidget()
     )
 
+    db= fields.Field(attribute="db",widget=resource_widget.IntegerWidget())
+    fuel = fields.Field(attribute="fuel",widget=resource_widget.CharWidget())
+    contact = fields.Field(attribute="contact",widget=resource_widget.CharWidget())
+
     class Meta:
         model = Tire
         fields = (
@@ -237,7 +241,10 @@ class TireResource(resources.ModelResource):
             "USD",
             "USD_active",
             "USDOFF",
-            "release_date"
+            "release_date",
+            "db",
+            "fuel",
+            "contact"
         )
         skip_unchanged = True
 
@@ -257,6 +264,9 @@ class TireResource(resources.ModelResource):
             "tradeware",
             "weight",
             "speed",
+            'db',
+            "fuel",
+            "contact",
             "USDNO",
             "USD",
             "USD_active",
