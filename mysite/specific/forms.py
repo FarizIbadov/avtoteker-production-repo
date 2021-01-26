@@ -101,6 +101,8 @@ class SerieForm(forms.ModelForm):
         self.fields['offroad'].widget.attrs['step'] = 1
         self.fields['comfort'].widget.attrs['max'] = 5
         self.fields['comfort'].widget.attrs['step'] = 1
+        self.fields['snow'].widget.attrs['max'] = 5
+        self.fields['snow'].widget.attrs['step'] = 1
         self.fields['noise'].widget.attrs['max'] = 5
         self.fields['noise'].widget.attrs['step'] = 1
         self.fields['treadware'].widget.attrs['max'] = 5
@@ -122,6 +124,7 @@ class SerieForm(forms.ModelForm):
             'wet',
             'offroad',
             'comfort',
+            "snow",
             'noise',
             'treadware',
             'value',

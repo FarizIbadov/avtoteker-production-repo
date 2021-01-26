@@ -104,6 +104,7 @@ class Serie(models.Model):
     comfort = models.PositiveSmallIntegerField(default=0)
     noise = models.PositiveSmallIntegerField(default=0)
     treadware = models.PositiveSmallIntegerField(default=0)
+    snow = models.PositiveSmallIntegerField(default=0)
     value = models.PositiveSmallIntegerField(default=0)
     description = RichTextUploadingField(default="description")
     extra = RichTextUploadingField(blank=True)
