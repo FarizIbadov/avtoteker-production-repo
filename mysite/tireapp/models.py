@@ -125,6 +125,7 @@ class Tire(models.Model):
     db = models.PositiveSmallIntegerField(default=72)
     fuel = models.CharField(max_length=5,default="B")
     contact = models.CharField(max_length=5,default="B")
+    kredit_initial_price = models.FloatField(blank=True,default=0)
 
     def get_tire_info(self):
         return "%s - %s - %s - %s" % (
@@ -191,23 +192,6 @@ class Tire(models.Model):
     def get_filters(self):
         return "<div>%s</div>  <div class='ml-2'>%s %s</div>"  % (self.year,self.weight,self.speed)
 
-
-class DefaultImage(models.Model):
-    image = models.ImageField(upload_to="default")
-
-    def clean(self,*args, **kwargs):
-        extension = self.image.name.split('.')[-1]
-        if extension != 'png':
-            raise ValidationError('Please provide a png file')
-        super(DefaultImage, self).clean(*args, **kwargs)
-
-    def save(self,*args, **kwargs):
-        self.image.name = "default.png"
-        DefaultImage.objects.all().delete()
-        super(DefaultImage, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return self.image.name
 
 
     

@@ -26,21 +26,21 @@
                     {% if object.release_date %}
                         <h4 class="main-list__header"><span class="text-my-primary">Gözlənilir:</span> {{object.release_date}}</h4>
                     {% endif %}
-                    <div class="main-list__side-info">
-                        {% if object.kredit_3_active and object.kredit_3_dif == 0  %}
-                        <small title="3 ay faizsiz kreditlə" class="main-list__side-single">3 ay {{object.kredit_3_dif|floatformat}}%</small>
-                        {% endif %}
-                        {% if object.brand.free_service %}
-                        <small title="1 illik pulsuz servis - nağd alış zamanı 4  təkər alınan halda" class="main-list__side-single">1 il servis</small>
-                        {% endif %}
-                    </div>
                     <div class="main-list__sub-row">
+                        <div class="main-list__side-info">
+                            {% if object.kredit_3_active and object.kredit_3_dif == 0  %}
+                            <small title="3 ay faizsiz kreditlə" class="main-list__side-single">3 ay {{object.kredit_3_dif|floatformat}}%</small>
+                            {% endif %}
+                            {% if object.brand.free_service %}
+                            <small title="1 illik pulsuz servis - nağd alış zamanı 4  təkər alınan halda" class="main-list__side-single">1 il servis</small>
+                            {% endif %}
+                        </div>
                             <img class="main-list__item-logo mb-1" src="{{object.brand.image.url}}" alt="{{object.brand}}">
                     </div>
                     <h4 class="main-list__card-text text-right pr-4">{{object.serie}}</h4>
                     <h4 class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</h4>
                     <div class="main-list__sub-row--2">
-                        <div class="main-list__col-sm">
+                        <div class="main-list__col-sm w-60">
 
                                 <img
                                 src="{{object.image.url}}"
@@ -49,7 +49,7 @@
                                 />
     
                         </div>
-                        <div class="main-list__col-sm--2">
+                        <div class="main-list__col-sm--2 w-40">
                             <div class="main-list__card-body">
                                 <div class="main-list__card-text--2">
                                     <div class='ml-2'>
@@ -96,17 +96,17 @@
                                         {{ object|get_kredit|safe}}
                                     {% endif %}
                                 </div>
-                                <div class="main-list__btn-box">
-                                    <button type="button" data-toggle="modal"
-                                    data-target="#order" class="main-list__cart-btn"
-                                    data-max="{{object.quantity}}"
-                                    data-price="{{object.USD}}"
-                                    data-id="{{object.id}}">
-                                        Sifariş et
-                                    </button>
-                                    <a href="{% url 'detail' object.id %}" class="main-list__detail-btn">Ətraflı</a>
-                                </div>
                             </div>
+                        </div>
+                        <div class="main-list__btn-box">
+                            <button type="button" data-toggle="modal"
+                            data-target="#order" class="main-list__cart-btn"
+                            data-max="{{object.quantity}}"
+                            data-price="{{object.USD}}"
+                            data-id="{{object.id}}">
+                                Sifariş et
+                            </button>
+                            <a href="{% url 'detail' object.id %}" class="main-list__detail-btn">Ətraflı</a>
                         </div>
                     </div>
                 </section>

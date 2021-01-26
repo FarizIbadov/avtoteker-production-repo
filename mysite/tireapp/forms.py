@@ -152,6 +152,7 @@ class TireForm(CleanedData, forms.ModelForm):
                 ),
             ),
             'release_date',
+            "kredit_initial_price",
             Row(
                 Column("db"),
                 Column("fuel"),

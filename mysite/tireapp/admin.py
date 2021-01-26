@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .forms import TireForm
-from .models import Tire,Size,DefaultImage
+from .models import Tire,Size
 from import_export.admin import ImportExportModelAdmin
 from .resources import TireResource
 
@@ -16,7 +16,3 @@ class TireAdmin(ImportExportModelAdmin):
 class SizeAdmin(admin.ModelAdmin):
     pass
     
-
-@admin.register(DefaultImage)
-class DefaultImageAdmin(admin.ModelAdmin):
-    pass
