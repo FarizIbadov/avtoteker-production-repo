@@ -2,6 +2,7 @@ from django.db import models
 from tireapp.models import Tire
 from django.utils import timezone
 
+
 class Order(models.Model):
     PAYMENT_CHOICES = [
         (1,'Nağd'),
