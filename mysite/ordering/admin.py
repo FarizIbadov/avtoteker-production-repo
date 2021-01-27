@@ -3,5 +3,5 @@ from .models import Order
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    readonly_fields = ['tire','email','phone','payment_type']
+    readonly_fields = ['tire','email','phone','payment_type','name']
     list_filter = ['remember_me']
