@@ -18,6 +18,7 @@
 
     {% include "../components/main-site/tire-search.html" %}
     {% include "../components/order-modal-form.html" %}
+    <h1 class="main-list__heading">{% parse_size_for_title request %}</h1>
     <div class="main-list">
         <div class="main-list__main-row">
             {% for object in object_list %}
