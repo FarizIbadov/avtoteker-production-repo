@@ -2,6 +2,10 @@ from django.db import models
 from mysite.utils import compress
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.core.files import File
+import requests
+import os
+from tempfile import NamedTemporaryFile
 
 
 class Season(models.Model):
@@ -106,8 +110,9 @@ class Serie(models.Model):
     treadware = models.PositiveSmallIntegerField(default=0)
     snow = models.PositiveSmallIntegerField(default=0)
     value = models.PositiveSmallIntegerField(default=0)
-    description = RichTextUploadingField(default="description")
+    description = RichTextUploadingField(blank=True)
     extra = RichTextUploadingField(blank=True)
+    image_url = models.URLField(blank=True)
 
     def __str__(self):
         return self.title
@@ -119,6 +124,14 @@ class Serie(models.Model):
         )
 
     def save(self, *args, **kwargs):
+        if self.image_url:
+            req = requests.get(self.image_url)
+            img_temp = NamedTemporaryFile(delete=True)
+            img_temp.write(req.content)
+            img_temp.flush()
+
+            self.image = File(img_temp,os.path.basename(self.image_url))
+            self.image_url = ""
         super().save()
         compress(self.image.path, (300, 300))
 

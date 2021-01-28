@@ -72,7 +72,7 @@ def parse_size_for_list(request):
     if not radius:
         radius = '-'
         
-    size = "%s/%s/R%s" % (width,height,radius)
+    size = "%s/%sR%s" % (width,height,radius)
     return size
 
 class SizeField:

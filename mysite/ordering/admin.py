@@ -7,6 +7,7 @@ from django.utils.html import format_html
 class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ['tire','email','phone_number','payment_type','name']
     list_filter = ['remember_me']
+    exclude = ['phone']
 
 
     def phone_number(self,obj):
