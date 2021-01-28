@@ -17,20 +17,9 @@
   <div class="main-list__main-row">
     <div class="main-list__col-12 px-0">
       <div class="main-list__card border-0">
-        {% if object.release_date %}
-        <h4 class="main-list__header--detail"><span class="text-my-primary">Gözlənilir:</span> {{object.release_date}}</h4>
-        {% endif %}
-        
-        
+        {% include "../components/main-site/coming-soon.html" with object=object detail=True %}
         <div class="main-list__sub-row px-4">
-          <div class="main-list__side-info ">
-            {% if object.kredit_3_active and object.kredit_3_dif == 0  %}
-            <small title="3 ay faizsiz kreditlə" class="main-list__side-single">3 ay {{object.kredit_3_dif|floatformat}}%</small>
-            {% endif %}
-            {% if object.brand.free_service %}
-            <small title="1 illik pulsuz servis - nağd alış zamanı 4  təkər alınan halda" class="main-list__side-single">1 il servis</small>
-            {% endif %}
-          </div>
+          {% include "../components/main-site/side-info.html" with object=object %}
           <img
             class="main-list__item-logo mb-1"
             src="{{object.brand.image.url}}"

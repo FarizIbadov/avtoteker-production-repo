@@ -13,16 +13,16 @@ class CustomBooleanWidget(BooleanWidget):
 
 class CustomBrandWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        country = row.get("origin")
-        title = value
+        country = row.get("origin").strip()
+        title = value.strip()
         brand = Brand.objects.get(title=title, country__title=country)
         return brand
 
 
 class CustomSerieWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        country = row.get("origin")
-        brand = row.get("brand")
+        country = row.get("origin").strip()
+        brand = row.get("brand").strip()
         serie = Serie.objects.get(
             title=value, brand__title=brand, brand__country__title=country
         )
@@ -31,7 +31,7 @@ class CustomSerieWidget(Widget):
 
 class CustomCountryWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        title = value
+        title = value.strip()
         country = Country.objects.get(title=title)
         return country
 
@@ -39,19 +39,19 @@ class CustomCountryWidget(Widget):
 class CustomClassWidget(Widget):
     def render(self, value, obj=None):
         Classes = {"1": "Econom", "2": "Orta", "3": "Premium"}
-        key = str(value)
+        key = str(value).strip()
         return Classes[key]
 
     def clean(self, value, row=None, *args, **kwargs):
         Classes = {"Econom": 1, "Orta": 2, "Premium": 3}
-        cap_word = value
+        cap_word = value.strip()
         index = Classes.get(cap_word, 2)
         return index
 
 
 class CustomSizeWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        width, height, radius = str(value).split("\\")
+        width, height, radius = str(value).strip().split("\\")
         size, _ = Size.objects.get_or_create(width=width, height=height, radius=radius)
         return size
 
@@ -75,3 +75,29 @@ class CustomDecimalWidget(DecimalWidget):
                 new_value = row.get("price") / self.month
 
         return new_value
+
+
+class CustomOutletBooleanWidget(CustomBooleanWidget):
+    def render(self, value, obj=None):
+        return super().render(value, obj=None)
+
+    def clean(self, value, row=None, *args, **kwargs):
+        new = row.get('new').strip()
+        if not value and new == "+":
+            return False
+        if not value and new == "-":
+            return True
+        return value == "+"
+
+class CustomNewBooleanWidget(CustomBooleanWidget):
+    def render(self, value, obj=None):
+        return super().render(value, obj=None)
+
+    def clean(self, value, row=None, *args, **kwargs):
+        outlet = row.get('outlet').strip()
+        if not value and outlet == "+":
+            return False
+        if not value and outlet == "-":
+            return True
+        return value == "+"
+

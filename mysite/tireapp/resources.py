@@ -193,6 +193,8 @@ class TireResource(resources.ModelResource):
     fuel = fields.Field(attribute="fuel",widget=resource_widget.CharWidget())
     contact = fields.Field(attribute="contact",widget=resource_widget.CharWidget())
     kredit_initial_price = fields.Field(column_name="kredit initial price %",attribute="kredit_initial_price",widget=resource_widget.FloatWidget())
+    new = fields.Field(attribute="new",widget=widgets.CustomNewBooleanWidget())
+    outlet = fields.Field(attribute="outlet",widget=widgets.CustomOutletBooleanWidget())
 
     class Meta:
         model = Tire
@@ -246,7 +248,9 @@ class TireResource(resources.ModelResource):
             "db",
             "fuel",
             "contact",
-            "kredit_initial_price"
+            "kredit_initial_price",
+            "new",
+            "outlet"
         )
         skip_unchanged = True
 
@@ -303,5 +307,7 @@ class TireResource(resources.ModelResource):
             "kredit_12_dif",
             "kredit_12_active",
             "quantity",
-            "release_date"
+            "release_date",
+            "new",
+            "outlet"
         )

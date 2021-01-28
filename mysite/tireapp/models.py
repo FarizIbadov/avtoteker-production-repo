@@ -126,6 +126,8 @@ class Tire(models.Model):
     fuel = models.CharField(max_length=5,default="B")
     contact = models.CharField(max_length=5,default="B")
     kredit_initial_price = models.FloatField(blank=True,default=0)
+    new = models.BooleanField(default=False)
+    outlet = models.BooleanField(default=False)
 
     def get_tire_info(self):
         return "%s - %s - %s - %s" % (

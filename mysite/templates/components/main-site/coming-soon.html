@@ -1,0 +1,7 @@
+{% if object.release_date %}
+    {% if detail %}
+    <h4 class="main-list__header--detail"><span class="text-my-primary">Gözlənilir:</span> {{object.release_date}}</h4>
+    {% else %}
+    <h4 class="main-list__header"><span class="text-my-primary">Gözlənilir:</span> {{object.release_date}}</h4>
+    {%endif%}
+{% endif %}

@@ -18,24 +18,15 @@
 
     {% include "../components/main-site/tire-search.html" %}
     {% include "../components/order-modal-form.html" %}
-    <h1 class="main-list__heading">{% parse_size_for_title request %}</h1>
+    <h1 class="main-list__heading">{% parse_size_for_list request %}</h1>
     <div class="main-list">
         <div class="main-list__main-row">
             {% for object in object_list %}
             <div class="main-list__col-12">
                 <section class="main-list__card">
-                    {% if object.release_date %}
-                        <h4 class="main-list__header"><span class="text-my-primary">Gözlənilir:</span> {{object.release_date}}</h4>
-                    {% endif %}
+                    {% include "../components/main-site/coming-soon.html" with object=object detail=False %}
                     <div class="main-list__sub-row">
-                        <div class="main-list__side-info">
-                            {% if object.kredit_3_active and object.kredit_3_dif == 0  %}
-                            <small title="3 ay faizsiz kreditlə" class="main-list__side-single">3 ay {{object.kredit_3_dif|floatformat}}%</small>
-                            {% endif %}
-                            {% if object.brand.free_service %}
-                            <small title="1 illik pulsuz servis - nağd alış zamanı 4  təkər alınan halda" class="main-list__side-single">1 il servis</small>
-                            {% endif %}
-                        </div>
+                        {% include "../components/main-site/side-info.html" with object=object %}
                             <img class="main-list__item-logo mb-1" src="{{object.brand.image.url}}" alt="{{object.brand}}">
                     </div>
                     <h4 class="main-list__card-text text-right pr-4">{{object.serie}}</h4>
@@ -112,6 +103,8 @@
                     </div>
                 </section>
             </div>
+            {% empty %}
+                <h3 class="main-list__empty-text">Hal hazırda yoxdur</h3>
             {% endfor %}
         </div>
     </div>
