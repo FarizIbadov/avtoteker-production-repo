@@ -66,7 +66,7 @@ class Country(models.Model):
 
 
 class Brand(models.Model):
-    title = models.CharField(max_length=50, unique=True)
+    title = models.CharField(max_length=50)
     image = models.ImageField(upload_to="brand", null=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     free_service = models.BooleanField(default=False)
@@ -99,7 +99,7 @@ class Brand(models.Model):
 
 
 class Serie(models.Model):
-    title = models.CharField(max_length=50, unique=True)
+    title = models.CharField(max_length=50)
     image = models.ImageField(upload_to="serie", blank=False, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     dry = models.PositiveSmallIntegerField(default=0)
