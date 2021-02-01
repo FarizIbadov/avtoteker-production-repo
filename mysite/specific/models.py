@@ -125,15 +125,23 @@ class Serie(models.Model):
 
     def save(self, *args, **kwargs):
         if self.image_url:
-            req = requests.get(self.image_url)
+            headers = {
+                'User-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36',
+                'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Encoding' : 'gzip,deflate,sdch',
+            }
+            req = requests.get(self.image_url,headers=headers)
             img_temp = NamedTemporaryFile(delete=True)
             img_temp.write(req.content)
             img_temp.flush()
 
             self.image = File(img_temp,os.path.basename(self.image_url))
             self.image_url = ""
+        
         super().save()
-        compress(self.image.path, (300, 300))
+        
+        if self.image:
+            compress(self.image.path, (300, 300))
 
     def get_absolute_url(self):
         return reverse("custom-admin:specific:serie-detail", kwargs={"pk": self.pk})

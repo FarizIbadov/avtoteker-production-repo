@@ -20,3 +20,6 @@ class BrandAdmin(admin.ModelAdmin):
 @admin.register(Serie)
 class SerieAdmin(ImportExportModelAdmin):
     resource_class = SerieResource
+
+    
+
