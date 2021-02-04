@@ -9,7 +9,5 @@ COPY . .
 
 RUN npm ci --only=production
 
-RUN adduser -D user
-USER user
 
 CMD ["npm","start"]
