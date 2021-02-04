@@ -93,16 +93,15 @@ exports.searchController = (req, res, next) => {
           for (const wheel of dataItem.wheels) {
             const wheelId = uuid();
             const pressure = []
-            if (wheel.front.tire && wheel.front.tire){
-              const bar = wheel.front.tire_pressure.bar + ' bar';
-              const kPa = wheel.front.tire_pressure.kPa + ' kPa';
-              pressure.push(bar,kPa);
-            } else {
-              pressure.push('-','-');
-            }
-
+  
             if (wheel.front.tire) {
-              
+              if (wheel.front.tire_pressure){
+                const bar = wheel.front.tire_pressure.bar + ' bar';
+                const kPa =  wheel.front.tire_pressure.kPa + ' kPa';
+                pressure.push(bar,kPa);
+              } else {
+                pressure.push('-','-');
+              }
 
               const tireType = !wheel.rear.tire ? 3 : 1;
               const tireObj = {
@@ -116,6 +115,14 @@ exports.searchController = (req, res, next) => {
             }
 
             if (wheel.rear.tire) {
+              if (wheel.rear.tire_pressure){
+                const bar = wheel.rear.tire_pressure.bar + ' bar';
+                const kPa =  wheel.rear.tire_pressure.kPa + ' kPa';
+                pressure.push(bar,kPa);
+              } else {
+                pressure.push('-','-');
+              }
+
               const tireObj = {
                 "wheel_id":wheelId,
                 "rim":wheel.rear.rim,
