@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   wheel-size:
+    restart: on-failure
     container_name: avto-node-ws
     build:
       context: ./node
