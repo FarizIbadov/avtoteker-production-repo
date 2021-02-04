@@ -12,22 +12,22 @@
     <div class="container my-5">
       <h1 class="text-center">{{title}}</h1>
       <hr>
-      <h2 class="text-center mb-5 font-weigth-400">
+      <h2 class="text-center mb-5 font-larger--2 font-weigth-400">
         Seçimi etmək üçün aşağıdaki şin ölçülərinə toxunun
       </h2>
       <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col" class="text-center">
-              <h3 class="mb-0">Şin ölçüsü</h3>
+              <h3 class="mb-0">Şin</h3>
             </th>
             <th scope="col" class="text-center">
-              <h3 class="mb-0">Qabaq / Arxa / 4X4</h3>
+              <h3 class="mb-0">Yer</h3>
             </th>
             <th scope="col" class="text-center">
-              <h3 class="mb-0">Disk ölçüsü</h3>
+              <h3 class="mb-0">Disk</h3>
             </th>
-            <th scope="col" class="text-center">
+            <th scope="col" class="text-center hidden-at-mobile">
               <h3 class="mb-0">Şin təzyiqi</h3>
             </th>
           </tr>
@@ -44,7 +44,7 @@
                   </td>
                   <td class="text-center">{{object.get_tire_type}}</td>
                   <td class="text-center">{{object.rim}}</td>
-                  <td class="text-center">{{object.pressure}}</td>
+                  <td class="text-center hidden-at-mobile">{{object.pressure}}</td>
                 {% else %}
                   <td class="text-center border-0">
                     <h5 class="mb-0">
@@ -53,7 +53,7 @@
                   </td>
                   <td class="text-center  border-0">{{object.get_tire_type}}</td>
                   <td class="text-center  border-0">{{object.rim}}</td>
-                  <td class="text-center  border-0">{{object.pressure}}</td>
+                  <td class="text-center  border-0 hidden-at-mobile">{{object.pressure}}</td>
                 {% endif %}
               </tr>
             {% endfor %}
