@@ -7,6 +7,7 @@ urlpatterns = [
     path("", include("main_site.urls")),
     path("admin/", include("custom_admin.urls")),
     path("base-admin/", admin.site.urls),
+    path("",include('wheel_size.urls')),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 

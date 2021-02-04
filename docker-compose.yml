@@ -1,6 +1,13 @@
 version: "3.8"
 
 services:
+  wheel-size:
+    container_name: avto-node-ws
+    build:
+      context: ./node
+    environment:
+      - WHEEL_SIZE_KEY=5f0e624a880add6bc70e73f774ae3db6
+
   web:
     restart: on-failure
     container_name: avtoteker-web

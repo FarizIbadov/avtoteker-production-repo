@@ -16,7 +16,7 @@
 
 {% block content %}
 
-    {% include "../components/main-site/tire-search.html" %}
+    {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
     {% include "../components/order-modal-form.html" %}
     <h1 class="main-list__heading">{% parse_size_for_list request %}</h1>
     <div class="main-list">

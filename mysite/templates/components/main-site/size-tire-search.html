@@ -1,0 +1,20 @@
+{% load size_parser %} {% parse_size request as sizes %}
+
+<div class="tire-search__container">
+    <div class="tire-search__row">
+        {% for size in sizes %}
+        <div class="tire-search__col-md">
+        <select name="{{size.field}}" id="{{size.field}}"  data-name="{{size.field}}"  class="tire-search__select size-select">
+            <option value="">{{size.name|capfirst}}</option>
+            {% for dimention in size.list %} 
+                {% if dimention == size.default %}
+                <option value="{{dimention}}" selected>{{dimention}}</option>
+                {% else %}
+                <option value="{{dimention}}">{{dimention}}</option>
+                {% endif %} 
+            {% endfor %}
+        </select>
+        </div>
+        {% endfor %}
+    </div>
+</div>

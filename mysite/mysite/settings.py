@@ -24,12 +24,13 @@ if ALLOWED_HOSTS_ENV:
 # Application definition
 
 INSTALLED_APPS = [
-    "social",
+    "social.apps.SocialConfig",
     "ordering.apps.OrderingConfig",
     "custom_admin.apps.CustomAdminConfig",
     "tireapp.apps.TireappConfig",
     "specific.apps.SpecificConfig",
     "main_site.apps.MainSiteConfig",
+    "wheel_size.apps.WheelSizeConfig",
     "faviconapp.apps.FaviconappConfig",
     "metaapp.apps.MetaappConfig",
     "adds.apps.AddsConfig",
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     "ckeditor",
     'ckeditor_uploader',
+    "rest_framework"
 ]
 
 SITE_ID = 1

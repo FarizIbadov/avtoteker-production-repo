@@ -1,5 +1,3 @@
-{% load size_parser %} {% parse_size request as sizes %}
-
 <form
   action="{% url 'list' %}"
   method="get"
@@ -7,29 +5,30 @@
   id="tire-search"
 >
   <h2 class="tire-search__heading">{{tire_search_title}}</h2>
-  <div class="tire-search__container">
-    <div class="tire-search__row">
-      {% for size in sizes %}
-      <div class="tire-search__col-md">
-        <select name="{{size.field}}" class="tire-search__select" >
-            <option value="">{{size.name|capfirst}}</option>
-            {% for dimention in size.list %} 
-              {% if dimention == size.default %}
-                <option value="{{dimention}}" selected>{{dimention}}</option>
-              {% else %}
-                <option value="{{dimention}}">{{dimention}}</option>
-              {% endif %} 
-          {% endfor %}
-        </select>
-      </div>
-      {% endfor %}
+  <div class="container mb-3">
+    <ul class="tire-search__nav nav" role="tablist">
+        <li class="nav-item" role="presentation" data-action="{% url 'list' %}">
+          <a class="nav-link {{size_link}}" id="size-tab" data-toggle="tab" href="#size" role="tab" aria-controls="size" aria-selected="true">Ölçü ilə</a>
+        </li>
+        <li class="nav-item" role="presentation" data-action="{% url 'search' %}">
+          <a class="nav-link {{car_link}}" id="car-tab" data-toggle="tab" href="#car" role="tab" aria-controls="car" aria-selected="false">Maşın ilə</a>
+        </li>
+    </ul>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane fade {{size_box}} {{size_link}}" id="size" role="tabpanel" aria-labelledby="size-tab">
+      {% include "./size-tire-search.html" %}
+    </div>
+    <div class="tab-pane fade {{car_box}} {{car_link}}" id="car" role="tabpanel" aria-labelledby=" car-tab">
+      {% include "./car-tire-search.html" %}
     </div>
   </div>
+  
   <div class="tire-search__btn-group">
-    <button class="tire-search__btn tire-search__btn--main" type="submit">
+    <button id="tire-search-submit-btn" class="tire-search__btn tire-search__btn--main" type="submit">
       Tap
     </button>
-    <button class="tire-search__btn tire-search__btn--outline" type="reset">
+    <button id="tire-search-reset-btn" class="tire-search__btn tire-search__btn--outline" type="reset">
       Yenidən
     </button>
   </div>

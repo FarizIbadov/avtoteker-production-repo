@@ -1,0 +1,22 @@
+{
+  "name": "tire-search-by-car",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app/index.js",
+    "dev": "nodemon app/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "uuid": "^8.3.2",
+    "ws-api-client-nodejs": "github:driveate/ws-api-client-nodejs"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
