@@ -1,5 +1,5 @@
 const ws_api_client = require("ws-api-client-nodejs");
-const uuid = require('uuid').v4;
+const uuid = require("uuid").v4;
 
 exports.makesController = (req, res, next) => {
   try {
@@ -87,58 +87,58 @@ exports.searchController = (req, res, next) => {
       if (error) {
         throw error;
       } else {
-        const tires = []
+        const tires = [];
 
         for (const dataItem of data) {
           for (const wheel of dataItem.wheels) {
             const wheelId = uuid();
-            const pressure = []
-  
+
             if (wheel.front.tire) {
-              if (wheel.front.tire_pressure){
-                const bar = wheel.front.tire_pressure.bar + ' bar';
-                const kPa =  wheel.front.tire_pressure.kPa + ' kPa';
-                pressure.push(bar,kPa);
+              const pressure = [];
+              if (wheel.front.tire_pressure) {
+                const bar = wheel.front.tire_pressure.bar + " bar";
+                const kPa = wheel.front.tire_pressure.kPa + " kPa";
+                pressure.push(bar, kPa);
               } else {
-                pressure.push('-','-');
+                pressure.push("-", "-");
               }
 
               const tireType = !wheel.rear.tire ? 3 : 1;
               const tireObj = {
-                "wheel_id":wheelId,
-                "rim":wheel.front.rim,
-                "tire_type":tireType,
-                "tire":wheel.front.tire,
-                "pressure":pressure.join(" / ")
-              }
+                wheel_id: wheelId,
+                rim: wheel.front.rim,
+                tire_type: tireType,
+                tire: wheel.front.tire,
+                pressure: pressure.join(" / "),
+              };
               tires.push(tireObj);
             }
 
             if (wheel.rear.tire) {
-              if (wheel.rear.tire_pressure){
-                const bar = wheel.rear.tire_pressure.bar + ' bar';
-                const kPa =  wheel.rear.tire_pressure.kPa + ' kPa';
-                pressure.push(bar,kPa);
+              const pressure = [];
+              if (wheel.rear.tire_pressure) {
+                const bar = wheel.rear.tire_pressure.bar + " bar";
+                const kPa = wheel.rear.tire_pressure.kPa + " kPa";
+                pressure.push(bar, kPa);
               } else {
-                pressure.push('-','-');
+                pressure.push("-", "-");
               }
 
               const tireObj = {
-                "wheel_id":wheelId,
-                "rim":wheel.rear.rim,
-                "tire_type":2,
-                "tire":wheel.rear.tire,
-                "pressure":pressure.join(" / ")
-              }
+                wheel_id: wheelId,
+                rim: wheel.rear.rim,
+                tire_type: 2,
+                tire: wheel.rear.tire,
+                pressure: pressure.join(" / "),
+              };
               tires.push(tireObj);
             }
           }
         }
         res.json(tires);
-        }
-      
-    }
-    
+      }
+    };
+
     apiInstance.searchByModelList(make, model, +year, { trim }, callback);
   } catch (err) {
     next(err);
