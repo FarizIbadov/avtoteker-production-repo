@@ -18,7 +18,7 @@ class TireSizeView(View):
         if self.make_slug and self.model_slug and self.year_slug and self.trim_slug and queryset != None:
             new_queryset = self.fetch_tire_size(queryset)
             context['prepare_tire_list'] = self.get_prepare_tire_list(new_queryset)
-            context['title'] = self.trim
+            context['title'] = "%s %s - %s %s" % (self.trim.make.name,self.trim.model.name,self.trim.name,self.trim.year.name)
             return render(request,'main_site/wheel-size-page.html',context)
         else: 
             return redirect("home")
