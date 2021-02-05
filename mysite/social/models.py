@@ -9,7 +9,12 @@ class Phone(models.Model):
 
 
 class SocialMedia(models.Model):
-    name = models.CharField(max_length=30)
+    CHOICE = [
+        ('facebook','facebook'),
+        ('instagram','instagram'),
+        ('youtube','youtube'),
+    ]
+    name = models.CharField(choices=CHOICE,max_length=30)
     href = models.URLField()
     active = models.BooleanField(default=False)
 
