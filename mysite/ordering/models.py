@@ -26,8 +26,8 @@ class Order(models.Model):
     def __str__(self):
         return '%s %s %s' % (self.tire.brand,self.tire.serie,self.tire.size)
 
-    def clean(self,*args, **kwargs):
-        regex = r"^\+[1-9]{1}[0-9]{3,14}$"
-        if not re.search(regex,self.phone):
-            raise ValidationError('Please enter valid phone number!')
-        super(Order, self).clean(*args, **kwargs)
+    # def clean(self,*args, **kwargs):
+    #     regex = r"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$"
+    #     if not re.search(regex,self.phone):
+    #         raise ValidationError('Please enter valid phone number!')
+    #     super(Order, self).clean(*args, **kwargs)
