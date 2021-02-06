@@ -12,6 +12,7 @@
 
 {% block content %} 
 {% include "../components/order-modal-form.html" %}
+{% include "../components/image-preview-modal.html" %}
 {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
 <div class="container mb-5">
   <div class="main-list__main-row">
@@ -35,11 +36,8 @@
 
         <div class="main-list__sub-row--2 px-4">
           <div class="main-list__col-sm w-60">
-            <img
-              src="{{object.image.url}}"
-              class="main-list__img"
-              alt="{{object.brand}}"
-            />
+            {% include "../components/main-site/list-item-image.html" with object=object %}
+            
           </div>
           
           <div class="main-list__col-sm--2 w-35">

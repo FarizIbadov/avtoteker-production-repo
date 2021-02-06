@@ -18,6 +18,8 @@
 
     {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
     {% include "../components/order-modal-form.html" %}
+    {% include "../components/image-preview-modal.html" %}
+    
     <h1 class="main-list__heading">{% parse_size_for_list request %}</h1>
     <div class="main-list">
         <div class="main-list__main-row">
@@ -33,13 +35,7 @@
                     <h4 class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</h4>
                     <div class="main-list__sub-row--2">
                         <div class="main-list__col-sm w-50">
-
-                                <img
-                                src="{{object.image.url}}"
-                                class="main-list__img"
-                                alt="{{object.brand}}"
-                                />
-    
+                            {% include "../components/main-site/list-item-image.html" with object=object %}
                         </div>
                         <div class="main-list__col-sm--2 w-40">
                             <div class="main-list__card-body">
