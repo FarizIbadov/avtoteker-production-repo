@@ -118,7 +118,6 @@ class Tire(models.Model):
     year = models.PositiveSmallIntegerField(null=True)
     Class = models.PositiveSmallIntegerField(default=1, choices=CLASS_CHOICES)
 
-    image = models.ImageField(blank=True,upload_to="product")
     quantity = models.PositiveIntegerField(default=4)
     release_date = models.CharField(blank=True,null=True,max_length=30)
 
@@ -144,18 +143,6 @@ class Tire(models.Model):
             self.size,
             self.manufacturer,
         )
-
-    def save(self, *args, **kwargs):
-        if not self.image:
-            new_file_name = self.serie.image.name.split('/')[-1]
-            new_file = File(
-                self.serie.image,
-                new_file_name
-            )
-            self.image = new_file
-    
-        super().save()
-        compress(self.image.path, (690, 690))
 
     def get_absolute_url(self):
         return reverse(
