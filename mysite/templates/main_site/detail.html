@@ -36,7 +36,13 @@
 
         <div class="main-list__sub-row--2 px-4">
           <div class="main-list__col-sm">
-            {% include "../components/main-site/list-item-image.html" with object=object %}
+            <!-- {% include "../components/main-site/list-item-image.html" with object=object %} -->
+            <img
+              data-toggle="modal" data-target="#imagePreview"
+              src="{{object.serie.image.url}}"
+              class="main-list__img"
+              alt="{{object.brand}}"
+              />
           </div>
           <div class="main-list__col-sm--2 w-35">
             <div class="main-list__card-body">
