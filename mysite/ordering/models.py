@@ -13,18 +13,18 @@ class Order(models.Model):
     ]
 
     name = models.CharField(max_length=20,null=True,blank=True)
-    tire = models.ForeignKey(Tire,on_delete=models.CASCADE)
+    tire = models.ForeignKey(Tire,on_delete=models.DO_NOTHING)
     quantity = models.PositiveSmallIntegerField(default=1)
     phone = models.CharField(max_length=20)
     email = models.EmailField(blank=True,null=True,unique=False)
     payment_type = models.PositiveSmallIntegerField(choices=PAYMENT_CHOICES,default=1) 
-    is_purchased = models.BooleanField(default=False)
     order_date = models.DateTimeField(default=timezone.now)
     note = models.TextField(blank=True,null=True)
     remember_me = models.BooleanField(default=False)
 
     def __str__(self):
         return '%s %s %s' % (self.tire.brand,self.tire.serie,self.tire.size)
+
 
     # def clean(self,*args, **kwargs):
     #     regex = r"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$"
