@@ -13,7 +13,7 @@ class Order(models.Model):
     ]
 
     name = models.CharField(max_length=20,null=True,blank=True)
-    tire = models.ForeignKey(Tire,on_delete=models.DO_NOTHING)
+    tire = models.ForeignKey(Tire,on_delete=models.SET_NULL,null=True)
     quantity = models.PositiveSmallIntegerField(default=1)
     phone = models.CharField(max_length=20)
     email = models.EmailField(blank=True,null=True,unique=False)
