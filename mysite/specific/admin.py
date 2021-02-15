@@ -4,6 +4,7 @@ from .models import Country, Season, Brand, Serie
 from .resources import SerieResource
 
 admin.site.site_header = "Avto Teker Admin"
+admin.site.site_title = "Avto Teker Admin"
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
