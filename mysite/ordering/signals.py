@@ -19,7 +19,7 @@ import os
 
 @receiver(post_save, sender=Order)
 def order_save(sender, instance:Order, created, **kwargs):
-    if created:
+    if instance.tire:
         instance.product_title = instance.tire.__str__()
         instance.product_link = reverse('detail',kwargs={'pk':instance.tire.id})
         instance.save()
