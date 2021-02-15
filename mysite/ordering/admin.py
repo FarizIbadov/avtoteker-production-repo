@@ -8,7 +8,7 @@ class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ['product','email','phone_number','payment_type','name']
     list_filter = ['remember_me']
     list_display = ['prd_title']
-    exclude = ['phone','tire','product_title','product_link']
+    exclude = ['phone','tire','product_title','product_link','prd_title']
 
 
     def phone_number(self,obj:Order):
@@ -16,7 +16,7 @@ class OrderAdmin(admin.ModelAdmin):
         return format_html(link) 
     
     def product(self,obj:Order):
-        title = prd_title(obj)
+        title = self.prd_title(obj)
 
         link = "<a href='%s'>%s</a>" % (obj.product_link,title)
         return format_html(link)
