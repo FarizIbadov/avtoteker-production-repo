@@ -26,7 +26,7 @@ class Order(models.Model):
 
     def __str__(self):
         if self.tire:
-            return self.tire
+            return '%s' % self.tire
         else:
             return self.product_title
 
