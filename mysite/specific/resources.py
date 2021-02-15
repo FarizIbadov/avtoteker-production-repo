@@ -7,7 +7,20 @@ class SerieResource(resources.ModelResource):
     def get_queryset(self):
         return self.Meta.model.objects.all().order_by("id")
 
-    title = fields.Field(attribute='title',widget=resource_widget.CharWidget())
+    def before_import(self,dataset, using_transactions, dry_run, **kwargs):
+        imported_ids = []
+        if not dry_run:
+            for row in dataset:
+                imported_ids.append(row[0])
+            filtered_ids = list(filter(None,imported_ids))
+            prepeared_for_deletion_models = self.Meta.model.objects.all().exclude(id__in=filtered_ids)
+            prepeared_for_deletion_models.delete()
+
+    def save_instance(self, instance, using_transactions=True, dry_run=False):
+        if not dry_run:
+            super().save_instance(instance, using_transactions, dry_run)
+
+    title = fields.Field(attribute='title',widget=widgets.CustomCharWidget())
     brand = fields.Field(attribute="brand",widget=widgets.CustomBrandWidget())
     dry = fields.Field(attribute="dry",widget=resource_widget.IntegerWidget())
     wet = fields.Field(attribute="wet",widget=resource_widget.IntegerWidget())

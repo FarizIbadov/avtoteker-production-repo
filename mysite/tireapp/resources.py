@@ -18,6 +18,10 @@ class TireResource(resources.ModelResource):
             prepeared_for_deletion_models.delete()
 
 
+    def save_instance(self, instance, using_transactions=True, dry_run=False):
+        if not dry_run:
+            super().save_instance(instance, using_transactions, dry_run)
+
 
     origin = fields.Field(
         attribute="brand__country", widget=widgets.CustomCountryWidget()
