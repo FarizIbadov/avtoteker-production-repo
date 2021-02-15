@@ -7,8 +7,8 @@ from django.utils.html import format_html
 class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ['product','email','phone_number','payment_type','name']
     list_filter = ['remember_me']
-    list_display = ['prd_title']
-    exclude = ['phone','tire','product_title','product_link','prd_title']
+    list_display = ['order_title']
+    exclude = ['phone','tire','product_title','product_link','order_title']
 
 
     def phone_number(self,obj:Order):
@@ -16,17 +16,17 @@ class OrderAdmin(admin.ModelAdmin):
         return format_html(link) 
     
     def product(self,obj:Order):
-        title = self.prd_title(obj)
+        title = self.order_title(obj)
 
         link = "<a href='%s'>%s</a>" % (obj.product_link,title)
         return format_html(link)
 
-    def prd_title(self,obj:Order):
+    def order_title(self,obj:Order):
         title = ""
         tire = obj.tire
         if tire:
-            title = tire
-        if not title:
+            title = tire.__str__()
+        else:
             title = obj.product_title
 
         return title
