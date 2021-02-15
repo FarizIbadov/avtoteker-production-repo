@@ -7,6 +7,17 @@ from import_export import widgets as resource_widget
 class TireResource(resources.ModelResource):
     def get_queryset(self):
         return self.Meta.model.objects.all().order_by("id")
+    
+    def before_import(self,dataset, using_transactions, dry_run, **kwargs):
+        imported_ids = []
+        if not dry_run:
+            for row in dataset:
+                imported_ids.append(row[0])
+            filtered_ids = list(filter(None,imported_ids))
+            prepeared_for_deletion_models = self.Meta.model.objects.all().exclude(id__in=filtered_ids)
+            prepeared_for_deletion_models.delete()
+
+
 
     origin = fields.Field(
         attribute="brand__country", widget=widgets.CustomCountryWidget()

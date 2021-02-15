@@ -1,5 +1,6 @@
 from django.template.loader import get_template
 from django.conf import settings
+from django.urls import reverse
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -18,6 +19,7 @@ import os
 
 @receiver(post_save, sender=Order)
 def order_save(sender, instance:Order, created, **kwargs):
-    if created:
-        instance.note = instance.tire
+    instance.product_title = instance.tire.__str__()
+    instance.product_link = reverse('detail',kwargs={'pk':instance.tire.id})
+    instance.save()
     

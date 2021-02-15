@@ -14,6 +14,8 @@ class Order(models.Model):
 
     name = models.CharField(max_length=20,null=True,blank=True)
     tire = models.ForeignKey(Tire,on_delete=models.SET_NULL,null=True)
+    product_title = models.CharField(blank=True,max_length=50)
+    product_link = models.CharField(blank=True,max_length=150)
     quantity = models.PositiveSmallIntegerField(default=1)
     phone = models.CharField(max_length=20)
     email = models.EmailField(blank=True,null=True,unique=False)
@@ -23,7 +25,10 @@ class Order(models.Model):
     remember_me = models.BooleanField(default=False)
 
     def __str__(self):
-        return '%s %s %s' % (self.tire.brand,self.tire.serie,self.tire.size)
+        if self.tire:
+            return self.tire
+        else:
+            return self.product_title
 
 
     # def clean(self,*args, **kwargs):
