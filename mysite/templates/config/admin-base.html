@@ -1,12 +1,15 @@
 {% load static %}
+{% load favicon %}
+{% get_favicon as favicon %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-    <script src="{% static 'js/bundle.js' %}" defer></script>
-    {% include "../components/title.html" %}
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <script src="{% static 'bundle.js' %}" defer></script>
+    <link rel="icon" type="image/x-icon" href="{{favicon}}" />
+    <title>Avto Admin</title>
   </head>
   <body>
     {% if user.is_authenticated %}

@@ -23,7 +23,7 @@ class OrderForm(forms.ModelForm):
         helper.layout = Layout(
             'tire',
             Row(
-                # Column('email',css_class="col-md-9"),
+                Column('name',css_class="col-md"),
                 Column('phone',css_class="col-md"),
                 # Column('quantity',css_class="col-md-3")
             ),
@@ -46,7 +46,8 @@ class OrderForm(forms.ModelForm):
             "tire": forms.HiddenInput(),
         }
         labels = {
-            "quantity":"Say",
-            "payment_type":"Ödənış üsulu",
-            "phone":"Mobil nömrəsi"
+            "name":"Ad:",
+            "quantity":"Say:",
+            "payment_type":"Ödənış üsulu:",
+            "phone":"Mobil nömrəsi:"
         }

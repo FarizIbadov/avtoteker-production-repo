@@ -1,4 +1,5 @@
 from django import template
+from tireapp.models import Tire
 
 register = template.Library()
 
@@ -59,3 +60,23 @@ taksit_fields = ["taksit_2","taksit_3","taksit_6","taksit_9","taksit_12"]
     %s %s
 </div>
 """
+
+@register.filter(name="special_kredit_price")
+def special_kredit_price(value:Tire):
+    price = float(value.USDNO)
+    if value.USD_active:
+        price = float(value.USD)
+
+    initial_price = value.kredit_initial_price
+
+    result = (price - (price * float(initial_price)/100)) / 3
+
+    return result
+
+@register.filter(name="get_first_price")
+def get_first_price(value):
+    price = float(value.USDNO)
+    if value.USD_active:
+        price = float(value.USD)
+    initial_price = value.kredit_initial_price
+    return price * float(initial_price)/100

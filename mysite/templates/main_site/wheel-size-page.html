@@ -1,0 +1,68 @@
+{% extends "../config/main-base.html" %} 
+
+{% block seo %}
+  <meta name="description" content="Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. #teker #təkər
+  BirKartla və TamKartla 6 ayadək faizsiz taksitlə.">
+
+  <title>#teker {{title}} təkər ölçüsü | Avtotəkər</title>
+{% endblock seo %}
+
+{% block content %}
+    {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
+    <div class="container my-5">
+      <h1 class="text-center">{{title}}</h1>
+      <hr>
+      <h2 class="text-center mb-5 font-larger--2 font-weigth-400">
+        Seçimi etmək üçün aşağıdaki şin ölçülərinə toxunun
+      </h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">
+              <h3 class="mb-0">Şin</h3>
+            </th>
+            <th scope="col" class="text-center">
+              <h3 class="mb-0">Yer</h3>
+            </th>
+            <th scope="col" class="text-center">
+              <h3 class="mb-0">Disk</h3>
+            </th>
+            <th scope="col" class="text-center hidden-at-mobile">
+              <h3 class="mb-0">Şin təzyiqi</h3>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for object_list in prepare_tire_list %}
+            {% for object in object_list %}
+              <tr>
+                {% if forloop.first %}
+                  <td class="text-center">
+                    <h5 class="mb-0">
+                      <a class="text-my-secondary" href="{{object.get_href}}">{{object.tire}}</a>
+                    </h5>
+                  </td>
+                  <td class="text-center">{{object.get_tire_type}}</td>
+                  <td class="text-center">{{object.rim}}</td>
+                  <td class="text-center hidden-at-mobile">{{object.pressure}}</td>
+                {% else %}
+                  <td class="text-center border-0">
+                    <h5 class="mb-0">
+                      <a class="text-my-secondary" href="{{object.get_href}}">{{object.tire}}</a>
+                    </h5>
+                  </td>
+                  <td class="text-center  border-0">{{object.get_tire_type}}</td>
+                  <td class="text-center  border-0">{{object.rim}}</td>
+                  <td class="text-center  border-0 hidden-at-mobile">{{object.pressure}}</td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="main-index">
+      {% include "../components/main-site/slider.html" %}
+      {% include "../components/main-site/brand-carousel.html" %}
+    </div>
+{% endblock content %}

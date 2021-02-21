@@ -1,49 +1,56 @@
 {% extends "../config/main-base.html" %}
+{% load static %}
 {% load taksit_kredit %}
+{% load size_parser %}
 
 {% block seo %}
-  <meta name="description" content="Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. #teker #təkər
+  {% parse_size_for_meta request as size %}
 
-  BirKartla və TamKartla 6 ayadək faizsiz taksitlə.">
+  {% if size and not object_list.is_empty %}
+    <meta name="description" content="{{size}} #teker #təkər.Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. BirKartla və TamKartla 6 ayadək faizsiz taksitlə.">
+  {% endif %}
 
-  <meta property="og:title" content="#teker #təkər | Avtotəkər | Horizon, Vitour, Dunlop, Yokohama, Continental" />
+  <title>{% parse_size_for_title request %} | #teker #təkər | Avtotəkər</title>
 
-  <meta property="og:description" content="Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. #teker #təkər" />
 {% endblock seo %}
 
 {% block content %}
 
-    {% include "../components/main-site/tire-search.html" %}
+    {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
     {% include "../components/order-modal-form.html" %}
-    <section class="main-list">
+    {% include "../components/image-preview-modal.html" %}
+    
+    <h1 class="main-list__heading">{% parse_size_for_list request %}</h1>
+    <div class="main-list">
         <div class="main-list__main-row">
             {% for object in object_list %}
             <div class="main-list__col-12">
-                <div class="main-list__card">
-                    <!-- <div class="main-list__side-info">
-                        <small class="main-list__side-single">3 ay {{object.kredit_3_dif|floatformat}}%</small>
-                        <small class="main-list__side-single">6 taksit</small>
-                        <small class="main-list__side-single">1 illik pulsuz servis</small>
-                    </div> -->
+                <section class="main-list__card">
+                    {% include "../components/main-site/coming-soon.html" with object=object detail=False %}
                     <div class="main-list__sub-row">
+                        {% include "../components/main-site/side-info.html" with object=object %}
                             <img class="main-list__item-logo mb-1" src="{{object.brand.image.url}}" alt="{{object.brand}}">
                     </div>
-                    <p class="main-list__card-text text-right pr-4">{{object.serie}}</p>
-                    <p class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</p>
+                    <h4 class="main-list__card-text text-right pr-4">{{object.serie}}</h4>
+                    <h4 class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</h4>
                     <div class="main-list__sub-row--2">
                         <div class="main-list__col-sm">
-
-                                <img
-                                src="{{object.image.url}}"
+                            <!-- {% include "../components/main-site/list-item-image.html" with object=object.serie %} -->
+                            <img
+                                data-toggle="modal" data-target="#imagePreview"
+                                src="{{object.serie.image.url}}"
                                 class="main-list__img"
                                 alt="{{object.brand}}"
                                 />
-    
                         </div>
-                        <div class="main-list__col-sm--2">
+                        <div class="main-list__col-sm--2 w-40">
                             <div class="main-list__card-body">
                                 <div class="main-list__card-text--2">
-                                    {{object.get_filters|safe}}
+                                    <div class='ml-2'>
+                                        {% if object.year == 2020 or object.year == 2021 %}
+                                            {{object.year}}
+                                        {% endif %}
+                                    {{object.weight}} {{object.speed}}</div>
                                 </div>
                                 <div class="main-list__card-text--2">
                                     {{object.tradeware}}
@@ -55,7 +62,8 @@
                                     {% include "../components/main-site/image.html" with object=object.brand.country %}
                                     {% include "../components/main-site/image.html" with object=object.manufacturer %}
                                 </div>
-                                <div class="main-list__price-info">
+                                <div class="main-list__price-info mr-1">
+                                    {% if object.USD_active %}
                                     <div class="price">
                                         <span class="red-line-trought  font-larger--2 opacity-8">
                                             {{object.USDNO|floatformat}}
@@ -63,32 +71,49 @@
                                     </div>  
                                     <div class="price text-right">
                                         <span class="text-red font-xl">{{object.USD|floatformat}}</span>
-                                        <span class="manat">₼</span>
+                                        <span class="manat">
+                                            <img src="{% static 'img/manat.png' %}" alt="₼">
+                                        </span>
                                     </div>  
+                                    {% else %}
+                                     <div class="price text-right">
+                                        <span class="text-red font-xl">{{object.USDNO|floatformat}}</span>
+                                        <span class="manat">
+                                            <img src="{% static 'img/manat.png' %}" alt="₼">
+                                        </span>
+                                    </div>  
+                                    {% endif %}
+
                                     {% if object.taksit_active %}  
                                         {{ object|get_taksit|safe}}
                                     {% elif object.kredit_active %}
                                         {{ object|get_kredit|safe}}
                                     {% endif %}
                                 </div>
-                                <div class="main-list__btn-box">
-                                    <button type="button" data-toggle="modal"
-                                    data-target="#order" class="main-list__cart-btn"
-                                    data-max="{{object.quantity}}"
-                                    data-price="{{object.USD}}"
-                                    data-id="{{object.id}}">
-                                        {% include "../components/main-site/cart.html" %}
-                                    </button>
-                                    <a href="{% url 'detail' object.id %}" class="main-list__detail-btn">Ətraflı</a>
-                                </div>
                             </div>
                         </div>
+                        <div class="main-list__btn-box">
+                            <button type="button" data-toggle="modal"
+                            data-target="#order" class="main-list__cart-btn"
+                            data-max="{{object.quantity}}"
+                            data-price="{{object.USD}}"
+                            data-id="{{object.id}}">
+                                Sifariş et
+                            </button>
+                            <a href="{% url 'detail' object.id %}" class="main-list__detail-btn">Ətraflı</a>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
+            {% empty %}
+                <h3 class="main-list__empty-text">Hal hazırda yoxdur</h3>
             {% endfor %}
         </div>
-    </section>
+    </div>
     {% include "../components/pagination.html" %}
-</div>
+    <div class="main-index">
+        {% include "../components/main-site/slider.html" %}
+        {% include "../components/main-site/brand-carousel.html" %}
+    </div>
+
 {% endblock content %}

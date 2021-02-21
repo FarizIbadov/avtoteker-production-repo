@@ -17,6 +17,9 @@ class Size(models.Model):
     def __str__(self):
         return "%s\\%s\\%s" % (self.width, self.height, self.radius)
 
+    def get_size_for_title(self):
+        return "%s/%s/%s" % (self.width,self.height,self.radius)
+
 
 class Tire(models.Model):
     CLASS_CHOICES = [
@@ -115,8 +118,15 @@ class Tire(models.Model):
     year = models.PositiveSmallIntegerField(null=True)
     Class = models.PositiveSmallIntegerField(default=1, choices=CLASS_CHOICES)
 
-    image = models.ImageField(upload_to="product")
     quantity = models.PositiveIntegerField(default=4)
+    release_date = models.CharField(blank=True,null=True,max_length=30)
+
+    db = models.PositiveSmallIntegerField(default=72)
+    fuel = models.CharField(max_length=5,default="B")
+    contact = models.CharField(max_length=5,default="B")
+    kredit_initial_price = models.FloatField(blank=True,default=0)
+    new = models.BooleanField(default=False)
+    outlet = models.BooleanField(default=False)
 
     def get_tire_info(self):
         return "%s - %s - %s - %s" % (
@@ -134,21 +144,9 @@ class Tire(models.Model):
             self.manufacturer,
         )
 
-    def save(self, *args, **kwargs):
-        if not self.image:
-            new_file_name = self.serie.image.name.split('/')[-1]
-            new_file = File(
-                self.serie.image,
-                new_file_name
-            )
-            self.image = new_file
-    
-        super().save()
-        compress(self.image.path, (690, 690))
-
     def get_absolute_url(self):
         return reverse(
-            "custom-admin:tireapp:tire-detail", kwargs={"pk": self.id}
+            "detail", kwargs={"pk": self.id}
         )
 
     def get_edit_url(self):
@@ -183,23 +181,6 @@ class Tire(models.Model):
     def get_filters(self):
         return "<div>%s</div>  <div class='ml-2'>%s %s</div>"  % (self.year,self.weight,self.speed)
 
-
-class DefaultImage(models.Model):
-    image = models.ImageField(upload_to="default")
-
-    def clean(self,*args, **kwargs):
-        extension = self.image.name.split('.')[-1]
-        if extension != 'png':
-            raise ValidationError('Please provide a png file')
-        super(DefaultImage, self).clean(*args, **kwargs)
-
-    def save(self,*args, **kwargs):
-        self.image.name = "default.png"
-        DefaultImage.objects.all().delete()
-        super(DefaultImage, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return self.image.name
 
 
     

@@ -4,7 +4,8 @@ class FilterBySizeMixin:
             "width": "size__width",
             "height": "size__height",
             "radius": "size__radius",
-            "brand": "brand__id"
+            "brand": "brand__title__icontains",
+            "serie": "serie__title__icontains"
         }
         kwargs = {}
         get_data = self.request.GET

@@ -14,7 +14,7 @@ from tablib import Dataset
 from .forms import ExcelForms, TireForm, PaginateByForm
 from .models import Tire
 from .utils import OrderedByField, FilterByField, TableFieldsMixin, TireTable
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy,reverse
 from .resources import TireResource
 
 
@@ -44,14 +44,8 @@ class TireCreateView(IsAdmin, CreateView):
     form_class = TireForm
     template_name = "tireapp/form.html"
 
-    def form_valid(self, form):
-        form.instance.creator = self.request.user
-        form.instance.updator = self.request.user
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        print(form.__dict__)
-        return super().form_invalid(form)
+    def get_success_url(self):
+        return reverse("custom-admin:tireapp:detail",kwargs={"pk":self.id})
 
 
 class TireUpdateView(IsAdmin, UpdateView):
@@ -59,9 +53,8 @@ class TireUpdateView(IsAdmin, UpdateView):
     model = Tire
     template_name = "tireapp/form.html"
 
-    def form_valid(self, form):
-        form.instance.updator = self.request.user
-        return super().form_valid(form)
+    def get_success_url(self):
+        return reverse("custom-admin:tireapp:tire-detail",kwargs={"pk":self.kwargs['pk']})
 
 
 class TireDetailView(IsAdmin, DetailView):

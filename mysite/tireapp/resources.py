@@ -7,6 +7,21 @@ from import_export import widgets as resource_widget
 class TireResource(resources.ModelResource):
     def get_queryset(self):
         return self.Meta.model.objects.all().order_by("id")
+    
+    def before_import(self,dataset, using_transactions, dry_run, **kwargs):
+        imported_ids = []
+        if not dry_run:
+            for row in dataset:
+                imported_ids.append(row[0])
+            filtered_ids = list(filter(None,imported_ids))
+            prepeared_for_deletion_models = self.Meta.model.objects.all().exclude(id__in=filtered_ids)
+            prepeared_for_deletion_models.delete()
+
+
+    def save_instance(self, instance, using_transactions=True, dry_run=False):
+        if not dry_run:
+            super().save_instance(instance, using_transactions, dry_run)
+
 
     origin = fields.Field(
         attribute="brand__country", widget=widgets.CustomCountryWidget()
@@ -162,6 +177,12 @@ class TireResource(resources.ModelResource):
     USD = fields.Field(
         column_name="sale", attribute="USD", widget=resource_widget.DecimalWidget()
     )
+    USD_active = fields.Field(
+        column_name="sale active",
+        attribute="USD_active",
+        widget=widgets.CustomBooleanWidget()
+    )
+
     USDOFF = fields.Field(
         column_name="Price Difference",
         attribute="USDOFF",
@@ -178,7 +199,17 @@ class TireResource(resources.ModelResource):
     )
 
     size = fields.Field(attribute="size", widget=widgets.CustomSizeWidget())
+    release_date = fields.Field(
+        attribute="release_date",
+        widget=resource_widget.CharWidget()
+    )
 
+    db= fields.Field(attribute="db",widget=resource_widget.IntegerWidget())
+    fuel = fields.Field(attribute="fuel",widget=resource_widget.CharWidget())
+    contact = fields.Field(attribute="contact",widget=resource_widget.CharWidget())
+    kredit_initial_price = fields.Field(column_name="kredit initial price %",attribute="kredit_initial_price",widget=resource_widget.FloatWidget())
+    new = fields.Field(attribute="new",widget=widgets.CustomNewBooleanWidget())
+    outlet = fields.Field(attribute="outlet",widget=widgets.CustomOutletBooleanWidget())
 
     class Meta:
         model = Tire
@@ -226,7 +257,15 @@ class TireResource(resources.ModelResource):
             "taksit_12_active",
             "USDNO",
             "USD",
+            "USD_active",
             "USDOFF",
+            "release_date",
+            "db",
+            "fuel",
+            "contact",
+            "kredit_initial_price",
+            "new",
+            "outlet"
         )
         skip_unchanged = True
 
@@ -246,8 +285,12 @@ class TireResource(resources.ModelResource):
             "tradeware",
             "weight",
             "speed",
+            'db',
+            "fuel",
+            "contact",
             "USDNO",
             "USD",
+            "USD_active",
             "USDOFF",
             "montaj_balance",
             "razval",
@@ -268,6 +311,7 @@ class TireResource(resources.ModelResource):
             "kredit_3",
             "kredit_3_dif",
             "kredit_3_active",
+            "kredit_initial_price",
             "kredit_6",
             "kredit_6_dif",
             "kredit_6_active",
@@ -278,4 +322,7 @@ class TireResource(resources.ModelResource):
             "kredit_12_dif",
             "kredit_12_active",
             "quantity",
+            "release_date",
+            "new",
+            "outlet"
         )

@@ -24,12 +24,17 @@ if ALLOWED_HOSTS_ENV:
 # Application definition
 
 INSTALLED_APPS = [
-    "social",
+    "social.apps.SocialConfig",
     "ordering.apps.OrderingConfig",
     "custom_admin.apps.CustomAdminConfig",
     "tireapp.apps.TireappConfig",
     "specific.apps.SpecificConfig",
     "main_site.apps.MainSiteConfig",
+    "wheel_size.apps.WheelSizeConfig",
+    "faviconapp.apps.FaviconappConfig",
+    "metaapp.apps.MetaappConfig",
+    "adds.apps.AddsConfig",
+    "copyright.apps.CopyrightConfig",
     "django_cleanup.apps.CleanupConfig",
     "crispy_forms",
     "import_export",
@@ -39,9 +44,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     "ckeditor",
     'ckeditor_uploader',
+    "rest_framework"
 ]
+
+SITE_ID = 1
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -132,20 +142,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/static/'
-MEDIA_URL = '/static/media/'
+STATIC_URL = ""
+MEDIA_URL = ""
 
 
 STATIC_ROOT = "/vol/web/static"
-MEDIA_ROOT = '/vol/web/media'
+MEDIA_ROOT = ""
+
+if DEBUG:
+    MEDIA_ROOT =  os.path.join(BASE_DIR,"media")
+    STATIC_URL = "/static/"
+    MEDIA_URL = "/media/"
+else:
+    MEDIA_ROOT =  '/vol/web/media'
+    STATIC_URL = '/static/static/'
+    MEDIA_URL = '/static/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
-# MEDIAFILES_DIRS = [
-#     os.path.join(BASE_DIR,'media')
-# ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 IMPORT_EXPORT_USE_TRANSACTIONS = True

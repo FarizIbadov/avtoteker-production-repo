@@ -2,6 +2,10 @@ from django.db import models
 from mysite.utils import compress
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.core.files import File
+import requests
+import os
+from tempfile import NamedTemporaryFile
 
 
 class Season(models.Model):
@@ -62,13 +66,14 @@ class Country(models.Model):
 
 
 class Brand(models.Model):
-    title = models.CharField(max_length=50, unique=True)
+    title = models.CharField(max_length=50)
     image = models.ImageField(upload_to="brand", null=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     free_service = models.BooleanField(default=False)
     extra_one_year_warranty = models.CharField(max_length=100,blank=True)
     order_number = models.IntegerField(default=1)
     description = RichTextUploadingField(default="description")
+    show_in_slider = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -94,7 +99,7 @@ class Brand(models.Model):
 
 
 class Serie(models.Model):
-    title = models.CharField(max_length=50, unique=True)
+    title = models.CharField(max_length=50)
     image = models.ImageField(upload_to="serie", blank=False, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     dry = models.PositiveSmallIntegerField(default=0)
@@ -103,9 +108,11 @@ class Serie(models.Model):
     comfort = models.PositiveSmallIntegerField(default=0)
     noise = models.PositiveSmallIntegerField(default=0)
     treadware = models.PositiveSmallIntegerField(default=0)
+    snow = models.PositiveSmallIntegerField(default=0)
     value = models.PositiveSmallIntegerField(default=0)
-    description = RichTextUploadingField(default="description")
+    description = RichTextUploadingField(blank=True)
     extra = RichTextUploadingField(blank=True)
+    image_url = models.URLField(blank=True)
 
     def __str__(self):
         return self.title
@@ -117,8 +124,24 @@ class Serie(models.Model):
         )
 
     def save(self, *args, **kwargs):
+        if self.image_url:
+            headers = {
+                'User-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36',
+                'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Encoding' : 'gzip,deflate,sdch',
+            }
+            req = requests.get(self.image_url,headers=headers)
+            img_temp = NamedTemporaryFile(delete=True)
+            img_temp.write(req.content)
+            img_temp.flush()
+
+            self.image = File(img_temp,os.path.basename(self.image_url))
+            self.image_url = ""
+        
         super().save()
-        compress(self.image.path, (300, 300))
+        
+        if self.image:
+            compress(self.image.path, (300, 300))
 
     def get_absolute_url(self):
         return reverse("custom-admin:specific:serie-detail", kwargs={"pk": self.pk})
