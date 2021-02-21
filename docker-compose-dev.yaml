@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  wheel-size:
+    restart: on-failure
+    container_name: avto-node-dev-ws
+    volumes:
+      - ./node:/app/
+    build:
+      context: ./node
+    environment:
+      - WHEEL_SIZE_KEY=5f0e624a880add6bc70e73f774ae3db6
+    command: sh -c "npx nodemon app/index.js"
+
+  web:
+    restart: on-failure
+    container_name: avtoteker-dev-web
+    volumes:
+      - ./mysite:/app/
+    build: .
+    environment:
+      - SECRET=j56@jyc()*qnyl1vj^yf5_a5c27kfp5ysf^yeoxl#ul4hn^j^(
+      - POSTGRES_DB=avtoteker
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=3151936f
+      - DEBUG=1
+      - ALLOWED_HOSTS=127.0.0.1,localhost,68.183.147.145,avtoteker.az,www.avtoteker.az
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
+
+  db:
+    restart: on-failure
+    container_name: avtoteker-dev-db
+    image: postgres:12.5-alpine
+    environment:
+      - POSTGRES_DB=avtoteker
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=3151936f
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+volumes:
+  static_data:
+  pgdata:

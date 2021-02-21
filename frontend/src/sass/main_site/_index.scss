@@ -1,0 +1,7 @@
+.main-index {
+  @extend .container;
+
+  @include responsive(max, 600px) {
+    padding: 0;
+  }
+}

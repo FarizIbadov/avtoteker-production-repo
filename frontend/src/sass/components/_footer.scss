@@ -1,0 +1,18 @@
+.footer {
+  background-color: #eee;
+  min-height: 150px;
+
+  &__logo {
+    width: 180px;
+    height: 40px;
+  }
+
+  &__bottom {
+    @extend .bg-my-secondary, .p-1, .text-light;
+  }
+
+  &__copyright {
+    @extend .container, .text-center, .mb-0;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,131 @@
+.detail-brand-img {
+  max-width: 200px;
+
+  @include responsive(max, 400px) {
+    max-width: 150px;
+  }
+}
+
+.detail-banner {
+  @extend .w-50, .p-2, .d-flex, .align-items-center, .justify-content-center;
+  text-align: center;
+
+  @include responsive(max, 400px) {
+    font-size: 14px;
+  }
+}
+
+.detail-extra {
+  p {
+    margin-bottom: 5px;
+  }
+}
+
+.detail-rating-box {
+  .rating-value,
+  .detail-rating-row {
+    @extend .d-flex;
+  }
+
+  .rating-label {
+    width: 100px;
+    font-size: 20px;
+  }
+
+  .rating-value {
+    @extend .ml-4, .align-items-center, .justify-content-between;
+    width: 100px;
+
+    & > span {
+      @include square(13px);
+      background-color: #ddd;
+      border-radius: 50%;
+
+      &.active {
+        background-color: #fb0;
+      }
+    }
+  }
+}
+
+.detail-cart-btn {
+  @include square(60px);
+  @extend .p-0;
+  border: none;
+  background-color: transparent;
+  cursor: not-allowed !important;
+
+  @include responsive(max, 450px) {
+    @include square(45px);
+  }
+}
+
+.detail-mb {
+  margin-bottom: 2px;
+  margin-right: 0;
+}
+
+.detail-info {
+  padding: 0;
+}
+
+.detail-qtn {
+  @extend .d-inline-flex,
+    .bg-my-primary,
+    .align-items-center,
+    .justify-content-center,
+    .ml-2;
+  @include square(60px);
+  font-size: 24px;
+  border-radius: 50%;
+
+  @include responsive(max, 768px) {
+    @include square(45px);
+  }
+}
+
+.detail-font-larger {
+  font-size: 16px;
+}
+
+.detail-serie-font {
+  font-size: 24px;
+}
+
+.detail {
+  width: 50px;
+  box-sizing: content-box;
+  padding: 5px 10px;
+
+  &--db {
+    @extend .detail;
+    background-color: #bfd630;
+  }
+
+  &--fuel {
+    @extend .detail;
+    background-color: #fef200;
+  }
+
+  &--contact {
+    @extend .detail;
+    background-color: #ffbb00;
+  }
+}
+
+.kredit-heading {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.kredit-table {
+  * .col-4 {
+    padding: 0 1px !important;
+  }
+}
+
+.taksit-table {
+  * .col-6 {
+    padding: 0 1px !important;
+  }
+}
