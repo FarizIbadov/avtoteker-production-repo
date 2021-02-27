@@ -4,7 +4,7 @@
   class="tire-search"
   id="tire-search"
 >
-  <h2 class="tire-search__heading">{{tire_search_title}}</h2>
+  {{tire_search_title|safe}}
   <div class="container mb-3">
     <ul class="tire-search__nav nav" role="tablist">
         <li class="nav-item" role="presentation" data-action="{% url 'list' %}">
