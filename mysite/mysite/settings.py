@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     "ckeditor",
     'ckeditor_uploader',
-    "rest_framework"
+    "rest_framework",
+    # "oilapp.apps.OilappConfig"
 ]
 
 SITE_ID = 1
