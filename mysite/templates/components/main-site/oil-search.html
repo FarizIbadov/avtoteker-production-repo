@@ -1,0 +1,32 @@
+<form
+  action="{% url 'oil-list' %}"
+  method="get"
+  class="tire-search"
+
+>
+ 
+<h2 class="tire-search__heading">Yağ seçimi</h2>
+<div class="tire-search__container">
+    <div class="row justify-content-center">  
+        <div class="col-sm-6 col-md-3">
+        <select name="oil-serie" id="oil-serie"  data-name="{{size.field}}" class="tire-search__select">
+            <option value="">Seria</option>
+        </select>
+        </div>
+        <div class="col-sm-6 col-md-3">
+        <select name="oil-type" id="oil-type"  data-name="{{size.field}}"  class="tire-search__select">
+            <option value="">Yanacaq növü</option>
+        </select>
+        </div>  
+    </div>
+</div>
+  
+  <div class="tire-search__btn-group">
+    <button id="tire-search-submit-btn" class="tire-search__btn tire-search__btn--main" type="submit">
+      Tap
+    </button>
+    <button id="tire-search-reset-btn" class="tire-search__btn tire-search__btn--outline" type="reset">
+      Yenidən
+    </button>
+  </div>
+</form>
