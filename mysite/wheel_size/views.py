@@ -26,7 +26,7 @@ class TireSizeView(View):
 
     def get_context_data(self):
         context = {
-            "tire_search_title":"Təkər seçimi",
+            "tire_search_title":"<h2 class='tire-search__heading'>Seçim edin</h2>",
         }
         return context
 
