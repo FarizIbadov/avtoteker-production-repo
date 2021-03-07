@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from tireapp.models import Tire
-from .models import Order
+from .models import Order,OilOrder
 
 from django.core.mail import EmailMultiAlternatives
 from email.mime.image import MIMEImage
@@ -24,3 +24,9 @@ def order_save(sender, instance:Order, created, **kwargs):
         instance.product_link = reverse('detail',kwargs={'pk':instance.tire.id})
         instance.save()
     
+@receiver(post_save, sender=OilOrder)
+def order_save(sender, instance:Order, created, **kwargs):
+    if created:
+        instance.product_title = instance.oil.__str__()
+        instance.product_link = reverse('oil-detail',kwargs={'pk':instance.oil.id})
+        instance.save()

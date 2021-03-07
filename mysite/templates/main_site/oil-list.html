@@ -4,83 +4,91 @@
 {% load size_parser %}
 
 {% block seo %}
-  {% parse_size_for_meta request as size %}
+ 
 
-  {% if size and not object_list.is_empty %}
-    <meta name="description" content="{{size}} #teker #təkər.Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. BirKartla və TamKartla 6 ayadək faizsiz taksitlə.">
-  {% endif %}
+  <meta name="description" content="Geniş yağ çeşidi Avtotəkərdə. Orijinal və minimum qiymət. Shell, Mobil1, Ravenol">
 
-  <title>{% parse_size_for_title request %} | #teker #təkər | Avtotəkər</title>
+  <title>Yağ seçimi | Avtotəkər | Shell, Mobil1, Ravenol</title>
 
 {% endblock seo %}
 
 {% block content %}
 
-    {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
-    {% include "../components/order-modal-form.html" %}
+    {% include "../components/main-site/oil-search.html" %}
+    {% include "../components/oil-order-modal-form.html" %}
     {% include "../components/image-preview-modal.html" %}
-    
-    <h1 class="main-list__heading">{% parse_size_for_list request %}</h1>
+
     <div class="main-list">
         <div class="main-list__main-row">
             {% for object in object_list %}
             <div class="main-list__col-12">
                 <section class="main-list__card">
-                    {% include "../components/main-site/coming-soon.html" with object=object detail=False %}
+                    {#{% include "../components/main-site/coming-soon.html" with object=object detail=False %}#}
                     <div class="main-list__sub-row">
-                        {% include "../components/main-site/side-info.html" with object=object %}
-                            <img class="main-list__item-logo mb-1" src="{{object.brand.image.url}}" alt="{{object.brand}}">
+                        {#{% include "../components/main-site/side-info.html" with object=object %}#}
+                            <img class="main-list__item-logo mb-1" src="{{object.brand.logo.url}}" alt="{{object.brand}}">
                     </div>
-                    <h4 class="main-list__card-text text-right pr-4">{{object.serie}}</h4>
+                    {% if object.serie.logo %}
+                    <div class="row justify-content-end px-4 no-gutters">
+                           <img class="main-list__item-logo mb-1" src="{{object.serie.logo.url}}" alt="{{object.serie}}"> 
+                    </div>
+                    {% endif %}
+                    <!-- <h4 class="main-list__card-text text-right pr-4 mt-2">
+                        {{object.serie}} <span class="text-danger">{{object.viscosity}}</span>
+                    </h4> -->
+                    <!-- <p class="text-right pr-4 mb-0 mt-1">
+                        {{object.volume}} 
+                        <span class="text-danger">{{object.oil_type}}</span>
+                        <span class="text-danger">{{object.fuel}}</span>
+                    </p>
+                    <p class="text-right pr-4">
+                        {{object.des1}}
+                    </p> -->
                     <h4 class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</h4>
                     <div class="main-list__sub-row--2">
                         <div class="main-list__col-sm">
                             <!-- {% include "../components/main-site/list-item-image.html" with object=object.serie %} -->
                             <img
                                 data-toggle="modal" data-target="#imagePreview"
-                                src="{{object.serie.image.url}}"
+                                src="{{object.get_image_url}}"
                                 class="main-list__img"
                                 alt="{{object.brand}}"
                                 />
                         </div>
                         <div class="main-list__col-sm--2 w-40">
                             <div class="main-list__card-body">
-                                <div class="main-list__card-text--2">
-                                    <div class='ml-2'>
-                                        {% if object.year == 2020 or object.year == 2021 %}
-                                            {{object.year}}
-                                        {% endif %}
-                                       {% if object.weight %}
-                                        {{object.weight}}
-                                       {% endif %}
-                                     {{object.speed}}</div>
-                                </div>
-                                <div class="main-list__card-text--2">
-                                    {{object.tradeware}}
-                                </div>
+                                <h4 class="main-list__card-text text-right mt-2">
+                                    {{object.serie}} <span class="text-danger">{{object.viscosity}}</span>
+                                </h4>
+                                <p class="text-right mb-0 mt-1">
+                                    {{object.volume}} 
+                                    <span class="text-danger">{{object.oil_type}}</span>
+                                    <span class="text-danger">{{object.fuel}}</span>
+                                </p>
+                                <p class="text-right">
+                                    {{object.des1}}
+                                </p>
+                              
                                 <div class="mt-2">
-                                    {% include "../components/main-site/image.html" with object=object.season %}
-                                </div>
-                                <div class="mt-2 mb-4">
                                     {% include "../components/main-site/image.html" with object=object.brand.country %}
-                                    {% include "../components/main-site/image.html" with object=object.manufacturer %}
+                                    {% include "../components/main-site/image.html" with object=object.country %}
                                 </div>
-                                <div class="main-list__price-info mr-1">
-                                    {% if object.USD_active %}
+                                <div class="main-list__price-info mt-5 mr-1">
+                                    {% if object.sale_active %}
                                     <div class="price">
                                         <span class="red-line-trought  font-larger--2 opacity-8">
-                                            {{object.USDNO|floatformat}}
+                                            {{object.price|floatformat}}
                                         </span>
                                     </div>  
                                     <div class="price text-right">
-                                        <span class="text-red font-xl">{{object.USD|floatformat}}</span>
+                                        <span class="text-red font-xl">{{object.sale|floatformat}}</span>
                                         <span class="manat">
                                             <img src="{% static 'img/manat.png' %}" alt="₼">
                                         </span>
                                     </div>  
                                     {% else %}
                                      <div class="price text-right">
-                                        <span class="text-red font-xl">{{object.USDNO|floatformat}}</span>
+                                        <span class="text-red font-xl">{{object.price|floatformat}}</span>
                                         <span class="manat">
                                             <img src="{% static 'img/manat.png' %}" alt="₼">
                                         </span>
@@ -95,16 +103,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="main-list__btn-box">
+                        <div class="main-list__btn-box d-flex align-items-center">
                             <button type="button" data-toggle="modal"
-                            data-target="#order" class="main-list__cart-btn"
+                            data-target="#order" class="main-list__cart-btn oil-button"
                             data-max="{{object.quantity}}"
                             data-price="{{object.USD}}"
                             data-id="{{object.id}}">
-                                Sifariş et
+                                Yağdəyişməyə yazılmaq
                             </button>
-                            <a href="{% url 'detail' object.id %}" class="main-list__detail-btn">Ətraflı</a>
+                    
+                            <a href="{% url 'oil-detail' object.id %}" class="main-list__detail-btn">Ətraflı</a>
                         </div>
+                        
                     </div>
                 </section>
             </div>
@@ -116,7 +126,7 @@
     {% include "../components/pagination.html" %}
     <div class="main-index">
         {% include "../components/main-site/slider.html" %}
-        {% include "../components/main-site/brand-carousel.html" %}
+        {% include "../components/main-site/oil-brand-carousel.html" %}
     </div>
 
 {% endblock content %}

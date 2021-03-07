@@ -1,10 +1,11 @@
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
 from .views import MainPage, MainListView, MainDetailView,MainSearchView
-from .sitemaps import TireSitemap
+from .sitemaps import TireSitemap,OilSitemap
 
 sitemaps = {
-    'tires': TireSitemap
+    'tires': TireSitemap,
+    "oil": OilSitemap
 }
 
 urlpatterns = [
