@@ -15,7 +15,6 @@ SECRET_KEY = os.environ.get("SECRET")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get("DEBUG"), 2))
 
-
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS_ENV = os.environ.get("ALLOWED_HOSTS")
 if ALLOWED_HOSTS_ENV:
@@ -50,7 +49,7 @@ INSTALLED_APPS = [
     "ckeditor",
     'ckeditor_uploader',
     "rest_framework",
-    # "oilapp.apps.OilappConfig"
+    "oilapp.apps.OilappConfig"
 ]
 
 SITE_ID = 1
