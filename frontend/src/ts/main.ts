@@ -21,6 +21,8 @@ const listCartBtns = document.querySelectorAll<HTMLButtonElement>(
   ".main-list__cart-btn",
 );
 const tireInput = document.getElementById("id_tire") as HTMLInputElement;
+const oilInput = document.getElementById("id_oil") as HTMLInputElement;
+
 const quantityInput = document.getElementById(
   "id_quantity",
 ) as HTMLInputElement;
@@ -30,9 +32,13 @@ listCartBtns.forEach(listCartBtn => {
     const target = e.target as HTMLElement;
     const btn = target.closest(".main-list__cart-btn") as HTMLButtonElement;
     const id = btn.getAttribute("data-id")!;
-    const max = btn.getAttribute("data-max")!;
-    tireInput.setAttribute("value", id);
-    quantityInput.setAttribute("max", max);
+    if (tireInput) {
+      const max = btn.getAttribute("data-max")!;
+      tireInput.setAttribute("value", id);
+      quantityInput.setAttribute("max", max);
+    } else if (oilInput) {
+      oilInput.setAttribute("value", id);
+    }
   });
 });
 
