@@ -1,3 +1,5 @@
+{% load options %} {% get_viscosities as viscosities %}
+
 <form
   action="{% url 'oil-list' %}"
   method="get"
@@ -9,15 +11,13 @@
 <div class="tire-search__container">
     <div class="row justify-content-center">  
         <div class="col-sm-6 col-md-3">
-        <select name="oil-serie" id="oil-serie"  data-name="{{size.field}}" class="tire-search__select">
-            <option value="">Seria</option>
+        <select name="viscosity" id="oil-serie"  class="tire-search__select">
+            <option value="">Qatılıq</option>
+            {% for viscosity in viscosities %}
+              <option value="{{viscosity.title}}">{{viscosity.title}}</option>
+            {% endfor %}
         </select>
         </div>
-        <div class="col-sm-6 col-md-3">
-        <select name="oil-type" id="oil-type"  data-name="{{size.field}}"  class="tire-search__select">
-            <option value="">Yanacaq növü</option>
-        </select>
-        </div>  
     </div>
 </div>
   

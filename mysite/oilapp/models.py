@@ -1,4 +1,5 @@
 import os
+from django.urls import reverse  
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField  
 from django.core.exceptions import ValidationError
@@ -52,7 +53,7 @@ class Serie(models.Model):
     description = RichTextUploadingField()
 
     def __str__(self):
-        return f"{self.title}"
+        return self.title
 
 class Oil(models.Model):
     EXTENSIONS = [
@@ -148,6 +149,12 @@ class Oil(models.Model):
         if self.image:
             return self.image.url
         return self.image_url
+
+    def get_absolute_url(self):
+        return reverse(
+            "oil-detail", kwargs={"pk": self.id}
+        )
+
 
     def __str__(self):
         return f"{self.brand.title} - {self.serie.title}"
