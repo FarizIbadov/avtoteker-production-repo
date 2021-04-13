@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     "ckeditor",
     'ckeditor_uploader',
     "rest_framework",
-    "oilapp.apps.OilappConfig"
+    "oilapp.apps.OilappConfig",
+    "campaign",
+    "news"
 ]
 
 SITE_ID = 1
