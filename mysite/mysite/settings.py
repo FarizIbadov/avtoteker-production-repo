@@ -17,7 +17,9 @@ DEBUG = bool(int(os.environ.get("DEBUG"), 2))
 
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS_ENV = os.environ.get("ALLOWED_HOSTS")
-if ALLOWED_HOSTS_ENV:
+if DEBUG:
+    ALLOWED_HOSTS.append("*")
+elif ALLOWED_HOSTS_ENV:
     ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(","))
 
 
