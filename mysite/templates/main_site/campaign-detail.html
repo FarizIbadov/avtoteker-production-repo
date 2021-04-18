@@ -3,16 +3,20 @@
 
 <title>Kampaniyalar - sərfəli təkliflər | #teker #təkər | Avtotəkər</title>
 
-{% endblock seo %} {% block content %} {% include
-"../components/main-site/tire-search.html" with size_link="active"
-size_box="show" %}
+{% endblock seo %} 
+{% block content %} 
+{% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
 
 <div class="main-list my-5">
   <div class="main-list__main-row">
     <div class="col mt-2">
       <div class="row justify-content-center px-md-4">
         <div class="col-md-12">
-          <img class="w-100" src="{{ object.image.url }}" alt="{{object.slug}}">
+          <img
+            class="w-100"
+            src="{{ object.image.url }}"
+            alt="{{object.slug}}"
+          />
         </div>
       </div>
       <div class="px-md-4">
