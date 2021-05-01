@@ -35,7 +35,6 @@
                     <h4 class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</h4>
                     <div class="main-list__sub-row--2">
                         <div class="main-list__col-sm">
-                            <!-- {% include "../components/main-site/list-item-image.html" with object=object.serie %} -->
                             <img
                                 data-toggle="modal" data-target="#imagePreview"
                                 src="{{object.serie.image.url}}"
@@ -66,21 +65,21 @@
                                     {% include "../components/main-site/image.html" with object=object.manufacturer %}
                                 </div>
                                 <div class="main-list__price-info mr-1">
-                                    {% if object.USD_active %}
+                                    {% if object.sale_active %}
                                     <div class="price">
                                         <span class="red-line-trought  font-larger--2 opacity-8">
-                                            {{object.USDNO|floatformat}}
+                                            {{object.price|floatformat}}
                                         </span>
                                     </div>  
                                     <div class="price text-right">
-                                        <span class="text-red font-xl">{{object.USD|floatformat}}</span>
+                                        <span class="text-red font-xl">{{object.sale|floatformat}}</span>
                                         <span class="manat">
                                             <img src="{% static 'img/manat.png' %}" alt="₼">
                                         </span>
                                     </div>  
                                     {% else %}
                                      <div class="price text-right">
-                                        <span class="text-red font-xl">{{object.USDNO|floatformat}}</span>
+                                        <span class="text-red font-xl">{{object.price|floatformat}}</span>
                                         <span class="manat">
                                             <img src="{% static 'img/manat.png' %}" alt="₼">
                                         </span>
@@ -99,7 +98,7 @@
                             <button type="button" data-toggle="modal"
                             data-target="#order" class="main-list__cart-btn"
                             data-max="{{object.quantity}}"
-                            data-price="{{object.USD}}"
+                            data-price="{{object.sale}}"
                             data-id="{{object.id}}">
                                 Sifariş et
                             </button>

@@ -1,4 +1,8 @@
 {% include "../map-modal.html" %}
+{% load navigation_list %}
+
+{% get_navigation_list as navigations %}
+
 <header class="header">
     {% include "./top.html" %}
     <div class="header__nav__container">
@@ -11,24 +15,11 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="header__nav__nav">
+              {% for navigation in navigations %}
               <li class="header__nav__item">
-                <a class="header__nav__link" href="{% url 'home' %}">Təkər seçimi</a>
+                <a class="header__nav__link" href="{{ navigation.link }}">{{navigation.title}}</a>
               </li>
-              <li class="header__nav__item">
-                <a class="header__nav__link" href="{% url 'oil' %}">Yağ seçimi</a>
-              </li>
-              <li class="header__nav__item">
-                <a class="header__nav__link " href="{% url 'campaign-list' %}">Kampaniyalar</a>
-              </li>
-              <li class="header__nav__item">
-                <a class="header__nav__link " href="{% url 'news-list' %}">Blog</a>
-              </li>
-              <!-- <li class="header__nav__item">
-                <a class="header__nav__link" href="#">Service</a>
-              </li>
-              <li class="header__nav__item">
-                <a class="header__nav__link  pr-0" href="#">Oil</a>
-              </li> -->
+              {% endfor %}
             </ul>
           </div>
       </nav>
