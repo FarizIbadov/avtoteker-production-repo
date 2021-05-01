@@ -1,6 +1,6 @@
 <div class="main-list__side-info">
     {% if object.sale_active %}
-    <small title="sale" class="main-list__side-single danger font-weight-bold">-{{ object.get_percentage|floatformat:-1 }}%</small>
+    <small title="sale" class="main-list__side-single danger font-weight-bold">- {{ object.get_percentage|floatformat:-1 }} %</small>
     {% endif %}
     {% if object.kredit_3_active and object.kredit_3_dif == 0  %}
     <small title="3 ay faizsiz kreditlə" class="main-list__side-single my-primary">3 ay {{object.kredit_3_dif|floatformat}}%</small>
