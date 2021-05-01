@@ -7,8 +7,11 @@ urlpatterns = [
     path("", include("main_site.urls")),
     path("",include("oilapp.urls")),
     path("admin/", include("custom_admin.urls")),
-    path("base-admin/", admin.site.urls),
+    path("avtoadmin/", admin.site.urls),
     path("",include('wheel_size.urls')),
+    path("",include("campaign.urls")),
+    path("",include("news.urls")),
+    path("kredit/",include("kredit.urls")),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 

@@ -1,0 +1,35 @@
+{% extends "../config/main-base.html" %}
+{% load static %}
+{% load size_parser %}
+
+{% block seo %}
+
+  <title>Blog | #teker #təkər | Avtotəkər</title>
+
+{% endblock seo %}
+
+{% block content %}
+
+    {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
+    
+    <h1 class="main-list__heading my-5">Blog</h1>
+
+    <div class="main-list mb-5">
+        <div class="main-list__main-row">
+            {% for object in object_list %}
+                <div class="col-md-6 mt-5">
+                    <img class="w-100 mb-2" src="{{ object.image.url }}" alt="{{object.slug}}">
+                    <a href="{% url 'news-detail' object.id %}" class="d-block text-decoration-none mt-4 mb-3">{{object.title|safe}}</a>
+                    {{object.description|truncatechars_html:object.truncate|safe}}
+                </div>
+            {% empty %}
+                <h3 class="main-list__empty-text">Xəbərlər hal hazırda yoxdur</h3>
+            {% endfor %}
+        </div>
+    </div>
+    {% include "../components/pagination.html" %}
+  
+
+{% endblock content %}
+
+
