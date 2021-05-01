@@ -180,6 +180,6 @@ class Tire(models.Model):
         return "<div>%s</div>  <div class='ml-2'>%s %s</div>"  % (self.year,self.weight,self.speed)
 
     def get_percentage(self):
-        return (self.price - self.sale) / self.price
+        return ((self.price - self.sale) / self.price) * 100
  
     
