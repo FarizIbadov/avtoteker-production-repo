@@ -17,9 +17,7 @@ DEBUG = bool(int(os.environ.get("DEBUG"), 2))
 
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS_ENV = os.environ.get("ALLOWED_HOSTS")
-if DEBUG:
-    ALLOWED_HOSTS.append("*")
-elif ALLOWED_HOSTS_ENV:
+if ALLOWED_HOSTS_ENV:
     ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(","))
 
 
@@ -51,9 +49,7 @@ INSTALLED_APPS = [
     "ckeditor",
     'ckeditor_uploader',
     "rest_framework",
-    "oilapp.apps.OilappConfig",
-    "campaign",
-    "news"
+    "oilapp.apps.OilappConfig"
 ]
 
 SITE_ID = 1

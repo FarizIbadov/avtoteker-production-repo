@@ -1,18 +1,15 @@
 from django.contrib import admin
-from import_export.admin import ExportMixin
 from .models import Order,OilOrder
 from django.utils.html import format_html
-from .resources import OilOrderResource,TireOrderResource
 
 
 @admin.register(Order)
-class OrderAdmin(ExportMixin,admin.ModelAdmin):
+class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ['product','email','phone_number','payment_type','name']
     list_filter = ['remember_me']
     list_display = ['order_title']
     exclude = ['phone','tire','product_title','product_link','order_title']
 
-    resource_class = TireOrderResource
 
     def phone_number(self,obj:Order):
         link = "<a href='tel:%s'>%s</a>" % (obj.phone,obj.phone)
@@ -35,13 +32,11 @@ class OrderAdmin(ExportMixin,admin.ModelAdmin):
         return title
 
 @admin.register(OilOrder)
-class OilOrderAdmin(ExportMixin,admin.ModelAdmin):
+class OilOrderAdmin(admin.ModelAdmin):
     readonly_fields = ['product','email','phone_number','payment_type','name']
     list_filter = ['remember_me']
     list_display = ['order_title']
     exclude = ['phone','oil','product_title','product_link','order_title']
-
-    resource_class = OilOrderResource
 
 
     def phone_number(self,obj:OilOrder):

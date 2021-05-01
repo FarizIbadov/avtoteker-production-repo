@@ -45,11 +45,9 @@ class Tire(models.Model):
     speed = models.CharField(max_length=10, null=True)
     season = models.ForeignKey(Season, on_delete=models.DO_NOTHING, null=True)
 
-    USDNO = models.DecimalField(null=True, decimal_places=2, max_digits=10)
-    USD = models.DecimalField(default=0, decimal_places=2, max_digits=10)
-    USD_active = models.BooleanField(default=True)
-    USDOFF = models.DecimalField(default=0, decimal_places=2, max_digits=10)
-    USDOFF_active = models.BooleanField(default=True)
+    price = models.DecimalField(null=True, decimal_places=2, max_digits=10)
+    sale = models.DecimalField(default=0, decimal_places=2, max_digits=10)
+    sale_active = models.BooleanField(default=True)
 
     taksit_active = models.BooleanField(default=True)
 
@@ -181,6 +179,7 @@ class Tire(models.Model):
     def get_filters(self):
         return "<div>%s</div>  <div class='ml-2'>%s %s</div>"  % (self.year,self.weight,self.speed)
 
-
-
+    def get_percentage(self):
+        return (self.price - self.sale) / self.price
+ 
     

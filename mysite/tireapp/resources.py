@@ -171,22 +171,16 @@ class TireResource(resources.ModelResource):
         widget=widgets.DecimalWidget(),
     )
 
-    USDNO = fields.Field(
-        column_name="price", attribute="USDNO", widget=resource_widget.DecimalWidget()
+    price = fields.Field(
+        column_name="price", attribute="price", widget=resource_widget.DecimalWidget()
     )
-    USD = fields.Field(
-        column_name="sale", attribute="USD", widget=resource_widget.DecimalWidget()
+    sale = fields.Field(
+        column_name="sale", attribute="sale", widget=resource_widget.DecimalWidget()
     )
-    USD_active = fields.Field(
+    sale_active = fields.Field(
         column_name="sale active",
-        attribute="USD_active",
+        attribute="sale_active",
         widget=widgets.CustomBooleanWidget()
-    )
-
-    USDOFF = fields.Field(
-        column_name="Price Difference",
-        attribute="USDOFF",
-        widget=resource_widget.DecimalWidget(),
     )
 
     montaj_balance = fields.Field(
@@ -255,10 +249,9 @@ class TireResource(resources.ModelResource):
             "taksit_9_active",
             "taksit_12",
             "taksit_12_active",
-            "USDNO",
-            "USD",
-            "USD_active",
-            "USDOFF",
+            "price",
+            "sale",
+            "sale_active",
             "release_date",
             "db",
             "fuel",
@@ -288,10 +281,9 @@ class TireResource(resources.ModelResource):
             'db',
             "fuel",
             "contact",
-            "USDNO",
-            "USD",
-            "USD_active",
-            "USDOFF",
+            "price",
+            "sale",
+            "sale_active",
             "montaj_balance",
             "razval",
             "year",

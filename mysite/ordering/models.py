@@ -30,13 +30,19 @@ class Order(models.Model):
             return '%s' % self.tire
         else:
             return self.product_title
-            
+
+
+    # def clean(self,*args, **kwargs):
+    #     regex = r"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$"
+    #     if not re.search(regex,self.phone):
+    #         raise ValidationError('Please enter valid phone number!')
+    #     super(Order, self).clean(*args, **kwargs)
 
 class OilOrder(models.Model):
     PAYMENT_CHOICES = [
         (1,'Nağd'),
         (2,'Kart ilə'),
-        (3,'BirKart / TamKart ilə'),
+        (4,'BirKart / TamKart ilə'),
     ]
 
     name = models.CharField(max_length=20,null=True,blank=True)

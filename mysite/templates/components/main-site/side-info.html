@@ -1,6 +1,12 @@
 <div class="main-list__side-info">
+    {% if object.sale_active %}
+    <small title="sale" class="main-list__side-single danger">{{ object.get_percentage|floatformat:-1 }}%</small>
+    {% endif %}
     {% if object.kredit_3_active and object.kredit_3_dif == 0  %}
     <small title="3 ay faizsiz kreditlə" class="main-list__side-single my-primary">3 ay {{object.kredit_3_dif|floatformat}}%</small>
+    {% endif %}
+    {% if object.montaj_balance != 0 %}
+    <small  class="main-list__side-single danger font-sm">Pulsuz montaj+balans</small>
     {% endif %}
     {% if object.brand.free_service %}
     <small title="1 illik pulsuz servis - nağd alış zamanı 4  təkər alınan halda" class="main-list__side-single my-primary">1 il servis</small>
@@ -11,4 +17,5 @@
     {% if object.outlet %}
     <small  class="main-list__side-single danger">Outlet</small>
     {% endif %}
+    
 </div>

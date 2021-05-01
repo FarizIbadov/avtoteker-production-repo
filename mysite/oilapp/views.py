@@ -7,7 +7,6 @@ class OilMainView(TemplateView):
     template_name = "main_site/oil-main.html"
 
 class OilListView(ListView):
-    paginate_by = 8
     template_name = "main_site/oil-list.html"
 
     def get_queryset(self,*args,**kwargs):
