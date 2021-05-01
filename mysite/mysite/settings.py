@@ -53,7 +53,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "oilapp.apps.OilappConfig",
     "campaign",
-    "news"
+    "news",
+    'navigation',
+    "kredit"
 ]
 
 SITE_ID = 1

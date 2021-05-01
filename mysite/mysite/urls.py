@@ -11,6 +11,7 @@ urlpatterns = [
     path("",include('wheel_size.urls')),
     path("",include("campaign.urls")),
     path("",include("news.urls")),
+    path("kredit/",include("kredit.urls")),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 

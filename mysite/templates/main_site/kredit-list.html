@@ -1,0 +1,37 @@
+{% extends "../config/main-base.html" %}
+{% load static %}
+{% load size_parser %}
+
+{% block seo %}
+
+  <title>Kreditlər | #teker #təkər | Avtotəkər</title>
+
+{% endblock seo %}
+
+{% block content %}
+    {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
+    
+    <h1 class="main-list__heading my-5">Kreditlə təkər</h1>
+
+    <div class="main-list mb-3">
+        <div class="main-list__main-row">
+            {% for object in object_list %}
+                <div class="col-md-12">
+                    {% if object.link_active %}
+                        <a href="{% url 'kredit-detail' object.slug %}" class="text-decoration-none">
+                            {{object.title|safe}}
+                        </a>
+                    {% else %}
+                        {{object.title|safe}}
+                    {% endif %}
+                    <hr>
+                    {{object.description|truncatechars_html:object.truncate|safe}}
+                </div>
+            {% empty %}
+                <h3 class="main-list__empty-text">Kreditlər hal hazırda yoxdur</h3>
+            {% endfor %}  
+        </div>
+    </div>
+    {% include "../components/pagination.html" %}
+{% endblock content %}
+
