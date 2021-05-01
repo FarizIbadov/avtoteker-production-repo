@@ -5,7 +5,7 @@
     {% if object.kredit_3_active and object.kredit_3_dif == 0  %}
     <small title="3 ay faizsiz kreditlə" class="main-list__side-single my-primary">3 ay {{object.kredit_3_dif|floatformat}}%</small>
     {% endif %}
-    {% if object.montaj_balance != 0 %}
+    {% if object.montaj_balance == 0 %}
     <small  class="main-list__side-single danger font-sm">Pulsuz montaj+balans</small>
     {% endif %}
     {% if object.brand.free_service %}
