@@ -18,7 +18,7 @@ def parse_size(request):
     width_obj = SizeField("width","en",width_def)
     height_obj = SizeField("height","hündürlük",height_def)
     radius_obj = SizeField("radius","radius",radius_def)
-    print("Not here either")
+    
     return (width_obj, height_obj, radius_obj)
 
 @register.simple_tag(name="parse_size_for_title")
