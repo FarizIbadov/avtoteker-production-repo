@@ -26,7 +26,7 @@ class Size(models.Model):
 
 class Tire(models.Model):
 
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(blank=True,max_length=200)
 
     CLASS_CHOICES = [
         (1, "Econom"),
@@ -193,7 +193,7 @@ class Tire(models.Model):
         if not self.slug:
             self.slug = self.generate_slug()
             self.save()
-
+       
         return self.slug
 
 

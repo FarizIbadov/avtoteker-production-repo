@@ -18,6 +18,7 @@ def parse_size(request):
     width_obj = SizeField("width","en",width_def)
     height_obj = SizeField("height","hündürlük",height_def)
     radius_obj = SizeField("radius","radius",radius_def)
+    
     return (width_obj, height_obj, radius_obj)
 
 @register.simple_tag(name="parse_size_for_title")
@@ -39,12 +40,14 @@ def get_size_action(request):
 
     if size[0] == "-" and size[1] == "-" and size[2] == "-":
         return reverse("list")
-    
-    return reverse("detail-list",kwargs={
+
+    reversed_url = reverse("detail-list",kwargs={
         "width": "_" if size[0] == "-" else size[0],
         "height": "_" if size[1] == "-" else size[1],
         "radius": "_" if size[2] == "-" else size[2],
     })
+
+    return reversed_url
 
 def get_size(request):
     size_dict = {}

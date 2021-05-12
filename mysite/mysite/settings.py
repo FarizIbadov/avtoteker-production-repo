@@ -14,6 +14,8 @@ SECRET_KEY = os.environ.get("SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get("DEBUG"), 2))
+# TEMPLATE_DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS_ENV = os.environ.get("ALLOWED_HOSTS")
@@ -181,3 +183,20 @@ CKEDITOR_UPLOAD_PATH = "ck_uploads"
 
 # EMAIL_HOST_USER = "ibadovfariz1999@gmail.com"
 # EMAIL_HOST_PASSWORD = "swfcrfnrlzcpyyli"
+
+import logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
+}
