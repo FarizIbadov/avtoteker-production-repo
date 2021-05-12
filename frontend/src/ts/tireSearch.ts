@@ -14,6 +14,9 @@ class TireSearch {
   model = "";
   year = "";
 
+  size = "";
+  actionVals = ["_", "_", "_"];
+
   state: "size" | "car" = "size";
   settedUp = false;
 
@@ -26,10 +29,10 @@ class TireSearch {
         const target = e.target as HTMLElement;
         this.setFormAction(target);
         this.tireSearchSubmitBtn!.removeAttribute("disabled");
-        this.setName("width", "height", "radius");
         this.removeName("make", "model", "year", "trim");
         this.resetSelect("make", "model", "year", "trim");
         this.state = "size";
+        this.sizeSearch();
       });
     }
 
@@ -38,13 +41,13 @@ class TireSearch {
         const target = e.target as HTMLElement;
         this.setFormAction(target);
         this.tireSearchSubmitBtn!.setAttribute("disabled", "");
-        this.removeName("width", "height", "radius");
         this.setName("make", "model", "year", "trim");
         this.carSearch();
       });
     }
 
     this.onResetForm();
+    this.sizeSearch();
   }
 
   resetSelect(...elementIds: string[]) {
@@ -79,6 +82,63 @@ class TireSearch {
     const closestListItem = element.closest("li");
     const action = closestListItem!.getAttribute("data-action")!;
     form.setAttribute("action", action);
+  }
+
+  handleSizeSelectEvent(e: Event) {
+    const { value } = e.target as HTMLSelectElement;
+    if (value) {
+      return value;
+    } else {
+      return "_";
+    }
+  }
+
+  sizeSearch() {
+    const width = document.getElementById("width") as HTMLSelectElement;
+    const height = document.getElementById("height") as HTMLSelectElement;
+    const radius = document.getElementById("radius") as HTMLSelectElement;
+    const form = document.getElementById("tire-search") as HTMLFormElement;
+
+    const formDefaultAction = form.getAttribute("data-action")!;
+    const currentAction = form.getAttribute("action")!;
+
+    if (currentAction !== formDefaultAction) {
+      const splitedAndFilteredPath = currentAction
+        .split("/")
+        .filter(segment => segment);
+
+      const dynamicPath =
+        splitedAndFilteredPath[splitedAndFilteredPath.length - 1];
+
+      const dynamicPathVals = dynamicPath.split("-");
+      this.actionVals = [...dynamicPathVals];
+    }
+
+    width.addEventListener("change", e => {
+      this.actionVals[0] = this.handleSizeSelectEvent(e);
+    });
+
+    height.addEventListener("change", e => {
+      this.actionVals[1] = this.handleSizeSelectEvent(e);
+    });
+
+    radius.addEventListener("change", e => {
+      this.actionVals[2] = this.handleSizeSelectEvent(e);
+    });
+
+    form.addEventListener("submit", e => {
+      if (this.actionVals.join("") !== "___") {
+        const newAction = formDefaultAction + this.actionVals.join("-");
+        form.setAttribute("action", newAction);
+      } else {
+        const action = formDefaultAction.substr(
+          0,
+          formDefaultAction.length - 1,
+        );
+        console.log(action);
+        form.setAttribute("action", action);
+      }
+    });
   }
 
   carSearch() {
@@ -191,6 +251,9 @@ class TireSearch {
               option.removeAttribute("selected");
             });
           });
+          const defaultSizeAction = form.getAttribute("data-action")!;
+          form.setAttribute("action", defaultSizeAction);
+          this.actionVals = ["_", "_", "_"];
         }
         if (this.state === "car") {
           this.tireSearchSubmitBtn.setAttribute("disabled", "");

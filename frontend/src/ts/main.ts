@@ -2,7 +2,6 @@ import "../sass/main.scss";
 import "../img/logo.svg";
 import "../img/icons.svg";
 import "../img/cart.svg";
-import "../img/logo.png";
 import "../img/manat.png";
 import "../fonts/Averta_Avto.ttf";
 import "../fonts/346526_2_0-b68b923f95695860fef4e27dbe4c742c.woff2";
