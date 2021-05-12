@@ -22,9 +22,8 @@ class MainListView(FilterBySizeMixin, ListView):
     paginate_by = 8
     template_name = "main_site/list.html"
 
-    def get_queryset(self):
+    def get_queryset(self):        
         kwargs = self.get_filter()
-        # print(self.request.session.session_key)
         return Tire.objects.filter(**kwargs).order_by("-brand__order_number")
 
     def get_context_data(self, **kwargs):
@@ -37,6 +36,7 @@ class MainListView(FilterBySizeMixin, ListView):
 class MainDetailView(DetailView):
     template_name = "main_site/detail.html"
     model = Tire
+    query_pk_and_slug = True
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

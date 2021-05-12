@@ -37,7 +37,7 @@
                         <div class="main-list__col-sm">
                             <img
                                 data-toggle="modal" data-target="#imagePreview"
-                                src="{{object.serie.image.url}}"
+                                src="{{object.serie.get_image}}"
                                 class="main-list__img"
                                 alt="{{object.brand}}"
                                 />
@@ -102,7 +102,7 @@
                             data-id="{{object.id}}">
                                 Sifariş et
                             </button>
-                            <a href="{% url 'detail' object.id %}" class="main-list__detail-btn">Ətraflı</a>
+                            <a href="{{object.get_absolute_url}}" class="main-list__detail-btn">Ətraflı</a>
                         </div>
                     </div>
                 </section>

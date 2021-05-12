@@ -36,18 +36,18 @@ class TireForm(CleanedData, forms.ModelForm):
             height=self.get_data("height"),
             radius=self.get_data("radius"),
         )[0]
-        self.instance.kredit_3 = self.get_data("kredit_3") or self.get_data("USDNO") / 3
-        self.instance.kredit_6 = self.get_data("kredit_6") or self.get_data("USDNO") / 6
-        self.instance.kredit_9 = self.get_data("kredit_9") or self.get_data("USDNO") / 9
+        self.instance.kredit_3 = self.get_data("kredit_3") or self.get_data("price") / 3
+        self.instance.kredit_6 = self.get_data("kredit_6") or self.get_data("price") / 6
+        self.instance.kredit_9 = self.get_data("kredit_9") or self.get_data("price") / 9
         self.instance.kredit_12 = (
-            self.get_data("kredit_12") or self.get_data("USDNO") / 12
+            self.get_data("kredit_12") or self.get_data("price") / 12
         )
-        self.instance.taksit_2 = self.get_data("taksit_2") or self.get_data("USDNO") / 2
-        self.instance.taksit_3 = self.get_data("taksit_3") or self.get_data("USDNO") / 3
-        self.instance.taksit_6 = self.get_data("taksit_6") or self.get_data("USDNO") / 6
-        self.instance.taksit_9 = self.get_data("taksit_9") or self.get_data("USDNO") / 9
+        self.instance.taksit_2 = self.get_data("taksit_2") or self.get_data("price") / 2
+        self.instance.taksit_3 = self.get_data("taksit_3") or self.get_data("price") / 3
+        self.instance.taksit_6 = self.get_data("taksit_6") or self.get_data("price") / 6
+        self.instance.taksit_9 = self.get_data("taksit_9") or self.get_data("price") / 9
         self.instance.taksit_12 = (
-            self.get_data("taksit_12") or self.get_data("USDNO") / 12
+            self.get_data("taksit_12") or self.get_data("price") / 12
         )
         return super().save(commit=commit)
 

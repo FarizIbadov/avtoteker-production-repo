@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse,reverse_lazy
 from django.utils import timezone
 from specific.models import Brand, Country, Serie, Season
 from mysite.utils import compress
@@ -20,8 +20,14 @@ class Size(models.Model):
     def get_size_for_title(self):
         return "%s/%s/%s" % (self.width,self.height,self.radius)
 
+    def get_size_for_url(self):
+        return "%s-%s-%s" % (self.width,self.height,self.radius)
+
 
 class Tire(models.Model):
+
+    slug = models.SlugField(blank=True)
+
     CLASS_CHOICES = [
         (1, "Econom"),
         (2, "Orta"),
@@ -144,8 +150,9 @@ class Tire(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            "detail", kwargs={"pk": self.id}
+            "detail", kwargs={"pk":self.pk,"slug":self.get_slug()}
         )
+        
 
     def get_edit_url(self):
         return reverse(
@@ -182,4 +189,22 @@ class Tire(models.Model):
     def get_percentage(self):
         return ((self.price - self.sale) / self.price) * 100
  
-    
+    def get_slug(self):
+        if not self.slug:
+            self.slug = self.generate_slug()
+            self.save()
+
+        return self.slug
+
+
+    def generate_slug(self):
+        splited_brand = self.brand.title.lower().split(" ")
+        brand = "-".join(splited_brand)
+
+        splited_serie = self.serie.title.lower().split(" ")
+        serie = "-".join(splited_serie)
+
+        size = self.size.get_size_for_url()
+
+        slug = "_".join([brand,serie,size]).replace("/","") 
+        return slug

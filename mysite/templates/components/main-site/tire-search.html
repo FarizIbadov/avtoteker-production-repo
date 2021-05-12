@@ -1,6 +1,9 @@
+{% load size_parser %}
+{% get_size_action request as action %}
+
 <form
-  action="{% url 'list' %}"
-  method="get"
+  action="{{ action }}"
+  data-action="{% url 'list' %}"
   class="tire-search"
   id="tire-search"
 >
