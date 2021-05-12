@@ -193,7 +193,7 @@ class Tire(models.Model):
         if not self.slug:
             self.slug = self.generate_slug()
             self.save()
-
+        print("Here?")
         return self.slug
 
 
