@@ -24,6 +24,7 @@ class MainListView(FilterBySizeMixin, ListView):
 
     def get_queryset(self):        
         kwargs = self.get_filter()
+        print(Tire.objects.filter(**kwargs).order_by("-brand__order_number"))
         return Tire.objects.filter(**kwargs).order_by("-brand__order_number")
 
     def get_context_data(self, **kwargs):
