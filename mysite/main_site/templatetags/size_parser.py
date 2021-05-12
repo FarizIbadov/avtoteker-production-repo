@@ -39,7 +39,7 @@ def get_size_action(request):
 
     if size[0] == "-" and size[1] == "-" and size[2] == "-":
         return reverse("list")
-    
+    print("Error not here")
     return reverse("detail-list",kwargs={
         "width": "_" if size[0] == "-" else size[0],
         "height": "_" if size[1] == "-" else size[1],
