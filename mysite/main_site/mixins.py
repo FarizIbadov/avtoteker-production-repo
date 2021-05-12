@@ -14,4 +14,5 @@ class FilterBySizeMixin:
             else:
                 continue
 
+        print({**kwargs})
         return {**kwargs}
