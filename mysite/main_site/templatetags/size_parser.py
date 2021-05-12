@@ -18,6 +18,7 @@ def parse_size(request):
     width_obj = SizeField("width","en",width_def)
     height_obj = SizeField("height","hündürlük",height_def)
     radius_obj = SizeField("radius","radius",radius_def)
+    print("Not here either")
     return (width_obj, height_obj, radius_obj)
 
 @register.simple_tag(name="parse_size_for_title")
@@ -45,7 +46,7 @@ def get_size_action(request):
         "height": "_" if size[1] == "-" else size[1],
         "radius": "_" if size[2] == "-" else size[2],
     })
-    print("Not here")
+
     return reversed_url
 
 def get_size(request):
