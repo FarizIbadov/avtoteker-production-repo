@@ -1,4 +1,5 @@
 from django import template
+from django.urls import reverse,resolve
 
 from tireapp.models import Size
 from  specific.models import Brand
@@ -8,77 +9,60 @@ register = template.Library()
 
 @register.simple_tag(name="parse_size")
 def parse_size(request):
-    width_text = "en"
-    width_def = ""
-    if request.GET.get('width'):
-        width_def = request.GET.get('width')
+    size = get_size(request)
 
-    height_text = "hündürlük"
-    height_def = ""
-    if request.GET.get('height'):
-        height_def = request.GET.get('height')
+    width_def = "" if size[0] == "-" else size[0]
+    height_def = "" if size[1] == "-" else size[1]
+    radius_def = "" if size[2] == "-" else size[2]
 
-    radius_text = "radius"
-    radius_def = ""
-    if request.GET.get('radius'):
-        radius_def = request.GET.get('radius')
-
-    width_obj = SizeField("width",width_text,width_def)
-    height_obj = SizeField("height",height_text,height_def)
-    radius_obj = SizeField("radius",radius_text,radius_def)
+    width_obj = SizeField("width","en",width_def)
+    height_obj = SizeField("height","hündürlük",height_def)
+    radius_obj = SizeField("radius","radius",radius_def)
     return (width_obj, height_obj, radius_obj)
 
 @register.simple_tag(name="parse_size_for_title")
 def parse_size_for_title(request):
-    width = request.GET.get('width')
-    height = request.GET.get('height')
-    radius = request.GET.get('radius')
-
-    if not width:
-        width = '-'
-    if not height:
-        height = '-'
-    if not radius:
-        radius = '-'
-
-    return "%s/%s/%s" % (width,height,radius)
+    return "%s/%s/%s" % get_size(request)
 
 @register.simple_tag(name="parse_size_for_meta")
 def parse_size_for_meta(request):
-    width = request.GET.get('width')
-    height = request.GET.get('height')
-    radius = request.GET.get('radius')
-
-    if not width:
-        return ""
-    if not height:
-        return ""
-    if not radius:
-        return ""
-        
-    size = "%s/%s/%s" % (width,height,radius)
-    return size
+    return "%s/%s/%s" % get_size(request)
     
 @register.simple_tag(name="parse_size_for_list")
 def parse_size_for_list(request):
-    width = request.GET.get('width')
-    height = request.GET.get('height')
-    radius = request.GET.get('radius')
+    return "%s/%sR%s" % get_size(request)
 
-    if not width:
-        width = '-'
-    if not height:
-        height = '-'
-    if not radius:
-        radius = '-'
-        
-    size = "%s/%sR%s" % (width,height,radius)
-    return size
+
+@register.simple_tag(name="get_size_action")
+def get_size_action(request):
+    size = get_size(request)
+
+    if size[0] == "-" and size[1] == "-" and size[2] == "-":
+        return reverse("list")
+    
+    return reverse("detail-list",kwargs={
+        "width": "_" if size[0] == "-" else size[0],
+        "height": "_" if size[1] == "-" else size[1],
+        "radius": "_" if size[2] == "-" else size[2],
+    })
+
+def get_size(request):
+    size_dict = {}
+    resolved_path = resolve(request.path)
+
+    if resolved_path.url_name == "detail-list":
+        size_dict = { **resolved_path.kwargs }
+
+    width = "-" if size_dict.get('width',"_") == "_" else size_dict['width']
+    height = "-" if size_dict.get('height',"_") == "_" else size_dict['height']
+    radius = "-" if size_dict.get('radius',"_") == "_" else size_dict['radius']
+
+    return (width,height,radius)
 
 class SizeField:
     queryset = Size.objects.all()
 
-    def __init__(self, field,name,default=""):
+    def __init__(self,field,name,default=""):
         self.default = default
         self.field = field
         self.name = name

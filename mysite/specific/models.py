@@ -23,7 +23,7 @@ class Season(models.Model):
 
     def save(self, *args, **kwargs):
         super().save()
-        compress(self.image.path, (300, 300))
+        compress(self.image.path, (1024, 1024))
 
     def get_absolute_url(self):
         return reverse("custom-admin:specific:season-detail", kwargs={"pk": self.pk})
@@ -50,7 +50,7 @@ class Country(models.Model):
 
     def save(self, *args, **kwargs):
         super().save()
-        compress(self.image.path, (300, 300))
+        compress(self.image.path, (1024, 1024))
 
     def get_absolute_url(self):
         return reverse("custom-admin:specific:country-detail", kwargs={"pk": self.pk})
@@ -86,7 +86,7 @@ class Brand(models.Model):
 
     def save(self, *args, **kwargs):
         super().save()
-        compress(self.image.path, (300, 300))
+        compress(self.image.path, (1024, 1024))
 
     def get_absolute_url(self):
         return reverse("custom-admin:specific:brand-detail", kwargs={"pk": self.pk})
@@ -100,7 +100,7 @@ class Brand(models.Model):
 
 class Serie(models.Model):
     title = models.CharField(max_length=50)
-    image = models.ImageField(upload_to="serie", blank=False, null=True)
+    image = models.ImageField(upload_to="serie", blank=True, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     dry = models.PositiveSmallIntegerField(default=0)
     wet = models.PositiveSmallIntegerField(default=0)
@@ -124,24 +124,10 @@ class Serie(models.Model):
         )
 
     def save(self, *args, **kwargs):
-        if self.image_url:
-            headers = {
-                'User-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36',
-                'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Accept-Encoding' : 'gzip,deflate,sdch',
-            }
-            req = requests.get(self.image_url,headers=headers)
-            img_temp = NamedTemporaryFile(delete=True)
-            img_temp.write(req.content)
-            img_temp.flush()
-
-            self.image = File(img_temp,os.path.basename(self.image_url))
-            self.image_url = ""
-        
         super().save()
         
         if self.image:
-            compress(self.image.path, (300, 300))
+            compress(self.image.path, (1024, 1024))
 
     def get_absolute_url(self):
         return reverse("custom-admin:specific:serie-detail", kwargs={"pk": self.pk})
@@ -151,6 +137,9 @@ class Serie(models.Model):
 
     def get_delete_url(self):
         return reverse("custom-admin:specific:serie-delete", kwargs={"pk": self.id})
+
+    def get_image(self):
+        return self.image.url if self.image else self.image_url
 
 
 Models = {

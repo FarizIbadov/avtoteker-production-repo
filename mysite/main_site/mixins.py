@@ -4,14 +4,12 @@ class FilterBySizeMixin:
             "width": "size__width",
             "height": "size__height",
             "radius": "size__radius",
-            "brand": "brand__title__icontains",
-            "serie": "serie__title__icontains"
         }
         kwargs = {}
-        get_data = self.request.GET
+        get_data = self.kwargs
 
         for key, value in field_to_model.items():
-            if get_data.get(key):
+            if get_data.get(key,"_") != "_":
                 kwargs[value] = get_data[key]
             else:
                 continue
