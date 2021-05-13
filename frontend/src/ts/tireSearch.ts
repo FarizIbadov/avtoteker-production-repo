@@ -125,8 +125,9 @@ class TireSearch {
     radius.addEventListener("change", e => {
       this.actionVals[2] = this.handleSizeSelectEvent(e);
     });
-    if (this.state === "size") {
-      form.addEventListener("submit", e => {
+
+    form.addEventListener("submit", e => {
+      if (this.state === "size") {
         if (this.actionVals.join("") !== "___") {
           const newAction = formDefaultAction + this.actionVals.join("-");
           form.setAttribute("action", newAction);
@@ -138,8 +139,8 @@ class TireSearch {
           console.log(action);
           form.setAttribute("action", action);
         }
-      });
-    }
+      }
+    });
   }
 
   carSearch() {
