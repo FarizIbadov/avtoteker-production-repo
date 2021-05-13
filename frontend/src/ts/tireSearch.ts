@@ -127,19 +127,19 @@ class TireSearch {
     });
 
     form.addEventListener("submit", e => {
-      if (this.state === "size") {
-        if (this.actionVals.join("") !== "___") {
-          const newAction = formDefaultAction + this.actionVals.join("-");
-          form.setAttribute("action", newAction);
-        } else {
-          const action = formDefaultAction.substr(
-            0,
-            formDefaultAction.length - 1,
-          );
-          console.log(action);
-          form.setAttribute("action", action);
-        }
+      // if (this.state === "size") {
+      if (this.actionVals.join("") !== "___") {
+        const newAction = formDefaultAction + this.actionVals.join("-");
+        form.setAttribute("action", newAction);
+      } else {
+        const action = formDefaultAction.substr(
+          0,
+          formDefaultAction.length - 1,
+        );
+
+        form.setAttribute("action", action);
       }
+      // }
     });
   }
 
