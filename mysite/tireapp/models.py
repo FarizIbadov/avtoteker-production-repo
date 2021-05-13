@@ -118,7 +118,8 @@ class Tire(models.Model):
     kredit_12_active = models.BooleanField(default=True)
 
     montaj_balance = models.DecimalField(null=True, decimal_places=2, max_digits=10)
-    razval = models.DecimalField(null=True, decimal_places=2, max_digits=10)
+    razval = models.CharField(max_length=50,blank=True,null=True)
+
     year = models.PositiveSmallIntegerField(null=True)
     Class = models.PositiveSmallIntegerField(default=1, choices=CLASS_CHOICES)
 
