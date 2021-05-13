@@ -65,12 +65,36 @@ class TireSize(models.Model):
             self.tire
         )
 
+        
     def get_href(self):
-        list_url = reverse('list')
         splited_size_list = re.split(r"/|R|ZR",self.tire)
-        width,height,radius = splited_size_list
-        query = "?width=%s&height=%s&radius=%s" % (width,height,radius)
-        return "".join([list_url,query])
+
+        width = ""  
+        height = ""
+        radius = ""
+
+        try:
+            width = splited_size_list[0]
+        except IndexError:
+            width = "_"
+            
+        try:
+            height = splited_size_list[1]
+        except IndexError:
+            height = "_"
+
+        try:
+            radius = splited_size_list[2]
+        except IndexError:
+            radius = "_"
+
+        url = reverse("detail-list",kwargs={
+            "width": width,
+            "height": height,
+            "radius": radius
+        })
+        print(url)
+        return url
 
     def get_tire_type(self):
         if self.tire_type == 1:
