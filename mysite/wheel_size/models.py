@@ -93,7 +93,6 @@ class TireSize(models.Model):
             "height": height,
             "radius": radius
         })
-        print(url)
         return url
 
     def get_tire_type(self):
