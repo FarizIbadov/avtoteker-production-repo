@@ -100,58 +100,57 @@ class TireSearch {
     const form = document.getElementById("tire-search") as HTMLFormElement;
 
     const currentAction = form.getAttribute("action")!;
-    if (currentAction === "/oil-list/") {
-      const formDefaultAction = form.getAttribute("data-action")!;
 
-      if (currentAction !== formDefaultAction) {
-        const splitedAndFilteredPath = currentAction
-          .split("/")
-          .filter(segment => segment);
+    const formDefaultAction = form.getAttribute("data-action")!;
 
-        const dynamicPath =
-          splitedAndFilteredPath[splitedAndFilteredPath.length - 1];
+    if (currentAction !== formDefaultAction) {
+      const splitedAndFilteredPath = currentAction
+        .split("/")
+        .filter(segment => segment);
 
-        const dynamicPathVals = dynamicPath.split("-");
-        this.actionVals = [...dynamicPathVals];
-      }
+      const dynamicPath =
+        splitedAndFilteredPath[splitedAndFilteredPath.length - 1];
 
-      if (width) {
-        width.addEventListener("change", e => {
-          this.actionVals[0] = this.handleSizeSelectEvent(e);
-        });
-      }
+      const dynamicPathVals = dynamicPath.split("-");
+      this.actionVals = [...dynamicPathVals];
+    }
 
-      if (height) {
-        height.addEventListener("change", e => {
-          this.actionVals[1] = this.handleSizeSelectEvent(e);
-        });
-      }
-
-      if (radius) {
-        radius.addEventListener("change", e => {
-          this.actionVals[2] = this.handleSizeSelectEvent(e);
-        });
-      }
-
-      form.addEventListener("submit", e => {
-        if (
-          this.state === "size" &&
-          form.getAttribute("action") !== "/oil-list/"
-        ) {
-          if (this.actionVals.join("") !== "___") {
-            const newAction = formDefaultAction + this.actionVals.join("-");
-            form.setAttribute("action", newAction);
-          } else {
-            const action = formDefaultAction.substr(
-              0,
-              formDefaultAction.length - 1,
-            );
-
-            form.setAttribute("action", action);
-          }
-        }
+    if (width) {
+      width.addEventListener("change", e => {
+        this.actionVals[0] = this.handleSizeSelectEvent(e);
       });
     }
+
+    if (height) {
+      height.addEventListener("change", e => {
+        this.actionVals[1] = this.handleSizeSelectEvent(e);
+      });
+    }
+
+    if (radius) {
+      radius.addEventListener("change", e => {
+        this.actionVals[2] = this.handleSizeSelectEvent(e);
+      });
+    }
+
+    form.addEventListener("submit", e => {
+      if (
+        this.state === "size" &&
+        form.getAttribute("action") !== "/oil-list/"
+      ) {
+        if (this.actionVals.join("") !== "___") {
+          const newAction = formDefaultAction + this.actionVals.join("-");
+          form.setAttribute("action", newAction);
+        } else {
+          const action = formDefaultAction.substr(
+            0,
+            formDefaultAction.length - 1,
+          );
+
+          form.setAttribute("action", action);
+        }
+      }
+    });
   }
 
   carSearch() {
