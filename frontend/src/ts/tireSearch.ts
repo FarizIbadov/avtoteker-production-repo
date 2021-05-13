@@ -125,20 +125,21 @@ class TireSearch {
     radius.addEventListener("change", e => {
       this.actionVals[2] = this.handleSizeSelectEvent(e);
     });
-
-    form.addEventListener("submit", e => {
-      if (this.actionVals.join("") !== "___") {
-        const newAction = formDefaultAction + this.actionVals.join("-");
-        form.setAttribute("action", newAction);
-      } else {
-        const action = formDefaultAction.substr(
-          0,
-          formDefaultAction.length - 1,
-        );
-        console.log(action);
-        form.setAttribute("action", action);
-      }
-    });
+    if (this.state === "size") {
+      form.addEventListener("submit", e => {
+        if (this.actionVals.join("") !== "___") {
+          const newAction = formDefaultAction + this.actionVals.join("-");
+          form.setAttribute("action", newAction);
+        } else {
+          const action = formDefaultAction.substr(
+            0,
+            formDefaultAction.length - 1,
+          );
+          console.log(action);
+          form.setAttribute("action", action);
+        }
+      });
+    }
   }
 
   carSearch() {
