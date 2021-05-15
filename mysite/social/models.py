@@ -23,7 +23,13 @@ class SocialMedia(models.Model):
 
 class Address(models.Model):
     address = models.CharField(max_length=40)
+    longitude = models.FloatField(default=49.877367169701486)
+    latidude = models.FloatField(default=40.40432361546929)
     active = models.BooleanField(default=False)
+    new = models.BooleanField(default=True)
+    order_number = models.IntegerField(default=0)
+    description = models.TextField(max_length=300,blank=True)
+    image = models.ImageField(upload_to="map",blank=True)
 
     def __str__(self):
         return self.address
