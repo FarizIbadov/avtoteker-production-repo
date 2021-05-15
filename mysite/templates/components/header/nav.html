@@ -1,10 +1,8 @@
-{% include "../map-modal.html" %}
 {% load navigation_list %}
 
 {% get_navigation_list as navigations %}
 
 <header class="header">
-    {% include "./top.html" %}
     <div class="header__nav__container">
       <nav class="header__nav">
           <a class="header__nav__logo" href="{% url 'home' %}">

@@ -9,7 +9,7 @@
 {% endblock seo %}
 
 {% block content %}
-
+    {% include "../components/phone-location-link-container.html" %}
     {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
     
     <h1 class="main-list__heading my-5">Kampaniyalar</h1>
@@ -29,7 +29,11 @@
         </div>
     </div>
     {% include "../components/pagination.html" %}
-  
+     <div class="main-index px-0 mb-5">
+      
+      {% include "../components/main-site/map.html" %}
+     
+    </div>
 
 {% endblock content %}
 
