@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -184,7 +185,7 @@ CKEDITOR_UPLOAD_PATH = "ck_uploads"
 # EMAIL_HOST_USER = "ibadovfariz1999@gmail.com"
 # EMAIL_HOST_PASSWORD = "swfcrfnrlzcpyyli"
 
-import logging
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

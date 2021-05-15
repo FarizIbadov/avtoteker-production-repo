@@ -10,7 +10,7 @@ import "../fonts/346526_C_0-d543b03fa0c0fb9a4f9f156b4facf083.woff2";
 import "bootstrap";
 import "slick-carousel";
 import "../js/gtag";
-import "../js/ymaps";
+import "./ymaps";
 import "./brandCarousel";
 import "./tireSearch";
 import "./imagePreview";

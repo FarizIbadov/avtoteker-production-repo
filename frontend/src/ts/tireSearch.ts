@@ -177,9 +177,9 @@ class TireSearch {
           const target = e.target as HTMLSelectElement;
           this.make = target.value;
           axios
-            .get<any, AxiosResponse<ResData[]>>(
-              `/api/models/?make=${this.make}`,
-            )
+            .get<any, AxiosResponse<ResData[]>>("/api/models/", {
+              params: { make: this.make },
+            })
             .then(res => {
               this.putOptions(model, res.data);
               model.removeAttribute("disabled");
@@ -196,9 +196,12 @@ class TireSearch {
           this.model = target.value;
           const { model, make } = this;
           axios
-            .get<any, AxiosResponse<ResData[]>>(
-              `/api/years/?model=${model}&make=${make}`,
-            )
+            .get<any, AxiosResponse<ResData[]>>("/api/years/", {
+              params: {
+                make,
+                model,
+              },
+            })
             .then(res => {
               this.putOptions(year, res.data);
               year.removeAttribute("disabled");
@@ -215,9 +218,9 @@ class TireSearch {
           this.year = target.value;
           const { model, make, year } = this;
           axios
-            .get<any, AxiosResponse<ResData[]>>(
-              `/api/trims/?model=${model}&make=${make}&year=${year}`,
-            )
+            .get<any, AxiosResponse<ResData[]>>("/api/trims/", {
+              params: { model, make, year },
+            })
             .then(res => {
               this.putOptions(trim, res.data);
               trim.removeAttribute("disabled");

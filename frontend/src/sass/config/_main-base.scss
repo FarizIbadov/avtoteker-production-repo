@@ -1,8 +1,6 @@
-$header-height: 160px;
-
 .main-container {
   @extend .d-flex, .flex-column;
-  margin-top: $header-height;
+  margin-top: 80px !important;
   min-height: 100vh !important;
 
   &__body {

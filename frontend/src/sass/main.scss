@@ -45,8 +45,7 @@ $custom-control-indicator-checked-box-shadow: #333;
 $custom-checkbox-indicator-indeterminate-bg: #333;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
-
-@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+@import "./icons";
 
 @import "./utils/mixin";
 @import "./utils/dimensions";
@@ -79,5 +78,7 @@ $custom-checkbox-indicator-indeterminate-bg: #333;
 @import "./components/cart";
 @import "./components/footer";
 @import "./components/brand-carousel";
+@import "./components/map";
+@import "./components/loader";
 
 @import "./config/main-base";
