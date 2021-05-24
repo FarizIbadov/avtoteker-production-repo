@@ -7,7 +7,7 @@
   {% parse_size_for_meta request as size %}
 
   {% if size and not object_list.is_empty %}
-    <meta name="description" content="{{size}} #teker #təkər.Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. BirKartla və TamKartla 6 ayadək faizsiz taksitlə.">
+    <meta name="description" content="{{size}} Təkər? Avtotəkərdə! Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinləri. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri. BirKartla və TamKartla təkər - 6 ayadək faizsiz taksitlə. #teker #təkər.">
   {% endif %}
 
   <title>{% parse_size_for_title request %} | #teker #təkər | Avtotəkər</title>
@@ -69,18 +69,18 @@
                                     {% if object.sale_active %}
                                     <div class="price">
                                         <span class="red-line-trought  font-larger--2 opacity-8">
-                                            {{object.price|floatformat}}
+                                            {{object.price|floatformat:-2}}
                                         </span>
                                     </div>  
                                     <div class="price text-right">
-                                        <span class="text-red font-xl">{{object.sale|floatformat}}</span>
+                                        <span class="text-red font-xl">{{object.sale|floatformat:-2}}</span>
                                         <span class="manat">
                                             <img src="{% static 'img/manat.png' %}" alt="₼">
                                         </span>
                                     </div>  
                                     {% else %}
                                      <div class="price text-right">
-                                        <span class="text-red font-xl">{{object.price|floatformat}}</span>
+                                        <span class="text-red font-xl">{{object.price|floatformat:-2}}</span>
                                         <span class="manat">
                                             <img src="{% static 'img/manat.png' %}" alt="₼">
                                         </span>
