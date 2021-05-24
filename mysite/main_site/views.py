@@ -14,7 +14,7 @@ class MainPage(TemplateView):
 
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
-        context['tire_search_title'] = "<h1 class='h2 tire-search__heading'>Təkər seçimi</h1>"
+        context['tire_search_title'] = "<h2 class='tire-search__heading'>Təkər seçimi</h2>"
         return context
 
 
