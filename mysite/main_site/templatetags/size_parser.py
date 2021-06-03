@@ -63,7 +63,7 @@ def get_size(request):
     return (width,height,radius)
 
 class SizeField:
-    queryset = Size.objects.all()
+    queryset = Size.objects.available()
 
     def __init__(self,field,name,default=""):
         self.default = default

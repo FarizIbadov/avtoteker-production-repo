@@ -1,36 +1,23 @@
 from django.contrib import admin
-from import_export.admin import ImportExportModelAdmin
+from import_export.admin import ImportExportMixin
 
-from .models import Brand,Fuel,OilType,Serie,Viscosity,Volume,Oil
-from .forms import OilForm
+from .models import Brand,Serie,Oil
 from .resources import OilResource
+from .forms import OilForm
+from utils.admin import CustomModelAdmin
 
-# Register your models here.
+
 @admin.register(Brand)
-class BrandAdmin(admin.ModelAdmin):
-    pass
-
-@admin.register(Fuel)
-class FuelAdmin(admin.ModelAdmin):
-    pass
-
-@admin.register(OilType)
-class OilTypeAdmin(admin.ModelAdmin):
+class BrandAdmin(CustomModelAdmin):
     pass
 
 @admin.register(Serie)
-class SerieAdmin(admin.ModelAdmin):
-    pass
-
-@admin.register(Viscosity)
-class ViscosityAdmin(admin.ModelAdmin):
-    pass
-
-@admin.register(Volume)
-class VolumeAdmin(admin.ModelAdmin):
+class SerieAdmin(CustomModelAdmin):
     pass
 
 @admin.register(Oil)
-class OilAdmin(ImportExportModelAdmin):
+class OilAdmin(ImportExportMixin,CustomModelAdmin):
     resource_class = OilResource
-    form = OilForm
+    form_class = OilForm
+
+
