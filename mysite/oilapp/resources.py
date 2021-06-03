@@ -1,7 +1,7 @@
 from import_export import resources,fields
 from tireapp import widgets as tire_widgets
 from . import widgets
-from .models import Oil,OilType,Fuel,Viscosity,Volume
+from .models import Oil
 
 class OilResource(resources.ModelResource):
     def get_queryset(self):
@@ -13,8 +13,8 @@ class OilResource(resources.ModelResource):
             for row in dataset:
                 imported_ids.append(row[0])
             filtered_ids = list(filter(None,imported_ids))
-            prepeared_for_deletion_models = self.Meta.model.objects.all().exclude(id__in=filtered_ids)
-            prepeared_for_deletion_models.delete()
+            models = self.Meta.model.objects.all().exclude(id__in=filtered_ids)
+            models.delete()
 
 
     def save_instance(self, instance, using_transactions=True, dry_run=False):
@@ -30,31 +30,10 @@ class OilResource(resources.ModelResource):
         attribute="serie",
         widget=widgets.CustomSerieWidget()
     )
-
-    volume = fields.Field(
-        attribute="volume",
-        widget=widgets.CustomModelWidget(Volume)
-    )
-
-    viscosity = fields.Field(
-        attribute="viscosity",
-        widget=widgets.CustomModelWidget(Viscosity)        
-    )
-
-    fuel = fields.Field(
-        attribute="fuel",
-        widget=widgets.CustomModelWidget(Fuel)
-    )
     
     country = fields.Field(
         attribute="country",
         widget=tire_widgets.CustomCountryWidget()
-    )
-
-    oil_type = fields.Field(
-        column_name="Oil type",
-        attribute="oil_type",
-        widget=widgets.CustomModelWidget(OilType)
     )
 
     sale_active = fields.Field(

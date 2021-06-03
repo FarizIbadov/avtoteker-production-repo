@@ -14,8 +14,8 @@ class OilListView(ListView):
         viscosity = self.request.GET.get("viscosity")
         kwargs = {}
         if viscosity:
-            kwargs['viscosity__title'] = viscosity
-        return Oil.objects.filter(**kwargs)
+            kwargs['viscosity'] = viscosity
+        return Oil.objects.available(**kwargs)
 
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
@@ -24,9 +24,15 @@ class OilListView(ListView):
 
 class OilDetailView(DetailView):
     template_name = "main_site/oil-detail.html"
-    model = Oil
 
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = OilOrderForm
+        
         return context
+
+    def get_object(self):
+        pk = self.kwargs['pk']
+        instance = Oil.objects.get(pk=pk)
+        return instance
+    

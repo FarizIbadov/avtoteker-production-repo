@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import timezone
 from django.urls import reverse,reverse_lazy
 from django.utils import timezone
 from specific.models import Brand, Country, Serie, Season
@@ -7,9 +8,9 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.core.exceptions import ValidationError
 from django.core.files import File
+from utils.models import CustomModel
 
-
-class Size(models.Model):
+class Size(CustomModel):
     width = models.CharField(max_length=10, null=True)
     height = models.CharField(max_length=10, null=True)
     radius = models.CharField(max_length=10, null=True)
@@ -24,21 +25,65 @@ class Size(models.Model):
         return "%s-%s-%s" % (self.width,self.height,self.radius)
 
 
-class Tire(models.Model):
-
-    slug = models.SlugField(blank=True,max_length=200)
-
+class Tire(CustomModel):
     CLASS_CHOICES = [
         (1, "Econom"),
         (2, "Orta"),
         (3, "Premium"),
     ]
 
-    brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True)
-    serie = models.ForeignKey(Serie, on_delete=models.SET_NULL, null=True)
-    manufacturer = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
+    KREDIT_CHOICES =  [
+        (0,"Yoxdur"),
+        (3,"3 ay"),
+        (6,"6 ay"),
+        (9,"9 ay"),
+        (12,"12 ay")
+    ]
 
-    size = models.ForeignKey(Size, on_delete=models.RESTRICT, null=True)
+    BIRKART_CHOICES = [
+        (0,"Yoxdur"),
+        (2,"2 ay"),
+        (3,"3 ay"),
+        (6,"6 ay"),
+        (9,"9 ay"),
+        (12,"12 ay")
+    ]
+
+    TAMKART_CHOICES = [
+        (0,"Yoxdur"),
+        (2,"2 ay"),
+        (3,"3 ay"),
+        (6,"6 ay"),
+        (9,"9 ay"),
+        (12,"12 ay")
+    ]
+
+    BOLKART_CHOICES = [
+        (0,"Yoxdur"),
+        (2,"2 ay"),
+        (3,"3 ay"),
+        (6,"6 ay"),
+        (9,"9 ay"),
+        (12,"12 ay")
+    ]
+
+    ALBALI_CHOICES = [
+        (0,"Yoxdur"),
+        (2,"2 ay"),
+        (3,"3 ay"),
+        (6,"6 ay"),
+        (9,"9 ay"),
+        (12,"12 ay")
+    ]
+
+    code = models.CharField(max_length=200,default="XXX")
+    slug = models.SlugField(blank=True,max_length=200)
+
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
+    serie = models.ForeignKey(Serie, on_delete=models.CASCADE, null=True)
+    manufacturer = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)
+
+    size = models.ForeignKey(Size, on_delete=models.CASCADE, null=True)
 
     MS = models.BooleanField(default=False)
     OE = models.CharField(default="-",max_length=20)
@@ -60,31 +105,31 @@ class Tire(models.Model):
     taksit_2 = models.DecimalField(
         null=True, blank=True, decimal_places=2, max_digits=10
     )
-    taksit_2_month = models.PositiveSmallIntegerField(default=2)
+    
     taksit_2_active = models.BooleanField(default=True)
 
     taksit_3 = models.DecimalField(
         null=True, blank=True, decimal_places=2, max_digits=10
     )
-    taksit_3_month = models.PositiveSmallIntegerField(default=3)
+    
     taksit_3_active = models.BooleanField(default=True)
 
     taksit_6 = models.DecimalField(
         null=True, blank=True, decimal_places=2, max_digits=10
     )
-    taksit_6_month = models.PositiveSmallIntegerField(default=6)
+    
     taksit_6_active = models.BooleanField(default=True)
 
     taksit_9 = models.DecimalField(
         null=True, blank=True, decimal_places=2, max_digits=10
     )
-    taksit_9_month = models.PositiveSmallIntegerField(default=9)
+    
     taksit_9_active = models.BooleanField(default=True)
 
     taksit_12 = models.DecimalField(
         null=True, blank=True, decimal_places=2, max_digits=10
     )
-    taksit_12_month = models.PositiveSmallIntegerField(default=12)
+    
     taksit_12_active = models.BooleanField(default=True)
 
     kredit_active = models.BooleanField(default=True)
@@ -93,32 +138,32 @@ class Tire(models.Model):
         null=True, blank=True, decimal_places=2, max_digits=10
     )
     kredit_3_dif = models.FloatField(default=0)
-    kredit_3_month = models.PositiveSmallIntegerField(default=3)
+    
     kredit_3_active = models.BooleanField(default=True)
 
     kredit_6 = models.DecimalField(
         null=True, blank=True, decimal_places=2, max_digits=10
     )
     kredit_6_dif = models.FloatField(default=0)
-    kredit_6_month = models.PositiveSmallIntegerField(default=6)
+    
     kredit_6_active = models.BooleanField(default=True)
 
     kredit_9 = models.DecimalField(
         null=True, blank=True, decimal_places=2, max_digits=10
     )
     kredit_9_dif = models.FloatField(default=0)
-    kredit_9_month = models.PositiveSmallIntegerField(default=9)
+    
     kredit_9_active = models.BooleanField(default=True)
 
     kredit_12 = models.DecimalField(
         null=True, blank=True, decimal_places=2, max_digits=10
     )
     kredit_12_dif = models.FloatField(default=0)
-    kredit_12_month = models.PositiveSmallIntegerField(default=12)
+    
     kredit_12_active = models.BooleanField(default=True)
 
     montaj_balance = models.DecimalField(null=True, decimal_places=2, max_digits=10)
-    razval = models.CharField(max_length=50,blank=True,null=True)
+    razval = models.CharField(max_length=50,null=True)
 
     year = models.PositiveSmallIntegerField(null=True)
     Class = models.PositiveSmallIntegerField(default=1, choices=CLASS_CHOICES)
@@ -132,6 +177,12 @@ class Tire(models.Model):
     kredit_initial_price = models.FloatField(blank=True,default=0)
     new = models.BooleanField(default=False)
     outlet = models.BooleanField(default=False)
+
+    birkart = models.PositiveSmallIntegerField(choices=BIRKART_CHOICES,blank=True)
+    tamkart = models.PositiveSmallIntegerField(choices=TAMKART_CHOICES,blank=True)
+    bolkart = models.PositiveSmallIntegerField(choices=BOLKART_CHOICES,blank=True)
+    albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES,blank=True)
+    kredit = models.PositiveSmallIntegerField(choices=KREDIT_CHOICES,blank=True)
 
     def get_tire_info(self):
         return "%s - %s - %s - %s" % (
@@ -155,15 +206,15 @@ class Tire(models.Model):
         )
         
 
-    def get_edit_url(self):
-        return reverse(
-            "custom-admin:tireapp:tire-update", kwargs={"pk": self.id}
-        )
+    # def get_edit_url(self):
+    #     return reverse(
+    #         "custom-admin:tireapp:tire-update", kwargs={"pk": self.id}
+    #     )
 
-    def get_delete_url(self):
-        return reverse(
-            "custom-admin:tireapp:tire-delete", kwargs={"pk": self.id}
-        )
+    # def get_delete_url(self):
+    #     return reverse(
+    #         "custom-admin:tireapp:tire-delete", kwargs={"pk": self.id}
+    #     )
 
     def get_ZR(self):
         return "ZR" if self.ZR else "R"
@@ -209,3 +260,49 @@ class Tire(models.Model):
 
         slug = "_".join([brand,serie,size]).replace("/","") 
         return slug
+
+    def save(self):
+        self.slug = self.generate_slug()
+        if not self.albalikart:
+            self.albalikart = self.get_active_price("taksit")
+        if not self.tamkart:
+            self.tamkart = self.get_active_price("taksit")
+        if not self.bolkart:
+            self.bolkart = self.get_active_price("taksit")
+        if not self.birkart:
+            self.birkart = self.get_active_price("taksit")
+        if not self.kredit:
+            self.kredit = self.get_active_price("kredit")
+        super().save()
+
+    def get_active_price(self,taksit_kredit_title):
+        kredit_list = ['kredit_3','kredit_6','kredit_9','kredit_12']
+        taksit_list = ['taksit_2','taksit_3','taksit_6','taksit_9','taksit_12']
+
+        iterable_list = taksit_list
+        active_months = [] 
+
+        if taksit_kredit_title == 'kredit':
+            iterable_list = kredit_list
+
+        for field in iterable_list:
+            month = int(field.split("_")[-1])
+
+            if getattr(self,field + "_active"):
+                active_months.append(month)
+        
+        return active_months[-1]
+
+
+class OneSTire(models.Model):
+    code = models.CharField(max_length=200)
+    price_usd = models.PositiveSmallIntegerField(default=0)
+    year = models.PositiveSmallIntegerField(null=True,default=timezone.now().year)
+    country = models.CharField(max_length=100,blank=True,null=True)
+    quantity = models.SmallIntegerField(null=True,default=0)
+
+    def __str__(self):
+        return self.code
+    
+
+            

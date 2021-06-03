@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     "campaign",
     "news",
     'navigation',
-    "kredit"
+    "kredit",
+    "kredit_taksit"
 ]
 
 SITE_ID = 1
@@ -185,19 +186,21 @@ CKEDITOR_UPLOAD_PATH = "ck_uploads"
 # EMAIL_HOST_USER = "ibadovfariz1999@gmail.com"
 # EMAIL_HOST_PASSWORD = "swfcrfnrlzcpyyli"
 
+LOGGING = None
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+if not DEBUG:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+            },
         },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        'loggers': {
+            'django': {
+                'handlers': ['console'],
+                'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+            },
         },
-    },
-}
+    }
