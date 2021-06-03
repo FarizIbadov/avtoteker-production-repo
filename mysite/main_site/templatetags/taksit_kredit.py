@@ -1,6 +1,6 @@
 from django import template
 from tireapp.models import Tire
-from kredit_taksit.models import KreditTaksitImage
+from kredit_taksit.models import KreditTaksitImage,KreditTaksitInterval
 
 register = template.Library()
 
@@ -55,7 +55,7 @@ def get_template(items):
     """
 
     carousel_item = """
-        <div class="carousel-item %s kredit-taksit-item w-100 h-100">
+        <div class="carousel-item %s kredit-taksit-item w-100 h-100" data-interval="%s">
             <div class="d-flex align-items-center justify-content-end h-100">
                 <figure class="kredit-taksit-fig mr-2 d-flex h-100" >
                     <img src="%s">
@@ -69,13 +69,17 @@ def get_template(items):
     """
 
     item_templates = []
+    interval = str(
+        KreditTaksitInterval.objects.filter(active=True).first() or 1000
+    )
+
 
     for i in range(len(items)):
         active = "active" if i == 0 else ""
         item = items[i]
         title = f"{item['month']} {item['title']} 0%"
         price = f"ayda <span class='text-danger'>{item['price']} azn</span>"
-        item_template = carousel_item % (active,item['image'],title,price)
+        item_template = carousel_item % (active,interval,item['image'],title,price)
         item_templates.append(item_template)
 
     return carousel_container % "".join(item_templates) if item_templates else ""
