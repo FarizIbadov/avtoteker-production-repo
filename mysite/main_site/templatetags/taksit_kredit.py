@@ -1,65 +1,85 @@
 from django import template
 from tireapp.models import Tire
+from kredit_taksit.models import KreditTaksitImage
 
 register = template.Library()
 
-@register.filter(name="get_taksit")
-def get_taksit(value):
-    active_taksits = []
-    for field in taksit_fields:
-        field_data = get_field_data(field,value)
-        if field_data[0]:
-            active_taksits.append(field_data[1])
-    if len(active_taksits) == 0:
-        return ""
-    last_taksit = active_taksits[-1]
-    return get_kredit_taksit_template(last_taksit,'taksit')
+taksit_fields = ["birkart","tamkart","bolkart","albalikart"]
+taksit_kredit_fields = ["kredit"]
+taksit_kredit_fields.extend(taksit_fields)
 
-@register.filter(name="get_kredit")
-def get_kredit(value):
-    active_kredits = []
-    for field in kredit_fields:
-        field_data = get_field_data(field,value)
-        if field_data[0]:
-            active_kredits.append(field_data[1])
-    if len(active_kredits) == 0:
-        return "" 
-    last_kredit = active_kredits[-1]
-    return get_kredit_taksit_template(last_kredit,'kredit')
+@register.filter(name="get_kredit_taksit")
+def get_kredit_taksit(value):
+    carousel_item_datas = []
+    for field in taksit_kredit_fields:
+        month = getattr(value,field,None)
 
-def get_field_data(field,value):
-    field_active = field + "_active"
-    field_month = field + "_month"
-    return (getattr(value,field_active),{
-        "value": getattr(value,field),
-        "month":getattr(value,field_month)
-    })
+        if not month:
+            continue
 
-def get_kredit_taksit_template(value,word):
-    first_part = """
-        <div class="price text-right">
-            <span class="text-red">ayda %s</span>
-        </div>  
-    """ % (value['value'])
-    second_part = """
-        <div class="text-right">
-            %s %s
+        try:
+            taksit_fields.index(field)
+            title = "taksit"   
+        except ValueError:
+            title = 'kredit'
+        
+        price_title = "%s_%d" % (title,month)
+        price = getattr(value,price_title,None)
+
+        if not price:
+            continue
+
+        try:
+            kredit_taksit = KreditTaksitImage.objects.get(name=field)
+        except KreditTaksitImage.DoesNotExist:
+            continue
+
+        carousel_item_data = {
+            "image": kredit_taksit.image.url,
+            "title": title,
+            "price": price,
+            "month": month
+        }
+
+        carousel_item_datas.append(carousel_item_data)
+
+    return get_template(carousel_item_datas)
+
+def get_template(items):
+    carousel_container = """
+        <div id="carouselExampleSlidesOnly" class="carousel slide taksit-kredit-container mt-3" data-ride="carousel">
+            <div class="carousel-inner h-100">
+                %s        
+            </div>
+        </div> 
+    """
+
+    carousel_item = """
+        <div class="carousel-item %s kredit-taksit-item w-100 h-100">
+            <div class="d-flex align-items-center justify-content-end h-100">
+                <figure class="kredit-taksit-fig mr-2 d-flex h-100" >
+                    <img src="%s">
+                </figure>
+                <div class="d-flex flex-column justify-content-center h-100">
+                    <div class="bg-my-primary text-center">%s</div>
+                    <div class="text-center">%s</div>
+                </div>
+            </div>
         </div>
-    """ % (value['month'],word)
-    return "".join([first_part,second_part])
+    """
 
-kredit_fields = ["kredit_3","kredit_6","kredit_9","kredit_12"]
-taksit_fields = ["taksit_2","taksit_3","taksit_6","taksit_9","taksit_12"]
+    item_templates = []
 
-"""
-<div class="price text-right">
-    <span class="text-red">ayda %s</span>
-    <span class="manat">₼</span>
-</div>  
-<div class="text-right">
-    %s %s
-</div>
-"""
+    for i in range(len(items)):
+        active = "active" if i == 0 else ""
+        item = items[i]
+        title = f"{item['month']} {item['title']} 0%"
+        price = f"ayda <span class='text-danger'>{item['price']} azn</span>"
+        item_template = carousel_item % (active,item['image'],title,price)
+        item_templates.append(item_template)
+
+    return carousel_container % "".join(item_templates) if item_templates else ""
+
 
 @register.filter(name="special_kredit_price")
 def special_kredit_price(value:Tire):
@@ -68,7 +88,6 @@ def special_kredit_price(value:Tire):
         price = float(value.sale)
 
     initial_price = value.kredit_initial_price
-
     result = (price - (price * float(initial_price)/100)) / 3
 
     return result
@@ -80,3 +99,4 @@ def get_first_price(value):
         price = float(value.sale)
     initial_price = value.kredit_initial_price
     return price * float(initial_price)/100
+    

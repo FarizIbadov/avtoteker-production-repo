@@ -1,7 +1,8 @@
 from django.db.models.signals import post_save, post_delete
+from import_export.signals import post_import
 
 from django.dispatch import receiver
-from .models import Tire, Size
+from .models import Tire, Size, OneSTire
 
 
 @receiver(post_delete, sender=Tire)
@@ -23,3 +24,4 @@ def save_existing_tire(sender, instance, created, **kwargs):
                     size.delete()
     except Size.DoesNotExist:
         pass
+

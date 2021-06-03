@@ -95,12 +95,8 @@
                                     </div>  
                                     {% endif %}
 
-                                    {% if object.taksit_active %}  
-                                        {{ object|get_taksit|safe}}
-                                    {% elif object.kredit_active %}
-                                        {{ object|get_kredit|safe}}
-                                    {% endif %}
                                 </div>
+                                {{ object|get_kredit_taksit|safe }} 
                             </div>
                         </div>
                         <div class="main-list__btn-box d-flex align-items-center">

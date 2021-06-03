@@ -1,7 +1,8 @@
 from import_export import resources, fields
-from .models import Tire
-from . import widgets
 from import_export import widgets as resource_widget
+from import_export.instance_loaders import BaseInstanceLoader
+from .models import Tire,OneSTire
+from . import widgets
 
 
 class TireResource(resources.ModelResource):
@@ -209,6 +210,7 @@ class TireResource(resources.ModelResource):
         model = Tire
         fields = (
             "id",
+            "code",
             "brand",
             "serie",
             "manufacturer",
@@ -258,12 +260,18 @@ class TireResource(resources.ModelResource):
             "contact",
             "kredit_initial_price",
             "new",
-            "outlet"
+            "outlet",
+            "birkart",
+            "tamkart",
+            "bolkart",
+            "albalikart",
+            "kredit"
         )
         skip_unchanged = True
 
         export_order = (
             "id",
+            "code",
             "brand",
             "serie",
             "origin",
@@ -318,3 +326,64 @@ class TireResource(resources.ModelResource):
             "new",
             "outlet"
         )
+
+
+class OneSTireResource(resources.ModelResource):
+    code = fields.Field(column_name="Mal",attribute="code")
+    price_usd = fields.Field(column_name="Qiymət USD",attribute="price_usd")
+    year = fields.Field(column_name="İl",attribute="year")
+    country = fields.Field(column_name="Ölkə",attribute="country")
+    quantity = fields.Field(column_name="Cəmi",attribute="quantity")   
+
+    def skip_row(self, instance, original):
+        if instance.code == "Cəmi":
+            return True
+        return super().skip_row(instance, original)   
+
+    def after_import_row(self, row, row_result, row_number=None, **kwargs):
+        try:
+            code = row['Mal']
+            tire = Tire.objects.get(code=code)
+            tire.quantity = row['Cəmi']
+            tire.save()
+        except Tire.DoesNotExist:
+            pass  
+
+    def before_import(self,dataset, using_transactions, dry_run, **kwargs):
+        imported_codes = []
+        if not dry_run:
+            for row in dataset:
+                imported_codes.append(row[0])
+
+            filtered_codes = list(filter(None,imported_codes))
+            os_tires = self.Meta.model.objects.all().exclude(code__in=filtered_codes)
+            tires = Tire.objects.all().exclude(code__in=filtered_codes)
+
+            os_tires.delete()
+
+            for tire in tires:
+                if tire.code != "XXX":
+                    tire.delete()
+
+    def for_delete(self,row,instance):
+        code = row['Mal']
+        if row['Cəmi']:
+            if row['Cəmi'] <= 0:
+                self.delete_tire(code)
+                return True
+        else:
+            self.delete_tire(code)
+            return True
+        
+    def delete_tire(self,code):
+        try:
+            tire = Tire.objects.get(code=code)
+            tire.delete()
+        except Tire.DoesNotExist:
+            return
+        
+    class Meta:
+        model = OneSTire 
+        fields = ("code","price_usd","year","country","quantity")
+        import_id_fields = ('code',)
+        skip_unchanged = True

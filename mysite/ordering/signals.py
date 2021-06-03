@@ -9,7 +9,7 @@ from .models import Order,OilOrder
 def order_save(sender, instance:Order, created, **kwargs):
     if created:
         instance.product_title = instance.tire.__str__()
-        instance.product_link = reverse('detail',kwargs={'pk':instance.tire.id})
+        instance.product_link = reverse('detail',kwargs={'pk':instance.tire.id,"slug": instance.tire.slug})
         instance.save()
     
 @receiver(post_save, sender=OilOrder)

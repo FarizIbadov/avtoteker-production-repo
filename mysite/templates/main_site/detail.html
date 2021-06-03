@@ -68,29 +68,25 @@
                 {% if object.sale_active %}
                   <div class="price">
                       <span class="red-line-trought  font-larger--2 opacity-8">
-                          {{object.price|floatformat}}
+                          {{object.price|floatformat:-2}}
                       </span>
                   </div>  
                   <div class="price text-right">
-                      <span class="text-red font-xl">{{object.sale|floatformat}}</span>
+                      <span class="text-red font-xl">{{object.sale|floatformat:-2}}</span>
                       <span class="manat">
                         <img src="{% static 'img/manat.png' %}" alt="₼">
                       </span>
                   </div>  
                 {% else %}
                   <div class="price text-right">
-                      <span class="text-red font-xl">{{object.price|floatformat}}</span>
+                      <span class="text-red font-xl">{{object.price|floatformat:-2}}</span>
                       <span class="manat">
                         <img src="{% static 'img/manat.png' %}" alt="₼">
                       </span>
                   </div>  
                 {% endif %}
-                {% if object.taksit_active %} 
-                  {{ object|get_taksit|safe}} 
-                {% elif object.kredit_active %} 
-                  {{ object|get_kredit|safe}} 
-                {% endif %}
               </div>
+              {{ object|get_kredit_taksit|safe }} 
             </div>
           </div>
           <div class="main-list__btn-box">
