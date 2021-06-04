@@ -5,4 +5,4 @@ class Copyright(models.Model):
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.content 
+        return self.content
