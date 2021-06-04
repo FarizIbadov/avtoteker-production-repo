@@ -76,7 +76,7 @@ class Tire(CustomModel):
         (12,"12 ay")
     ]
 
-    code = models.CharField(max_length=200,default="XXX",blank=True)
+    code = models.CharField(max_length=200,blank=True)
     slug = models.SlugField(blank=True,max_length=200)
 
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
