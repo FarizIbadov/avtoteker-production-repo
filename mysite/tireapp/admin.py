@@ -10,6 +10,7 @@ from .resources import TireResource,  OneSTireResource
 class TireAdmin(ImportExportMixin,CustomModelAdmin):
     form = TireForm
     resource_class = TireResource
+    search_fields = ("brand__title","serie__title","quantity","manufacturer__title") 
     exclude = ("size",)
     list_display = ["brand", "serie", "size", "manufacturer","quantity"]
     list_filter = ["brand", "serie", "manufacturer", "size"]
