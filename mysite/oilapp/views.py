@@ -35,4 +35,3 @@ class OilDetailView(DetailView):
         pk = self.kwargs['pk']
         instance = Oil.objects.get(pk=pk)
         return instance
-    
