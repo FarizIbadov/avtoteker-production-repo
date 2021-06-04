@@ -1,22 +1,27 @@
 from import_export import resources, fields
 from import_export import widgets as resource_widget
-from import_export.instance_loaders import BaseInstanceLoader
 from .models import Tire,OneSTire
 from . import widgets
-
+from .instance_loader import CustomModelInstanceLoader
 
 class TireResource(resources.ModelResource):
     def get_queryset(self):
-        return self.Meta.model.objects.all().order_by("id")
+        return Tire.objects.all()
     
+    def export(self,queryset,*args,**kwargs):
+        tires = Tire.objects.available()
+        return super().export(tires,*args,**kwargs)
+
     def before_import(self,dataset, using_transactions, dry_run, **kwargs):
         imported_ids = []
         if not dry_run:
             for row in dataset:
                 imported_ids.append(row[0])
+
             filtered_ids = list(filter(None,imported_ids))
-            prepeared_for_deletion_models = self.Meta.model.objects.all().exclude(id__in=filtered_ids)
-            prepeared_for_deletion_models.delete()
+            tires = Tire.objects.all()
+            tires.backup()
+            tires.exclude(id__in=filtered_ids).delete()
 
 
     def save_instance(self, instance, using_transactions=True, dry_run=False):
@@ -208,6 +213,9 @@ class TireResource(resources.ModelResource):
 
     class Meta:
         model = Tire
+        import_id_fields = ("id",'code')
+        # instance_loader_class = CustomModelInstanceLoader
+
         fields = (
             "id",
             "code",
@@ -343,7 +351,7 @@ class OneSTireResource(resources.ModelResource):
     def after_import_row(self, row, row_result, row_number=None, **kwargs):
         try:
             code = row['Mal']
-            tire = Tire.objects.get(code=code)
+            tire = Tire.objects.get_object(code=code)
             tire.quantity = row['Cəmi']
             tire.save()
         except Tire.DoesNotExist:
@@ -356,14 +364,13 @@ class OneSTireResource(resources.ModelResource):
                 imported_codes.append(row[0])
 
             filtered_codes = list(filter(None,imported_codes))
-            os_tires = self.Meta.model.objects.all().exclude(code__in=filtered_codes)
-            tires = Tire.objects.all().exclude(code__in=filtered_codes)
 
+            os_tires = self.Meta.model.objects.exclude(code__in=filtered_codes)
             os_tires.delete()
 
-            for tire in tires:
-                if tire.code != "XXX":
-                    tire.delete()
+            tires = Tire.objects.exclude(code="XXX")
+            tires.backup()
+            tires.exclude(code__in=filtered_codes).delete()
 
     def for_delete(self,row,instance):
         code = row['Mal']
@@ -375,9 +382,15 @@ class OneSTireResource(resources.ModelResource):
             self.delete_tire(code)
             return True
         
+    def import_row(self, row, instance_loader, using_transactions=True, dry_run=False, raise_errors=False, **kwargs):
+        row_result = super().import_row(row, instance_loader, using_transactions, dry_run, raise_errors, **kwargs)
+        row_result.object_id = row['Mal']
+        row_result.object_repr = row['Mal']
+        return row_result
+
     def delete_tire(self,code):
         try:
-            tire = Tire.objects.get(code=code)
+            tire = Tire.objects.get_object(code=code)
             tire.delete()
         except Tire.DoesNotExist:
             return

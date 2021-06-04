@@ -8,6 +8,7 @@ class CustomAdminActionsMixin(object):
         count = queryset.count() 
         extra = 'item was' if count == 1 else "items were"
         msg = "%d %s restored successfully" % (count,extra)
+        messages.add_message(request,messages.SUCCESS,msg,True)
     backup.short_description = "Backup deleted items"
 
  
