@@ -352,8 +352,11 @@ class OneSTireResource(resources.ModelResource):
         try:
             code = row['Mal']
             tire = Tire.objects.get_object(code=code)
-            tire.quantity = row['Cəmi']
-            tire.save()
+            if not row['Cəmi']:
+                tire.delete()
+            else: 
+                tire.quantity = row['Cəmi']
+                tire.save()
         except Tire.DoesNotExist:
             pass  
 

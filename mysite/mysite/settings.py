@@ -31,7 +31,7 @@ elif ALLOWED_HOSTS_ENV:
 INSTALLED_APPS = [
     "social.apps.SocialConfig",
     "ordering.apps.OrderingConfig",
-    "custom_admin.apps.CustomAdminConfig",
+    # "custom_admin.apps.CustomAdminConfig",
     "tireapp.apps.TireappConfig",
     "specific.apps.SpecificConfig",
     "main_site.apps.MainSiteConfig",
