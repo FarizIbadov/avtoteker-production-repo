@@ -14,9 +14,9 @@ class TireAdmin(ImportExportMixin,CustomModelAdmin):
     list_display = ["brand", "serie", "size", "manufacturer","quantity"]
     list_filter = ["brand", "serie", "manufacturer", "size"]
 
-# @admin.register(OneSTire)
-# class OneSTireAdmin(ImportMixin,admin.ModelAdmin):
-#     resource_class = OneSTireResource
+@admin.register(OneSTire)
+class OneSTireAdmin(ImportMixin,admin.ModelAdmin):
+    resource_class = OneSTireResource
 
 
 @admin.register(Size)

@@ -22,7 +22,6 @@ class KreditDetailView(ModelFormMixin,DetailView):
     success_url = ""
 
     def get_form_class(self):
-        print(self.kwargs['slug'])
         return super().get_form_class()
 
     def post(self,request,*args,**kwargs):
