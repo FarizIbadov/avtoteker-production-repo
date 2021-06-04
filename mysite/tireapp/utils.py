@@ -48,10 +48,10 @@ class FilterByField(object):
         # for field in Tire._meta.get_fields():
         #     if field.is_relation:
         #         # for f in field._meta.get_fields():
-        #         #     print(f.name)
-        #         print(field.related_model._meta.get_fields())
+        #         #     pass
+        #         
         #     else:
-        #         print(field)
+        #         pass
         kwargs = {}
 
         return kwargs
