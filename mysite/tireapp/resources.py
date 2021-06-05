@@ -352,6 +352,7 @@ class OneSTireResource(resources.ModelResource):
         try:
             code = row['Mal']
             tire = Tire.objects.get_object(code=code)
+
             if not row['Cəmi']:
                 tire.delete()
             else: 
@@ -364,11 +365,14 @@ class OneSTireResource(resources.ModelResource):
         imported_codes = []
         if not dry_run:
             for row in dataset:
-                imported_codes.append(row[0])
+                if row[0] != "Cəmi":
+                    imported_codes.append(row[0])
 
+                
             filtered_codes = list(filter(None,imported_codes))
+            print(filtered_codes)
 
-            os_tires = self.Meta.model.objects.exclude(code__in=filtered_codes)
+            os_tires = OneSTire.objects.exclude(code__in=filtered_codes)
             os_tires.delete()
 
             tires = Tire.objects.exclude(code="XXX")
@@ -381,6 +385,7 @@ class OneSTireResource(resources.ModelResource):
             if row['Cəmi'] <= 0:
                 self.delete_tire(code)
                 return True
+            return False
         else:
             self.delete_tire(code)
             return True
@@ -396,10 +401,11 @@ class OneSTireResource(resources.ModelResource):
             tire = Tire.objects.get_object(code=code)
             tire.delete()
         except Tire.DoesNotExist:
-            return
+            pass
+        return
         
     class Meta:
         model = OneSTire 
         fields = ("code","price_usd","year","country","quantity")
         import_id_fields = ('code',)
-        skip_unchanged = True
+        # skip_unchanged = True
