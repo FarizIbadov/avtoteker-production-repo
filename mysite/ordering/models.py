@@ -14,7 +14,7 @@ class Order(models.Model):
     ]
 
     name = models.CharField(max_length=20,null=True,blank=True)
-    tire = models.ForeignKey(Tire,on_delete=models.SET_NULL,null=True)
+    tire = models.ForeignKey(Tire,on_delete=models.CASCADE,null=True)
     product_title = models.CharField(blank=True,max_length=50)
     product_link = models.CharField(blank=True,max_length=150)
     quantity = models.PositiveSmallIntegerField(default=1)
@@ -56,7 +56,7 @@ class OilOrder(models.Model):
     ]
 
     name = models.CharField(max_length=20,null=True,blank=True)
-    oil = models.ForeignKey(Oil,on_delete=models.SET_NULL,null=True)
+    oil = models.ForeignKey(Oil,on_delete=models.CASCADE,null=True)
     product_title = models.CharField(blank=True,max_length=50)
     product_link = models.CharField(blank=True,max_length=150)
     phone = models.CharField(max_length=20)

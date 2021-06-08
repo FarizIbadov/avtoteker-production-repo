@@ -3,12 +3,17 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout,Row,Column,Field
 from .models import Order,OilOrder
 
-class OrderForm(forms.ModelForm):
+class OrderForm(forms.Form):
+    PAYMENT_CHOICES = [
+        (1,'Nağd'),
+        (2,'Kart ilə'),
+        (3,'Kreditlə'),
+        (4,'BirKart / TamKart ilə'),
+    ]
 
-    def __init__(self, *args, **kwargs):
-        super(OrderForm, self).__init__(*args, **kwargs)
-        self.fields['quantity'].widget.attrs['min'] = 1
-
+    name = forms.CharField(max_length=20,label="Ad:")
+    quantity = forms.IntegerField(min_value=1,label="Say:",required=True)
+    payment_type = forms.ChoiceField(choices=PAYMENT_CHOICES,)
     
     def clean_quantity(self):
         quantity = self.cleaned_data['quantity']
@@ -25,10 +30,8 @@ class OrderForm(forms.ModelForm):
             Row(
                 Column('name',css_class="col-md"),
                 Column('phone',css_class="col-md"),
-                # Column('quantity',css_class="col-md-3")
             ),
             Row(
-                # Column('phone',css_class="col-md-6"),
                 Column(
                     Field('payment_type',css_class="custom-select"),
                 css_class="col-md-9"),
@@ -38,7 +41,6 @@ class OrderForm(forms.ModelForm):
         return helper
 
     class Meta:
-        model = Order
         exclude = ('is_purchased','order_date',)
         widgets = {
             "quantity": forms.NumberInput(),
@@ -52,7 +54,7 @@ class OrderForm(forms.ModelForm):
             "phone":"Mobil nömrəsi:"
         }
 
-class OilOrderForm(forms.ModelForm):
+class OilOrderForm(forms.Form):
     @property
     def helper(self):
         helper = FormHelper()
@@ -75,7 +77,6 @@ class OilOrderForm(forms.ModelForm):
         return helper
 
     class Meta:
-        model = OilOrder
         exclude = ('is_purchased','order_date',)
         widgets = {
             "quantity": forms.NumberInput(),
