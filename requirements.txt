@@ -15,6 +15,7 @@ Django==3.1
 django-author==1.0.2
 django-ckeditor==6.0.0
 django-cleanup==5.0.0
+django-cors-headers==3.7.0
 django-crispy-forms==1.9.2
 django-import-export==2.3.0
 django-js-asset==1.2.2
