@@ -1,5 +1,8 @@
 {% load crispy_forms_tags %}
-<form method="POST" action="{% url 'tire-order' %}" novalidate class="modal fade needs-validation" id="order" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{% load get_forms %}
+{% get_tire_form as form %}
+
+<form method="POST" action="{% url 'tire-order' %}" novalidate class="modal fade needs-validation tire-order" id="order" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,12 +11,16 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-          {% crispy form %} 
+      <div class="modal-body" id="order-modal-body">
+          <div id="modal-form">
+            {% crispy form %} 
+          </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer"  id="order-modal-footer">
         <button type="button" class="btn btn-my-secondary" data-dismiss="modal">İmtina</button>
-        <button type="submit" class="btn btn-my-primary" id="order-btn">Sifariş et</button>
+        <button type="submit" class="btn btn-my-primary" id="order-btn">
+          <span>Sifariş et</span>
+        </button>
       </div>
     </div>
   </div>

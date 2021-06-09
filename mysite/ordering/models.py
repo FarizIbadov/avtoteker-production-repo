@@ -2,7 +2,7 @@ from django.db import models
 from tireapp.models import Tire
 from oilapp.models import Oil
 from django.utils import timezone
-from django.core.exceptions import ValidationError
+
 import re
 
 class Order(models.Model):
@@ -31,22 +31,6 @@ class Order(models.Model):
         else:
             return self.product_title
 
-    def clean(self):
-        phone_re = re.compile(r"\d+")
-        phone_re_split = re.compile(r"\s|-")
-        phone = self.phone
-
-        if phone.find('+') == 0:
-            phone = phone[1:]
-
-        phone = phone_re_split.split(phone)
-        phone = "".join(phone)
-
-        if not phone_re.search(phone):
-            raise ValidationError("Telefon Nömrə yanlışdı")
-
-        
-            
 
 class OilOrder(models.Model):
     PAYMENT_CHOICES = [
@@ -71,18 +55,3 @@ class OilOrder(models.Model):
             return '%s' % self.oil
         else:
             return self.product_title
-
-
-    def clean(self):
-        phone_re = re.compile(r"\d+")
-        phone_re_split = re.compile(r"\s|-")
-        phone = self.phone
-
-        if phone.find('+') == 0:
-            phone = phone[1:]
-
-        phone = phone_re_split.split(phone)
-        phone = "".join(phone)
-
-        if not phone_re.search(phone):
-            raise ValidationError("Telefon Nömrə yanlışdı")

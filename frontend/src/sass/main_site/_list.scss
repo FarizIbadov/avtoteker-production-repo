@@ -221,3 +221,17 @@
   max-width: 200px;
   height: 60px;
 }
+
+.comming-soon-container {
+  max-width: 210px;
+  width: 100%;
+  font-size: 16px;
+  align-items: center;
+
+  @include responsive(max, 800px) {
+    font-size: 14px;
+    background: linear-gradient(110deg, #ffbb00 0 55%, #dc3545 55% 100%);
+  }
+
+  background: linear-gradient(110deg, #ffbb00 0 53%, #dc3545 53% 100%);
+}

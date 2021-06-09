@@ -11,15 +11,12 @@ class OrderForm(forms.Form):
         (4,'BirKart / TamKart ilə'),
     ]
 
-    name = forms.CharField(max_length=20,label="Ad:")
-    quantity = forms.IntegerField(min_value=1,label="Say:",required=True)
-    payment_type = forms.ChoiceField(choices=PAYMENT_CHOICES,)
-    
-    def clean_quantity(self):
-        quantity = self.cleaned_data['quantity']
-        if quantity < 1:
-            raise forms.ValidationError("Ordering nothing?")
-        return quantity
+    name = forms.CharField(max_length=20,label="Ad:",required=False)
+    quantity = forms.IntegerField(min_value=1,label="Say:",required=True,widget=forms.NumberInput(attrs={"value": 1}))
+    payment_type = forms.ChoiceField(label="Ödənış üsulu:",choices=PAYMENT_CHOICES,required=True)
+    phone = forms.CharField(label="Mobil nömrəsi:",max_length=20,required=True)
+    tire = forms.IntegerField(min_value=0,widget=forms.HiddenInput())
+
 
     @property
     def helper(self):
@@ -40,21 +37,20 @@ class OrderForm(forms.Form):
         )
         return helper
 
-    class Meta:
-        exclude = ('is_purchased','order_date',)
-        widgets = {
-            "quantity": forms.NumberInput(),
-            "is_purchased": forms.HiddenInput(),
-            "tire": forms.HiddenInput(),
-        }
-        labels = {
-            "name":"Ad:",
-            "quantity":"Say:",
-            "payment_type":"Ödənış üsulu:",
-            "phone":"Mobil nömrəsi:"
-        }
-
 class OilOrderForm(forms.Form):
+    PAYMENT_CHOICES = [
+        (1,'Nağd'),
+        (2,'Kart ilə'),
+        (3,'BirKart / TamKart ilə'),
+    ]
+
+    name = forms.CharField(max_length=20,label="Ad:",required=False)
+    quantity = forms.IntegerField(min_value=1,label="Say:",required=True)
+    payment_type = forms.ChoiceField(label="Ödənış üsulu:",choices=PAYMENT_CHOICES,required=True)
+    phone = forms.CharField(label="Mobil nömrəsi:",max_length=20,required=True)
+    oil = forms.IntegerField(min_value=0,widget=forms.HiddenInput())
+    note = forms.CharField(label="İstəyinizi yazın:",widget=forms.Textarea,required=False)
+
     @property
     def helper(self):
         helper = FormHelper()
@@ -75,17 +71,3 @@ class OilOrderForm(forms.Form):
             ),
         )
         return helper
-
-    class Meta:
-        exclude = ('is_purchased','order_date',)
-        widgets = {
-            "quantity": forms.NumberInput(),
-            "is_purchased": forms.HiddenInput(),
-            "oil": forms.HiddenInput(),
-        }
-        labels = {
-            "name":"Ad:",
-            "payment_type":"Ödənış üsulu:",
-            "phone":"Mobil nömrəsi:",
-            "note": "İstəyinizi yazın:"
-        }

@@ -27,7 +27,6 @@
             {% for object in object_list %}
             <div class="main-list__col-12">
                 <section class="main-list__card">
-                    {% include "../components/main-site/coming-soon.html" with object=object detail=False %}
                     <div class="main-list__sub-row">
                         {% include "../components/main-site/side-info.html" with object=object %}
                             <img class="main-list__item-logo mb-1" src="{{object.brand.image.url}}" alt="{{object.brand}}">
@@ -87,6 +86,15 @@
                                     </div>  
                                     {% endif %}
                                 </div>
+                                {% if object.release_date %}
+                                <div class="mt-4 d-flex p-1 comming-soon-container">
+                                    <div class="flex-1 w-55
+                                     text-my-secondary text-center">Gözlənilir</div>
+                                    <div class="w-45  flex-1 text-light text-center">
+                                        {{object.release_date}}
+                                    </div>
+                                </div>
+                                {% endif %}
                                 {{ object|get_kredit_taksit|safe}}
                             </div>
                         </div>
