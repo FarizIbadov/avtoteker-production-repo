@@ -66,7 +66,7 @@ class OrderForm {
         orderModalFooter.classList.remove("d-none");
       })
       .catch(e => {
-        console.log(e.response.data);
+        // console.log(e.response.data);
         this.removeSpinner();
         modalForm!.classList.remove("d-none");
         orderModalFooter.classList.remove("d-none");

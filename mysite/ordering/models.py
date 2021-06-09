@@ -2,6 +2,7 @@ from django.db import models
 from tireapp.models import Tire
 from oilapp.models import Oil
 from django.utils import timezone
+import uuid
 
 import re
 
@@ -13,6 +14,7 @@ class Order(models.Model):
         (4,'BirKart / TamKart ilə'),
     ]
 
+    uuid = models.UUIDField(blank=True,null=True)
     name = models.CharField(max_length=20,null=True,blank=True)
     tire = models.ForeignKey(Tire,on_delete=models.CASCADE,null=True)
     product_title = models.CharField(blank=True,max_length=50)
@@ -31,6 +33,11 @@ class Order(models.Model):
         else:
             return self.product_title
 
+    def save(self):
+        if not self.uuid:
+            self.uuid = uuid.uuid4()
+        super().save()
+
 
 class OilOrder(models.Model):
     PAYMENT_CHOICES = [
@@ -39,6 +46,7 @@ class OilOrder(models.Model):
         (3,'BirKart / TamKart ilə'),
     ]
 
+    uuid = models.UUIDField(blank=True,null=True)
     name = models.CharField(max_length=20,null=True,blank=True)
     oil = models.ForeignKey(Oil,on_delete=models.CASCADE,null=True)
     product_title = models.CharField(blank=True,max_length=50)
@@ -55,3 +63,8 @@ class OilOrder(models.Model):
             return '%s' % self.oil
         else:
             return self.product_title
+
+    def save(self):
+        if not self.uuid:
+            self.uuid = uuid.uuid4()
+        super().save()

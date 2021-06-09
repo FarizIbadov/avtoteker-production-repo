@@ -27,7 +27,7 @@ elif ALLOWED_HOSTS_ENV:
 if DEBUG:
     CORS_ALLOWED_ORIGINS = ['http://localhost:3000','http://localhost:8000']
 else:
-    CORS_ALLOWED_ORIGINS = ALLOWED_HOSTS.copy()
+    CORS_TRUSTED_ORIGINS = ALLOWED_HOSTS.copy()
 
 # Application definition
 
