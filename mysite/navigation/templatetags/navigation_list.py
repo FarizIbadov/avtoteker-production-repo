@@ -1,8 +1,12 @@
 from django import template
-from navigation.models import NavigationLink
+from navigation import models 
 
 register = template.Library()
 
 @register.simple_tag(name="get_navigation_list")
 def get_navigation_list():
-    return NavigationLink.objects.filter(deleted=False)
+    return models.NavigationLink.objects.filter(active=True)
+
+@register.simple_tag(name="get_logo")
+def get_logo():
+    return models.Logo.objects.filter(active=True).first()

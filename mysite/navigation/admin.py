@@ -1,8 +1,11 @@
 from django.contrib import admin
-from .models import NavigationLink
-from utils.admin import CustomModelAdmin
+from . import models
 
-@admin.register(NavigationLink)
-class NavigationLinkAdmin(CustomModelAdmin):
+@admin.register(models.NavigationLink)
+class NavigationLinkAdmin(admin.ModelAdmin):
     list_display = ('title','link')
-    ordering = ('deleted','order_number')
+    ordering = ('order_number',)
+
+@admin.register(models.Logo)
+class LogoAdmin(admin.ModelAdmin):
+    list_display = ('get_name','active')
