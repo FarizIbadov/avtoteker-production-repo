@@ -1,5 +1,7 @@
 {% load static %}
+{% load navigation_list %}
+{% get_logo as logo %}
 
-<svg class="logo {{class}}">
-    <use xlink:href="{% static 'img/logo.svg' %}#Logo"/>
-</svg>
+<div class="{{class}}">
+    <img class="w-100 object-fit-contain" src="{{ logo }}" alt="logo">
+</div>

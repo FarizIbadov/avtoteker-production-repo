@@ -7,16 +7,20 @@ from .resources import OilOrderResource,TireOrderResource
 
 @admin.register(Order)
 class OrderAdmin(ExportMixin,admin.ModelAdmin):
-    readonly_fields = ['product','email','phone_number','payment_type','name']
+    readonly_fields = ['customer_id','product','email','phone_number','payment_type','name']
     list_filter = ['remember_me']
     list_display = ['order_title']
-    exclude = ['phone','tire','product_title','product_link','order_title']
+    exclude = ['uuid','phone','tire','product_title','product_link','order_title']
+    search_fields = ("uuid",)
 
     resource_class = TireOrderResource
 
     def phone_number(self,obj:Order):
         link = "<a href='tel:%s'>%s</a>" % (obj.phone,obj.phone)
         return format_html(link) 
+
+    def customer_id(self,obj):
+        return obj.uuid if obj.uuid else "-" 
     
     def product(self,obj:Order):
         title = self.order_title(obj)
@@ -47,6 +51,9 @@ class OilOrderAdmin(ExportMixin,admin.ModelAdmin):
     def phone_number(self,obj:OilOrder):
         link = "<a href='tel:%s'>%s</a>" % (obj.phone,obj.phone)
         return format_html(link) 
+
+    def customer_id(self,obj):
+        return obj.uuid if obj.uuid else "-" 
     
     def product(self,obj:OilOrder):
         title = self.order_title(obj)
