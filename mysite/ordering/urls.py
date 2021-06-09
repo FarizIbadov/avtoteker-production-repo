@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import OrderCreateView,OilOrderCreateView
+from .views import OilOrderAPIView,TireOrderAPIView
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
-    path("",OrderCreateView.as_view(),name="tire-order"),
-    path("oil/",OilOrderCreateView.as_view(),name="oil-order"),
+    path("tire/",TireOrderAPIView.as_view(),name="tire-order"),
+    path("oil/",OilOrderAPIView.as_view(),name="oil-order"),
 ]

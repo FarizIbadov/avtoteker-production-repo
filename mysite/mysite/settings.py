@@ -15,8 +15,6 @@ SECRET_KEY = os.environ.get("SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get("DEBUG"), 2))
-# TEMPLATE_DEBUG = True
-# DEBUG = True
 
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS_ENV = os.environ.get("ALLOWED_HOSTS")
@@ -25,6 +23,11 @@ if DEBUG:
 elif ALLOWED_HOSTS_ENV:
     ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(","))
 
+ 
+if DEBUG:
+    CORS_ALLOWED_ORIGINS = ['http://localhost:3000','http://localhost:8000']
+else:
+    CORS_ALLOWED_ORIGINS = ALLOWED_HOSTS.copy()
 
 # Application definition
 
@@ -54,6 +57,7 @@ INSTALLED_APPS = [
     "ckeditor",
     'ckeditor_uploader',
     "rest_framework",
+    "corsheaders",
     "oilapp.apps.OilappConfig",
     "campaign",
     "news",
@@ -74,6 +78,7 @@ CKEDITOR_CONFIGS = {
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
