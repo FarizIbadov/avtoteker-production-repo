@@ -31,15 +31,9 @@
         {% endif %}
 
         <div class="main-list__sub-row--2 px-4">
-          <div class="main-list__col-sm">
-            {#{% include "../components/main-site/list-item-image.html" with object=object %}#}
-            <img
-              data-toggle="modal" data-target="#imagePreview"
-              src="{{object.get_image_url}}"
-              class="main-list__img"
-              alt="{{object.brand}}"
-              />
-          </div>
+          
+          {% include "../components/product-image.html" with object=object %}
+          
           <div class="main-list__col-sm--2 w-35">
             <div class="main-list__card-body">
                 <h4 class="main-list__card-text text-right mt-2">
@@ -79,16 +73,18 @@
                   </div>  
                 {% endif %}
               </div>
+              
+            </div>
+          </div>
+          <div class="row justify-content-end no-gutters ml-auto">
+           
+              {% include "../components/sticker-carousel.html" with object=object %}
+           
+            <div class="col-12">
               {{ object|get_kredit_taksit|safe }} 
             </div>
           </div>
           <div class="main-list__btn-box d-flex align-items-center">
-            <!-- <button
-              type="button"
-              class="detail-cart-btn mr-2"
-            >
-              {% include "../components/main-site/cart.html" %}
-            </button> -->
             <button type="button" data-toggle="modal"
               data-target="#order" class="main-list__cart-btn detail-mb oil-button"
               data-max="{{object.quantity}}"
