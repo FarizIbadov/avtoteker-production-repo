@@ -8,3 +8,11 @@ interface Field {
   id: string;
   type: NumberConstructor | StringConstructor;
 }
+
+interface ErrorData {
+  [key: string]: string[];
+}
+
+interface OrderResult {
+  [key: string]: string;
+}

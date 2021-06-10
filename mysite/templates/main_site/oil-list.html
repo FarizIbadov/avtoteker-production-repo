@@ -32,28 +32,10 @@
                            <img class="main-list__item-logo mb-1" src="{{object.serie.logo.url}}" alt="{{object.serie}}"> 
                     </div>
                     {% endif %}
-                    <!-- <h4 class="main-list__card-text text-right pr-4 mt-2">
-                        {{object.serie}} <span class="text-danger">{{object.viscosity}}</span>
-                    </h4> -->
-                    <!-- <p class="text-right pr-4 mb-0 mt-1">
-                        {{object.volume}} 
-                        <span class="text-danger">{{object.oil_type}}</span>
-                        <span class="text-danger">{{object.fuel}}</span>
-                    </p>
-                    <p class="text-right pr-4">
-                        {{object.des1}}
-                    </p> -->
+                  
                     <h4 class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</h4>
                     <div class="main-list__sub-row--2">
-                        <div class="main-list__col-sm">
-                            <!-- {% include "../components/main-site/list-item-image.html" with object=object.serie %} -->
-                            <img
-                                data-toggle="modal" data-target="#imagePreview"
-                                src="{{object.get_image_url}}"
-                                class="main-list__img"
-                                alt="{{object.brand}}"
-                                />
-                        </div>
+                        {% include "../components/product-image.html" with object=object %}
                         <div class="main-list__col-sm--2 w-40">
                             <div class="main-list__card-body">
                                 <h4 class="main-list__card-text text-right mt-2">
@@ -95,7 +77,14 @@
                                     {% endif %}
 
                                 </div>
-                                {{ object|get_kredit_taksit|safe }} 
+                            </div>
+                        </div>
+                        <div class="row justify-content-end no-gutters ml-auto">
+           
+                            {% include "../components/sticker-carousel.html" with object=object %}
+                        
+                            <div class="col-12">
+                            {{ object|get_kredit_taksit|safe }} 
                             </div>
                         </div>
                         <div class="main-list__btn-box d-flex align-items-center">

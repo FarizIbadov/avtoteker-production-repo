@@ -1,0 +1,11 @@
+{% load navigation_list %}
+{% get_logo as logo %}
+
+<div class="main-list__col-sm" data-toggle="modal" data-target="#imagePreview">
+    <img
+        src="{{object.get_image}}"
+        class="main-list__img"
+        alt="{{object.brand}}"
+    />
+    <img class="modal-logo" src="{{ logo }}" src="logo"/>
+</div>
