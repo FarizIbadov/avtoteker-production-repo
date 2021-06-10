@@ -33,10 +33,12 @@ class Order(models.Model):
         else:
             return self.product_title
 
-    def save(self):
+    def save(self,force_insert=False, force_update=False, using=None,
+             update_fields=None):
         if not self.uuid:
             self.uuid = uuid.uuid4()
-        super().save()
+        super().save(force_insert, force_update, using,
+             update_fields)
 
 
 class OilOrder(models.Model):
@@ -64,7 +66,9 @@ class OilOrder(models.Model):
         else:
             return self.product_title
 
-    def save(self):
+    def save(self,force_insert=False, force_update=False, using=None,
+             update_fields=None):
         if not self.uuid:
             self.uuid = uuid.uuid4()
-        super().save()
+        super().save(force_insert, force_update, using,
+             update_fields)
