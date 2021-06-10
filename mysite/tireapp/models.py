@@ -184,6 +184,8 @@ class Tire(CustomModel):
     albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES,blank=True)
     kredit = models.PositiveSmallIntegerField(choices=KREDIT_CHOICES,blank=True)
 
+    stickers = models.CharField(max_length=100,blank=True)
+
     def get_tire_info(self):
         return "%s - %s - %s - %s" % (
             self.brand,
@@ -205,6 +207,8 @@ class Tire(CustomModel):
             "detail", kwargs={"pk":self.pk,"slug":self.get_slug()}
         )
         
+    def get_image(self):
+        return self.serie.get_image()
 
     # def get_edit_url(self):
     #     return reverse(

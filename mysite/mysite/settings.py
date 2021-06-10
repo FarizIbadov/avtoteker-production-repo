@@ -32,6 +32,26 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    "adds.apps.AddsConfig",
+    "copyright.apps.CopyrightConfig",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+
+    "ckeditor",
+    'ckeditor_uploader',
+    "rest_framework",
+    "colorfield",
+    "corsheaders",
+    "django_cleanup.apps.CleanupConfig",
+    "crispy_forms",
+    "import_export",
+
     "social.apps.SocialConfig",
     "ordering.apps.OrderingConfig",
     # "custom_admin.apps.CustomAdminConfig",
@@ -41,29 +61,13 @@ INSTALLED_APPS = [
     "wheel_size.apps.WheelSizeConfig",
     "faviconapp.apps.FaviconappConfig",
     "metaapp.apps.MetaappConfig",
-    "adds.apps.AddsConfig",
-    "copyright.apps.CopyrightConfig",
-    "django_cleanup.apps.CleanupConfig",
-    "crispy_forms",
-    "import_export",
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    'django.contrib.sites',
-    'django.contrib.sitemaps',
-    "ckeditor",
-    'ckeditor_uploader',
-    "rest_framework",
-    "corsheaders",
     "oilapp.apps.OilappConfig",
     "campaign",
     "news",
     'navigation',
     "kredit",
-    "kredit_taksit"
+    "kredit_taksit",
+    "sticker"
 ]
 
 SITE_ID = 1
@@ -193,19 +197,19 @@ CKEDITOR_UPLOAD_PATH = "ck_uploads"
 
 LOGGING = None
 
-if not DEBUG:
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'handlers': {
-            'console': {
-                'class': 'logging.StreamHandler',
-            },
-        },
-        'loggers': {
-            'django': {
-                'handlers': ['console'],
-                'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-            },
-        },
-    }
+# if not DEBUG:
+#     LOGGING = {
+#         'version': 1,
+#         'disable_existing_loggers': False,
+#         'handlers': {
+#             'console': {
+#                 'class': 'logging.StreamHandler',
+#             },
+#         },
+#         'loggers': {
+#             'django': {
+#                 'handlers': ['console'],
+#                 'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+#             },
+#         },
+#     }

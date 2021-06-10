@@ -127,6 +127,7 @@ class OilResource(resources.ModelResource):
             "taksit_9_active",
             "taksit_12",
             "taksit_12_active",
+            'stickers'
         )
 
         skip_unchanged = True

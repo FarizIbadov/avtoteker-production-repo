@@ -142,7 +142,9 @@ class Oil(CustomModel):
     bolkart = models.PositiveSmallIntegerField(choices=BOLKART_CHOICES,blank=True)
     albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES,blank=True)
 
-    def get_image_url(self):
+    stickers = models.CharField(max_length=100,blank=True)
+
+    def get_image(self):
         if self.image:
             return self.image.url
         return self.image_url

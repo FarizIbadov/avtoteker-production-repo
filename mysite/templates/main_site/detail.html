@@ -36,9 +36,9 @@
         </p>
 
         <div class="main-list__sub-row--2 px-4">
-          <div class="main-list__col-sm">
-            {% include "../components/main-site/list-item-image.html" with object=object %}
-          </div>
+          
+          {% include "../components/product-image.html" with object=object %}
+          
           <div class="main-list__col-sm--2 w-35">
             <div class="main-list__card-body">
               <div class="main-list__card-text--2 detail-font-larger">
@@ -85,8 +85,32 @@
                   </div>  
                 {% endif %}
               </div>
-              {{ object|get_kredit_taksit|safe }} 
+             
             </div>
+          </div>
+          <div class="row justify-content-end ml-auto no-gutters">
+              {% if object.release_date %}
+                <div class="col-12 mt-4 d-flex p-1 comming-soon-container comming-soon-container--1">
+                    <div class="flex-1 w-55
+                    text-my-secondary text-center">Gözlənilir</div>
+                    <div class="w-45  flex-1 text-light text-center">
+                        {{object.release_date}}
+                    </div>
+                </div>
+                {% elif object.new %}
+                    <div class="col-12 mt-4 d-flex p-1 
+                    justify-content-between comming-soon-container comming-soon-container--2">
+                        <div class="w-68
+                        text-my-secondary  text-center">Artıq satışda!</div>
+                        <div class="w-32  text-light text-center">
+                            Yeni
+                        </div>
+                    </div>
+                    {% include "../components/sticker-carousel.html" with object=object %}
+                {% endif %}
+              <div> 
+                  {{ object|get_kredit_taksit|safe}}
+              </div>
           </div>
           <div class="main-list__btn-box">
             <button type="button" data-toggle="modal"
@@ -111,6 +135,7 @@
       </div>
     </div>
   </div>
+  {% include "../components/sticker-descriptions.html" with object=object %}
   {% if object.kredit_active or object.taksit_active %}
   <div class="row mb-5 mt-2">
     <ul class="col-md-12 nav nav-tabs nav-justified px-0" id="myTab" role="tablist">

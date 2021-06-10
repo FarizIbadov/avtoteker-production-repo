@@ -273,7 +273,8 @@ class TireResource(resources.ModelResource):
             "tamkart",
             "bolkart",
             "albalikart",
-            "kredit"
+            "kredit",
+            "stickers"
         )
         skip_unchanged = True
 

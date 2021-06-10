@@ -48,14 +48,14 @@ def get_kredit_taksit(value):
 def get_template(items):
     carousel_container = """
         <div id="carouselExampleSlidesOnly" class="carousel slide taksit-kredit-container mt-3" data-ride="carousel">
-            <div class="carousel-inner h-100">
+            <div class="carousel-inner h-100 kredit-taksit-item ">
                 %s        
             </div>
         </div> 
     """
 
     carousel_item = """
-        <div class="carousel-item %s kredit-taksit-item w-100 h-100" data-interval="%s">
+        <div class="carousel-item %s h-100 w-100" data-interval="%s">
             <div class="d-flex align-items-center justify-content-end h-100">
                 <figure class="kredit-taksit-fig mr-2 d-flex h-100" >
                     <img src="%s">

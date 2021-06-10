@@ -1,11 +1,11 @@
 from django.contrib import admin
 from import_export.admin import ExportMixin
-from .models import Order,OilOrder
+from . import models
 from django.utils.html import format_html
 from .resources import OilOrderResource,TireOrderResource
 
 
-@admin.register(Order)
+@admin.register(models.Order)
 class OrderAdmin(ExportMixin,admin.ModelAdmin):
     readonly_fields = ['customer_id','product','email','phone_number','payment_type','name']
     list_filter = ['remember_me']
@@ -15,20 +15,20 @@ class OrderAdmin(ExportMixin,admin.ModelAdmin):
 
     resource_class = TireOrderResource
 
-    def phone_number(self,obj:Order):
+    def phone_number(self,obj):
         link = "<a href='tel:%s'>%s</a>" % (obj.phone,obj.phone)
         return format_html(link) 
 
     def customer_id(self,obj):
         return obj.uuid if obj.uuid else "-" 
     
-    def product(self,obj:Order):
+    def product(self,obj):
         title = self.order_title(obj)
 
         link = "<a href='%s'>%s</a>" % (obj.product_link,title)
         return format_html(link)
 
-    def order_title(self,obj:Order):
+    def order_title(self,obj):
         title = ""
         tire = obj.tire
         if tire:
@@ -38,7 +38,7 @@ class OrderAdmin(ExportMixin,admin.ModelAdmin):
 
         return title
 
-@admin.register(OilOrder)
+@admin.register(models.OilOrder)
 class OilOrderAdmin(ExportMixin,admin.ModelAdmin):
     readonly_fields = ['product','email','phone_number','payment_type','name']
     list_filter = ['remember_me']
@@ -48,20 +48,20 @@ class OilOrderAdmin(ExportMixin,admin.ModelAdmin):
     resource_class = OilOrderResource
 
 
-    def phone_number(self,obj:OilOrder):
+    def phone_number(self,obj):
         link = "<a href='tel:%s'>%s</a>" % (obj.phone,obj.phone)
         return format_html(link) 
 
     def customer_id(self,obj):
         return obj.uuid if obj.uuid else "-" 
     
-    def product(self,obj:OilOrder):
+    def product(self,obj):
         title = self.order_title(obj)
 
         link = "<a href='%s'>%s</a>" % (obj.product_link,title)
         return format_html(link)
 
-    def order_title(self,obj:OilOrder):
+    def order_title(self,obj):
         title = ""
         oil = obj.oil
         if oil:
@@ -70,3 +70,7 @@ class OilOrderAdmin(ExportMixin,admin.ModelAdmin):
             title = obj.product_title
 
         return title
+
+@admin.register(models.Result)
+class ResultAdmin(admin.ModelAdmin):
+    list_display = ("head",'order_type')

@@ -34,14 +34,7 @@
                     <h4 class="main-list__card-text text-right pr-4">{{object.serie}}</h4>
                     <h4 class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</h4>
                     <div class="main-list__sub-row--2">
-                        <div class="main-list__col-sm">
-                            <img
-                                data-toggle="modal" data-target="#imagePreview"
-                                src="{{object.serie.get_image}}"
-                                class="main-list__img"
-                                alt="{{object.brand}}"
-                                />
-                        </div>
+                        {% include "../components/product-image.html" with object=object %}
                         <div class="main-list__col-sm--2 w-40">
                             <div class="main-list__card-body">
                                 <div class="main-list__card-text--2">
@@ -64,7 +57,7 @@
                                     {% include "../components/main-site/image.html" with object=object.brand.country %}
                                     {% include "../components/main-site/image.html" with object=object.manufacturer %}
                                 </div>
-                                <div class="main-list__price-info mr-1">
+                                <div class="main-list__price-info mt-md-5 mr-1">
                                     {% if object.sale_active %}
                                     <div class="price">
                                         <span class="red-line-trought  font-larger--2 opacity-8">
@@ -86,15 +79,29 @@
                                     </div>  
                                     {% endif %}
                                 </div>
-                                {% if object.release_date %}
-                                <div class="mt-4 d-flex p-1 comming-soon-container">
-                                    <div class="flex-1 w-55
-                                     text-my-secondary text-center">Gözlənilir</div>
-                                    <div class="w-45  flex-1 text-light text-center">
-                                        {{object.release_date}}
+                            </div>
+                        </div>
+                        <div class="row justify-content-end w-100 no-gutters">
+                            {% if object.release_date %}
+                            <div class="col-12 mt-4 d-flex p-1 comming-soon-container comming-soon-container--1">
+                                <div class="flex-1 w-55
+                                text-my-secondary text-center">Gözlənilir</div>
+                                <div class="w-45  flex-1 text-light text-center">
+                                    {{object.release_date}}
+                                </div>
+                            </div>
+                            {% elif object.new %}
+                                <div class="col-12 mt-4 d-flex p-1 
+                                justify-content-between comming-soon-container comming-soon-container--2">
+                                    <div class="w-68
+                                    text-my-secondary  text-center">Artıq satışda!</div>
+                                    <div class="w-32  text-light text-center">
+                                        Yeni
                                     </div>
                                 </div>
-                                {% endif %}
+                                {% include "../components/sticker-carousel.html" with object=object %}
+                            {% endif %}
+                            <div class="col-12"> 
                                 {{ object|get_kredit_taksit|safe}}
                             </div>
                         </div>
