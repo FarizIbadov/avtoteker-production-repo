@@ -106,8 +106,8 @@
                             Yeni
                         </div>
                     </div>
+                    {% endif %}
                     {% include "../components/sticker-carousel.html" with object=object %}
-                {% endif %}
               <div> 
                   {{ object|get_kredit_taksit|safe}}
               </div>
