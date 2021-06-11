@@ -7,6 +7,7 @@ class Sticker(models.Model):
     image = models.ImageField(upload_to="sticker")
     image_width = models.FloatField(default=50)
     text = models.CharField(max_length=20)
+    text_font = models.PositiveSmallIntegerField(default=16)
     text_width = models.FloatField(default=50)
     active = models.BooleanField(default=True)
 

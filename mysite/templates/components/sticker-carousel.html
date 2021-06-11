@@ -1,24 +1,16 @@
 {% load sticker %}
-{% get_stickers object as stickers %}
 {% get_sticker_timer as timer %}
 
-{% if stickers %}
-<div class="col-12">
-    <div id="carouselExampleSlidesOnly" class="carousel slide sticker-container ml-auto mt-4" data-ride="carousel">
+{% if object.stickers.all %}
+<div class="col-12 my-3">
+    <div id="carouselExampleSlidesOnly" class="carousel slide sticker-container ml-auto" data-ride="carousel">
         <div class="carousel-inner h-100">
-            {% for sticker in stickers %}
-                
+            {% for sticker in object.stickers.all %}
+                {% if sticker.active %}
                     <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %} h-100 w-100" data-interval="{{ timer }}">
-                        <div class="d-flex align-items-center justify-content-end w-100 h-100">
-                            <div class="h-100" style="width: {{ sticker.image_width }}% !important;background-color: {{sticker.color}}">
-                                <img class="w-100 h-100 object-fit-contain" src="{{ sticker.image.url }}" alt="{{ sticker.text }}">
-                            </div>
-                            <div class="p-1 bg-danger text-light text-center" style="width: {{ sticker.text_width }}% !important;">
-                                {{ sticker.text }}
-                            </div>
-                        </div>
+                        {% include "./sticker.html" with sticker=sticker %}
                     </div>
-                
+                {% endif %}
             {% endfor %}        
         </div>
     </div> 
