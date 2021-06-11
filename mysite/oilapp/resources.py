@@ -5,7 +5,11 @@ from .models import Oil
 
 class OilResource(resources.ModelResource):
     def get_queryset(self):
-        return self.Meta.model.objects.all().order_by("id")
+        return Tire.objects.all()
+    
+    def export(self,queryset,*args,**kwargs):
+        tires = Tire.objects.available()
+        return super().export(tires,*args,**kwargs)
     
     def before_import(self,dataset, using_transactions, dry_run, **kwargs):
         imported_ids = []
@@ -15,11 +19,6 @@ class OilResource(resources.ModelResource):
             filtered_ids = list(filter(None,imported_ids))
             models = self.Meta.model.objects.all().exclude(id__in=filtered_ids)
             models.delete()
-
-
-    def save_instance(self, instance, using_transactions=True, dry_run=False):
-        if not dry_run:
-            super().save_instance(instance, using_transactions, dry_run)
             
     brand = fields.Field(
         attribute="brand",
@@ -127,7 +126,8 @@ class OilResource(resources.ModelResource):
             "taksit_9_active",
             "taksit_12",
             "taksit_12_active",
-            'stickers'
+            'stickers',
+            "campaigns"
         )
 
         skip_unchanged = True

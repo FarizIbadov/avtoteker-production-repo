@@ -6,6 +6,9 @@ from django.core.exceptions import ValidationError
 from specific.models import Country
 from utils.models import CustomModel
 
+from sticker.models import Sticker
+from campaign.models import Post
+
 class Brand(CustomModel):
     title = models.CharField(max_length=50)
     country = models.ForeignKey(
@@ -142,7 +145,10 @@ class Oil(CustomModel):
     bolkart = models.PositiveSmallIntegerField(choices=BOLKART_CHOICES,blank=True)
     albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES,blank=True)
 
-    stickers = models.CharField(max_length=100,blank=True)
+    stickers = models.ManyToManyField(Sticker,related_name='oils',blank=True)
+    campaigns = models.ManyToManyField(Post,related_name="oils",blank=True)
+
+    
 
     def get_image(self):
         if self.image:

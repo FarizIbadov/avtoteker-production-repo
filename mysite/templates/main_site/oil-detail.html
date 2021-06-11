@@ -34,7 +34,7 @@
           
           {% include "../components/product-image.html" with object=object %}
           
-          <div class="main-list__col-sm--2 w-35">
+          <div class="main-list__col-sm--2 w-35 mb-5">
             <div class="main-list__card-body">
                 <h4 class="main-list__card-text text-right mt-2">
                     {{object.serie}} <span class="text-danger">{{object.viscosity}}</span>
@@ -77,8 +77,8 @@
             </div>
           </div>
           <div class="row justify-content-end no-gutters ml-auto">
-           
-              {% include "../components/sticker-carousel.html" with object=object %}
+            {% include "../components/sticker-carousel.html" with object=object %}
+            {% include "../components/campaign-descriptions.html" with object=object %}
            
             <div class="col-12">
               {{ object|get_kredit_taksit|safe }} 

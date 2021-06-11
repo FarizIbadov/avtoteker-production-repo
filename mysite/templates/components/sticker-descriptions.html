@@ -1,30 +1,22 @@
 {% load sticker %}
-{% get_stickers object as stickers %}
 
-{% if stickers %}
-<div class="mb-5">
+{% if object.stickers.all %}
+<section class="mb-5">
     <h2 class="text-center">Hədiyyələr və güzəştlər</h2>
     <hr>
-    {% for sticker in stickers %}
-        <div class="container px-0 pb-3">
-            <div class="row no-gutters mb-4">
-                <div class="col-12">
-                    <div class="sticker-container">
-                        <div class="d-flex align-items-center justify-content-end w-100 h-100">
-                            <div class="h-100" style="width: {{ sticker.image_width }}% !important;background-color: {{sticker.color}}">
-                                <img class="w-100 h-100 object-fit-contain" src="{{ sticker.image.url }}" alt="{{ sticker.text }}">
-                            </div>
-                            <div class="p-1 bg-danger text-light text-center" style="width: {{ sticker.text_width }}% !important;">
-                                {{ sticker.text }}
-                            </div>
-                        </div>
+    {% for sticker in object.stickers.all %}
+        {% if sticker.active %}
+            <div class="container px-0 pb-3">
+                <div class="row no-gutters mb-4">
+                    <div class="col-12">
+                        {% include "./sticker.html" with sticker=sticker %}
+                    </div>
+                    <div class="col-12 mt-3">
+                        {{sticker.get_content|safe}}
                     </div>
                 </div>
-                <div class="col-12 mt-3">
-                    {{sticker.get_content|safe}}
-                </div>
             </div>
-        </div>
+        {% endif %}
     {% endfor %}
-</div>
+</section>
 {% endif %}

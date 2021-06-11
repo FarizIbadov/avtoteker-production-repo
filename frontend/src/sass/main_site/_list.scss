@@ -196,17 +196,13 @@
 
 .kredit-taksit-item {
   font-size: 16px;
-  width: 250px !important;
+  width: 220px !important;
   margin-left: auto;
 }
 
 .kredit-taksit-fig {
   @include square(60px);
   margin-bottom: 0;
-
-  @include responsive(max, 768px) {
-    @include square(45px);
-  }
 
   & > img {
     width: 100%;
@@ -216,7 +212,7 @@
 }
 
 .kredit-taksit-container {
-  width: 250px !important;
+  width: 220px !important;
   height: 60px;
 }
 
