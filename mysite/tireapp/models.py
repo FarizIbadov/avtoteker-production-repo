@@ -9,6 +9,8 @@ from ckeditor.fields import RichTextField
 from django.core.exceptions import ValidationError
 from django.core.files import File
 from utils.models import CustomModel
+from sticker.models import Sticker
+from campaign.models import Post
 
 class Size(CustomModel):
     width = models.CharField(max_length=10, null=True)
@@ -184,7 +186,8 @@ class Tire(CustomModel):
     albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES,blank=True)
     kredit = models.PositiveSmallIntegerField(choices=KREDIT_CHOICES,blank=True)
 
-    stickers = models.CharField(max_length=100,blank=True)
+    stickers = models.ManyToManyField(Sticker,related_name='tires',blank=True)
+    campaigns = models.ManyToManyField(Post,related_name="tires",blank=True)
 
     def get_tire_info(self):
         return "%s - %s - %s - %s" % (

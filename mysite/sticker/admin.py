@@ -11,7 +11,7 @@ class StickerAdmin(admin.ModelAdmin):
     fields = (
         'color',
         'image',
-        'text',
+        ('text','text_font'),
         ('image_width','image_width_num'),
         ('text_width','text_width_num'),
         'description',

@@ -1,0 +1,40 @@
+{% load campaign %}
+
+{% if object.campaigns.all %}
+<section class="mb-5">
+    <h2 class="text-center">Kampaniyalar</h2>
+    <hr>
+    {% for campaign in object.campaigns.all %}
+        
+        {% if campaign.active %}
+            <article class="pb-3">
+                {% for sticker in campaign.stickers.all %}
+                    {% if forloop.counter0 == 0 %}
+                        {% if sticker.active %}
+                            <div class="mb-4">
+                                {% include "./sticker.html" with sticker=sticker %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <div class="mb-4">
+                    <a class="text-decoration-none" href="{% url 'campaign-detail' campaign.pk %}">{{campaign.title|safe}}</a>
+                    {{campaign.description|truncatechars_html:campaign.truncate|safe}}
+                </div>
+
+                {% for sticker in campaign.stickers.all %}
+                    {% if not forloop.counter0 == 0 %}
+                        {% if sticker.active %}
+                            <div class="mb-4">
+                                {% include "./sticker.html" with sticker=sticker %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {{campaign.extra_2|safe}}
+            </article>
+            <hr>
+        {% endif %}
+    {% endfor %}
+</section>
+{% endif %}
