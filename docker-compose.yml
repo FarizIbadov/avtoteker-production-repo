@@ -1,8 +1,16 @@
 version: "3.8"
 
 services:
+  wheel-size:
+    restart: always
+    container_name: avto-node-ws
+    build:
+      context: ./node
+    environment:
+      - WHEEL_SIZE_KEY=5f0e624a880add6bc70e73f774ae3db6
+
   web:
-    restart: on-failure
+    restart: always
     container_name: avtoteker-web
     build: .
     volumes:
@@ -18,6 +26,7 @@ services:
       - db
 
   proxy:
+    restart: always
     container_name: avtoteker-proxy
     build:
       context: ./proxy
@@ -25,11 +34,12 @@ services:
       - static_data:/vol/static
     ports:
       - "80:8080"
-      - "443:8080"
+      - "443:8443"
     depends_on:
       - web
 
   db:
+    restart: always
     container_name: avtoteker-db
     image: postgres:12.5-alpine
     environment:
