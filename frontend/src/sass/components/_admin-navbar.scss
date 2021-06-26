@@ -1,0 +1,46 @@
+.admin-navbar {
+  @extend .navbar, .navbar-expand-lg, .navbar-light, .bg-my-primary;
+  font-size: 1.1rem;
+
+  &__logo {
+    @extend .navbar-brand;
+    width: 180px;
+    height: 50px;
+  }
+
+  &__toggler {
+    @extend .navbar-toggler;
+  }
+
+  &__toggler-icon {
+    @extend .navbar-toggler-icon;
+  }
+
+  &__collapse {
+    @extend .p-2;
+  }
+
+  &__nav {
+    @extend .navbar-nav;
+
+    &--rigth {
+      @extend .mr-auto;
+    }
+
+    &--left {
+      @extend .ml-auto;
+    }
+  }
+
+  &__item {
+    @extend .nav-item;
+  }
+
+  &__link {
+    @extend .nav-link;
+  }
+
+  &__btn {
+    @extend .btn, .btn-my-secondary, .d-inline-block, .p-2;
+  }
+}

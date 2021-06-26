@@ -1,0 +1,9 @@
+.main-container {
+  @extend .d-flex, .flex-column;
+  margin-top: 80px !important;
+  min-height: 100vh !important;
+
+  &__body {
+    flex: 1;
+  }
+}

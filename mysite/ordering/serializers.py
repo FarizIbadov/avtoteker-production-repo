@@ -1,5 +1,8 @@
+from django.core.mail import send_mail
+from django.conf import settings
 from rest_framework import serializers
 from . import models
+from emailapp.models import AuthUser,Email
 import phonenumbers
 
 class OilOrderSerializer(serializers.ModelSerializer):
@@ -13,6 +16,26 @@ class OilOrderSerializer(serializers.ModelSerializer):
         except phonenumbers.NumberParseException:
             raise serializers.ValidationError("Telefon Nömrə yanlışdı")
             
+    def save(self, **kwargs):
+        instance = super().save(**kwargs)
+        self.perform_email_send(instance)
+        return instance
+
+    
+    def perform_email_send(self,instance):
+        auth_user = AuthUser.objects.filter(active=True).first()
+        if auth_user:
+            recipient_list = Email.objects.all().values_list("email",flat=True)
+            kwargs = {
+                "fail_silently": not settings.DEBUG,
+                "subject": "Order",
+                "message": "OK",
+                "auth_user": auth_user.email,
+                "auth_password": auth_user.password,
+                "from_email": auth_user.email,
+                "recipient_list": list(recipient_list)
+            }
+            send_mail(**kwargs)
         
 
     def validate_payment_type(self,value):
@@ -50,6 +73,26 @@ class TireOrderSerializer(serializers.ModelSerializer):
             return value
         except phonenumbers.NumberParseException:
             raise serializers.ValidationError("Telefon Nömrə yanlışdı")
+
+    def save(self, **kwargs):
+        instance = super().save(**kwargs)
+        self.perform_email_send(instance)
+        return instance
+
+    def perform_email_send(self,instance):
+        auth_user = AuthUser.objects.filter(active=True).first()
+        if auth_user:
+            recipient_list = Email.objects.all().values_list("email",flat=True)
+            kwargs = {
+                "fail_silently": not settings.DEBUG,
+                "subject": "Order",
+                "message": "OK",
+                "auth_user": auth_user.email,
+                "auth_password": auth_user.password,
+                "from_email": auth_user.email,
+                "recipient_list": list(recipient_list)
+            }
+            send_mail(**kwargs)
 
     def validate_payment_type(self,value):
         payment_types = [1,2,3,4]

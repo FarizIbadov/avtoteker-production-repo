@@ -1,0 +1,4 @@
+.cart {
+  @extend .d-block;
+  @include square(100%);
+}
