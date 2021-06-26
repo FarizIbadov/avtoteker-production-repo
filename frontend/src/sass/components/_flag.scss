@@ -1,9 +1,0 @@
-.flag {
-  @extend .rounded;
-  @include square(50px);
-  object-fit: contain;
-
-  @include responsive(max, 450px) {
-    @include square(35px);
-  }
-}
