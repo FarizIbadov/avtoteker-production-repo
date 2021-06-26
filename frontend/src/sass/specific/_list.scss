@@ -1,0 +1,16 @@
+.specific-list {
+  @extend .container-fluid, .my-3;
+
+  &__empty {
+    @extend .py-5;
+  }
+
+  &__empty-text {
+    @extend .text-center;
+  }
+
+  &__btn {
+    @extend .btn, .btn-my-secondary, .d-block, .mx-auto;
+    width: 130px;
+  }
+}

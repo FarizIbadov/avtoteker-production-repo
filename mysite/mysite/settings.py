@@ -67,7 +67,8 @@ INSTALLED_APPS = [
     'navigation',
     "kredit",
     "kredit_taksit",
-    "sticker"
+    "sticker",
+    "emailapp"
 ]
 
 SITE_ID = 1
@@ -186,14 +187,10 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 CKEDITOR_UPLOAD_PATH = "ck_uploads"
 
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = "smtp.gmail.com"
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-
-# EMAIL_HOST_USER = "ibadovfariz1999@gmail.com"
-# EMAIL_HOST_PASSWORD = "swfcrfnrlzcpyyli"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.yandex.ru"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 LOGGING = None
 
