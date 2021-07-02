@@ -19,13 +19,7 @@
             alt="{{object.slug}}"
           />
         </div>
-        {% if object.video %}
-        <div class="col-md-12 mt-5">
-          <video id="campaign-video" controls class="w-100" data-src="{{ object.video.url }}">
-              <source />
-          </video>
-        </div>
-        {% endif %}
+        {% include "../components/video.html" with object=object %}
       </div>
       <div class="px-md-4">
         <div class="d-block mt-5 mb-4">{{object.title|safe}}</div>

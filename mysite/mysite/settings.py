@@ -68,7 +68,9 @@ INSTALLED_APPS = [
     "kredit",
     "kredit_taksit",
     "sticker",
-    "emailapp"
+    "emailapp",
+    "secure_sites",
+    "adv"
 ]
 
 SITE_ID = 1

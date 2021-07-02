@@ -273,6 +273,7 @@ class TireResource(resources.ModelResource):
             'campaigns'
         )
         skip_unchanged = True
+        use_bulk = True
 
         export_order = (
             "id",
@@ -357,7 +358,7 @@ class OneSTireResource(resources.ModelResource):
             code = row['Mal']
             quantity = row['Cəmi']
 
-            tire = Tire.objects.get_object(code=code)
+            tire = Tire.objects.get(code=code)
 
             if not quantity:
                 tire.delete()
@@ -379,7 +380,6 @@ class OneSTireResource(resources.ModelResource):
 
                 
             filtered_codes = list(filter(None,imported_codes))
-            print(filtered_codes)
 
             os_tires = OneSTire.objects.exclude(code__in=filtered_codes)
             os_tires.delete()
@@ -417,4 +417,5 @@ class OneSTireResource(resources.ModelResource):
         model = OneSTire 
         fields = ("code","price_usd","year","country","quantity")
         import_id_fields = ('code',)
+        use_bulk = True
         # skip_unchanged = True

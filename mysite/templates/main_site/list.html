@@ -2,6 +2,7 @@
 {% load static %}
 {% load taksit_kredit %}
 {% load size_parser %}
+{% load edv %}
 
 {% block seo %}
   {% parse_size_for_meta request as size %}
@@ -15,6 +16,7 @@
 {% endblock seo %}
 
 {% block content %}
+    {% get_edv as edv %}
 
     {% include "../components/phone-location-link-container.html" %}
     {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
@@ -71,7 +73,7 @@
                                         </span>
                                     </div>  
                                     {% else %}
-                                     <div class="price text-right">
+                                    <div class="price text-right">
                                         <span class="text-red font-xl">{{object.price|floatformat:-2}}</span>
                                         <span class="manat">
                                             <img src="{% static 'img/manat.png' %}" alt="₼">
@@ -82,6 +84,7 @@
                             </div>
                         </div>
                         <div class="row justify-content-end w-100 no-gutters">
+                            {% include "../components/edv.html" with object=object edv=edv %}
                             {% if object.release_date %}
                                 {% include "../components/comming-soon.html" with object=object %}
                             {% elif object.new %}
