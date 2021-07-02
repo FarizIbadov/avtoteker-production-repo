@@ -14,7 +14,7 @@ def get_edv_price(value,percentage):
     price = float(value.sale if value.sale != None else value.price)
     a = price / percentage.get_first_perc()
     edv_price = (price - a) * percentage.get_second_perc()
-    return edv_price
+    return round(edv_price,2)
 
 
 class EDV:
