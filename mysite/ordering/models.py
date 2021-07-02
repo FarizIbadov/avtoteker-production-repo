@@ -2,8 +2,10 @@ from django.db import models
 from tireapp.models import Tire
 from oilapp.models import Oil
 from django.utils import timezone
+from secure_sites.models import SecureSite
 import uuid
 import phonenumbers
+
 
 import re
 
@@ -48,6 +50,16 @@ class Order(models.Model):
 
         super().save(force_insert, force_update, using,
              update_fields)
+    
+    def get_payment_type(self):
+        index = self.payment_type - 1
+        return self.PAYMENT_CHOICES[index][1]
+
+
+    def get_absolute_email_url(self):
+        secure_site = SecureSite.objects.filter(active=True).first()
+        address = secure_site.get_address() + self.tire.get_absolute_url()
+        return address
 
 
 class OilOrder(models.Model):
@@ -90,6 +102,16 @@ class OilOrder(models.Model):
         super().save(force_insert, force_update, using,
              update_fields)
 
+    def get_payment_type(self):
+        index = self.payment_type - 1
+        return self.PAYMENT_CHOICES[index][1]
+
+    def get_absolute_email_url(self):
+        secure_site = SecureSite.objects.filter(active=True).first()
+        address = secure_site.get_address() + self.oil.get_absolute_url()
+        return address
+
+
 class Result(models.Model):
     CHOICES = [
         ('t','Tire'),
@@ -98,6 +120,7 @@ class Result(models.Model):
 
     head = models.CharField(max_length=100)
     sub = models.TextField()
+    message = models.CharField(max_length=200,default="Oldı, təşəkür edirik")
     order_id_part = models.CharField(max_length=100)
     order_type = models.CharField(max_length=1,choices=CHOICES)
     active = models.BooleanField(default=True)

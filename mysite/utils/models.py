@@ -18,10 +18,8 @@ class CustomManager(models.Manager):
         return self.filter(*args,**kwargs)
 
     def get(self, *args, **kwargs):
+        kwargs['deleted'] = False
         instance = self.get_object(*args, **kwargs)
-
-        if instance.deleted:
-            raise Http404
         return instance
 
     def get_object(self,*args,**kwargs):

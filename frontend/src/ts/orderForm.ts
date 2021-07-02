@@ -123,11 +123,12 @@ class OrderForm {
 
         this.putResultView(orderModalBody, orderId, res.data.result);
         this.orderBtn!.classList.add("d-none");
-        this.cancelBtn!.innerText = "Oldı, təşşəkür edirik";
+        this.cancelBtn!.innerText = res.data.result["message"];
         orderModalFooter.classList.remove("d-none");
       })
       .catch(e => {
         this.removeSpinner();
+        this.modalTitle!.classList.remove("non-visible");
         this.modalForm!.classList.remove("d-none");
         orderModalFooter.classList.remove("d-none");
         this.putErrors(e.response!.data);

@@ -19,6 +19,7 @@
             alt="{{object.slug}}"
           />
         </div>
+        {% include "../components/video.html" with object=object %}
       </div>
       <div class="px-md-4">
         <div class="d-block mt-5 mb-4">{{object.title|safe}}</div>

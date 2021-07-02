@@ -15,6 +15,7 @@ import "./brandCarousel";
 import "./tireSearch";
 import "./imagePreview";
 import "./orderForm";
+import "./videoPlayer";
 
 const form = document.querySelector<HTMLFormElement>(".needs-validation");
 const listCartBtns = document.querySelectorAll<HTMLButtonElement>(

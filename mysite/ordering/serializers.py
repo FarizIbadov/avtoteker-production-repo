@@ -12,7 +12,7 @@ class OilOrderSerializer(serializers.ModelSerializer):
             return value
         except phonenumbers.NumberParseException:
             raise serializers.ValidationError("Telefon Nömrə yanlışdı")
-            
+
         
 
     def validate_payment_type(self,value):
@@ -83,4 +83,4 @@ class TireOrderSerializer(serializers.ModelSerializer):
 class ResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Result
-        fields = ('head','sub','order_id_part')
+        fields = ('head','sub','message','order_id_part')
