@@ -24,3 +24,7 @@ class StickerAdmin(admin.ModelAdmin):
     def text_width_num(self,obj):
         return f"{round(obj.text_width,2)}%"
 
+
+@admin.register(models.StickerTimer)
+class StickerTimerAdmin(admin.ModelAdmin):
+    pass
