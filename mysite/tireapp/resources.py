@@ -351,23 +351,21 @@ class OneSTireResource(resources.ModelResource):
             return True
         return super().skip_row(instance, original)   
 
-    def after_import_row(self, row, row_result, row_number=None, **kwargs):
-        try:
-            code = row['Mal']
-            quantity = row['Cəmi']
+    def after_import_row(self, row, row_result, row_number=None, **kwargs):     
+        code = row['Mal']
+        quantity = row['Cəmi']
 
-            tire = Tire.objects.get(code=code)
+        tire = Tire.objects.filter(code=code).first()
 
-            if not quantity:
-                tire.delete()
-            else: 
-                cached_qtn = self.CACHED_QUANTITIES.get(code,0)
-                current_qtn = cached_qtn + quantity
-                tire.quantity = current_qtn
-                tire.save()
-                self.CACHED_QUANTITIES[code] = current_qtn
-        except Tire.DoesNotExist:
-            pass  
+        if tire and not quantity:
+            tire.delete()
+        elif tire: 
+            cached_qtn = self.CACHED_QUANTITIES.get(code,0)
+            current_qtn = cached_qtn + quantity
+            tire.quantity = current_qtn
+            tire.save()
+            self.CACHED_QUANTITIES[code] = current_qtn
+        
 
     def before_import(self,dataset, using_transactions, dry_run, **kwargs):
         imported_codes = []
@@ -404,12 +402,10 @@ class OneSTireResource(resources.ModelResource):
         return row_result
 
     def delete_tire(self,code):
-        try:
-            tire = Tire.objects.get_object(code=code,deleted=False)
+        tire = Tire.objects.filter(code=code,deleted=False).first()
+        if tire:
             tire.delete()
-        except Tire.DoesNotExist:
-            pass
-        return
+     
         
     class Meta:
         model = OneSTire 

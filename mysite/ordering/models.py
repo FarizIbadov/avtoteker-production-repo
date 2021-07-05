@@ -58,7 +58,10 @@ class Order(models.Model):
 
     def get_absolute_email_url(self):
         secure_site = SecureSite.objects.filter(active=True).first()
-        address = secure_site.get_address() + self.tire.get_absolute_url()
+        if secure_site:
+            address = secure_site.get_address() + self.tire.get_absolute_url()
+        else:
+            address = self.get_absolute_email_url()
         return address
 
 
@@ -108,7 +111,10 @@ class OilOrder(models.Model):
 
     def get_absolute_email_url(self):
         secure_site = SecureSite.objects.filter(active=True).first()
-        address = secure_site.get_address() + self.oil.get_absolute_url()
+        if secure_site:
+            address = secure_site.get_address() + self.oil.get_absolute_url()
+        else:
+            address = self.get_absolute_email_url()
         return address
 
 
