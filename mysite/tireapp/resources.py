@@ -355,16 +355,19 @@ class OneSTireResource(resources.ModelResource):
         code = row['Mal']
         quantity = row['Cəmi']
 
-        tire = Tire.objects.filter(code=code,deleted=False).first()
+        try:
+            tire = Tire.objects.available().get(code=code)
 
-        if tire and not quantity:
-            tire.delete()
-        elif tire: 
-            cached_qtn = self.CACHED_QUANTITIES.get(code,0)
-            current_qtn = cached_qtn + quantity
-            tire.quantity = current_qtn
-            tire.save()
-            self.CACHED_QUANTITIES[code] = current_qtn
+            if not quantity:
+                tire.delete()
+            else: 
+                cached_qtn = self.CACHED_QUANTITIES.get(code,0)
+                current_qtn = cached_qtn + quantity
+                tire.quantity = current_qtn
+                tire.save()
+                self.CACHED_QUANTITIES[code] = current_qtn
+        except Tire.DoesNotExist:
+            pass
         
 
     def before_import(self,dataset, using_transactions, dry_run, **kwargs):
@@ -400,9 +403,12 @@ class OneSTireResource(resources.ModelResource):
         return row_result
 
     def delete_tire(self, code):
-        tire = Tire.objects.filter(code=code,deleted=False).first()
-        if tire:
-            tire.delete()
+        try:
+            tire = Tire.objects.available().get(code=code)
+            if tire:
+                tire.delete()
+        except Tire.DoesNotExist:
+            pass
      
         
     class Meta:
