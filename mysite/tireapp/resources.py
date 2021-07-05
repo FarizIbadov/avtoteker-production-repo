@@ -209,7 +209,6 @@ class TireResource(resources.ModelResource):
     class Meta:
         model = Tire
         import_id_fields = ("id",'code')
-        # instance_loader_class = CustomModelInstanceLoader
 
         fields = (
             "id",
@@ -337,7 +336,6 @@ class TireResource(resources.ModelResource):
 class OneSTireResource(resources.ModelResource):
     CACHED_QUANTITIES = {}
 
-
     code = fields.Field(column_name="Mal",attribute="code")
     price_usd = fields.Field(column_name="Qiymət USD",attribute="price_usd")
     year = fields.Field(column_name="İl",attribute="year")
@@ -353,12 +351,12 @@ class OneSTireResource(resources.ModelResource):
             return True
         return super().skip_row(instance, original)   
 
-    def after_import_row(self, row, row_result, row_number=None, **kwargs):
-        try:
-            code = row['Mal']
-            quantity = row['Cəmi']
+    def after_import_row(self, row, row_result, row_number=None, **kwargs):     
+        code = row['Mal']
+        quantity = row['Cəmi']
 
-            tire = Tire.objects.get(code=code)
+        try:
+            tire = Tire.objects.available().get(code=code)
 
             if not quantity:
                 tire.delete()
@@ -369,7 +367,8 @@ class OneSTireResource(resources.ModelResource):
                 tire.save()
                 self.CACHED_QUANTITIES[code] = current_qtn
         except Tire.DoesNotExist:
-            pass  
+            pass
+        
 
     def before_import(self,dataset, using_transactions, dry_run, **kwargs):
         imported_codes = []
@@ -377,10 +376,8 @@ class OneSTireResource(resources.ModelResource):
             for row in dataset:
                 if row[0] != "Cəmi":
                     imported_codes.append(row[0])
-
                 
             filtered_codes = list(filter(None,imported_codes))
-
             os_tires = OneSTire.objects.exclude(code__in=filtered_codes)
             os_tires.delete()
 
@@ -405,17 +402,17 @@ class OneSTireResource(resources.ModelResource):
         row_result.object_repr = row['Mal']
         return row_result
 
-    def delete_tire(self,code):
+    def delete_tire(self, code):
         try:
-            tire = Tire.objects.get_object(code=code)
-            tire.delete()
+            tire = Tire.objects.available().get(code=code)
+            if tire:
+                tire.delete()
         except Tire.DoesNotExist:
             pass
-        return
+     
         
     class Meta:
         model = OneSTire 
         fields = ("code","price_usd","year","country","quantity")
         import_id_fields = ('code',)
         use_bulk = True
-        # skip_unchanged = True

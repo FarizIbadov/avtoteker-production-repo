@@ -5,6 +5,9 @@ class CustomQuerySet(models.QuerySet):
     def delete(self):
         self.update(deleted=True)
 
+    def force_delete(self):
+        super().delete()
+
     def backup(self):
         self.update(deleted=False)
 
