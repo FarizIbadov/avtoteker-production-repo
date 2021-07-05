@@ -209,7 +209,6 @@ class TireResource(resources.ModelResource):
     class Meta:
         model = Tire
         import_id_fields = ("id",'code')
-        # instance_loader_class = CustomModelInstanceLoader
 
         fields = (
             "id",
@@ -337,7 +336,6 @@ class TireResource(resources.ModelResource):
 class OneSTireResource(resources.ModelResource):
     CACHED_QUANTITIES = {}
 
-
     code = fields.Field(column_name="Mal",attribute="code")
     price_usd = fields.Field(column_name="Qiymət USD",attribute="price_usd")
     year = fields.Field(column_name="İl",attribute="year")
@@ -407,7 +405,7 @@ class OneSTireResource(resources.ModelResource):
 
     def delete_tire(self,code):
         try:
-            tire = Tire.objects.get_object(code=code)
+            tire = Tire.objects.get_object(code=code,deleted=False)
             tire.delete()
         except Tire.DoesNotExist:
             pass
@@ -418,4 +416,4 @@ class OneSTireResource(resources.ModelResource):
         fields = ("code","price_usd","year","country","quantity")
         import_id_fields = ('code',)
         use_bulk = True
-        # skip_unchanged = True
+        skip_unchanged = True
