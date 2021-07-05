@@ -11,6 +11,10 @@ class CustomAdminActionsMixin(object):
         messages.add_message(request,messages.SUCCESS,msg,True)
     backup.short_description = "Backup deleted items"
 
+    def force_delete(self,modeladmin, request, queryset):
+        queryset.force_delete()
+    backup.short_description = "Force delete items"
+
  
 class CustomModelAdmin(admin.ModelAdmin,CustomAdminActionsMixin):
     def get_list_display(self,request):
