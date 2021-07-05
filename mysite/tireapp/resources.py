@@ -373,10 +373,8 @@ class OneSTireResource(resources.ModelResource):
             for row in dataset:
                 if row[0] != "Cəmi":
                     imported_codes.append(row[0])
-
                 
             filtered_codes = list(filter(None,imported_codes))
-
             os_tires = OneSTire.objects.exclude(code__in=filtered_codes)
             os_tires.delete()
 
@@ -401,7 +399,7 @@ class OneSTireResource(resources.ModelResource):
         row_result.object_repr = row['Mal']
         return row_result
 
-    def delete_tire(self,code):
+    def delete_tire(self, code):
         tire = Tire.objects.filter(code=code,deleted=False).first()
         if tire:
             tire.delete()
