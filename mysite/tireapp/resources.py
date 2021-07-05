@@ -410,4 +410,3 @@ class OneSTireResource(resources.ModelResource):
         fields = ("code","price_usd","year","country","quantity")
         import_id_fields = ('code',)
         use_bulk = True
-        skip_unchanged = True
