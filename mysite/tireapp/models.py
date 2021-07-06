@@ -298,7 +298,7 @@ class Tire(CustomModel):
             if getattr(self,field + "_active"):
                 active_months.append(month)
         
-        return active_months[-1]
+        return active_months[-1] if len(active_months) != 0 else 0
 
 
 class OneSTire(models.Model):
