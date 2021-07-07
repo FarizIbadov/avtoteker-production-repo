@@ -56,7 +56,7 @@ class CustomModelAdmin(admin.ModelAdmin,CustomAdminActionsMixin):
         return self.model.objects.get_object(pk=object_id)
 
     def prepear_actions(self):
-        default_action_list = [self.backup,*self.actions]
+        default_action_list = [self.backup,self.force_delete,*self.actions]
         default_actions = {}
 
         for func in default_action_list:

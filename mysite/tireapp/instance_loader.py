@@ -7,10 +7,9 @@ class CustomModelInstanceLoader(ModelInstanceLoader):
             for key in self.resource.get_import_id_fields():
                 field = self.resource.fields[key]
                 params[field.attribute] = field.clean(row)
-                
             if params:
-                instance = self.get_queryset().filter(**params).first()
-                return instance
+                print(self.get_queryset().filter(**params).first())
+                return self.get_queryset().filter(**params).first()
             else:
                 return None
         except self.resource._meta.model.DoesNotExist:

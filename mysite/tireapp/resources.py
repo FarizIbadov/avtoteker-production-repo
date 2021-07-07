@@ -23,6 +23,7 @@ class TireResource(resources.ModelResource):
             tires.backup()
             tires.exclude(id__in=filtered_ids).delete()
 
+    
 
     manufacturer = fields.Field(
         attribute="manufacturer", widget=widgets.CustomCountryWidget()
@@ -206,7 +207,6 @@ class TireResource(resources.ModelResource):
     class Meta:
         model = Tire
         import_id_fields = ("id",'code')
-        # instance_loader_class = CustomModelInstanceLoader
 
         fields = (
             "id",

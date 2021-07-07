@@ -1,10 +1,8 @@
-{% load campaign %}
-
-{% if object.campaigns.all %}
+{% if object.get_campaigns %}
 <section class="mb-5">
     <h2 class="text-center">Kampaniyalar</h2>
     <hr>
-    {% for campaign in object.campaigns.all %}
+    {% for campaign in object.get_campaigns %}
         
         {% if campaign.active %}
             <article class="pb-3">

@@ -1,10 +1,10 @@
 {% load sticker %}
 
-{% if object.stickers.all %}
+{% if object.get_stickers %}
 <section class="mb-5">
     <h2 class="text-center">Hədiyyələr və güzəştlər</h2>
     <hr>
-    {% for sticker in object.stickers.all %}
+    {% for sticker in object.get_stickers %}
         {% if sticker.active %}
             <div class="container px-0 pb-3">
                 <div class="row no-gutters mb-4">
