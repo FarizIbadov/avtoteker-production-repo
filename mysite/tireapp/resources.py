@@ -23,6 +23,8 @@ class TireResource(resources.ModelResource):
             tires.backup()
             tires.exclude(id__in=filtered_ids).delete()
 
+    
+
     manufacturer = fields.Field(
         attribute="manufacturer", widget=widgets.CustomCountryWidget()
     )
