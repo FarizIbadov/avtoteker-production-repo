@@ -13,18 +13,15 @@ class CustomBooleanWidget(BooleanWidget):
 
 class CustomBrandWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        country = row.get("origin").strip()
         title = value.strip()
-        brand = Brand.objects.get(title=title, country__title=country)
+        brand = Brand.objects.get(title=title)
         return brand
 
 
 class CustomSerieWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        country = row.get("origin").strip()
-        brand = row.get("brand").strip()
         serie = Serie.objects.get(
-            title=value, brand__title=brand, brand__country__title=country
+            title=value
         )
         return serie
 
