@@ -24,9 +24,6 @@ class TireResource(resources.ModelResource):
             tires.exclude(id__in=filtered_ids).delete()
 
 
-    origin = fields.Field(
-        attribute="brand__country", widget=widgets.CustomCountryWidget()
-    )
     manufacturer = fields.Field(
         attribute="manufacturer", widget=widgets.CustomCountryWidget()
     )
@@ -209,6 +206,7 @@ class TireResource(resources.ModelResource):
     class Meta:
         model = Tire
         import_id_fields = ("id",'code')
+        # instance_loader_class = CustomModelInstanceLoader
 
         fields = (
             "id",
@@ -279,7 +277,6 @@ class TireResource(resources.ModelResource):
             "code",
             "brand",
             "serie",
-            "origin",
             "manufacturer",
             "size",
             "ZR",
