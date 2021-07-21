@@ -78,9 +78,9 @@ def get_template(items):
         active = "active" if i == 0 else ""
         title = ""
         item = items[i]
-        if item['title'] = 'taksit':
+        if item['title'] == 'taksit':
             title = f"{item['month']} {item['title']} 0%"
-        elif item['title'] = 'kredit':
+        elif item['title'] == 'kredit':
             title = f"{item['month']} ay kreditlə"
         price = f"ayda <span class='text-danger'>{item['price']} azn</span>"
         item_template = carousel_item % (active,interval,item['image'],title,price)
