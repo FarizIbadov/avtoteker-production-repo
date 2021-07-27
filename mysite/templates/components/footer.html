@@ -3,15 +3,19 @@
 
 <div class="footer d-flex align-items-center">
     <div class="container">
-    <div class="row">
+    <div class="row justify-content-between">
         <div class="col-md-3">
             <div class="row">
                 <div class="col-md-3">
                     {% include "./logo.html" with class="footer__logo"%}
                 </div>
             </div>
+        </div>
+        <div class="col-md-4 mt-3 mt-md-0">
             <div class="row">
-                
+                <div class="col-12 text-left text-md-right">
+                    <a class="text-my-secondary" href="{% url 'about-us' %}">Haqqımızda</a>
+                </div>
             </div>
         </div>
     </div>

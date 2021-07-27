@@ -27,6 +27,7 @@ $font-family-sans-serif: Averta_avto;
 $theme-colors: (
   "my-primary": #fb0,
   "my-secondary": #333,
+  "light-2": #eee,
 );
 $pagination-color: #333;
 $pagination-active-color: #fff;
@@ -82,3 +83,4 @@ $custom-checkbox-indicator-indeterminate-bg: #333;
 @import "./components/loader";
 
 @import "./config/main-base";
+@import "./main_site/about-us";

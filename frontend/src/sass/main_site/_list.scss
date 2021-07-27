@@ -312,6 +312,7 @@
     height: 100%;
     width: 100%;
 
+    &::-moz-range-thumb,
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
       position: relative;
