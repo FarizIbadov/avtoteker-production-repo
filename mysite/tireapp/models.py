@@ -191,7 +191,7 @@ class Tire(CustomModel):
 
     def get_stickers(self):
         if self.stickers:
-            stickers = self.stickers.split(",")
+            stickers = self.stickers.split("/")
             sticker_list = list(filter(None,stickers)) 
             filtered_stickers = list(map(int,sticker_list))
             sticker_qs = Sticker.objects.filter(id__in=filtered_stickers)
@@ -200,7 +200,7 @@ class Tire(CustomModel):
 
     def get_campaigns(self):
         if self.campaigns:
-            campaigns = self.campaigns.split(",")
+            campaigns = self.campaigns.split("/")
             campaign_list = list(filter(None,campaigns)) 
             filtered_campaigns = list(map(int,campaign_list))
             campaign_qs = Post.objects.filter(id__in=filtered_campaigns)
