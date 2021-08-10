@@ -346,14 +346,13 @@ class OneSTireResource(resources.ModelResource):
         code = row['Mal']
         quantity = row['Cəmi']
 
-        try:
-            tire = Tire.objects.available().filter(code=code).first()
-            if not quantity:
-                tire.delete()
-            else: 
-                tire.set_quantity(quantity)
-        except Tire.DoesNotExist:
-            pass
+        tire = Tire.objects.available().filter(code=code).first()
+        if tire:
+            tire.set_quantity(quantity)
+        elif not quantity: 
+            tire.delete()
+        
+            
         
 
     def before_import(self,dataset, using_transactions, dry_run, **kwargs):
