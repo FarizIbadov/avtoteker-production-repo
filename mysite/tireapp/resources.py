@@ -331,17 +331,11 @@ class TireResource(resources.ModelResource):
 
 
 class OneSTireResource(resources.ModelResource):
-    CACHED_QUANTITIES = {}
-
     code = fields.Field(column_name="Mal",attribute="code")
     price_usd = fields.Field(column_name="Qiymət USD",attribute="price_usd")
     year = fields.Field(column_name="İl",attribute="year")
     country = fields.Field(column_name="Ölkə",attribute="country")
     quantity = fields.Field(column_name="Cəmi",attribute="quantity")   
-
-    def __init__(self):
-        super().__init__()
-        self.CACHED_QUANTITIES = {}
 
     def skip_row(self, instance, original):
         if instance.code == "Cəmi":
@@ -354,15 +348,10 @@ class OneSTireResource(resources.ModelResource):
 
         try:
             tire = Tire.objects.available().get(code=code)
-
             if not quantity:
                 tire.delete()
             else: 
-                cached_qtn = self.CACHED_QUANTITIES.get(code,0)
-                current_qtn = cached_qtn + quantity
-                tire.quantity = current_qtn
-                tire.save()
-                self.CACHED_QUANTITIES[code] = current_qtn
+                tire.set_quantity(quantity)
         except Tire.DoesNotExist:
             pass
         
@@ -412,4 +401,3 @@ class OneSTireResource(resources.ModelResource):
         model = OneSTire 
         fields = ("code","price_usd","year","country","quantity")
         import_id_fields = ('code',)
-        use_bulk = True
