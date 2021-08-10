@@ -347,7 +347,7 @@ class OneSTireResource(resources.ModelResource):
         quantity = row['Cəmi']
 
         try:
-            tire = Tire.objects.available().get(code=code)
+            tire = Tire.objects.available().filter(code=code).first()
             if not quantity:
                 tire.delete()
             else: 
@@ -390,7 +390,7 @@ class OneSTireResource(resources.ModelResource):
 
     def delete_tire(self, code):
         try:
-            tire = Tire.objects.available().get(code=code)
+            tire = Tire.objects.available().filter(code=code).first()
             if tire:
                 tire.delete()
         except Tire.DoesNotExist:
