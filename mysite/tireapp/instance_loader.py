@@ -8,7 +8,6 @@ class CustomModelInstanceLoader(ModelInstanceLoader):
                 field = self.resource.fields[key]
                 params[field.attribute] = field.clean(row)
             if params:
-                print(self.get_queryset().filter(**params).first())
                 return self.get_queryset().filter(**params).first()
             else:
                 return None

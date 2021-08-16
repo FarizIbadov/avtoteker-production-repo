@@ -254,6 +254,7 @@ class TireResource(resources.ModelResource):
             "price",
             "sale",
             "sale_active",
+            "price_3",
             "release_date",
             "db",
             "fuel",
@@ -294,6 +295,7 @@ class TireResource(resources.ModelResource):
             "price",
             "sale",
             "sale_active",
+            "price_3",
             "montaj_balance",
             "razval",
             "year",
@@ -331,11 +333,17 @@ class TireResource(resources.ModelResource):
 
 
 class OneSTireResource(resources.ModelResource):
+    CACHED_QUANTITIES = {}
+
     code = fields.Field(column_name="Mal",attribute="code")
     price_usd = fields.Field(column_name="Qiymət USD",attribute="price_usd")
     year = fields.Field(column_name="İl",attribute="year")
     country = fields.Field(column_name="Ölkə",attribute="country")
     quantity = fields.Field(column_name="Cəmi",attribute="quantity")   
+
+    def __init__(self):
+        super().__init__()
+        self.CACHED_QUANTITIES = {}
 
     def skip_row(self, instance, original):
         if instance.code == "Cəmi":
@@ -346,13 +354,19 @@ class OneSTireResource(resources.ModelResource):
         code = row['Mal']
         quantity = row['Cəmi']
 
-        tire = Tire.objects.available().filter(code=code).first()
-        if tire:
-            tire.set_quantity(quantity)
-        elif not quantity: 
-            tire.delete()
-        
-            
+        try:
+            tire = Tire.objects.available().get(code=code)
+
+            if not quantity:
+                tire.delete()
+            else: 
+                cached_qtn = self.CACHED_QUANTITIES.get(code,0)
+                current_qtn = cached_qtn + quantity
+                tire.quantity = current_qtn
+                tire.save()
+                self.CACHED_QUANTITIES[code] = current_qtn
+        except Tire.DoesNotExist:
+            pass
         
 
     def before_import(self,dataset, using_transactions, dry_run, **kwargs):
@@ -389,7 +403,7 @@ class OneSTireResource(resources.ModelResource):
 
     def delete_tire(self, code):
         try:
-            tire = Tire.objects.available().filter(code=code).first()
+            tire = Tire.objects.available().get(code=code)
             if tire:
                 tire.delete()
         except Tire.DoesNotExist:
@@ -400,3 +414,4 @@ class OneSTireResource(resources.ModelResource):
         model = OneSTire 
         fields = ("code","price_usd","year","country","quantity")
         import_id_fields = ('code',)
+        use_bulk = True
