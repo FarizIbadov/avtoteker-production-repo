@@ -76,8 +76,8 @@ def get_template(items):
 
     for i in range(len(items)):
         active = "active" if i == 0 else ""
-        title = ""
         item = items[i]
+        title = ""
         if item['title'] == 'taksit':
             title = f"{item['month']} {item['title']} 0%"
         elif item['title'] == 'kredit':

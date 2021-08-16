@@ -70,7 +70,8 @@ INSTALLED_APPS = [
     "sticker",
     "emailapp",
     "secure_sites",
-    "adv"
+    "adv",
+    # "about_us"
 ]
 
 SITE_ID = 1

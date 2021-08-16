@@ -102,6 +102,8 @@ class Tire(CustomModel):
     sale = models.DecimalField(default=0, decimal_places=2, max_digits=10)
     sale_active = models.BooleanField(default=True)
 
+    price_3 = models.FloatField(blank=True,null=True)
+
     taksit_active = models.BooleanField(default=True)
 
     taksit_2 = models.DecimalField(
@@ -186,12 +188,13 @@ class Tire(CustomModel):
     albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES,blank=True)
     kredit = models.PositiveSmallIntegerField(choices=KREDIT_CHOICES,blank=True)
 
-    stickers = models.CharField(max_length=100,blank=True)
-    campaigns = models.CharField(max_length=100,blank=True)
+    stickers = models.CharField(max_length=100,blank=True,null=True)
+    campaigns = models.CharField(max_length=100,blank=True,null=True)
+
 
     def get_stickers(self):
         if self.stickers:
-            stickers = self.stickers.split("\\")
+            stickers = self.stickers.split("/")
             sticker_list = list(filter(None,stickers)) 
             filtered_stickers = list(map(int,sticker_list))
             sticker_qs = Sticker.objects.filter(id__in=filtered_stickers)
@@ -200,7 +203,7 @@ class Tire(CustomModel):
 
     def get_campaigns(self):
         if self.campaigns:
-            campaigns = self.campaigns.split("\\")
+            campaigns = self.campaigns.split("/")
             campaign_list = list(filter(None,campaigns)) 
             filtered_campaigns = list(map(int,campaign_list))
             campaign_qs = Post.objects.filter(id__in=filtered_campaigns)
@@ -317,10 +320,6 @@ class Tire(CustomModel):
                 active_months.append(month)
         
         return active_months[-1] if len(active_months) != 0 else 0
-
-    def set_quantity(self,qtn):
-        self.quantity += qtn
-        super().save()
 
 
 class OneSTire(models.Model):
