@@ -102,6 +102,8 @@ class Tire(CustomModel):
     sale = models.DecimalField(default=0, decimal_places=2, max_digits=10)
     sale_active = models.BooleanField(default=True)
 
+    price_3 = models.FloatField(blank=True,null=True)
+
     taksit_active = models.BooleanField(default=True)
 
     taksit_2 = models.DecimalField(
@@ -186,8 +188,8 @@ class Tire(CustomModel):
     albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES,blank=True)
     kredit = models.PositiveSmallIntegerField(choices=KREDIT_CHOICES,blank=True)
 
-    stickers = models.CharField(max_length=100,blank=True)
-    campaigns = models.CharField(max_length=100,blank=True)
+    stickers = models.CharField(max_length=100,blank=True,null=True)
+    campaigns = models.CharField(max_length=100,blank=True,null=True)
 
 
     def get_stickers(self):

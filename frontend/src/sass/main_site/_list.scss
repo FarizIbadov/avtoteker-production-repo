@@ -333,3 +333,28 @@
 }
 
 // <i class="bi bi-fullscreen-exit"></i>
+
+.price-3-style {
+  margin-left: auto;
+  font-size: 24px;
+
+  height: 60px;
+
+  display: flex;
+
+  align-items: center;
+
+  & > .price {
+    font-weight: 600;
+    font-size: 32px;
+  }
+}
+
+.price-manat {
+  display: inline-flex;
+  align-items: center;
+
+  & > img {
+    height: 15px;
+  }
+}
