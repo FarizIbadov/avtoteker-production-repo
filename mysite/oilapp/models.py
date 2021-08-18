@@ -5,6 +5,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.core.exceptions import ValidationError
 from specific.models import Country
 from utils.models import CustomModel
+from mysite.utils import compress
 
 from sticker.models import Sticker
 from campaign.models import Post
@@ -173,6 +174,8 @@ class Oil(CustomModel):
         if not self.birkart:
             self.birkart = self.get_active_price("taksit")
         super().save()
+
+        compress(self.image.url,quality=90)
 
     def get_active_price(self,taksit_kredit_title):
         kredit_list = ['kredit_3','kredit_6','kredit_9','kredit_12']
