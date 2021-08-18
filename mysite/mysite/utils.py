@@ -4,11 +4,18 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Column, Div, HTML, Field
 
 
-def compress(path: str, dimentions: tuple):
+def compress(path, dimentions=None, quality=None):
+    kwargs = {
+        'fp': path
+    }
     img = Image.open(path)
-    if img.height > dimentions[1] or img.width > dimentions[0]:
+    if dimentions and (img.height > dimentions[1] or img.width > dimentions[0]):
         img.thumbnail(dimentions)
-        img.save(path)
+    elif quality:
+        kwargs['optimize'] = True
+        kwargs['quality'] = quality
+
+    img.save(**kwargs)
 
 
 def get_url_name(request):

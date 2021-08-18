@@ -2,6 +2,8 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 
+from mysite.utils import compress
+
 class News(models.Model):
     slug = models.CharField(max_length=150)
     title = RichTextField()
@@ -14,6 +16,11 @@ class News(models.Model):
 
     def __str__(self):
         return self.slug
+
+    def save(self):
+        super().save()
+
+        compress(self.image.path,quality=90)
 
     class Meta:
         verbose_name_plural = "News"

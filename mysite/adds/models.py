@@ -1,4 +1,5 @@
 from django.db import models
+from mysite.utils import compress
 
 class Add(models.Model):
     name = models.CharField(max_length=50,default="advertisement")
@@ -8,4 +9,9 @@ class Add(models.Model):
 
     def __str__(self):
         return self.image.name
+
+    def save(self, **kwargs):
+        super().save(**kwargs)
+
+        compress(self.image.path, quality=90)
 

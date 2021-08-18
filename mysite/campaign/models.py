@@ -8,6 +8,8 @@ import PIL
 
 import os
 
+from mysite.utils import compress
+
 class CustomValidators:
     @staticmethod
     def check_mime_type(value):
@@ -36,3 +38,7 @@ class Post(models.Model):
     def __str__(self):
         return self.slug
 
+    def save(self):
+        super().save()
+
+        compress(self.image.path,quality=90)
