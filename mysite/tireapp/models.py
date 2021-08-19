@@ -303,7 +303,6 @@ class Tire(CustomModel):
             self.kredit = self.get_active_price("kredit")
         super().save()
 
-        compress(self.image.url,quality=90)
 
     def get_active_price(self,taksit_kredit_title):
         kredit_list = ['kredit_3','kredit_6','kredit_9','kredit_12']
