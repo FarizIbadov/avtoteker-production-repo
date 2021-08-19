@@ -40,5 +40,5 @@ class Post(models.Model):
 
     def save(self):
         super().save()
-
+    
         compress(self.image.path,quality=90)
