@@ -175,7 +175,7 @@ class Oil(CustomModel):
             self.birkart = self.get_active_price("taksit")
         super().save()
 
-        compress(self.image.url,quality=90)
+        # compress(self.image.url,quality=90)
 
     def get_active_price(self,taksit_kredit_title):
         kredit_list = ['kredit_3','kredit_6','kredit_9','kredit_12']

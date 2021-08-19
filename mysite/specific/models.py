@@ -128,7 +128,7 @@ class Serie(CustomModel):
         super().save()
         
         if self.image:
-            compress(self.image.path, (1024, 1024))
+            compress(self.image.path, quality=90)
 
     # def get_absolute_url(self):
     #     return reverse("custom-admin:specific:serie-detail", kwargs={"pk": self.pk})
