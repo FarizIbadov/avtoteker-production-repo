@@ -339,10 +339,6 @@ class OneSTireResource(resources.ModelResource):
     country = fields.Field(column_name="Ölkə",attribute="country")
     quantity = fields.Field(column_name="Cəmi",attribute="quantity")   
 
-    def __init__(self):
-        super().__init__()
-        self.CACHED_QUANTITIES = {}
-
     def skip_row(self, instance, original):
         if instance.code == "Cəmi":
             return True
