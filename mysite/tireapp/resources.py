@@ -348,7 +348,7 @@ class OneSTireResource(resources.ModelResource):
         code = row['Mal']
         quantity = row['Cəmi']
 
-        tire = Tire.objects.available().filter(code=code).first()
+        tire = Tire.objects.available(code=code).first()
 
         if not quantity:
             tire.delete()
