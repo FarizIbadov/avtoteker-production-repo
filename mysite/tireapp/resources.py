@@ -352,7 +352,7 @@ class OneSTireResource(resources.ModelResource):
 
         if not quantity:
             tire.delete()
-        elif tire: 
+        elif tire and quantity: 
             tire.add_quantity(quantity)
 
 
@@ -389,7 +389,7 @@ class OneSTireResource(resources.ModelResource):
         return row_result
 
     def delete_tire(self, code):
-        tire = Tire.objects.available().filter(code=code).first()
+        tire = Tire.objects.available(code=code).first()
         if tire:
             tire.delete()
      
