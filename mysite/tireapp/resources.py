@@ -353,7 +353,7 @@ class OneSTireResource(resources.ModelResource):
 
         if not quantity:
             tire.delete()
-        else: 
+        elif tire: 
             tire.add_quantity(quantity)
         
     
