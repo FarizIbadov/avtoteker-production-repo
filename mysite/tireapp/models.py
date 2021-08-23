@@ -338,7 +338,7 @@ class Tire(CustomModel):
         
         return active_months[-1] if len(active_months) != 0 else 0
 
-    def add_quantity(self,qtn):
+    def add_quantity(self, qtn):
         self.quantity += qtn
         super().save()
 
