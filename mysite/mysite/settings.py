@@ -71,7 +71,7 @@ INSTALLED_APPS = [
     "emailapp",
     "secure_sites",
     "adv",
-    "waranty"
+    # "waranty"
     # "about_us"
 ]
 

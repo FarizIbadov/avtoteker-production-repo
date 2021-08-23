@@ -1,18 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
-
-class CustomValidators:
-    @staticmethod
-    def check_mime_type(value):
-        MIME_TYPES = ['image/svg+xml','image/png','image/jpeg']
-        if value._file:
-            content_type = value._file.content_type
-            try:
-                MIME_TYPES.index(content_type)
-            except ValueError:
-                raise ValidationError("Invalid File")
-            
+from mysite.validators import CustomValidators
             
 
 class EDVLogo(models.Model):

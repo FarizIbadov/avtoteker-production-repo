@@ -1,0 +1,305 @@
+{% extends "admin/import_export/base.html" %}
+
+{% load i18n %}
+{% load admin_urls %}
+{% load static %}
+
+{% block breadcrumbs_last %}
+{% trans "Tire Search Warranty" %}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}
+    <style>
+        .ul-list {
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    
+        .ul {
+            margin-bottom: 20px;
+            margin-right: 25px;
+            display: none;
+        }
+
+        .ul-content {
+            margin-top: 20px;
+        }
+
+        .li {
+           display: flex;
+           align-items: center;
+           margin-bottom: 10px;
+        }
+
+        .li > input {
+            display: block;
+            margin-left: 10px;
+        }
+
+        .table {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .table-cell,
+        .table-cell-center{
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .table-cell-center {
+            text-align: center;
+        }
+
+        .season-img-container,
+        .brand-logo-container {
+            display: block;
+            width:100%; 
+        }
+
+        .season-img-container {
+            max-width: 40px;
+        }
+
+        .brand-logo-container {
+            max-width: 150px;
+        }
+
+        .season-img,
+        .brand-logo {
+            width: 100%;
+        }
+
+        .red-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: red;
+        }
+
+        #payment-type  {
+            display: none;
+        }
+
+        .ul.show,
+        #payment-type.show {
+            display: block ;
+        }
+
+        #next-btn:disabled:hover {
+            background-color: #417690;
+            cursor: not-allowed;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <form method="GET">
+      <fieldset class="module aligned">
+          <div class="form-row">
+            {{ form.code.errors }}
+
+            {{ form.code.label_tag }}
+
+            {{ form.code }}
+
+            {% if form.code.field.help_text %}
+            <p class="help">{{ form.code.field.help_text|safe }}</p>
+            {% endif %}
+          </div>
+          <div class="form-row">
+            <div class="fieldBox">
+              {{ form.size.errors }}
+
+              {{ form.size.label_tag }}
+
+              {{ form.size }}
+
+              {% if form.size.field.help_text %}
+              <p class="help">{{ form.size.field.help_text|safe }}</p>
+              {% endif %}
+            </div>
+            <div class="fieldBox">
+              {{ form.brand.errors }}
+
+              {{ form.brand.label_tag }}
+
+              {{ form.brand }}
+
+              {% if form.brand.field.help_text %}
+              <p class="help">{{ form.brand.field.help_text|safe }}</p>
+              {% endif %}
+            </div>
+          </div>
+      </fieldset>
+      <div class="submit-row">
+        <input type="submit" class="default" value="{% trans 'Search' %}">
+      </div>
+    </form>
+    {% if results %}
+    <form class="results" action="{% url opts|admin_urlname:'add' %}">
+        <h2>Tires</h2>
+        <table id="result_list" class="table" id="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Brand</th>
+                    <th>Season</th>
+                    <th>Serie</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                    <tr >
+                        <td class="table-cell table-cell-center">
+                            <a target="blank" class="red-dot" href="{{result.get_absolute_url}}"></a>
+                        </td>
+                        <td class="table-cell">
+                            <div class="brand-logo-container">
+                                <img class="brand-logo" src="{{result.brand.image.url}}" alt="{{result.brand}}">
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="season-img-container">
+                                <img class="season-img" src="{{result.season.image.url}}" alt="{{result.season}}">
+                            </div>
+                        </td>
+                        <td class="table-cell">{{result.serie}}</td>
+                        <td class="table-cell">{{result.size}}</td>
+                        <td class="table-cell">{{result.get_price}} AZN</td>
+                        <td class="table-cell">{{result.get_quantity}}</td>
+                        <td class="table-cell">
+                            <input class="radio" name="tire" value="{{result.pk}}" data-code="{{result.code}}" type="radio">
+                        </td>
+                    </tr>    
+                {% endfor %}
+            </tbody>
+        </table>
+        <div id="payment-type">
+            <h2>Payment Terms:  <span id="code-container"></span></h2>
+            <div class="ul-list">
+                <div class="ul show">
+                    {% for payment in payments %}
+                    <div class="li">
+                        <label for="{{payment.key}}">{{payment.title}}</label>
+                        <input class="payment-radio-1" type="radio" id="{{payment.key}}" name="payment-1" 
+                        {% if not payment.has_childs %} value="{{payment.pk}}" {% endif %} >
+                    </div>
+                    {% endfor %}
+                </div>
+                {% for payment in payments %}   
+                    {% if payment.has_childs and payment.get_childs %}
+                        <div class="ul" id="{{payment.key}}-container">
+                            {% for child in payment.get_childs %}
+                                <div class="li">
+                                    <label for="{{child.key}}">{{child.title}}</label>
+                                    <input class="payment-radio-2" type="radio" id="{{child.key}}" name="payment-2" 
+                                    {% if not child.has_childs %} value="{{child.pk}}" {% endif %} >
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                {% for payment in payments %}   
+                    {% if payment.has_childs and payment.get_childs %}
+                        {% for child in payment.get_childs %}
+                            {% if child.has_childs and child.get_childs %}
+                            <div class="ul" id="{{child.key}}-container">                            
+                                {% for grand_child in child.get_childs %}
+                                    <div class="li">
+                                        <label for="{{grand_child.key}}">{{grand_child.title}}</label>
+                                        <input class="payment-radio-3" type="radio" id="{{grand_child.key}}" name="payment-3" 
+                                        {% if not child.has_childs %} value="{{grand_child.pk}}" {% endif %} >
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                {% for payment in payments %}   
+                    {% if payment.has_childs and payment.get_childs %}
+                        {% for child in payment.get_childs %}
+                            {% if child.has_childs and child.get_childs %}
+                                {% for grand_child in child.get_childs %}
+                                {% if grand_child.has_childs and grand_child.get_childs %}
+                                <div class="ul" id="{{grand_child.key}}-container">  
+                                    {% for gg_child in grand_child.get_childs %}                        
+                                    <div class="li">
+                                        <label for="{{gg_child.key}}">{{gg_child.title}}</label>
+                                        <input class="payment-radio-4" type="radio" id="{{gg_child.key}}" name="payment-4" 
+                                        {% if not gg_child.has_childs %} value="{{gg_child.pk}}" {% endif %} >
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="submit-row">
+            <input type="submit" disabled id="next-btn" class="default" value="{% trans 'Next' %}">
+        </div>
+    </form>
+    {% endif %}
+    <script defer>
+        const paymentContainer = document.getElementById("payment-type")
+        const codeContainer = document.getElementById("code-container")
+        const ulList = document.querySelector('.ul-list')
+        const nextBtn = document.getElementById('next-btn')
+
+        document.querySelectorAll('.radio').forEach(input => {
+            input.addEventListener('click', (e) => {
+                paymentContainer.classList.add('show')
+                codeContainer.innerHTML = e.target.getAttribute('data-code')
+            })
+        })
+
+        let ids = [1,2,3,4]
+        
+        for (let i of ids) {
+            document.querySelectorAll(`.payment-radio-${i}`).forEach(input => {
+                input.addEventListener('click', (e) => {
+                    const id = e.target.id + '-container';
+
+                    const currentIndex = ids.indexOf(i)
+                    const prepeareForDeletionIds = ids.slice(currentIndex,ids.length) 
+
+                    for (let i of prepeareForDeletionIds) {
+                        const id = ulList.getAttribute(`data-id-${i}`)
+                        const container = document.getElementById(id)
+                        if (container) {
+                            container.classList.remove('show')
+                        }
+                        document.querySelectorAll(`.payment-radio-${++i}`).forEach(input => {
+                            input.checked = false
+                        })
+                    }
+
+                    if (e.target.getAttribute('value')) {
+                        nextBtn.removeAttribute('disabled')
+                    } else {
+                        nextBtn.setAttribute('disabled', "")
+                    }
+
+                    const container = document.getElementById(id)
+                    if (container) {
+                        container.classList.add('show')
+                    }
+                    ulList.setAttribute(`data-id-${i}`, id)
+                })
+            })
+        }
+    </script>
+{% endblock %}
