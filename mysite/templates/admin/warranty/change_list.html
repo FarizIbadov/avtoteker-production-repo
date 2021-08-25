@@ -1,0 +1,13 @@
+{% extends 'admin/change_list.html' %}
+
+{% block object-tools-items %}
+    {% load i18n %}
+    {% load admin_urls %}
+
+    <li>
+        {% url cl.opts|admin_urlname:'add' as add_url %}
+        <a href="{% url opts|admin_urlname:'choose-tire' %}" class="addlink">
+        {% blocktranslate with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktranslate %}
+        </a>
+    </li>
+{% endblock %}
