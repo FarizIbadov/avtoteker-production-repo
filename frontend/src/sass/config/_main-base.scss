@@ -1,0 +1,25 @@
+.main-container {
+  @extend .d-flex, .flex-column;
+  margin-top: 80px !important;
+  min-height: 100vh !important;
+
+  &__body {
+    flex: 1;
+  }
+}
+
+.image-modal {
+  position: relative;
+}
+
+.modal-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  max-width: 350px;
+  width: 100%;
+
+  opacity: 0.1;
+}

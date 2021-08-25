@@ -2,7 +2,6 @@ from import_export import resources, fields
 from import_export import widgets as resource_widget
 from .models import Tire,OneSTire
 from . import widgets
-from .instance_loader import CustomModelInstanceLoader
 
 class TireResource(resources.ModelResource):
     def get_queryset(self):
@@ -402,3 +401,6 @@ class OneSTireResource(resources.ModelResource):
         fields = ("code","price_usd","year","country","quantity")
         import_id_fields = ('code',)
         use_bulk = True
+
+
+# class OsTireImporter:

@@ -1,0 +1,360 @@
+.main-list {
+  @extend .container;
+
+  &__main-row {
+    @extend .row;
+  }
+
+  &__sub-row {
+    @extend .row,
+      .no-gutters,
+      .px-4,
+      .pb-2,
+      .justify-content-end,
+      .h-100,
+      .mt-4;
+    position: relative;
+
+    &--2 {
+      @extend .row,
+        .no-gutters,
+        .pt-1,
+        .px-4,
+        .pb-3,
+        .justify-content-between,
+        .align-items-start;
+      min-height: 300px;
+
+      @include responsive(max, 450px) {
+        min-height: 300px;
+      }
+    }
+  }
+
+  &__price-info {
+    margin-top: 10px;
+    width: 110px;
+  }
+
+  &__col-12 {
+    @extend .col-12, .my-3, .mx-auto;
+  }
+
+  &__card {
+    @extend .card, .mb-3, .py-0;
+  }
+
+  &__header {
+    @extend .card-header, .text-center, .bg-my-secondary, .text-light;
+
+    &--detail {
+      @extend .card-header,
+        .text-center,
+        .bg-my-secondary,
+        .text-light,
+        .border-bottom-0,
+        .px-2;
+    }
+  }
+
+  &__item-logo {
+    @extend .d-inline-block, .card-img;
+    object-fit: contain;
+    width: 200px;
+    max-height: 50px;
+
+    @include responsive(max, 768px) {
+      width: 150px;
+      max-height: 40px;
+    }
+
+    @include responsive(max, 300px) {
+      width: 120px;
+    }
+  }
+
+  &__img {
+    @extend .d-block, .card-img;
+    object-fit: contain;
+
+    min-width: 125px;
+    max-width: 350px;
+    max-height: 350px;
+    width: 100%;
+  }
+
+  &__col-sm {
+    @extend .col-sm-8,
+      .col-md-7,
+      .w-50,
+      .h-100,
+      .d-flex,
+      .justify-content-center;
+    max-height: 326px;
+    cursor: pointer;
+
+    &--2 {
+      @extend .col-sm-4, .no-gutters;
+    }
+  }
+
+  &__card-body {
+    @extend .card-body, .d-flex, .flex-column, .align-items-end, .p-0;
+  }
+
+  &__card-text {
+    @extend .card-text, .font-larger, .mb-0;
+
+    &--2 {
+      @extend .card-text, .justify-content-end, .font-smaller, .d-flex;
+    }
+  }
+
+  &__btn-box {
+    @extend .mt-4, .w-100, .d-flex, .align-items-end, .justify-content-end;
+  }
+
+  &__cart-btn {
+    @extend .d-inline-block, .btn, .btn-danger, .rounded-0, .btn-sm;
+    width: 100px;
+    margin-right: 10px;
+    box-shadow: none !important;
+
+    @include responsive(max, 450px) {
+      font-size: 12px;
+    }
+  }
+
+  &__detail-btn {
+    @extend .d-inline-block, .btn, .btn-sm, .btn-my-primary, .rounded-0;
+    width: 80px;
+
+    @include responsive(max, 450px) {
+      font-size: 12px;
+      width: 60px;
+    }
+  }
+
+  &__side-info {
+    max-width: 150px;
+    width: 100%;
+    min-width: 80px;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    z-index: 1;
+
+    @include responsive(max, 768px) {
+      max-width: 100px;
+    }
+  }
+
+  &__side-single {
+    @extend .d-flex,
+      .text-center,
+      .justify-content-center,
+      .align-items-center,
+      .bg-my-primary,
+      .p-1;
+
+    font-size: 18px;
+
+    &.danger {
+      @extend .bg-danger, .text-light;
+    }
+    &.my-primary {
+      @extend .bg-my-primary;
+    }
+
+    &:not(:last-of-type) {
+      @extend .mb-2;
+    }
+
+    @include responsive(max, 768px) {
+      padding: 0 !important;
+      font-size: 14px;
+    }
+  }
+
+  &__heading {
+    @extend .text-center, .pt-3, .pb-0, .mb-0;
+    font-weight: 400 !important;
+    letter-spacing: 5px;
+  }
+
+  &__empty-text {
+    @extend .col-sm-12, .text-center, .py-5, .mb-0, .text-danger;
+    font-size: 24px;
+    font-weight: 400 !important;
+    letter-spacing: 2px;
+  }
+}
+
+.opacity-8 {
+  opacity: 80%;
+}
+
+.kredit-taksit-item {
+  font-size: 16px;
+  width: 220px !important;
+  margin-left: auto;
+}
+
+.kredit-taksit-fig {
+  @include square(60px);
+  margin-bottom: 0;
+
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.kredit-taksit-container {
+  width: 220px !important;
+  height: 60px;
+}
+
+.sticker-container {
+  max-width: 300px !important;
+  width: 100%;
+  height: 32px;
+}
+
+.comming-soon-container {
+  max-width: 210px;
+  width: 100%;
+  font-size: 16px;
+  align-items: center;
+
+  &--1 {
+    background: linear-gradient(110deg, #ffbb00 0 53%, #dc3545 53% 100%);
+  }
+
+  &--2 {
+    background: linear-gradient(110deg, #ffbb00 0 64%, #dc3545 64% 100%);
+  }
+}
+
+.non-visible {
+  visibility: hidden;
+}
+
+.edv-container {
+  max-width: 220px !important;
+  width: 100%;
+
+  margin-left: auto;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.edv-logo {
+  max-width: 110px;
+}
+
+.edv-price {
+  border-left: 1px solid #00000010;
+}
+
+.video-player {
+  position: relative;
+  background-color: #333;
+
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+
+  overflow: hidden;
+}
+
+.video {
+  height: 100%;
+}
+
+.video-tool-container {
+  position: absolute;
+  background-color: #33333340;
+  height: 40px;
+  width: 100%;
+
+  bottom: 0;
+  left: 0;
+}
+
+.video-play-pause {
+  font-size: 30px;
+  background-color: transparent;
+  border: none;
+}
+
+.fullscreen-btn {
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+}
+
+.video-play-pause,
+.fullscreen-btn {
+  cursor: pointer;
+}
+
+.video-tool-progress {
+  flex: 1;
+  height: 10px;
+
+  & > input[type="range"] {
+    -webkit-appearance: none;
+    background: linear-gradient(to right, #ffbb00 0 0%, #fff 0% 100%);
+    height: 100%;
+    width: 100%;
+
+    &::-moz-range-thumb,
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      position: relative;
+      background: #ffbb00;
+      cursor: pointer;
+      border: none;
+      @include square(20px);
+      border-radius: 50%;
+    }
+  }
+}
+
+.video-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// <i class="bi bi-fullscreen-exit"></i>
+
+.price-3-style {
+  margin-left: auto;
+  font-size: 24px;
+
+  height: 60px;
+
+  display: flex;
+
+  align-items: center;
+
+  & > .price {
+    font-weight: 600;
+    font-size: 32px;
+  }
+}
+
+.price-manat {
+  display: inline-flex;
+  align-items: center;
+
+  & > img {
+    height: 15px;
+  }
+}

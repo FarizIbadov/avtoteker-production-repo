@@ -1,0 +1,32 @@
+.tireapp {
+  &__table {
+    @extend .table, .table-sm;
+
+    @include responsive(max,600px){
+      font-size: 14px;
+    }
+  }
+
+  &__table-head {
+    @extend .thead-dark;
+  }
+
+  &__table-head-col-link {
+    color: #fff;
+    &:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  &__table-body-col-link {
+    &:not(.btn) {
+      color: #212529;
+      &:hover {
+        text-decoration: none;
+        color: darken(#212529, $amount: 10);
+      }
+    }
+  }
+}
+
