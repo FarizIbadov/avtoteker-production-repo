@@ -1,0 +1,26 @@
+.login {
+  @extend .container-fluid;
+
+  &__container {
+    @extend .d-flex, .align-items-center, .justify-content-center;
+    height: 90vh;
+  }
+
+  &__form {
+    max-width: 400px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    @extend .w-100;
+    border-radius: 10px;
+  }
+
+  &__logo {
+    max-width: 200px;
+    height: 100px;
+    @extend .mx-auto;
+  }
+
+  &__btn {
+    @extend .btn, .btn-my-primary, .btn-block;
+  }
+}

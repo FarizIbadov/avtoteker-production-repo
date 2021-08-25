@@ -1,0 +1,58 @@
+.map-item.map-active + .list-group-content {
+  height: 200px;
+}
+
+.map-item {
+  border: none !important;
+}
+
+.list-group-content {
+  height: 0;
+  transition: all 0.3s;
+  overflow-y: scroll;
+}
+
+.map {
+  height: 500px;
+
+  @include responsive(max, 768px) {
+    height: 300px;
+  }
+}
+
+.map-active {
+  @extend .bg-my-secondary, .text-light;
+}
+
+.map-content {
+  padding: 0.75rem 1.25rem;
+  font-size: 14px;
+}
+
+.map-tab-container {
+  border: 1px solid #eee;
+  border-collapse: collapse;
+}
+
+.map-repeat-icon {
+  @include square(120px);
+  cursor: pointer;
+}
+
+.map-image {
+  object-fit: contain;
+  max-height: 200px;
+}
+
+.map-list-group {
+  display: flex;
+
+  @include responsive(max, 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  & > .map-tab-container {
+    flex: 1;
+  }
+}
