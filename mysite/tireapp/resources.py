@@ -1,10 +1,9 @@
 from import_export import resources, fields
 from import_export import widgets as resource_widget
-from .models import Tire,OneSTire
+from .models import Tire, OneSTire, OsTireImporterSetting
 from . import widgets
 
 import tablib
-
 
 class TireResource(resources.ModelResource):
     def get_queryset(self):
@@ -402,17 +401,75 @@ class OneSTireResource(resources.ModelResource):
         import_id_fields = ('code',)
         use_bulk = True
 
+
 class OsTireImporter:
-    def __init__(self, dataset):
+    def __init__(self, dataset: tablib.Dataset):
+        self.tires = Tire.objects.available()
         self.updated_tires = []
         self.deleted_tires = []
+        self.codes = []
         self.dataset = dataset
+        self.row_is_included = False
+
+        self.init_settings()
+
+    def init_settings(self):
+        setting = OsTireImporterSetting.objects.filter(active=True).first()
+        self.code_field = "Mal"
+        self.quantity_field = "Cəmi"
+
+        if setting:
+            self.code_field = setting.look_up
+            self.quantity_field = setting.get_from_field
 
     def process_import(self):
-        # setting = OsTireImporterSetting
         for row in self.dataset.dict:
+            code = row.get(self.code_field)
+            quantity = int(row.get(self.quantity_field, 0))
+            
+            if not code:
+                continue
 
-            code = row[]
-            quantity = row[]
+            self.codes.append(code)
+            self.process_tire(code, quantity)
+
+        self.codes.append("XXX")
+    
+
+    def get_tire(self, code):
+        self.row_is_included = False
+        filtered_tire = list(filter(self.filter_tire(code),self.updated_tires))
+       
+        if filtered_tire:
+            return filtered_tire[0]   
+        return self.tires.filter(code=code).first()
+
+    def process_tire(self, code, quantity):
+        tire = self.get_tire(code)
+        if not tire:
+            return
+
+        if quantity <= 0:
+            self.deleted_tires.append(tire.pk)
+        else:
+            tire.quantity = quantity
+
+        if not self.row_is_included:
+            self.updated_tires.append(tire)
+
+    def process_save(self):
+        codes = list(set(filter(None,self.codes)))
+        Tire.objects.exclude(code__in=codes).delete()
+
+        Tire.objects.bulk_update(self.updated_tires, batch_size=1000, fields=['quantity'])
+        Tire.objects.filter(pk__in=self.deleted_tires).delete()
 
 
+    def filter_tire(self, code):
+        def _filter_tire(value):
+            if code == value.code:
+                self.row_is_included = True
+            return code == value.code
+        return _filter_tire
+
+    
