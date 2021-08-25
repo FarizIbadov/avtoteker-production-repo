@@ -12,10 +12,13 @@ from utils.models import CustomModel
 from sticker.models import Sticker
 from campaign.models import Post
 
+
 class Size(CustomModel):
     width = models.CharField(max_length=10, null=True)
     height = models.CharField(max_length=10, null=True)
     radius = models.CharField(max_length=10, null=True)
+
+    size_code = models.CharField(max_length=255, null=True)
 
     def __str__(self):
         return "%s\\%s\\%s" % (self.width, self.height, self.radius)
@@ -25,6 +28,13 @@ class Size(CustomModel):
 
     def get_size_for_url(self):
         return "%s-%s-%s" % (self.width,self.height,self.radius)
+
+    def save(self):
+        if not self.size_code:
+            self.size_code = "".join([self.width,self.height,self.radius])
+        
+        super().save()
+
 
 
 class Tire(CustomModel):
@@ -234,6 +244,12 @@ class Tire(CustomModel):
     def get_image(self):
         return self.serie.get_image()
 
+    def get_price(self):
+        return self.sale if self.sale else self.price
+
+    def get_quantity(self):
+        return self.quantity if self.quantity <= 4 else "4+"
+
     # def get_edit_url(self):
     #     return reverse(
     #         "custom-admin:tireapp:tire-update", kwargs={"pk": self.id}
@@ -336,6 +352,14 @@ class OneSTire(models.Model):
 
     def __str__(self):
         return self.code
+
+class OsTireImporterSetting(models.Model):
+    look_up = models.CharField(max_length=100, null=True)
+    get_from_field = models.CharField(max_length=100, null=True)
+
+    active = models.BooleanField(default=True)
     
+    def __str__(self):
+        return "OsTire Importer Setting"
 
             

@@ -3,6 +3,9 @@ from import_export import widgets as resource_widget
 from .models import Tire,OneSTire
 from . import widgets
 
+import tablib
+
+
 class TireResource(resources.ModelResource):
     def get_queryset(self):
         return Tire.objects.all()
@@ -347,15 +350,13 @@ class OneSTireResource(resources.ModelResource):
         code = row['Mal']
         quantity = row['Cəmi']
 
-        
         tire = Tire.objects.available(code=code).first()
 
         if not quantity:
             tire.delete()
         elif tire and quantity: 
             tire.add_quantity(quantity)
-        
-    
+
 
     def before_import(self,dataset, using_transactions, dry_run, **kwargs):
         imported_codes = []
@@ -393,7 +394,6 @@ class OneSTireResource(resources.ModelResource):
         tire = Tire.objects.available(code=code).first()
         if tire:
             tire.delete()
-
      
         
     class Meta:
@@ -402,5 +402,17 @@ class OneSTireResource(resources.ModelResource):
         import_id_fields = ('code',)
         use_bulk = True
 
+class OsTireImporter:
+    def __init__(self, dataset):
+        self.updated_tires = []
+        self.deleted_tires = []
+        self.dataset = dataset
 
-# class OsTireImporter:
+    def process_import(self):
+        # setting = OsTireImporterSetting
+        for row in self.dataset.dict:
+
+            code = row[]
+            quantity = row[]
+
+

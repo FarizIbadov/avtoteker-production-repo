@@ -22,5 +22,5 @@ class OneSTireAdmin(ImportMixin,admin.ModelAdmin):
 
 @admin.register(Size)
 class SizeAdmin(CustomModelAdmin):
-    pass
+    exclude = ("size_code",)
     
