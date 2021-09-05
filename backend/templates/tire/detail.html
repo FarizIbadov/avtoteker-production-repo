@@ -1,0 +1,318 @@
+{% extends "../config/main-base.html" %} 
+{% load static %}
+{% load rating %} 
+{% load taksit_kredit %}
+{% load edv %}
+
+{% block seo %}
+  <meta name="description" content="{{object.size.get_size_for_title}} {{object.brand.title}} {{object.serie.title}} Təkər? Avtotəkərdə! Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinləri. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri. BirKartla və TamKartla təkər - 6 ayadək faizsiz taksitlə. #teker #təkər.">
+
+  <title>{{object.brand.title}} {{object.serie.title}} {{object.size.get_size_for_title}} | #teker #təkər | Avtotəkər</title>
+{% endblock seo %}
+
+{% block content %} 
+{% get_edv as edv %}
+
+{% include "../components/order-modal-form.html" %}
+{% include "../components/image-preview-modal.html" %}
+{% include "../components/phone-location-link-container.html" %}
+{% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
+<h1 class="main-list__heading detail-header">{{object.brand}} {{object.serie}} {{object.size.width}}/{{object.size.height}}{{object.get_ZR}}{{object.size.radius}}</h1>
+<hr class="detail-header-line">
+<div class="container mb-5">
+  <div class="main-list__main-row">
+    <div class="main-list__col-12 px-0">
+      <div class="main-list__card border-0">
+        <div class="main-list__sub-row px-4">
+          {% include "../components/main-site/side-info.html" with object=object %}
+          <img
+            class="main-list__item-logo mb-1"
+            src="{{object.brand.get_image}}"
+            title="{{object.brand}}"
+            alt="{{object.brand}}"
+          />
+        </div>
+
+        <p class="main-list__card-text text-right pr-4 detail-serie-font">
+          {{object.serie}}
+        </p>
+        <p class="main-list__card-text text-right pr-4">
+          {{object.get_size|safe}}
+        </p>
+
+        {% if object.get_OE %}
+        <div class="mt-3 row justify-content-end align-items-center no-gutters">
+          <div class="col-2 d-flex align-items-center justify-content-end">
+            <div class="w-20 mr-2 d-flex align-items-center">
+              <img class="w-100" src="{{object.get_OE.image.url}}" alt="">
+            </div>
+            <span class="bg-my-primary h5 p-1 mb-0 mr-4 text-center">
+              {{object.get_OE.title}}
+            </span>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if object.get_year != None %}
+        <div class="mt-3 row justify-content-end align-items-center no-gutters">
+          <div class="col-2 d-flex align-items-center justify-content-end">
+            <span class="{% if object.get_year == True %}bg-my-primary {% else %} bg-danger text-white {% endif %} h5 p-1 mb-0 mr-4 text-center">
+              {{object.year}}
+            </span>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if object.RF %}
+        <div class="mt-3 row justify-content-end align-items-center no-gutters">
+          <div class="w-17 ml-2">
+            <p class="mr-4 bg-my-primary text-center h5 line-height-1 p-1">
+              Run - Flat (R-F)
+            </p>
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="main-list__sub-row--2 px-4">
+          
+          {% include "../components/product-image.html" with object=object %}
+          
+          <div class="main-list__col-sm--2 w-35 mb-5">
+            <div class="main-list__card-body">
+              <div class="main-list__card-text--2 detail-font-larger">
+                <div class='ml-2'>{{object.weight}} {{object.speed}}</div>
+              </div>
+              <div title="'treadwear' protektorun dərinlik indeksi, yol tutma indeksi, temperatura"  class="main-list__card-text--2  detail-font-larger">
+                  {{object.tradeware}}
+              </div>
+              <div class="main-list__card-text--2 detail-font-larger mt-2 detail--db">
+                  <span title="səs indeksı">dB {{object.db}}</span> 
+              </div>
+              <div class="main-list__card-text--2 detail-font-larger mt-2 detail--fuel">
+                  <span class="ml-1" title="yanacağ indeksı">{{object.fuel}}</span>
+              </div>
+              <div class="main-list__card-text--2 detail-font-larger mt-2 detail--contact">
+                  <span class="ml-1" title="yaş yol tutumu indeksı">{{object.contact}}</span>
+              </div>
+              <div class="mt-3">
+                {% include "../components/main-site/image.html" with object=object.season %}
+              </div>
+              <div class="mt-2 mb-4">
+                {% include "../components/main-site/image.html" with object=object.brand.country %} 
+                {% include "../components/main-site/image.html" with object=object.manufacturer %}
+              </div>
+              <div class="main-list__price-info">
+                {% if object.sale_active %}
+                  <div class="price">
+                      <span class="red-line-trought  font-larger--2 opacity-8">
+                          {{object.price|floatformat:-2}}
+                      </span>
+                  </div>  
+                  <div class="price text-right">
+                      <span class="text-red font-xl">{{object.sale|floatformat:-2}}</span>
+                      <span class="manat">
+                        <img src="{% static 'img/manat.png' %}" alt="₼">
+                      </span>
+                  </div>  
+                {% else %}
+                  <div class="price text-right">
+                      <span class="text-red font-xl">{{object.price|floatformat:-2}}</span>
+                      <span class="manat">
+                        <img src="{% static 'img/manat.png' %}" alt="₼">
+                      </span>
+                  </div>  
+                {% endif %}
+              </div>
+            </div>
+            <div class="row justify-content-end ml-auto no-gutters">
+                  {% include "../components/edv.html" with object=object edv=edv detail=True %}
+                  {% if object.release_date %}
+                      {% include "../components/comming-soon.html" with object=object %}
+                  {% elif object.new %}
+                      {% include "../components/new-product-banner.html" with object=object %}
+                  {% endif %}
+                    {% include "../components/sticker-carousel.html" with object=object %}
+                <div class="col-12"> 
+                    {{ object|get_kredit_taksit|safe}}
+                </div>
+            </div>
+          
+          
+          <div class="main-list__btn-box">
+            <button type="button" data-toggle="modal"
+              data-target="#order" class="main-list__cart-btn detail-mb"
+              data-max="{{object.quantity}}"
+              data-price="{{object.sale}}"
+              data-id="{{object.id}}">
+                  Sifariş et
+              </button>
+          </div>
+          <div class="d-flex justify-content-end align-items-center ml-auto mt-4">
+            Say
+            <span class="detail-qtn" title="Stock">
+              {% if object.quantity > 4 %}
+                4+
+              {% else %}
+                {{object.quantity}}
+              {% endif %}
+            </span>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  {% include "../components/sticker-descriptions.html" with object=object %}
+  {% include "../components/campaign-descriptions.html" with object=object %}
+  </div>
+  {% if object.kredit_active or object.taksit_active %}
+  <div class="row mb-5 mt-2">
+    <ul class="col-md-12 nav nav-tabs nav-justified px-0" id="myTab" role="tablist">
+      {% if object.kredit_active %}
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active text-my-secondary" id="home-tab" data-toggle="tab" href="#kredit" role="tab" aria-controls="home" aria-selected="true">Kredit</a>
+      </li>
+      {% endif %}
+      {% if object.taksit_active %}
+      <li class="nav-item" role="presentation">
+        <a class="nav-link  text-my-secondary" id="profile-tab" data-toggle="tab" href="#taksit" role="tab" aria-controls="profile" aria-selected="false">Taksit</a>
+      </li>
+      {% endif %}
+    </ul>
+    <div class="mt-4 col-md-12 tab-content" id="myTabContent">
+      {% if object.kredit_active %}
+      <div class="tab-pane fade show active" id="kredit" role="tabpanel" aria-labelledby="home-tab">
+        {% include "../components/main-site/kredit-table.html" with object=object %}
+      </div>
+      {% endif %}
+      {% if object.taksit_active %}
+      <div class="tab-pane fade" id="taksit" role="tabpanel" aria-labelledby="profile-tab">
+        {% include "../components/main-site/taksit-table.html" with object=object %}
+      </div>
+      {% endif %}
+    </div>
+    
+  </div>
+  
+  {% endif %}
+
+
+  <div class="row justify-content-center">
+    <div class="col-md-12 detail-info">
+      <div class="d-flex mt-2">
+        <div class="detail-banner mr-1 bg-my-primary">Montaj+Balans</div>
+        <div class="detail-banner bg-light">
+          {{object.montaj_balance|floatformat}} azn / ədəd
+        </div>
+      </div>
+      <div class="d-flex mt-2">
+        <div class="detail-banner mr-1 bg-my-primary">Disk təmiri</div>
+        <div class="detail-banner bg-light">10 - 15 azn / ədəd</div>
+      </div>
+      <div class="d-flex mt-2">
+        <div class="detail-banner mr-1 bg-my-primary">Razval</div>
+        <div class="detail-banner bg-light">
+          {{object.razval|floatformat}} azn
+        </div>
+      </div>
+
+      {% if object.brand.free_service %}
+      <div class="d-flex mt-2">
+        <div class="detail-banner mr-1 bg-my-primary">Bir illik servis</div>
+        <div class="detail-banner bg-light">hədiyyə</div>
+      </div>
+      {% endif %}
+      <div class="d-flex mt-2">
+        <div class="detail-banner mr-1 bg-my-primary">
+          2 / 4 təkər üçün ventil
+        </div>
+        <div class="detail-banner bg-light">3 / 5 azn</div>
+      </div>
+      {% if object.brand.extra_one_year_warranty %}
+      <div class="d-flex mt-2">
+        <div class="detail-banner mr-1 bg-my-primary">Əlavə bir il zəmanət</div>
+        <div class="detail-banner bg-light">
+          {{object.brand.extra_one_year_warranty}}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row mb-3 mt-5">
+    <div class="col">
+        <p class="mr-1">{{object.size.get_size_for_title}} {{object.brand.title}} {{object.serie.title}} {{object.serie.description|safe}}</p> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-4 d-flex align-items-center">
+      <div class="detail-rating-box pt-1">
+        <div class="detail-rating-row">
+          <div class="rating-label">Dry</div>
+          <div class="rating-value">{{object.serie.dry|get_rating|safe}}</div>
+        </div>
+        <div class="detail-rating-row">
+          <div class="rating-label">Wet</div>
+          <div class="rating-value">{{object.serie.wet|get_rating|safe}}</div>
+        </div>
+        <div class="detail-rating-row">
+          <div class="rating-label">Snow</div>
+          <div class="rating-value">{{object.serie.snow|get_rating|safe}}</div>
+        </div>
+        <div class="detail-rating-row">
+          <div class="rating-label">Offroad</div>
+          <div class="rating-value">
+            {{object.serie.offroad|get_rating|safe}}
+          </div>
+        </div>
+        <div class="detail-rating-row">
+          <div class="rating-label">Comfort</div>
+          <div class="rating-value">
+            {{object.serie.comfort|get_rating|safe}}
+          </div>
+        </div>
+        <div class="detail-rating-row">
+          <div class="rating-label">Noise</div>
+          <div class="rating-value">{{object.serie.noise|get_rating|safe}}</div>
+        </div>
+        <div class="detail-rating-row">
+          <div class="rating-label">Treadware</div>
+          <div class="rating-value">
+            {{object.serie.treadware|get_rating|safe}}
+          </div>
+        </div>
+        <div class="detail-rating-row">
+          <div class="rating-label">Value</div>
+          <div class="rating-value">{{object.serie.value|get_rating|safe}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 detail-extra">{{object.serie.extra|safe}}</div>
+  </div>
+  <div class="row my-4">
+    <div class="col">
+      <div class="col-md px-0">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="mb-0">{{object.brand.title}} haqqında</h5>
+          </div>
+          <div class="detail-brand-img">
+            <img
+              class="w-100"
+              src="{{object.brand.get_image}}"
+              alt="{{object.brand.title}}"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 px-0 mt-3">{{object.brand.description|safe}}</div>
+    </div>
+  </div>
+</div>
+
+
+<div class="main-index px-0 mb-5">
+        {% include "../components/main-site/map.html" %}
+    </div>
+{% endblock content %}
+

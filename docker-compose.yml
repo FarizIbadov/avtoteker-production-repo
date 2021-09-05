@@ -15,13 +15,7 @@ services:
     build: .
     volumes:
       - static_data:/vol/web
-    environment:
-      - SECRET=j56@jyc()*qnyl1vj^yf5_a5c27kfp5ysf^yeoxl#ul4hn^j^(
-      - POSTGRES_DB=avtoteker
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=3151936f
-      - DEBUG=0
-      - ALLOWED_HOSTS=127.0.0.1,localhost,68.183.147.145,avtoteker.az,www.avtoteker.az
+    env_file: .env
     depends_on:
       - db
 
@@ -35,17 +29,13 @@ services:
     ports:
       - "80:8080"
       - "443:8443"
-    depends_on:
-      - web
+
 
   db:
     restart: always
     container_name: avtoteker-db
     image: postgres:12.5-alpine
-    environment:
-      - POSTGRES_DB=avtoteker
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=3151936f
+    env_file: .env
     volumes:
       - pgdata:/var/lib/postgresql/data/
 
