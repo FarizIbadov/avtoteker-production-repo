@@ -78,7 +78,7 @@ module.exports = {
   ],
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "..", "mysite", "static"),
+    path: path.resolve(__dirname, "..", "backend", "static"),
   },
   optimization: {
     minimizer: [
