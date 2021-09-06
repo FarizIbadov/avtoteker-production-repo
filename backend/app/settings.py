@@ -209,7 +209,6 @@ EMAIL_HOST = "smtp.yandex.ru"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-<<<<<<< HEAD:backend/app/settings.py
 # LOGGING = None
 
 # if not DEBUG:
@@ -228,23 +227,3 @@ EMAIL_USE_TLS = True
 #             },
 #         },
 #     }
-=======
-LOGGING = None
-
-if not DEBUG:
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'handlers': {
-            'console': {
-                'class': 'logging.StreamHandler',
-            },
-        },
-        'loggers': {
-            'django': {
-                'handlers': ['console'],
-                'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-            },
-        },
-    }
->>>>>>> ac0f46f91bcac003dc6bf55f295bd575af0870a5:mysite/mysite/settings.py
