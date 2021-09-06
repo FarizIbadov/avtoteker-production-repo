@@ -54,7 +54,7 @@ class OsMixin:
                 importer.process_save()
                 add_message(request, SUCCESS, "File was imported successfully")
             except Exception as e:
-                add_message(request,ERROR, e.message)
+                add_message(request,ERROR, e)
 
         context = {}
         context.update(self.admin_site.each_context(request))
@@ -66,7 +66,7 @@ class OsMixin:
         return TemplateResponse(request, "admin/os-tire/os-form.html", context)
 
 @admin.register(models.Tire)
-class TireAdmin(ImportExportMixin,OsMixin,CustomModelAdmin):
+class TireAdmin(ImportExportMixin, OsMixin, CustomModelAdmin):
     form = TireForm
     resource_class = TireResource
     search_fields = ("brand__title","serie__title","quantity","manufacturer__title") 

@@ -13,7 +13,7 @@ class CustomAdminActionsMixin(object):
 
     def force_delete(self,modeladmin, request, queryset):
         queryset.force_delete()
-    backup.short_description = "Force delete items"
+    force_delete.short_description = "Force delete items"
 
  
 class CustomModelAdmin(admin.ModelAdmin,CustomAdminActionsMixin):
@@ -21,8 +21,8 @@ class CustomModelAdmin(admin.ModelAdmin,CustomAdminActionsMixin):
         list_display = super().get_list_display(request)
 
         if list_display:
-            return (*list_display,"deleted")        
-        return ("__str__",'deleted')
+            return (*list_display, "deleted")        
+        return ("__str__", "deleted")
 
     def get_exclude(self,request,obj=None):
         exclude = super().get_exclude(request,obj)

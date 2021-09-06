@@ -348,16 +348,17 @@ class OsTireImporter:
     def init_settings(self):
         setting = OsTireImporterSetting.objects.filter(active=True).first()
         self.code_field = "Mal"
-        self.quantity_field = "Cəmi"
+        self.quantity_field = "Miqdar"
 
         if setting:
             self.code_field = setting.look_up
             self.quantity_field = setting.get_from_field
+            
 
     def process_import(self):
         for row in self.dataset.dict:
             code = row.get(self.code_field)
-            quantity = int(row.get(self.quantity_field, 0))
+            quantity = int(row.get(self.quantity_field) or 0)
             
             if not code:
                 continue
@@ -370,7 +371,7 @@ class OsTireImporter:
 
     def get_tire(self, code):
         self.row_is_included = False
-        filtered_tire = list(filter(self.filter_tire(code),self.updated_tires))
+        filtered_tire = list(filter(self.filter_tire(code), self.updated_tires))
        
         if filtered_tire:
             return filtered_tire[0]   
