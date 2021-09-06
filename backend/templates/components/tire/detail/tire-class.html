@@ -1,3 +1,4 @@
+{% if object.tire_class %}
 <div class="container">
     <div class="d-flex flex-column flex-sm-row mb-3">
         <div>
@@ -5,10 +6,13 @@
                 {{object.tire_class}}
             </p>
         </div>
+        {% if object.get_tire_class_description %}
         <div class="ml-0 ml-sm-1 mt-1 mt-sm-0">
             <p class="bg-light text-center h5 mb-0 line-height-1 p-2">
                 {{object.get_tire_class_description}}
             </p>
         </div>
+        {% endif %}
     </div>
 </div>
+{% endif %}
