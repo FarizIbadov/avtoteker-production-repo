@@ -16,16 +16,7 @@ SECRET_KEY = os.environ.get("SECRET", "j56@jyc()*qnyl1vj^yf5_a5c27kfp5ysf^yeoxl#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "1") == '1'
 
-<<<<<<< HEAD:backend/app/settings.py
 ALLOWED_HOSTS =  ['172.20.10.4', '192.168.0.164', '192.168.0.152','localhost'] if DEBUG else os.environ.get("ALLOWED_HOSTS","").split(",")
-=======
-ALLOWED_HOSTS = []
-ALLOWED_HOSTS_ENV = os.environ.get("ALLOWED_HOSTS")
-if DEBUG:
-    ALLOWED_HOSTS.append("*")
-elif ALLOWED_HOSTS_ENV:
-    ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(","))
->>>>>>> ac0f46f91bcac003dc6bf55f295bd575af0870a5:mysite/mysite/settings.py
 
  
 if DEBUG:
@@ -36,11 +27,6 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
-<<<<<<< HEAD:backend/app/settings.py
-=======
-    "adds.apps.AddsConfig",
-    "copyright.apps.CopyrightConfig",
->>>>>>> ac0f46f91bcac003dc6bf55f295bd575af0870a5:mysite/mysite/settings.py
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -61,10 +47,6 @@ INSTALLED_APPS = [
 
     "social.apps.SocialConfig",
     "ordering.apps.OrderingConfig",
-<<<<<<< HEAD:backend/app/settings.py
-=======
-    # "custom_admin.apps.CustomAdminConfig",
->>>>>>> ac0f46f91bcac003dc6bf55f295bd575af0870a5:mysite/mysite/settings.py
     "tireapp.apps.TireappConfig",
     "specific.apps.SpecificConfig",
     "main_site.apps.MainSiteConfig",
@@ -81,11 +63,8 @@ INSTALLED_APPS = [
     "emailapp",
     "secure_sites",
     "adv",
-<<<<<<< HEAD:backend/app/settings.py
     "adds.apps.AddsConfig",
     "copyright.apps.CopyrightConfig",
-=======
->>>>>>> ac0f46f91bcac003dc6bf55f295bd575af0870a5:mysite/mysite/settings.py
     # "waranty"
     # "about_us"
 ]

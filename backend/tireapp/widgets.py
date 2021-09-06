@@ -14,21 +14,13 @@ class CustomBooleanWidget(BooleanWidget):
 class CustomBrandWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
         title = value.strip()
-<<<<<<< HEAD:backend/tireapp/widgets.py
         brand, _ = Brand.objects.get_or_create(title=title)
-=======
-        brand = Brand.objects.get(title=title)
->>>>>>> ac0f46f91bcac003dc6bf55f295bd575af0870a5:mysite/tireapp/widgets.py
         return brand
 
 
 class CustomSerieWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-<<<<<<< HEAD:backend/tireapp/widgets.py
         serie, _ = Serie.objects.get_or_create(
-=======
-        serie = Serie.objects.get(
->>>>>>> ac0f46f91bcac003dc6bf55f295bd575af0870a5:mysite/tireapp/widgets.py
             title=value
         )
         return serie

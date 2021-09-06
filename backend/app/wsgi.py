@@ -1,9 +1,5 @@
 """
-<<<<<<< HEAD:backend/app/wsgi.py
 WSGI config for app project.
-=======
-WSGI config for mysite project.
->>>>>>> ac0f46f91bcac003dc6bf55f295bd575af0870a5:mysite/mysite/wsgi.py
 It exposes the WSGI callable as a module-level variable named ``application``.
 For more information on this file, see
 https://docs.djangoproject.com/en/3.1/howto/deployment/wsgi/
