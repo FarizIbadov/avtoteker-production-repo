@@ -27,34 +27,34 @@ class OsMixin:
         return my_urls + urls
 
     def os_import(self, request, *args, **kwargs):
-        formats = [XLSX, XLS]
-    
-        form = ImportForm(
-            formats, 
-            request.POST or None, 
-            request.FILES or None,
-            **kwargs
-        )
+        try:
+            formats = [XLSX, XLS]
+        
+            form = ImportForm(
+                formats, 
+                request.POST or None, 
+                request.FILES or None,
+                **kwargs
+            )
 
-        if request.method == "POST" and form.is_valid():
-            input_format = formats[
-                int(form.cleaned_data['input_format'])
-            ]()
-            import_file = form.cleaned_data['import_file']
-            tmp_storage = self.write_to_tmp_storage(import_file, input_format)
+            if request.method == "POST" and form.is_valid():
+                input_format = formats[
+                    int(form.cleaned_data['input_format'])
+                ]()
+                import_file = form.cleaned_data['import_file']
+                tmp_storage = self.write_to_tmp_storage(import_file, input_format)
 
-            data = tmp_storage.read(input_format.get_read_mode())
-            if not input_format.is_binary() and self.from_encoding:
-                data = force_str(data, self.from_encoding)
+                data = tmp_storage.read(input_format.get_read_mode())
+                if not input_format.is_binary() and self.from_encoding:
+                    data = force_str(data, self.from_encoding)
 
-            dataset = input_format.create_dataset(data)
-            try:
+                dataset = input_format.create_dataset(data)
                 importer = OsTireImporter(dataset)
                 importer.process_import()
                 importer.process_save()
                 add_message(request, SUCCESS, "File was imported successfully")
-            except Exception as e:
-                add_message(request,ERROR, e)
+        except Exception as e:
+            add_message(request,ERROR, e)
 
         context = {}
         context.update(self.admin_site.each_context(request))
