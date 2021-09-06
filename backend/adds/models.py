@@ -1,9 +1,5 @@
 from django.db import models
-<<<<<<< HEAD:backend/adds/models.py
 from app.utils import compress
-=======
-from mysite.utils import compress
->>>>>>> ac0f46f91bcac003dc6bf55f295bd575af0870a5:mysite/adds/models.py
 
 class Add(models.Model):
     name = models.CharField(max_length=50,default="advertisement")
