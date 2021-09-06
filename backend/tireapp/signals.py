@@ -2,7 +2,7 @@ from django.db.models.signals import post_save, post_delete
 from import_export.signals import post_import
 
 from django.dispatch import receiver
-from .models import Tire, Size, OneSTire
+from .models import Tire, Size
 
 
 @receiver(post_delete, sender=Tire)
