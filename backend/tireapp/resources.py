@@ -359,7 +359,7 @@ class OsTireImporter:
         for row in self.dataset.dict:
             code = row.get(self.code_field)
             quantity = int(row.get(self.quantity_field) or 0)
-            
+        
             if not code:
                 continue
 

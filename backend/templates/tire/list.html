@@ -45,28 +45,9 @@
                             <h4 class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</h4>
                         </div>
                     </div>
-                    {% if object.get_OE %}
-                        <div class="mt-3 row justify-content-end align-items-center no-gutters">
-                        <div class="col-2 d-flex align-items-center justify-content-end">
-                            <div class="w-20 mr-2 d-flex align-items-center">
-                            <img class="w-100" src="{{object.get_OE.image.url}}" alt="">
-                            </div>
-                            <span class="bg-my-primary h5 p-1 mb-0 mr-4 text-center">
-                            {{object.get_OE.title}}
-                            </span>
-                        </div>
-                        </div>
-                        {% endif %}
+                    {% include "../components/tire/detail/oe-year.html" with object=object %}
 
-                        {% if object.RF %}
-                        <div class="mt-3 row justify-content-end align-items-center no-gutters">
-                        <div class="w-17 ml-2">
-                            <p class="mr-4 bg-my-primary text-center h5 line-height-1 p-1">
-                            Run - Flat (R-F)
-                            </p>
-                        </div>
-                        </div>
-                        {% endif %}
+                    {% include "../components/tire/detail/RF.html" %}
                     
                     <div class="main-list__sub-row--2">
                         {% include "../components/product-image.html" with object=object %}
