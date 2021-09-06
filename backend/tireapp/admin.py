@@ -8,7 +8,7 @@ from import_export.forms import ImportForm
 from import_export.formats.base_formats import XLS, XLSX
 
 from .forms import TireForm
-from .models import Tire,Size, OsTireImporterSetting, OE, TireYear
+from . import models
 from import_export.admin import ImportExportMixin,ImportMixin
 from utils.admin import CustomModelAdmin
 from .resources import TireResource, OsTireImporter
@@ -65,7 +65,7 @@ class OsMixin:
 
         return TemplateResponse(request, "admin/os-tire/os-form.html", context)
 
-@admin.register(Tire)
+@admin.register(models.Tire)
 class TireAdmin(ImportExportMixin,OsMixin,CustomModelAdmin):
     form = TireForm
     resource_class = TireResource
@@ -77,19 +77,27 @@ class TireAdmin(ImportExportMixin,OsMixin,CustomModelAdmin):
     change_list_template = "admin/os-tire/change-list-import-export.html"
 
 
-@admin.register(Size)
+@admin.register(models.Size)
 class SizeAdmin(CustomModelAdmin):
     exclude = ("size_code",)
     
-@admin.register(OsTireImporterSetting)
+@admin.register(models.OsTireImporterSetting)
 class OsTireImporterSettingAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(OE)
+@admin.register(models.OE)
 class OEAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(TireYear)
+@admin.register(models.TireYear)
 class TireYearAdmin(admin.ModelAdmin):
     list_display = ('year', 'active')
+
+@admin.register(models.TireClass)
+class TireClassAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+
+@admin.register(models.TireClassText)
+class TireClassTextAdmin(admin.ModelAdmin):
+    list_display = ('text', 'active')

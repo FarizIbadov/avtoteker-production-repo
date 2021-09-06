@@ -188,8 +188,8 @@ class TireResource(resources.ModelResource):
         attribute="montaj_balance",
         widget=resource_widget.DecimalWidget(),
     )
-    Class = fields.Field(
-        column_name="class", attribute="Class", widget=widgets.CustomClassWidget()
+    tire_class = fields.Field(
+        column_name="class", attribute="tire_class", widget=widgets.CustomClassWidget()
     )
 
     size = fields.Field(attribute="size", widget=widgets.CustomSizeWidget())
@@ -300,7 +300,7 @@ class TireResource(resources.ModelResource):
             "montaj_balance",
             "razval",
             "year",
-            "Class",
+            "tire_class",
             "taksit_active",
             "taksit_2",
             "taksit_2_active",

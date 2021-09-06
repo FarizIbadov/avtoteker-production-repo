@@ -33,13 +33,9 @@ class MainListView(FilterBySizeMixin, ListView):
 
 
 class MainDetailView(DetailView):
+    model = Tire
     template_name = "tire/detail.html"
     query_pk_and_slug = True
-
-    def get_object(self):
-        pk = self.kwargs['pk']
-        slug = self.kwargs['slug']
-        return Tire.objects.get(slug=slug,pk=pk)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -12,6 +12,20 @@ from utils.models import CustomModel
 from sticker.models import Sticker
 from campaign.models import Post
 
+class TireClassText(models.Model):
+    text = models.CharField(max_length=255, null=True)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.text
+
+class TireClass(models.Model):
+    title = models.CharField(max_length=255, null=True)
+
+    def __str__(self):
+        return self.title
+
+
 class TireYear(models.Model):
     year = models.PositiveSmallIntegerField(default=2017)
     active = models.BooleanField(default=True)
@@ -24,7 +38,7 @@ class OE(models.Model):
     title = models.CharField(max_length=255, null=True)
     image = models.ImageField(upload_to="oe", null=True)
 
-    description = models.TextField(blank=True)
+    description = RichTextField(blank=True)
 
     def __str__(self):
         return self.title
@@ -58,12 +72,6 @@ class Size(CustomModel):
 
 
 class Tire(CustomModel):
-    CLASS_CHOICES = [
-        (1, "Econom"),
-        (2, "Orta"),
-        (3, "Premium"),
-    ]
-
     KREDIT_CHOICES =  [
         (0,"Yoxdur"),
         (3,"3 ay"),
@@ -200,7 +208,7 @@ class Tire(CustomModel):
     razval = models.CharField(max_length=50,null=True)
 
     year = models.PositiveSmallIntegerField(blank=True, null=True)
-    Class = models.PositiveSmallIntegerField(default=1, choices=CLASS_CHOICES)
+    tire_class = models.ForeignKey(TireClass, on_delete=models.SET_NULL, null=True)
 
     quantity = models.PositiveIntegerField(default=4)
     release_date = models.CharField(blank=True,null=True,max_length=30)
@@ -290,6 +298,10 @@ class Tire(CustomModel):
     def get_ZR(self):
         return "ZR" if self.ZR else "R"
 
+    def get_tire_class_description(self):
+        tire_class_text = TireClassText.objects.filter(active=True).first()
+        return getattr(tire_class_text, 'text', "")
+
     def get_size(self):
         return "<span class='text-red'>%s</span>/<span class='text-red'>%s</span> %s<span class='text-red'>%s</span>" % (
             self.size.width,
@@ -375,3 +387,4 @@ class OsTireImporterSetting(models.Model):
         return "OsTire Importer Setting"
 
             
+

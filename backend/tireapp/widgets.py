@@ -1,6 +1,6 @@
 from import_export.widgets import BooleanWidget, Widget, DecimalWidget
 from specific.models import Brand, Serie, Country, Season
-from .models import Size
+from .models import Size, TireClass
 
 
 class CustomBooleanWidget(BooleanWidget):
@@ -35,15 +35,12 @@ class CustomCountryWidget(Widget):
 
 class CustomClassWidget(Widget):
     def render(self, value, obj=None):
-        Classes = {"1": "Econom", "2": "Orta", "3": "Premium"}
-        key = str(value).strip()
-        return Classes[key]
+        return value.title
+      
 
     def clean(self, value, row=None, *args, **kwargs):
-        Classes = {"Econom": 1, "Orta": 2, "Premium": 3}
-        cap_word = value.strip()
-        index = Classes.get(cap_word, 2)
-        return index
+        tire_class, _ = TireClass.objects.get_or_create(title=value.strip())
+        return tire_class
 
 
 class CustomSizeWidget(Widget):
