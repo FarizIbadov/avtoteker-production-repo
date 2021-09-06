@@ -1,0 +1,115 @@
+{% extends "../config/main-base.html" %}
+{% load static %}
+{% load taksit_kredit %}
+{% load size_parser %}
+
+{% block seo %}
+ 
+
+  <meta name="description" content="Geniş yağ çeşidi Avtotəkərdə. Orijinal və minimum qiymət. Shell, Mobil1, Ravenol">
+
+  <title>Yağ seçimi | Avtotəkər | Shell, Mobil1, Ravenol</title>
+
+{% endblock seo %}
+
+{% block content %}
+    {% include "../components/phone-location-link-container.html" %}
+    {% include "../components/main-site/oil-search.html" %}
+    {% include "../components/oil-order-modal-form.html" %}
+    {% include "../components/image-preview-modal.html" %}
+
+    <div class="main-list">
+        <div class="main-list__main-row">
+            {% for object in object_list %}
+            <div class="main-list__col-12">
+                <section class="main-list__card">
+                    <div class="main-list__sub-row">
+                        {#{% include "../components/main-site/side-info.html" with object=object %}#}
+                            <img class="main-list__item-logo mb-1" src="{{object.brand.logo.url}}" alt="{{object.brand}}">
+                    </div>
+                    {% if object.serie.logo %}
+                    <div class="row justify-content-end px-4 no-gutters">
+                           <img class="main-list__item-logo mb-1" src="{{object.serie.logo.url}}" alt="{{object.serie}}"> 
+                    </div>
+                    {% endif %}
+                  
+                    <h4 class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</h4>
+                    <div class="main-list__sub-row--2">
+                        {% include "../components/product-image.html" with object=object %}
+                        <div class="main-list__col-sm--2 w-40 mb-5">
+                            <div class="main-list__card-body">
+                                <h4 class="main-list__card-text text-right mt-2">
+                                    {{object.serie}} <span class="text-danger">{{object.viscosity}}</span>
+                                </h4>
+                                <p class="text-right mb-0 mt-1">
+                                    {{object.volume}} 
+                                    <span class="text-danger">{{object.oil_type}}</span>
+                                    <span class="text-danger">{{object.fuel}}</span>
+                                </p>
+                                <p class="text-right">
+                                    {{object.des1}}
+                                </p>
+                              
+                                <div class="mt-2">
+                                    {% include "../components/main-site/image.html" with object=object.brand.country %}
+                                    {% include "../components/main-site/image.html" with object=object.country %}
+                                </div>
+                                <div class="main-list__price-info mt-5 mr-1">
+                                    {% if object.sale_active %}
+                                    <div class="price">
+                                        <span class="red-line-trought  font-larger--2 opacity-8">
+                                            {{object.price|floatformat}}
+                                        </span>
+                                    </div>  
+                                    <div class="price text-right">
+                                        <span class="text-red font-xl">{{object.sale|floatformat}}</span>
+                                        <span class="manat">
+                                            <img src="{% static 'img/manat.png' %}" alt="₼">
+                                        </span>
+                                    </div>  
+                                    {% else %}
+                                     <div class="price text-right">
+                                        <span class="text-red font-xl">{{object.price|floatformat}}</span>
+                                        <span class="manat">
+                                            <img src="{% static 'img/manat.png' %}" alt="₼">
+                                        </span>
+                                    </div>  
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end no-gutters ml-auto">
+           
+                            {% include "../components/sticker-carousel.html" with object=object %}
+                        
+                            <div class="col-12">
+                            {{ object|get_kredit_taksit|safe }} 
+                            </div>
+                        </div>
+                        <div class="main-list__btn-box d-flex align-items-center">
+                            <button type="button" data-toggle="modal"
+                            data-target="#order" class="main-list__cart-btn oil-button"
+                            data-max="{{object.quantity}}"
+                            data-price="{{object.USD}}"
+                            data-id="{{object.id}}">
+                                Yağdəyişməyə yazılmaq
+                            </button>
+                    
+                            <a href="{% url 'oil-detail' object.id %}" class="main-list__detail-btn">Ətraflı</a>
+                        </div>
+                        
+                    </div>
+                </section>
+            </div>
+            {% empty %}
+                <h3 class="main-list__empty-text">Hal hazırda yoxdur</h3>
+            {% endfor %}
+        </div>
+    </div>
+    {% include "../components/pagination.html" %}
+    <div class="main-index">
+        {% include "../components/main-site/oil-brand-carousel.html" %}
+        {% include "../components/main-site/map.html" %}
+    </div>
+{% endblock content %}

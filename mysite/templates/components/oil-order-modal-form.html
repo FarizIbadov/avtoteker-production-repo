@@ -1,0 +1,24 @@
+{% load crispy_forms_tags %}
+{% load get_forms %}
+{% get_oil_form as form %}
+
+<form method="POST" action="{% url 'oil-order' %}" novalidate class="modal fade oil-order" id="order" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Yağdəyişməyə yazılmaq</h5>
+      </div>
+      <div class="modal-body" id="order-modal-body">
+          <div id="modal-form">
+            {% crispy form %} 
+          </div>
+      </div>
+      <div class="modal-footer" id="order-modal-footer">
+        <button type="button" class="btn btn-my-secondary" id="cancel-btn" data-dismiss="modal">İmtina</button>
+        <button type="submit" class="btn btn-my-primary" id="order-btn">
+          <span>Yağdəyişməyə yazılmaq</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

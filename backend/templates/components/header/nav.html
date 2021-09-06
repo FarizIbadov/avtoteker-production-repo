@@ -18,12 +18,15 @@
                 <a class="header__nav__link" href="{{ navigation.link }}">{{navigation.title}}</a>
               </li>
               {% endfor %}
+<<<<<<< HEAD:backend/templates/components/header/nav.html
 
               {% if request.user.is_superuser or request.user.is_staff %}
                 <li class="header__nav__item">
                   <a target="blank" class="header__nav__link" href="{% url 'admin:index' %}">Admin</a>
                 </li>
               {% endif %}
+=======
+>>>>>>> ac0f46f91bcac003dc6bf55f295bd575af0870a5:mysite/templates/components/header/nav.html
             </ul>
           </div>
       </nav>

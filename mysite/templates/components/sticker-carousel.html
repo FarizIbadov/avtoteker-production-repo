@@ -1,0 +1,18 @@
+{% load sticker %}
+{% get_sticker_timer as timer %}
+
+{% if object.get_stickers %}
+<div class="col-12 my-3">
+    <div id="carouselExampleSlidesOnly" class="carousel slide sticker-container ml-auto" data-ride="carousel">
+        <div class="carousel-inner h-100">
+            {% for sticker in object.get_stickers %}
+                {% if sticker.active %}
+                    <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %} h-100 w-100" data-interval="{{ timer }}">
+                        {% include "./sticker.html" with sticker=sticker %}
+                    </div>
+                {% endif %}
+            {% endfor %}        
+        </div>
+    </div> 
+</div>
+{% endif %}

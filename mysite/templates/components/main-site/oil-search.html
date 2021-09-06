@@ -1,0 +1,32 @@
+{% load options %} {% get_viscosities as viscosities %}
+
+<form
+  action="{% url 'oil-list' %}"
+  method="get"
+  class="tire-search"
+  id="tire-search"
+>
+ 
+<h2 class="tire-search__heading">Yağ seçimi</h2>
+<div class="tire-search__container">
+    <div class="row justify-content-center">  
+        <div class="col-sm-6 col-md-3">
+        <select name="viscosity" id="oil-serie"  class="tire-search__select">
+            <option value="">Qatılıq</option>
+            {% for viscosity in viscosities %}
+              <option value="{{viscosity.title}}">{{viscosity.title}}</option>
+            {% endfor %}
+        </select>
+        </div>
+    </div>
+</div>
+  
+  <div class="tire-search__btn-group">
+    <button id="tire-search-submit-btn" class="tire-search__btn tire-search__btn--main" type="submit">
+      Tap
+    </button>
+    <button id="tire-search-reset-btn" class="tire-search__btn tire-search__btn--outline" type="reset">
+      Yenidən
+    </button>
+  </div>
+</form>

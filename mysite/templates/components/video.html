@@ -1,0 +1,30 @@
+{% if object.video %}
+<div class="col-md-12 {% if not_margin %}  {% else %} mt-5 {% endif %}">
+  <div class="video-player">
+    <video class="w-100 video" autoplay>
+      <source src="{{ object.video.url }}" />
+    </video>
+    <div class="video-tool-container d-none align-items-center px-3">
+      <div class="mr-3 h-100">
+        <button class="text-light video-play-pause h-100">
+          <i class="bi bi-play-fill d-flex align-items-center h-100"></i>
+        </button>
+      </div>
+      <div class="video-tool-progress d-flex align-items-center">
+        <input
+          type="range"
+          value="0"
+          step="1"
+          class="video-progress"
+          class="w-100"
+        />
+      </div>
+      <div class="ml-3">
+        <button class="text-light fullscreen-btn h-100">
+          <i class="bi bi-fullscreen"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
