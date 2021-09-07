@@ -218,7 +218,7 @@
   <div class="row mb-3 mt-5">
     <div class="col">
         <p>{{object.size.get_size_for_title}} {{object.brand.title}} {{object.serie.title}} 
-        {% if object.serie.description and object.serie.description != "description" %}
+        {% if object.serie.description %}
           {{object.serie.description|safe}}
         {% endif %}
         </p> 
