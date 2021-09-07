@@ -96,48 +96,46 @@
                   </div>  
                 {% endif %}
               </div>
-             
             </div>
-            
-          
-            
           </div>
         </div>
         
-        <div class="row justify-content-end ml-auto no-gutters mt-4 px-4">
-              {% include "../components/edv.html" with object=object edv=edv detail=True %}
-              {% if object.release_date %}
-                  {% include "../components/comming-soon.html" with object=object %}
-              {% elif object.new %}
-                  {% include "../components/new-product-banner.html" with object=object %}
+        <div class="px-4">
+          <div class="row justify-content-end ml-auto no-gutters">
+                {% include "../components/edv.html" with object=object edv=edv detail=True %}
+                {% if object.release_date %}
+                    {% include "../components/comming-soon.html" with object=object %}
+                {% elif object.new %}
+                    {% include "../components/new-product-banner.html" with object=object %}
+                {% endif %}
+                  {% include "../components/sticker-carousel.html" with object=object %}
+              <div class="col-12"> 
+                  {{ object|get_kredit_taksit|safe}}
+              </div>
+          </div>
+        
+        
+          <div class="main-list__btn-box">
+            <button type="button" data-toggle="modal"
+              data-target="#order" class="main-list__cart-btn detail-mb"
+              data-max="{{object.quantity}}"
+              data-price="{{object.sale}}"
+              data-id="{{object.id}}">
+                  Sifariş et
+              </button>
+          </div>
+          <div class="d-flex justify-content-end align-items-center ml-auto mt-4">
+            Say
+            <span class="detail-qtn" title="Stock">
+              {% if object.quantity > 4 %}
+                4+
+              {% else %}
+                {{object.quantity}}
               {% endif %}
-                {% include "../components/sticker-carousel.html" with object=object %}
-            <div class="col-12"> 
-                {{ object|get_kredit_taksit|safe}}
-            </div>
+            </span>
+          </div>
         </div>
-      
-      
-      <div class="main-list__btn-box px-4">
-        <button type="button" data-toggle="modal"
-          data-target="#order" class="main-list__cart-btn detail-mb"
-          data-max="{{object.quantity}}"
-          data-price="{{object.sale}}"
-          data-id="{{object.id}}">
-              Sifariş et
-          </button>
       </div>
-      <div class="d-flex justify-content-end align-items-center ml-auto mt-4 px-4">
-        Say
-        <span class="detail-qtn" title="Stock">
-          {% if object.quantity > 4 %}
-            4+
-          {% else %}
-            {{object.quantity}}
-          {% endif %}
-        </span>
-      </div>
-    </div>
   </div>
   {% include "../components/tire/detail/tire-class.html" with object=object %}
   {% include "../components/tire/detail/OE-description.html" with object=object %}
