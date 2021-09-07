@@ -69,7 +69,7 @@ class Brand(CustomModel):
     free_service = models.BooleanField(default=False)
     extra_one_year_warranty = models.CharField(max_length=100,blank=True)
     order_number = models.IntegerField(default=1)
-    description = RichTextUploadingField(default="description")
+    description = RichTextUploadingField()
     show_in_slider = models.BooleanField(default=False)
 
     def __str__(self):
