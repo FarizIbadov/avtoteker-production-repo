@@ -33,18 +33,17 @@
                 <section class="main-list__card rounded-0">
                     <div class="main-list__sub-row">
                         {% include "../components/main-site/side-info.html" with object=object %}
+                        <div>
+
                             <img class="main-list__item-logo mb-1" src="{{object.brand.get_image}}" alt="{{object.brand}}">
-                    </div>
-                    <div class="row justify-content-end">
-                        <div class="col-3">
-                            <h4 class="main-list__card-text text-right pr-4">{{object.serie}}</h4>
                         </div>
                     </div>
-                    <div class="row justify-content-end">
-                        <div class="col-3">
-                            <h4 class="main-list__card-text text-right pr-4">{{object.get_size|safe}}</h4>
-                        </div>
-                    </div>
+                    <p class="main-list__card-text text-right pr-4 detail-serie-font">
+                        {{object.serie}}
+                    </p>
+                    <p class="main-list__card-text text-right pr-4">
+                        {{object.get_size|safe}}
+                    </p>
                     {% include "../components/tire/detail/oe-year.html" with object=object %}
 
                     {% include "../components/tire/detail/RF.html" %}
