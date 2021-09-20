@@ -31,17 +31,17 @@ RUN chown -R user:user ./locale/az/LC_MESSAGES
 RUN chown -R user:user ./locale/ru/LC_MESSAGES
 RUN chown -R user:user ./locale/tr/LC_MESSAGES
 
-RUN chmod -R 755 ./locale/en/LC_MESSAGES/django.mo
-RUN chmod -R 755 ./locale/en/LC_MESSAGES/django.po
+RUN chmod g+w ./locale/en/LC_MESSAGES/django.mo
+RUN chmod g+w ./locale/en/LC_MESSAGES/django.po
 
-RUN chmod -R 755 ./locale/ru/LC_MESSAGES/django.mo
-RUN chmod -R 755 ./locale/ru/LC_MESSAGES/django.po
+RUN chmod g+w ./locale/ru/LC_MESSAGES/django.mo
+RUN chmod g+w ./locale/ru/LC_MESSAGES/django.po
 
-RUN chmod -R 755 ./locale/tr/LC_MESSAGES/django.mo
-RUN chmod -R 755 ./locale/tr/LC_MESSAGES/django.po
+RUN chmod g+w ./locale/tr/LC_MESSAGES/django.mo
+RUN chmod g+w ./locale/tr/LC_MESSAGES/django.po
 
-RUN chmod -R 755 ./locale/az/LC_MESSAGES/django.mo
-RUN chmod -R 755 ./locale/az/LC_MESSAGES/django.po
+RUN chmod g+w ./locale/az/LC_MESSAGES/django.mo
+RUN chmod g+w ./locale/az/LC_MESSAGES/django.po
 
 
 RUN chown -R user:user /vol
