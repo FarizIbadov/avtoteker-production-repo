@@ -16,10 +16,12 @@ COPY /backend .
 RUN mkdir -p /vol/web/media
 RUN mkdir -p /vol/web/static
 
+
+RUN useradd -ms /bin/bash user
+
 RUN chown -R user:user ./locale
 RUN chmod -R 755 ./locale
 
-RUN useradd -ms /bin/bash user
 RUN chown -R user:user /vol
 RUN chmod -R 755 /vol/web
 USER user
