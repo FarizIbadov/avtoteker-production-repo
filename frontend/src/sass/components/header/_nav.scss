@@ -19,10 +19,14 @@
 
   &__toggler {
     @extend .border-0;
+
+    
   }
 
   &__nav {
     @extend .navbar-nav, .ml-auto;
+
+
   }
 
   &__item {
@@ -31,5 +35,65 @@
 
   &__link {
     @extend .nav-link;
+  }
+}
+
+.nav-dropdown {
+  @extend .bg-my-secondary;
+
+  position: absolute;
+  right:0%;
+  top: 0;
+  height: 80px !important;
+  width: 60.5px !important;
+
+  display: flex; 
+  align-items: center;
+
+  & > a {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+  }
+
+  & > .dropdown-menu {
+    min-width: 60.5px !important;
+    max-width: 60.5px !important;
+
+    @media screen and (max-width:1245px) {
+  
+      min-width: 50px !important;
+      max-width: 50px !important;
+    }
+    
+    &.show {
+      transform: translate3d(0px, 80px, 0px) !important;
+    }
+  }
+
+  & .dropdown-item {
+    &:active {
+      @extend .bg-my-secondary;
+    }
+  }
+}
+
+.toggler-extra {
+  @media screen and (max-width:812px) {
+    margin-right: 20px;
+  }
+  @media screen and (max-width:620px) {
+    margin-right: 50px;
+  }
+}
+
+.nav-extra {
+  @media screen and (max-width:1235px) {
+    margin-right: 10px;
+  }
+
+  @media screen and (max-width:1040px) {
+    margin-right: 20px;
   }
 }

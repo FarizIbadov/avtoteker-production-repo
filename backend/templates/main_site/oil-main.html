@@ -1,9 +1,10 @@
 {% extends "../config/main-base.html" %} 
+{% load i18n %}
 
 {% block seo %}
-  <meta name="description" content="Geniş yağ çeşidi Avtotəkərdə. Orijinal və minimum qiymət. Shell, Mobil1, Ravenol">
+  <meta name="description" content="{% trans 'Geniş yağ çeşidi Avtotəkərdə. Orijinal və minimum qiymət. Shell, Mobil1, Ravenol' %}">
   
-  <title>Yağdəyişmə - Yağ seçimi | Avtotəkər | Shell, Mobil1, Ravenol</title>
+  <title>{% trans 'Yağdəyişmə - Yağ seçimi | Avtotəkər | Shell, Mobil1, Ravenol' %}</title>
 {% endblock seo %}
 
 {% block content %}

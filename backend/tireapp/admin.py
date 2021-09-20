@@ -97,7 +97,3 @@ class TireYearAdmin(admin.ModelAdmin):
 @admin.register(models.TireClass)
 class TireClassAdmin(admin.ModelAdmin):
     list_display = ('title',)
-
-@admin.register(models.TireClassText)
-class TireClassTextAdmin(admin.ModelAdmin):
-    list_display = ('text', 'active')

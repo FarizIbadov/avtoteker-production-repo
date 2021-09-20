@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.utils.translation import gettext as _
 from django.contrib.postgres.search import TrigramSimilarity
 from django.urls import reverse
 from django.views.generic import TemplateView, ListView, DetailView,View
@@ -12,9 +13,9 @@ import re
 class MainPage(TemplateView):
     template_name = "main_site/index.html"
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tire_search_title'] = "<h2 class='tire-search__heading'>Təkər seçimi</h2>"
+        context['tire_search_title'] = f"""<h2 class='tire-search__heading'>{_("Təkər seçimi")}</h2>"""
         return context
 
 
@@ -28,7 +29,7 @@ class MainListView(FilterBySizeMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tire_search_title'] = "<h2 class='tire-search__heading'>Seçim edin</h2>"
+        context['tire_search_title'] = f"""<h2 class='tire-search__heading'>{_("Seçim edin")}</h2>"""
         return context
 
 
@@ -39,6 +40,6 @@ class MainDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tire_search_title'] = "<h2 class='tire-search__heading'>Seçim edin</h2>"
+        context['tire_search_title'] = f"""<h2 class='tire-search__heading'>{_("Seçim edin")}</h2>"""
         return context
         

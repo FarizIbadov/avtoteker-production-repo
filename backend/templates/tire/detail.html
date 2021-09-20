@@ -3,11 +3,12 @@
 {% load rating %} 
 {% load taksit_kredit %}
 {% load edv %}
+{% load i18n %}
 
 {% block seo %}
-  <meta name="description" content="{{object.size.get_size_for_title}} {{object.brand.title}} {{object.serie.title}} Təkər? Avtotəkərdə! Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinləri. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri. BirKartla və TamKartla təkər - 6 ayadək faizsiz taksitlə. #teker #təkər.">
+  <meta name="description" content="{{object.size.get_size_for_title}} {{object.brand.title}} {{object.serie.title}} {% trans 'Təkər? Avtotəkərdə! Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinləri. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri. BirKartla və TamKartla təkər - 6 ayadək faizsiz taksitlə. #teker #təkər.' %}">
 
-  <title>{{object.brand.title}} {{object.serie.title}} {{object.size.get_size_for_title}} | #teker #təkər | Avtotəkər</title>
+  <title>{{object.brand.title}} {{object.serie.title}} {{object.size.get_size_for_title}} {% trans '| #teker #təkər | Avtotəkər' %}</title>
 {% endblock seo %}
 
 {% block content %} 
@@ -121,11 +122,12 @@
               data-max="{{object.quantity}}"
               data-price="{{object.sale}}"
               data-id="{{object.id}}">
-                  Sifariş et
+                  {% trans 'Sifariş et' %}
               </button>
           </div>
+          {% include '../components/tire/social-box.html' %}
           <div class="d-flex justify-content-end align-items-center ml-auto mt-4">
-            Say
+            {% trans 'Say' %}
             <span class="detail-qtn" title="Stock">
               {% if object.quantity > 4 %}
                 4+
@@ -147,12 +149,12 @@
     <ul class="col-md-12 nav nav-tabs nav-justified px-0" id="myTab" role="tablist">
       {% if object.kredit_active %}
       <li class="nav-item" role="presentation">
-        <a class="nav-link active text-my-secondary" id="home-tab" data-toggle="tab" href="#kredit" role="tab" aria-controls="home" aria-selected="true">Kredit</a>
+        <a class="nav-link active text-my-secondary" id="home-tab" data-toggle="tab" href="#kredit" role="tab" aria-controls="home" aria-selected="true">{% trans 'Kredit' %}</a>
       </li>
       {% endif %}
       {% if object.taksit_active %}
       <li class="nav-item" role="presentation">
-        <a class="nav-link  text-my-secondary" id="profile-tab" data-toggle="tab" href="#taksit" role="tab" aria-controls="profile" aria-selected="false">Taksit</a>
+        <a class="nav-link  text-my-secondary" id="profile-tab" data-toggle="tab" href="#taksit" role="tab" aria-controls="profile" aria-selected="false">{% trans 'Taksit' %}</a>
       </li>
       {% endif %}
     </ul>
@@ -179,35 +181,35 @@
       <div class="d-flex mt-2">
         <div class="detail-banner mr-1 bg-my-primary">Montaj+Balans</div>
         <div class="detail-banner bg-light">
-          {{object.montaj_balance|floatformat}} azn / ədəd
+          {{object.montaj_balance|floatformat}} {% trans 'azn / ədəd' %}
         </div>
       </div>
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-my-primary">Disk təmiri</div>
-        <div class="detail-banner bg-light">10 - 15 azn / ədəd</div>
+        <div class="detail-banner mr-1 bg-my-primary">{% trans 'Disk təmiri' %}</div>
+        <div class="detail-banner bg-light">{% trans '10 - 15 azn / ədəd' %}</div>
       </div>
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-my-primary">Razval</div>
+        <div class="detail-banner mr-1 bg-my-primary">{% trans 'Razval' %}</div>
         <div class="detail-banner bg-light">
-          {{object.razval|floatformat}} azn
+          {{object.razval|floatformat}} {% trans 'azn' %}
         </div>
       </div>
 
       {% if object.brand.free_service %}
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-my-primary">Bir illik servis</div>
-        <div class="detail-banner bg-light">hədiyyə</div>
+        <div class="detail-banner mr-1 bg-my-primary">{% trans 'Bir illik servis' %}</div>
+        <div class="detail-banner bg-light">{% trans 'hədiyyə' %}</div>
       </div>
       {% endif %}
       <div class="d-flex mt-2">
         <div class="detail-banner mr-1 bg-my-primary">
-          2 / 4 təkər üçün ventil
+         {% trans '2 / 4 təkər üçün ventil' %}
         </div>
-        <div class="detail-banner bg-light">3 / 5 azn</div>
+        <div class="detail-banner bg-light">{% trans '3 / 5 azn' %}</div>
       </div>
       {% if object.brand.extra_one_year_warranty %}
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-my-primary">Əlavə bir il zəmanət</div>
+        <div class="detail-banner mr-1 bg-my-primary">{% trans 'Əlavə bir il zəmanət' %}</div>
         <div class="detail-banner bg-light">
           {{object.brand.extra_one_year_warranty}}
         </div>
@@ -228,41 +230,41 @@
     <div class="col-md-6 mb-4 d-flex align-items-center">
       <div class="detail-rating-box pt-1">
         <div class="detail-rating-row">
-          <div class="rating-label">Dry</div>
+          <div class="rating-label">{% trans 'Dry' %}</div>
           <div class="rating-value">{{object.serie.dry|get_rating|safe}}</div>
         </div>
         <div class="detail-rating-row">
-          <div class="rating-label">Wet</div>
+          <div class="rating-label">{% trans 'Wet' %}</div>
           <div class="rating-value">{{object.serie.wet|get_rating|safe}}</div>
         </div>
         <div class="detail-rating-row">
-          <div class="rating-label">Snow</div>
+          <div class="rating-label">{% trans 'Snow</div>
           <div class="rating-value">{{object.serie.snow|get_rating|safe}}</div>
         </div>
         <div class="detail-rating-row">
-          <div class="rating-label">Offroad</div>
+          <div class="rating-label">{% trans 'Offroad' %}</div>
           <div class="rating-value">
             {{object.serie.offroad|get_rating|safe}}
           </div>
         </div>
         <div class="detail-rating-row">
-          <div class="rating-label">Comfort</div>
+          <div class="rating-label">{% trans 'Comfort' %}</div>
           <div class="rating-value">
             {{object.serie.comfort|get_rating|safe}}
           </div>
         </div>
         <div class="detail-rating-row">
-          <div class="rating-label">Noise</div>
+          <div class="rating-label">{% trans 'Noise' %}</div>
           <div class="rating-value">{{object.serie.noise|get_rating|safe}}</div>
         </div>
         <div class="detail-rating-row">
-          <div class="rating-label">Treadware</div>
+          <div class="rating-label">{% trans 'Treadware' %}</div>
           <div class="rating-value">
             {{object.serie.treadware|get_rating|safe}}
           </div>
         </div>
         <div class="detail-rating-row">
-          <div class="rating-label">Value</div>
+          <div class="rating-label">{% trans 'Value' %}</div>
           <div class="rating-value">{{object.serie.value|get_rating|safe}}</div>
         </div>
       </div>

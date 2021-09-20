@@ -1,9 +1,10 @@
+{% load i18n %}
 {% load oil_brands %}
 {% get_oil_brands as brands %}
 
 {% if not brands.is_empty %}
 <div class="brand-carousel">
-    <h2 class="slick-heading">Bizim markalar</h2>
+    <h2 class="slick-heading">{% trans 'Bizim markalar' %}</h2>
     <div class="customer-logos slider">
         {% for brand in brands %}
         <div class="slide">

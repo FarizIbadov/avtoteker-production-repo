@@ -1,5 +1,6 @@
 from django import template
 from django.urls import reverse,resolve
+from django.utils.translation import gettext as _
 
 from tireapp.models import Size
 from  specific.models import Brand
@@ -15,9 +16,9 @@ def parse_size(request):
     height_def = "" if size[1] == "-" else size[1]
     radius_def = "" if size[2] == "-" else size[2]
 
-    width_obj = SizeField("width","en",width_def)
-    height_obj = SizeField("height","hündürlük",height_def)
-    radius_obj = SizeField("radius","radius",radius_def)
+    width_obj = SizeField("width",_("en"),width_def)
+    height_obj = SizeField("height",_("hündürlük"),height_def)
+    radius_obj = SizeField("radius",_("radius"),radius_def)
     
     return (width_obj, height_obj, radius_obj)
 

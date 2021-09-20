@@ -1,11 +1,14 @@
+{% load i18n %}
 {% load taksit_kredit %}
+
 
 <div class="row kredit-table">
     <div class="col-md-12">
       <div class="row">
-        <h5 class="col-4 text-center kredit-heading">ay</h5>
-        <h5 class="col-4 text-center kredit-heading">ilkin odəniş</h5>
-        <h5 class="col-4 text-center kredit-heading">aylıq</h5>
+        <h5 class="col-4 text-center kredit-heading">{% trans 'ay' %}
+        </h5>
+        <h5 class="col-4 text-center kredit-heading">{% trans 'ilkin odəniş' %}</h5>
+        <h5 class="col-4 text-center kredit-heading">{% trans 'aylıq' %}</h5>
       </div>
      
       {% if object.kredit_3_active%}
@@ -17,7 +20,7 @@
       {% endif %}
       {% if object.kredit_3_active and object.kredit_3_dif == 0 %}
       <div class="row mb-1">
-        <div class="col-4"><div class="bg-danger text-light p-2 text-center">3 ay 0%</div></div>
+        <div class="col-4"><div class="bg-danger text-light p-2 text-center">3 {% trans 'ay' %} 0%</div></div>
         <div class="col-4"><div class="bg-danger text-light p-2 text-center">{{object|get_first_price|floatformat}}</div></div>
         <div class="col-4"><div class="bg-danger text-light p-2 text-center">{{object|special_kredit_price|floatformat}}</div></div>
       </div>

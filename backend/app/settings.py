@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 import logging
 
+from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -44,6 +46,8 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     "crispy_forms",
     "import_export",
+    'rosetta',
+    "modeltranslation",
 
     "social.apps.SocialConfig",
     "ordering.apps.OrderingConfig",
@@ -87,6 +91,7 @@ CKEDITOR_CONFIGS = {
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -153,7 +158,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "az"
+
+LANGUAGES = (
+    ('az', _("Azerbaijani")),
+    ('en', _("English")),
+    ('ru', _("Russian")),
+    ('tr', _("Turkey")),
+)
 
 TIME_ZONE = "UTC"
 
@@ -187,6 +199,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.yandex.ru"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+LOCALE_PATHS = (
+    BASE_DIR / 'locale',
+)
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = "az"
 
 # LOGGING = None
 

@@ -52,3 +52,20 @@ if (form) {
     }
   });
 }
+
+
+const langDropDown = document.getElementById("lang-dropdown")!;
+const navBurger = document.getElementById("nav-burger")!;
+const navList = document.getElementById("nav-list")!;
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY >= 43) {
+    langDropDown.classList.add('d-none');
+    navBurger.classList.remove("toggler-extra");
+    navList.classList.remove("nav-extra");
+  } else {
+    langDropDown.classList.remove("d-none");
+    navBurger.classList.add("toggler-extra");
+    navList.classList.add("nav-extra");
+  }
+})

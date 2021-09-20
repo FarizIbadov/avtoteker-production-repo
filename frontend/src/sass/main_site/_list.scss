@@ -363,3 +363,29 @@
 .oe-logo {
   width: 50px;
 }
+
+.social-box {
+  margin-top: 10px !important;
+}
+
+.phone-btn {
+  @extend .bg-my-primary, .text-dark, .py-1, .px-2, .btn ,.btn-sm, .rounded-0, .shadow-none;
+
+  margin-right: 10px;
+  width: 100px;
+
+  @include responsive(max, 450px) {
+      font-size: 12px;
+    
+    }
+}
+
+.message-btn {
+  @extend .bg-danger, .text-white, .py-1 , .px-2, .btn ,.btn-sm, .rounded-0, .shadow-none;
+  width: 80px;
+
+  @include responsive(max, 450px) {
+      font-size: 12px;
+      width: 60px;
+  }
+}

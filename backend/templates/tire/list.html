@@ -1,4 +1,5 @@
 {% extends "../config/main-base.html" %}
+{% load i18n %}
 {% load static %}
 {% load taksit_kredit %}
 {% load size_parser %}
@@ -9,10 +10,10 @@
   {% parse_size_for_meta request as size %}
 
   {% if size and not object_list.is_empty %}
-    <meta name="description" content="{{size}} Təkər? Avtotəkərdə! Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinləri. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri. BirKartla və TamKartla təkər - 6 ayadək faizsiz taksitlə. #teker #təkər.">
+    <meta name="description" content="{{size}} {% trans 'Təkər? Avtotəkərdə! Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinləri. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri. BirKartla və TamKartla təkər - 6 ayadək faizsiz taksitlə. #teker #təkər.' %}">
   {% endif %}
 
-  <title>{% parse_size_for_title request %} | #teker #təkər | Avtotəkər</title>
+  <title>{% parse_size_for_title request %} {% trans '| #teker #təkər | Avtotəkər' %}</title>
 
 {% endblock seo %}
 
@@ -123,15 +124,16 @@
                                 data-max="{{object.quantity}}"
                                 data-price="{{object.sale}}"
                                 data-id="{{object.id}}">
-                                Sifariş et
+                                {% trans 'Sifariş et' %}
                             </button>
-                            <a href="{{object.get_absolute_url}}" class="main-list__detail-btn">Ətraflı</a>
+                            <a href="{{object.get_absolute_url}}" class="main-list__detail-btn">{% trans 'Ətraflı' %}</a>
                         </div>
+                        {% include '../components/tire/social-box.html' %}
                     </div>
                 </section>
             </div>
             {% empty %}
-                <h3 class="main-list__empty-text">Hal hazırda yoxdur</h3>
+                <h3 class="main-list__empty-text">{% trans 'Hal hazırda yoxdur' %}</h3>
             {% endfor %}
         </div>
     </div>

@@ -1,11 +1,11 @@
 {% extends "admin/import_export/base.html" %}
 
-{% load i18n %}
+<!-- {% load i18n %} -->
 {% load admin_urls %}
 {% load static %}
 
 {% block breadcrumbs_last %}
-{% trans "Tire Search Warranty" %}
+    Tire Search Warranty
 {% endblock %}
 
 {% block extrastyle %}{{ block.super }}
@@ -137,7 +137,7 @@
           </div>
       </fieldset>
       <div class="submit-row">
-        <input type="submit" class="default" value="{% trans 'Search' %}">
+        <input type="submit" class="default" value="Search">
       </div>
     </form>
     {% if results %}
@@ -249,7 +249,7 @@
             </div>
         </div>
         <div class="submit-row">
-            <input type="submit" disabled id="next-btn" class="default" value="{% trans 'Next' %}">
+            <input type="submit" disabled id="next-btn" class="default" value="Next">
         </div>
     </form>
     {% endif %}

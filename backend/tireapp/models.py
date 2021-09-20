@@ -12,15 +12,8 @@ from utils.models import CustomModel
 from sticker.models import Sticker
 from campaign.models import Post
 
-class TireClassText(models.Model):
-    text = models.CharField(max_length=255, null=True)
-    active = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.text
-
 class TireClass(models.Model):
-    title = models.CharField(max_length=255, null=True)
+    title = models.CharField(max_length=255)
 
     def __str__(self):
         return self.title
@@ -132,8 +125,8 @@ class Tire(CustomModel):
     ZR = models.BooleanField(default=False)
 
     tradeware = models.CharField(max_length=10, null=True)
-    weight = models.IntegerField(null=True)
-    speed = models.CharField(max_length=10, null=True)
+    weight = models.IntegerField(blank=True)
+    speed = models.CharField(max_length=10, blank=True)
     season = models.ForeignKey(Season, on_delete=models.DO_NOTHING, null=True)
 
     price = models.DecimalField(null=True, decimal_places=2, max_digits=10)
@@ -297,10 +290,6 @@ class Tire(CustomModel):
 
     def get_ZR(self):
         return "ZR" if self.ZR else "R"
-
-    def get_tire_class_description(self):
-        tire_class_text = TireClassText.objects.filter(active=True).first()
-        return getattr(tire_class_text, 'text', "")
 
     def get_size(self):
         return "<span class='text-red'>%s</span>/<span class='text-red'>%s</span> %s<span class='text-red'>%s</span>" % (

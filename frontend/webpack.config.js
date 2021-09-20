@@ -11,7 +11,7 @@ module.exports = {
   devtool: "inline-source-map",
   devServer: {
     port: 3000,
-    contentBase: path.resolve(__dirname, "..", "backend", "static"),
+    contentBase: path.resolve(__dirname, "..", "mysite", "static"),
     publicPath: "/static/",
     open: true,
     proxy: {

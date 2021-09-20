@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.utils.translation import gettext as _
 from django.views.generic import View
 from .models import TireSize,Trim
 import requests
@@ -26,7 +27,7 @@ class TireSizeView(View):
 
     def get_context_data(self):
         context = {
-            "tire_search_title":"<h2 class='tire-search__heading'>Seçim edin</h2>",
+            "tire_search_title":f"""<h2 class='tire-search__heading'>{_("Seçim edin")}</h2>""",
         }
         return context
 

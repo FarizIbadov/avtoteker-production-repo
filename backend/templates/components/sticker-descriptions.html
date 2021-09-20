@@ -1,8 +1,9 @@
+{% load i18n %}
 {% load sticker %}
 
 {% if object.get_stickers %}
 <section class="mb-5">
-    <h2 class="text-center">Hədiyyələr və güzəştlər</h2>
+    <h2 class="text-center">{% trans 'Hədiyyələr və güzəştlər' %}</h2>
     <hr>
     {% for sticker in object.get_stickers %}
         {% if sticker.active %}

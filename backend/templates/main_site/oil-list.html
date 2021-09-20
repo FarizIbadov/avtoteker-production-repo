@@ -3,12 +3,14 @@
 {% load taksit_kredit %}
 {% load size_parser %}
 
+{% load i18n %}
+
 {% block seo %}
  
 
-  <meta name="description" content="Geniş yağ çeşidi Avtotəkərdə. Orijinal və minimum qiymət. Shell, Mobil1, Ravenol">
+  <meta name="description" content="{% trans 'Geniş yağ çeşidi Avtotəkərdə. Orijinal və minimum qiymət. Shell, Mobil1, Ravenol' %}">
 
-  <title>Yağ seçimi | Avtotəkər | Shell, Mobil1, Ravenol</title>
+  <title>{% trans 'Yağ seçimi | Avtotəkər | Shell, Mobil1, Ravenol' %}</title>
 
 {% endblock seo %}
 
@@ -93,17 +95,17 @@
                             data-max="{{object.quantity}}"
                             data-price="{{object.USD}}"
                             data-id="{{object.id}}">
-                                Yağdəyişməyə yazılmaq
+                                {% trans 'Yağdəyişməyə yazılmaq' %}
                             </button>
                     
-                            <a href="{% url 'oil-detail' object.id %}" class="main-list__detail-btn">Ətraflı</a>
+                            <a href="{% url 'oil-detail' object.id %}" class="main-list__detail-btn">{% trans 'Ətraflı' %}</a>
                         </div>
                         
                     </div>
                 </section>
             </div>
             {% empty %}
-                <h3 class="main-list__empty-text">Hal hazırda yoxdur</h3>
+                <h3 class="main-list__empty-text">{% trans 'Hal hazırda yoxdur' %}</h3>
             {% endfor %}
         </div>
     </div>

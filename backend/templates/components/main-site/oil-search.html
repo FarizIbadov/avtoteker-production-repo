@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load options %} {% get_viscosities as viscosities %}
 
 <form
@@ -7,12 +8,13 @@
   id="tire-search"
 >
  
-<h2 class="tire-search__heading">Yağ seçimi</h2>
+<h2 class="tire-search__heading">{% trans 'Yağ seçimi' %}
+</h2>
 <div class="tire-search__container">
     <div class="row justify-content-center">  
         <div class="col-sm-6 col-md-3">
         <select name="viscosity" id="oil-serie"  class="tire-search__select">
-            <option value="">Qatılıq</option>
+            <option value="">{% trans 'Qatılıq' %}</option>
             {% for viscosity in viscosities %}
               <option value="{{viscosity.title}}">{{viscosity.title}}</option>
             {% endfor %}
@@ -23,10 +25,10 @@
   
   <div class="tire-search__btn-group">
     <button id="tire-search-submit-btn" class="tire-search__btn tire-search__btn--main" type="submit">
-      Tap
+      {% trans 'Tap' %}
     </button>
     <button id="tire-search-reset-btn" class="tire-search__btn tire-search__btn--outline" type="reset">
-      Yenidən
+      {% trans 'Yenidən' %}
     </button>
   </div>
 </form>

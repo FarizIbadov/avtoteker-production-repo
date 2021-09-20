@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load edv %}
 
 {% if edv.logo %}
@@ -9,7 +10,7 @@
         {% if detail and edv.percentage %}
         <p class="edv-price pl-3 ml-2 d-flex align-items-center font-medium">
             <span><snap class="text-danger">{{object|get_edv_price:edv.percentage}} </snap> 
-            - dək </span>
+            {% trans '- dək' %} </span>
         </p>
         {% endif %}
     </div>

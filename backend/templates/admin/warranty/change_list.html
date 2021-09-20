@@ -7,7 +7,7 @@
     <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
         <a href="{% url opts|admin_urlname:'choose-tire' %}" class="addlink">
-        {% blocktranslate with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktranslate %}
+            Add {{ name }}
         </a>
     </li>
 {% endblock %}

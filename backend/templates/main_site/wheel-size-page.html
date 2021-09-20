@@ -1,10 +1,10 @@
 {% extends "../config/main-base.html" %} 
 
 {% block seo %}
-  <meta name="description" content="Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. #teker #təkər
-  BirKartla və TamKartla 6 ayadək faizsiz taksitlə.">
+  <meta name="description" content="{% trans 'Avtotəkər sizin üçün müxtəlif ölçülərdə olan seçilmiş markaların təkərlərin rəsmi zəmanətlə nağd, faizsiz taksitlə və kreditlə satışın təklif edir. Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinlərin distribütoru. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri mövcuddur. #teker #təkər
+  BirKartla və TamKartla 6 ayadək faizsiz taksitlə.' %}">
 
-  <title>#teker {{title}} təkər ölçüsü | Avtotəkər</title>
+  <title>{% trans '#teker' %} {{title}} {% trans 'təkər ölçüsü | Avtotəkər' %}</title>
 {% endblock seo %}
 
 {% block content %}
@@ -14,22 +14,22 @@
       <h1 class="text-center">{{title}}</h1>
       <hr>
       <h2 class="text-center mb-5 font-larger--2 font-weigth-400">
-        Seçimi etmək üçün aşağıdaki şin ölçülərinə toxunun
+        {% trans 'Seçimi etmək üçün aşağıdaki şin ölçülərinə toxunun' %}
       </h2>
       <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col" class="text-center">
-              <h3 class="mb-0">Şin</h3>
+              <h3 class="mb-0">{% trans 'Şin' %}</h3>
             </th>
             <th scope="col" class="text-center">
-              <h3 class="mb-0">Yer</h3>
+              <h3 class="mb-0">{% trans 'Yer' %}</h3>
             </th>
             <th scope="col" class="text-center">
-              <h3 class="mb-0">Disk</h3>
+              <h3 class="mb-0">{% trans 'Disk' %}</h3>
             </th>
             <th scope="col" class="text-center hidden-at-mobile">
-              <h3 class="mb-0">Şin təzyiqi</h3>
+              <h3 class="mb-0">{% trans 'Şin təzyiqi' %}</h3>
             </th>
           </tr>
         </thead>

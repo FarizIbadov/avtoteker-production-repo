@@ -1,8 +1,11 @@
+{% load i18n %}
+
 <div class="row taksit-table">
     <div class="col-md-12">
       <div class="row">
-        <h5 class="col-6 text-center kredit-heading">ay</h5>
-        <h5 class="col-6 text-center kredit-heading">aylıq</h5>
+        <h5 class="col-6 text-center kredit-heading">{% trans 'ay' %}</h5>
+        <h5 class="col-6 text-center kredit-heading">{% trans 'aylıq' %}
+        </h5>
       </div>
      
       {% if object.taksit_2_active%}

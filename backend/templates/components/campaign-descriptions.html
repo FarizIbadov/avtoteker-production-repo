@@ -1,6 +1,9 @@
+{% load i18n %}
+
 {% if object.get_campaigns %}
 <section class="mb-5">
-    <h2 class="text-center">Kampaniyalar</h2>
+    <h2 class="text-center">{% trans 'Kampaniyalar' %}
+    </h2>
     <hr>
     {% for campaign in object.get_campaigns %}
         

@@ -1,4 +1,5 @@
 from django import template
+from django.utils.translation import gettext as _
 from tireapp.models import Tire
 from kredit_taksit.models import KreditTaksitImage,KreditTaksitInterval
 
@@ -82,7 +83,7 @@ def get_template(items):
             title = f"{item['month']} {item['title']} 0%"
         elif item['title'] == 'kredit':
             title = f"{item['month']} ay kreditlə"
-        price = f"ayda <span class='text-danger'>{item['price']} azn</span>"
+        price = f"{_('ayda')} <span class='text-danger'>{item['price']} azn</span>"
         item_template = carousel_item % (active,interval,item['image'],title,price)
         item_templates.append(item_template)
 

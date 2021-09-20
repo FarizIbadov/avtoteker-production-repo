@@ -2,10 +2,12 @@
 {% load static %}
 {% load taksit_kredit %}
 
-{% block seo %}
-  <meta name="description" content="Geniş yağ çeşidi Avtotəkərdə. Orijinal və minimum qiymət. Shell, Mobil1, Ravenol">
+{% load  i18n %}
 
-  <title>{{object.brand}} {{object.serie}} {{object.viscosity}} - {% if object.sale_active %} {{object.sale}} {% else %} {{object.price}} {% endif %} azn | Yağ seçimi | Avtotəkər </title>
+{% block seo %}
+  <meta name="description" content="{% trans 'Geniş yağ çeşidi Avtotəkərdə. Orijinal və minimum qiymət. Shell, Mobil1, Ravenol' %}">
+
+  <title>{{object.brand}} {{object.serie}} {{object.viscosity}} - {% if object.sale_active %} {{object.sale}} {% else %} {{object.price}} {% endif %} {% trans 'azn | Yağ seçimi | Avtotəkər' %} </title>
 {% endblock seo %}
 
 {% block content %}
@@ -90,7 +92,7 @@
               data-max="{{object.quantity}}"
               data-price="{{object.USD}}"
               data-id="{{object.id}}">
-                  Yağdəyişməyə yazılmaq
+                  {% trans 'Yağdəyişməyə yazılmaq' %}
               </button>
            </div>
         </div>
@@ -115,7 +117,7 @@
             <div class="col-md px-0">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h5 class="mb-0">{{object.brand.title}} haqqında</h5>
+                        <h5 class="mb-0">{{object.brand.title}} {% trans 'haqqında' %}</h5>
                     </div>
                     <div class="detail-brand-img">
                         <img

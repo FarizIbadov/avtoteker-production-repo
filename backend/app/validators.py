@@ -1,16 +1,13 @@
 from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
-from django.utils.translation import gettext_lazy as _
 
 import phonenumbers
 
 
 @deconstructible
 class ContentTypeValidator:
-    message = _(
-        'File mime_type “%(mime_type)s” is not allowed. '
-        'Allowed mime_types are: %(mime_types)s.'
-    )
+    message = 'File mime_type “%(mime_type)s” is not allowed. Allowed mime_types are: %(mime_types)s.'
+    
     code = 'invalid_mime_type'
 
     def __init__(self, mime_types=None, message=None, code=None):
@@ -47,9 +44,8 @@ class ContentTypeValidator:
 
 @deconstructible
 class PhoneValidator:
-    message = _(
-        'Invalid phone number'  
-    )
+    message = 'Invalid phone number'  
+    
     code = 'invalid_phone_number'
 
     def __call__(self,value):

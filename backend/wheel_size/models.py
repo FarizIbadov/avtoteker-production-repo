@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext as _
 import re
 
 class Make(models.Model):
@@ -97,8 +98,8 @@ class TireSize(models.Model):
 
     def get_tire_type(self):
         if self.tire_type == 1:
-            return 'Qabaq'
+            return _('Qabaq')
         elif self.tire_type == 2:
-            return 'Arxa'
-        return "4X4"
+            return _('Arxa')
+        return _("4X4")
 

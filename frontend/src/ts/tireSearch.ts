@@ -161,9 +161,14 @@ class TireSearch {
     const year = document.getElementById("year") as HTMLSelectElement;
     const trim = document.getElementById("trim") as HTMLSelectElement;
 
+    const makesUrl = make.getAttribute('data-url')!;
+    const modelUrl = model.getAttribute("data-url")!;
+    const yearUrl = year.getAttribute("data-url")!;
+    const trimUrl = trim.getAttribute("data-url")!;
+
     if (this.state === "size") {
       axios
-        .get<any, AxiosResponse<ResData[]>>("/api/makes/")
+        .get<any, AxiosResponse<ResData[]>>(makesUrl)
         .then(res => {
           this.resetSelect("make", "model", "year", "trim");
           this.putOptions(make, res.data);
@@ -179,7 +184,7 @@ class TireSearch {
           const target = e.target as HTMLSelectElement;
           this.make = target.value;
           axios
-            .get<any, AxiosResponse<ResData[]>>("/api/models/", {
+            .get<any, AxiosResponse<ResData[]>>(modelUrl, {
               params: { make: this.make },
             })
             .then(res => {
@@ -198,7 +203,7 @@ class TireSearch {
           this.model = target.value;
           const { model, make } = this;
           axios
-            .get<any, AxiosResponse<ResData[]>>("/api/years/", {
+            .get<any, AxiosResponse<ResData[]>>(yearUrl, {
               params: {
                 make,
                 model,
@@ -220,7 +225,7 @@ class TireSearch {
           this.year = target.value;
           const { model, make, year } = this;
           axios
-            .get<any, AxiosResponse<ResData[]>>("/api/trims/", {
+            .get<any, AxiosResponse<ResData[]>>(trimUrl, {
               params: { model, make, year },
             })
             .then(res => {

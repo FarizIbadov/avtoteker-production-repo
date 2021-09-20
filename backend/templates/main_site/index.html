@@ -1,9 +1,10 @@
 {% extends "../config/main-base.html" %} 
+{% load i18n %}
 
 {% block seo %}
-  <meta name="description" content="Təkər? Avtotəkərdə! Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinləri. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri. BirKartla və TamKartla təkər - 6 ayadək faizsiz taksitlə. #teker #təkər.">
+  <meta name="description" content="{% trans 'Təkər? Avtotəkərdə! Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinləri. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri. BirKartla və TamKartla təkər - 6 ayadək faizsiz taksitlə. #teker #təkər.' %}">
 
-  <title>#teker #təkər | Avtotəkər | Horizon, Vitour, Dunlop, Yokohama, Continental</title>
+  <title>{% trans '#teker #təkər | Avtotəkər | Horizon, Vitour, Dunlop, Yokohama, Continental' %}</title>
 {% endblock seo %}
 
 {% block content %}
