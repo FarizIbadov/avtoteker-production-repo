@@ -206,21 +206,21 @@ LOCALE_PATHS = (
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = "az"
 
-# LOGGING = None
+LOGGING = None
 
-# if not DEBUG:
-#     LOGGING = {
-#         'version': 1,
-#         'disable_existing_loggers': False,
-#         'handlers': {
-#             'console': {
-#                 'class': 'logging.StreamHandler',
-#             },
-#         },
-#         'loggers': {
-#             'django': {
-#                 'handlers': ['console'],
-#                 'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-#             },
-#         },
-#     }
+if not DEBUG:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['console'],
+                'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+            },
+        },
+    }
