@@ -21,27 +21,17 @@ RUN useradd -ms /bin/bash user
 
 RUN chown -R user:user ./locale
 
-RUN chown ugo+rwx user:user ./locale/en
-RUN chown ugo+rwx user:user ./locale/az
-RUN chown ugo+rwx user:user ./locale/ru
-RUN chown ugo+rwx user:user ./locale/tr
+RUN chmod g+w ./locale/en/LC_MESSAGES/django.mo
+RUN chmod g+w ./locale/en/LC_MESSAGES/django.po
 
-RUN chown ugo+rwx user:user ./locale/en/LC_MESSAGES
-RUN chown ugo+rwx user:user ./locale/az/LC_MESSAGES
-RUN chown ugo+rwx user:user ./locale/ru/LC_MESSAGES
-RUN chown ugo+rwx user:user ./locale/tr/LC_MESSAGES
+RUN chmod g+w ./locale/ru/LC_MESSAGES/django.mo
+RUN chmod g+w ./locale/ru/LC_MESSAGES/django.po
 
-RUN chmod 777 ./locale/en/LC_MESSAGES/django.mo
-RUN chmod 777 ./locale/en/LC_MESSAGES/django.po
+RUN chmod g+w ./locale/tr/LC_MESSAGES/django.mo
+RUN chmod g+w ./locale/tr/LC_MESSAGES/django.po
 
-RUN chmod 777 ./locale/ru/LC_MESSAGES/django.mo
-RUN chmod 777 ./locale/ru/LC_MESSAGES/django.po
-
-RUN chmod 777 ./locale/tr/LC_MESSAGES/django.mo
-RUN chmod 777 ./locale/tr/LC_MESSAGES/django.po
-
-RUN chmod 777 ./locale/az/LC_MESSAGES/django.mo
-RUN chmod 777 ./locale/az/LC_MESSAGES/django.po
+RUN chmod g+w ./locale/az/LC_MESSAGES/django.mo
+RUN chmod g+w ./locale/az/LC_MESSAGES/django.po
 
 
 RUN chown -R user:user /vol
