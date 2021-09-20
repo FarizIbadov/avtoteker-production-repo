@@ -12,6 +12,8 @@ from utils.models import CustomModel
 from sticker.models import Sticker
 from campaign.models import Post
 
+from django.utils.translation import gettext as _
+
 class TireClass(models.Model):
     title = models.CharField(max_length=255)
 
@@ -203,7 +205,7 @@ class Tire(CustomModel):
     year = models.PositiveSmallIntegerField(blank=True, null=True)
     tire_class = models.ForeignKey(TireClass, on_delete=models.SET_NULL, null=True)
 
-    quantity = models.PositiveIntegerField(default=4)
+    quantity = models.CharField(max_length=255, blank=True, null=True)
     release_date = models.CharField(blank=True,null=True,max_length=30)
 
     db = models.PositiveSmallIntegerField(default=72)
@@ -221,8 +223,6 @@ class Tire(CustomModel):
 
     stickers = models.CharField(max_length=100,blank=True,null=True)
     campaigns = models.CharField(max_length=100,blank=True,null=True)
-
-    
 
     def get_stickers(self):
         if self.stickers:
@@ -258,6 +258,7 @@ class Tire(CustomModel):
             self.manufacturer,
         )
 
+
     def get_absolute_url(self):
         return reverse(
             "detail", kwargs={"pk":self.pk,"slug":self.get_slug()}
@@ -286,7 +287,13 @@ class Tire(CustomModel):
         return self.sale if self.sale else self.price
 
     def get_quantity(self):
-        return self.quantity if self.quantity <= 4 else "4+"
+        if self.get_quantity_is_numeric():
+            return self.quantity if int(self.quantity) <= 4 else "4+"
+        else:
+            return _("Sorğu ilə")
+ 
+    def get_quantity_is_numeric(self):
+        return self.quantity.isnumeric()
 
     def get_ZR(self):
         return "ZR" if self.ZR else "R"

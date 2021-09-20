@@ -127,13 +127,15 @@
           </div>
           {% include '../components/tire/social-box.html' %}
           <div class="d-flex justify-content-end align-items-center ml-auto mt-4">
-            {% trans 'Say' %}
-            <span class="detail-qtn" title="Stock">
-              {% if object.quantity > 4 %}
-                4+
-              {% else %}
-                {{object.quantity}}
+            <span class="d-inline-block mr-2">{% trans 'Say' %}</span>
+            <span class="detail-qtn 
+              {% if object.get_quantity_is_numeric %} 
+                circle 
+              {% else %} 
+                rounded-1 
               {% endif %}
+            " title="Stock">
+              {{object.get_quantity}}
             </span>
           </div>
         </div>

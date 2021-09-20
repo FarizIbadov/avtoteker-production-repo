@@ -4,7 +4,7 @@
 {% load taksit_kredit %}
 {% load size_parser %}
 {% load edv %}
-{% load text %}
+
 
 {% block seo %}
   {% parse_size_for_meta request as size %}
@@ -19,7 +19,7 @@
 
 {% block content %}
     {% get_edv as edv %}
-    {% get_price_3_text as price_3_text %}
+
 
     {% include "../components/phone-location-link-container.html" %}
     {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
@@ -95,10 +95,10 @@
                                 </div>
                             </div>
                         </div>
-                        {% if object.price_3 and price_3_text %}
-                        <div class="bg-my-primary py-2 px-3 mb-5 price-3-style">
-                            <div>{{ price_3_text }}</div>
-                            <div class="text-danger price mx-3">
+                        {% if object.price_3 %}
+                        <div class="py-1 px-3 mb-5 price-3-style">
+                            <div class="text-center">{% trans "Endirim" %}</div>
+                            <div class="text-white price mx-3 ml-5">
                                 {{object.price_3}}
                             </div>
                              <div class="price-manat">

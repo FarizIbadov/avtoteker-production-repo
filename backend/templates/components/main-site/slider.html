@@ -15,9 +15,11 @@
   <div class="carousel-inner">
     {% for item in slider %}
       {% if forloop.first %}
+
       <div class="carousel-item active" data-interval="{{item.duration}}">
       <img src="{{item.image.url}}" class="d-block w-100" alt="{{item.name}}">
     </div>
+   
       {% else %}
     <div class="carousel-item" data-interval="{{item.duration}}">
       <img src="{{item.image.url}}" class="d-block w-100" alt="{{item.name}}">

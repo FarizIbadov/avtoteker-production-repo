@@ -3,6 +3,7 @@ from import_export.admin import ImportExportMixin
 from .models import Country, Season, Brand, Serie
 from .resources import SerieResource
 from utils.admin import CustomModelAdmin
+from modeltranslation.admin import TranslationAdmin
 
 admin.site.site_header = "Avto Teker Admin"
 admin.site.site_title = "Avto Teker Admin"
@@ -16,11 +17,11 @@ class SeasonAdmin(CustomModelAdmin):
     pass
 
 @admin.register(Brand)
-class BrandAdmin(CustomModelAdmin):
+class BrandAdmin(TranslationAdmin, CustomModelAdmin):
     pass
 
 @admin.register(Serie)
-class SerieAdmin(ImportExportMixin,CustomModelAdmin):
+class SerieAdmin(ImportExportMixin,TranslationAdmin, CustomModelAdmin):
     resource_class = SerieResource
 
     

@@ -335,10 +335,13 @@
 // <i class="bi bi-fullscreen-exit"></i>
 
 .price-3-style {
+  background: linear-gradient(-110deg, #dc3545  0 150px, #ffbb00 150px 100%);
+;
   margin-left: auto;
   font-size: 24px;
 
-  height: 60px;
+  border-radius: 20px;
+  height: 45px;
 
   display: flex;
 

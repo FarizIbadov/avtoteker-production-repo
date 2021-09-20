@@ -1,9 +1,10 @@
 from django.contrib import admin
 from . import models,forms
+from modeltranslation.admin import TranslationAdmin
 
 # Register your models here.
 @admin.register(models.Sticker)
-class StickerAdmin(admin.ModelAdmin):
+class StickerAdmin(TranslationAdmin):
     readonly_fields = ("image_width_num",'text_width_num')
     list_display = ('text','image','active')
     form = forms.StickerForm

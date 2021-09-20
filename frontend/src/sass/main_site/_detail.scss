@@ -87,12 +87,14 @@
     .align-items-center,
     .justify-content-center,
     .ml-2;
-  @include square(60px);
+  height: 60px;
+  min-width: 60px;
   font-size: 24px;
-  border-radius: 50%;
+  
 
   @include responsive(max, 768px) {
-    @include square(45px);
+    height: 45px;
+    min-width: 45px;
   }
 }
 
@@ -148,4 +150,13 @@
 
 .oil-button {
   width: 120px;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.rounded-1 {
+  border-radius: 30px;
+  padding: 0px 20px;
 }

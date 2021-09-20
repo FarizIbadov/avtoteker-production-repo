@@ -12,6 +12,7 @@ from . import models
 from import_export.admin import ImportExportMixin,ImportMixin
 from utils.admin import CustomModelAdmin
 from .resources import TireResource, OsTireImporter
+from modeltranslation.admin import TranslationAdmin
 
 
 class OsMixin:
@@ -85,9 +86,8 @@ class SizeAdmin(CustomModelAdmin):
 class OsTireImporterSettingAdmin(admin.ModelAdmin):
     pass
 
-
 @admin.register(models.OE)
-class OEAdmin(admin.ModelAdmin):
+class OEAdmin(TranslationAdmin):
     pass
 
 @admin.register(models.TireYear)
@@ -95,5 +95,5 @@ class TireYearAdmin(admin.ModelAdmin):
     list_display = ('year', 'active')
 
 @admin.register(models.TireClass)
-class TireClassAdmin(admin.ModelAdmin):
+class TireClassAdmin(TranslationAdmin):
     list_display = ('title',)

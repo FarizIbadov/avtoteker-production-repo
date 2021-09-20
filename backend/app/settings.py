@@ -29,6 +29,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    "modeltranslation",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -47,7 +48,6 @@ INSTALLED_APPS = [
     "crispy_forms",
     "import_export",
     'rosetta',
-    "modeltranslation",
 
     "social.apps.SocialConfig",
     "ordering.apps.OrderingConfig",

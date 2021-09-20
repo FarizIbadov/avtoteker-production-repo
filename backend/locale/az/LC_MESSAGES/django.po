@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-20 12:31+0000\n"
-"PO-Revision-Date: 2021-09-20 08:12+0000\n"
+"POT-Creation-Date: 2021-09-20 14:53+0000\n"
+"PO-Revision-Date: 2021-09-20 13:32+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -65,7 +65,7 @@ msgstr ""
 
 #: ordering/forms.py:15 ordering/forms.py:48
 msgid "Ad:"
-msgstr ""
+msgstr "Name:"
 
 #: ordering/forms.py:16 ordering/forms.py:49
 msgid "Say:"
@@ -360,80 +360,88 @@ msgstr ""
 msgid "Say"
 msgstr ""
 
-#: templates/tire/detail.html:152
+#: templates/tire/detail.html:154
 msgid "Kredit"
 msgstr ""
 
-#: templates/tire/detail.html:157
+#: templates/tire/detail.html:159
 msgid "Taksit"
 msgstr ""
 
-#: templates/tire/detail.html:184
+#: templates/tire/detail.html:186
 msgid "azn / ədəd"
 msgstr ""
 
-#: templates/tire/detail.html:188
+#: templates/tire/detail.html:190
 msgid "Disk təmiri"
 msgstr ""
 
-#: templates/tire/detail.html:189
+#: templates/tire/detail.html:191
 msgid "10 - 15 azn / ədəd"
 msgstr ""
 
-#: templates/tire/detail.html:192
+#: templates/tire/detail.html:194
 msgid "Razval"
 msgstr ""
 
-#: templates/tire/detail.html:194
+#: templates/tire/detail.html:196
 msgid "azn"
 msgstr ""
 
-#: templates/tire/detail.html:200
+#: templates/tire/detail.html:202
 msgid "Bir illik servis"
 msgstr ""
 
-#: templates/tire/detail.html:201
+#: templates/tire/detail.html:203
 msgid "hədiyyə"
 msgstr ""
 
-#: templates/tire/detail.html:206
+#: templates/tire/detail.html:208
 msgid "2 / 4 təkər üçün ventil"
 msgstr ""
 
-#: templates/tire/detail.html:208
+#: templates/tire/detail.html:210
 msgid "3 / 5 azn"
 msgstr ""
 
-#: templates/tire/detail.html:212
+#: templates/tire/detail.html:214
 msgid "Əlavə bir il zəmanət"
 msgstr ""
 
-#: templates/tire/detail.html:233
+#: templates/tire/detail.html:235
 msgid "Dry"
 msgstr ""
 
-#: templates/tire/detail.html:237
+#: templates/tire/detail.html:239
 msgid "Wet"
 msgstr ""
 
-#: templates/tire/detail.html:245
+#: templates/tire/detail.html:247
 msgid "Offroad"
 msgstr ""
 
-#: templates/tire/detail.html:251
+#: templates/tire/detail.html:253
 msgid "Comfort"
 msgstr ""
 
-#: templates/tire/detail.html:257
+#: templates/tire/detail.html:259
 msgid "Noise"
 msgstr ""
 
-#: templates/tire/detail.html:261
+#: templates/tire/detail.html:263
 msgid "Treadware"
 msgstr ""
 
-#: templates/tire/detail.html:267
+#: templates/tire/detail.html:269
 msgid "Value"
+msgstr ""
+
+#: templates/tire/list.html:100
+msgid "Endirim"
+msgstr ""
+
+#: tireapp/models.py:293
+msgid "Sorğu ilə"
 msgstr ""
 
 #: wheel_size/models.py:101
@@ -446,4 +454,4 @@ msgstr ""
 
 #: wheel_size/models.py:104
 msgid "4X4"
-msgstr ""
+msgstr "4X4"

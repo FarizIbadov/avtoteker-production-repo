@@ -6,17 +6,19 @@ from .resources import OilResource
 from .forms import OilForm
 from utils.admin import CustomModelAdmin
 
+from modeltranslation.admin import TranslationAdmin
+
 
 @admin.register(Brand)
-class BrandAdmin(CustomModelAdmin):
+class BrandAdmin(TranslationAdmin,CustomModelAdmin):
     pass
 
 @admin.register(Serie)
-class SerieAdmin(CustomModelAdmin):
+class SerieAdmin(TranslationAdmin,CustomModelAdmin):
     pass
 
 @admin.register(Oil)
-class OilAdmin(ImportExportMixin,CustomModelAdmin):
+class OilAdmin(ImportExportMixin,TranslationAdmin,CustomModelAdmin):
     resource_class = OilResource
     form_class = OilForm
 
