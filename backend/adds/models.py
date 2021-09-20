@@ -10,6 +10,9 @@ class Add(models.Model):
     def __str__(self):
         return self.image.name if self.image else '-'
 
+    def get_image(self):
+        return self.image.url if self.image else ""
+
     def save(self, **kwargs):
         super().save(**kwargs)
         compress(self.image.path, quality=90)
