@@ -21,15 +21,15 @@ RUN useradd -ms /bin/bash user
 
 RUN chown -R user:user ./locale
 
-RUN chown -R user:user ./locale/en
-RUN chown -R user:user ./locale/az
-RUN chown -R user:user ./locale/ru
-RUN chown -R user:user ./locale/tr
+RUN chown ugo+rwx user:user ./locale/en
+RUN chown ugo+rwx user:user ./locale/az
+RUN chown ugo+rwx user:user ./locale/ru
+RUN chown ugo+rwx user:user ./locale/tr
 
-RUN chown -R user:user ./locale/en/LC_MESSAGES
-RUN chown -R user:user ./locale/az/LC_MESSAGES
-RUN chown -R user:user ./locale/ru/LC_MESSAGES
-RUN chown -R user:user ./locale/tr/LC_MESSAGES
+RUN chown ugo+rwx user:user ./locale/en/LC_MESSAGES
+RUN chown ugo+rwx user:user ./locale/az/LC_MESSAGES
+RUN chown ugo+rwx user:user ./locale/ru/LC_MESSAGES
+RUN chown ugo+rwx user:user ./locale/tr/LC_MESSAGES
 
 RUN chmod 777 ./locale/en/LC_MESSAGES/django.mo
 RUN chmod 777 ./locale/en/LC_MESSAGES/django.po
