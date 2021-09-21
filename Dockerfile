@@ -1,6 +1,7 @@
 FROM python:3.8.5-slim-buster
 
-RUN apt-get update && apt-get install gcc -y
+RUN apt-get update && apt-get install gcc -y && apt-get install gettext
+
 ENV PATH="/scripts:${PATH}"
 
 WORKDIR /app
