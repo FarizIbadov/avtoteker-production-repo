@@ -62,7 +62,7 @@ def get_template(items):
                     <img src="%s">
                 </figure>
                 <div class="flex-fill d-flex flex-column justify-content-center h-100">
-                    <div class="bg-my-primary text-center">%s</div>
+                    <div class="px-1 bg-my-primary text-center">%s</div>
                     <div class="text-center">%s</div>
                 </div>
             </div>
@@ -80,9 +80,11 @@ def get_template(items):
         item = items[i]
         title = ""
         if item['title'] == 'taksit':
-            title = f"{item['month']} {item['title']} 0%"
+            taksit = _('{{month}} taksit 0%')
+            title = taksit.replace("{{month}}", str(item['month']))
         elif item['title'] == 'kredit':
-            title = f"{item['month']} ay kreditlə"
+            kredit = _("{{month}} ay kreditlə")
+            title = kredit.replace('{{month}}', str(item['month']))
         price = f"{_('ayda')} <span class='text-danger'>{item['price']} azn</span>"
         item_template = carousel_item % (active,interval,item['image'],title,price)
         item_templates.append(item_template)
