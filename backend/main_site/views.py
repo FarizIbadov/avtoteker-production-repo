@@ -15,7 +15,8 @@ class MainPage(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tire_search_title'] = f"""<h2 class='tire-search__heading'>{_("Təkər seçimi")}</h2>"""
+        title = _("Təkər seçimi")
+        context['tire_search_title'] = f"""<h2 class='tire-search__heading'>{title}</h2>"""
         return context
 
 
@@ -29,7 +30,8 @@ class MainListView(FilterBySizeMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tire_search_title'] = f"""<h2 class='tire-search__heading'>{_("Seçim edin")}</h2>"""
+        title = _("Seçim edin")
+        context['tire_search_title'] = f"""<h2 class='tire-search__heading'>{title}</h2>"""
         return context
 
 
@@ -40,6 +42,7 @@ class MainDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tire_search_title'] = f"""<h2 class='tire-search__heading'>{_("Seçim edin")}</h2>"""
+        title = _("Seçim edin")
+        context['tire_search_title'] = f"""<h2 class='tire-search__heading'>{title}</h2>"""
         return context
         
