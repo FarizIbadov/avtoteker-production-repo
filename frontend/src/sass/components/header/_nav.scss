@@ -60,12 +60,6 @@
   & > .dropdown-menu {
     min-width: 60.5px !important;
     max-width: 60.5px !important;
-
-    @media screen and (max-width:1245px) {
-  
-      min-width: 50px !important;
-      max-width: 50px !important;
-    }
     
     &.show {
       transform: translate3d(0px, 80px, 0px) !important;
