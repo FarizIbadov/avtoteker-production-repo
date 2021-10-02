@@ -18,7 +18,7 @@
             <ul class="header__nav__nav nav-extra" id="nav-list">
               {% for navigation in navigations %}
               <li class="header__nav__item">
-                <a class="header__nav__link" href="{{ navigation.link }}">{{navigation.title}}</a>
+                <a class="header__nav__link" href="{{ navigation.get_link }}">{{navigation.title}}</a>
               </li>
               {% endfor %}
 

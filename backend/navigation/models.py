@@ -9,6 +9,9 @@ class NavigationLink(models.Model):
     def __str__(self):
         return "%s - %s" % (self.title,self.link)
 
+    def get_link(self):
+        return self.link if link else ""
+
 class Logo(models.Model):
     logo = models.ImageField(upload_to="logo")
     active = models.BooleanField(default=True)
