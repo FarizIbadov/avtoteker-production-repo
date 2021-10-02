@@ -4,7 +4,7 @@ from modeltranslation.admin import TranslationAdmin
 
 @admin.register(models.NavigationLink)
 class NavigationLinkAdmin(TranslationAdmin):
-    list_display = ('title','link')
+    list_display = ('title',)
     ordering = ('order_number',)
 
 @admin.register(models.Logo)
