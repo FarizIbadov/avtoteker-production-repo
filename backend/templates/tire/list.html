@@ -95,17 +95,7 @@
                                 </div>
                             </div>
                         </div>
-                        {% if object.price_3 %}
-                        <div class="py-1 px-3 mb-5 price-3-style">
-                            <div class="text-center">{% trans "Endirim" %}</div>
-                            <div class="text-white price mx-3 ml-5">
-                                {{object.price_3}}
-                            </div>
-                             <div class="price-manat">
-                                <img src="{% static 'img/manat.png' %}" alt="₼">
-                             </div>
-                        </div>
-                        {% endif %}
+                        {% include "../components/main-site/third-price.html" with object=object %}
                         <div class="row justify-content-end w-100 no-gutters">
                             {% include "../components/edv.html" with object=object edv=edv %}
                             {% if object.release_date %}
