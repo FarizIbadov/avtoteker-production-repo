@@ -111,17 +111,17 @@ class Tire(CustomModel):
         (12,"12 ay")
     ]
 
-    code = models.CharField(max_length=200, blank=True)
+    code = models.CharField(max_length=200, blank=True, null=True)
     slug = models.SlugField(max_length=200, blank=True)
 
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
-    serie = models.ForeignKey(Serie, on_delete=models.CASCADE, null=True)
-    manufacturer = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)
+    brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True)
+    serie = models.ForeignKey(Serie, on_delete=models.SET_NULL, null=True)
+    manufacturer = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
 
-    size = models.ForeignKey(Size, on_delete=models.CASCADE, null=True)
+    size = models.ForeignKey(Size, on_delete=models.SET_NULL, null=True)
 
     MS = models.BooleanField(default=False)
-    OE = models.CharField(max_length=20, default="-")
+    OE = models.CharField(max_length=255, default="-")
     SL = models.BooleanField(default=False)
     RF = models.BooleanField(default=False)
     ZR = models.BooleanField(default=False)
@@ -129,97 +129,69 @@ class Tire(CustomModel):
     tradeware = models.CharField(max_length=10, null=True)
     weight = models.IntegerField(blank=True)
     speed = models.CharField(max_length=10, blank=True)
-    season = models.ForeignKey(Season, on_delete=models.DO_NOTHING, null=True)
+    season = models.ForeignKey(Season, on_delete=models.SET_NULL, null=True)
 
-    price = models.DecimalField(null=True, decimal_places=2, max_digits=10)
-    sale = models.DecimalField(default=0, decimal_places=2, max_digits=10)
+    price = models.FloatField(null=True)
+    sale = models.FloatField(blank=True, null=True)
     sale_active = models.BooleanField(default=True)
-
     price_3 = models.FloatField(blank=True,null=True)
+
 
     taksit_active = models.BooleanField(default=True)
 
-    taksit_2 = models.DecimalField(
-        null=True, blank=True, decimal_places=2, max_digits=10
-    )
-    
+    taksit_2 = models.FloatField(null=True, blank=True)
     taksit_2_active = models.BooleanField(default=True)
 
-    taksit_3 = models.DecimalField(
-        null=True, blank=True, decimal_places=2, max_digits=10
-    )
-    
+    taksit_3 = models.FloatField(null=True, blank=True)
     taksit_3_active = models.BooleanField(default=True)
 
-    taksit_6 = models.DecimalField(
-        null=True, blank=True, decimal_places=2, max_digits=10
-    )
-    
+    taksit_6 = models.FloatField(null=True, blank=True)
     taksit_6_active = models.BooleanField(default=True)
 
-    taksit_9 = models.DecimalField(
-        null=True, blank=True, decimal_places=2, max_digits=10
-    )
-    
+    taksit_9 = models.FloatField(null=True, blank=True)
     taksit_9_active = models.BooleanField(default=True)
 
-    taksit_12 = models.DecimalField(
-        null=True, blank=True, decimal_places=2, max_digits=10
-    )
-    
+    taksit_12 = models.FloatField(null=True, blank=True)    
     taksit_12_active = models.BooleanField(default=True)
 
     kredit_active = models.BooleanField(default=True)
-
-    kredit_3 = models.DecimalField(
-        null=True, blank=True, decimal_places=2, max_digits=10
-    )
+    kredit_3 = models.FloatField(null=True, blank=True)
     kredit_3_dif = models.FloatField(default=0)
-    
     kredit_3_active = models.BooleanField(default=True)
 
-    kredit_6 = models.DecimalField(
-        null=True, blank=True, decimal_places=2, max_digits=10
-    )
+    kredit_6 = models.FloatField(null=True, blank=True)
     kredit_6_dif = models.FloatField(default=0)
-    
     kredit_6_active = models.BooleanField(default=True)
 
-    kredit_9 = models.DecimalField(
-        null=True, blank=True, decimal_places=2, max_digits=10
-    )
+    kredit_9 = models.FloatField(null=True, blank=True)
     kredit_9_dif = models.FloatField(default=0)
-    
     kredit_9_active = models.BooleanField(default=True)
 
-    kredit_12 = models.DecimalField(
-        null=True, blank=True, decimal_places=2, max_digits=10
-    )
+    kredit_12 = models.FloatField(null=True, blank=True)
     kredit_12_dif = models.FloatField(default=0)
-    
     kredit_12_active = models.BooleanField(default=True)
 
-    montaj_balance = models.DecimalField(null=True, decimal_places=2, max_digits=10)
-    razval = models.CharField(max_length=50,null=True)
+    montaj_balance = models.CharField(max_length=255,blank=True, null=True)
+    razval = models.CharField(max_length=255,blank=True, null=True)
 
     year = models.PositiveSmallIntegerField(blank=True, null=True)
-    tire_class = models.ForeignKey(TireClass, on_delete=models.SET_NULL, null=True)
+    tire_class = models.ForeignKey(TireClass, blank=True, on_delete=models.SET_NULL, null=True)
 
     quantity = models.CharField(max_length=255, blank=True, null=True)
-    release_date = models.CharField(blank=True,null=True,max_length=30)
+    release_date = models.CharField(max_length=255, blank=True,null=True)
 
     db = models.PositiveSmallIntegerField(default=72)
-    fuel = models.CharField(max_length=5,default="B")
-    contact = models.CharField(max_length=5,default="B")
-    kredit_initial_price = models.FloatField(blank=True,default=0)
+    fuel = models.CharField(max_length=255, default="B")
+    contact = models.CharField(max_length=255, default="B")
+    kredit_initial_price = models.FloatField(blank=True, default=0)
     new = models.BooleanField(default=False)
     outlet = models.BooleanField(default=False)
 
-    birkart = models.PositiveSmallIntegerField(choices=BIRKART_CHOICES,blank=True)
-    tamkart = models.PositiveSmallIntegerField(choices=TAMKART_CHOICES,blank=True)
-    bolkart = models.PositiveSmallIntegerField(choices=BOLKART_CHOICES,blank=True)
-    albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES,blank=True)
-    kredit = models.PositiveSmallIntegerField(choices=KREDIT_CHOICES,blank=True)
+    birkart = models.PositiveSmallIntegerField(choices=BIRKART_CHOICES,blank=True, null=True)
+    tamkart = models.PositiveSmallIntegerField(choices=TAMKART_CHOICES,blank=True, null=True)
+    bolkart = models.PositiveSmallIntegerField(choices=BOLKART_CHOICES,blank=True, null=True)
+    albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES,blank=True, null=True)
+    kredit = models.PositiveSmallIntegerField(choices=KREDIT_CHOICES,blank=True, null=True)
 
     stickers = models.CharField(max_length=100,blank=True,null=True)
     campaigns = models.CharField(max_length=100,blank=True,null=True)

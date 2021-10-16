@@ -50,7 +50,7 @@ class TireResource(resources.ModelResource):
     taksit_2 = fields.Field(
         column_name="Taksit 2 ay",
         attribute="taksit_2",
-        widget=widgets.CustomDecimalWidget(2),
+        widget=widgets.CustomFloatWidget(2),
     )
     taksit_2_active = fields.Field(
         column_name="Taksit 2 active",
@@ -60,7 +60,7 @@ class TireResource(resources.ModelResource):
     taksit_3 = fields.Field(
         column_name="Taksit 3 ay",
         attribute="taksit_3",
-        widget=widgets.CustomDecimalWidget(3),
+        widget=widgets.CustomFloatWidget(3),
     )
     taksit_3_active = fields.Field(
         column_name="Taksit 3 active",
@@ -70,7 +70,7 @@ class TireResource(resources.ModelResource):
     taksit_6 = fields.Field(
         column_name="Taksit 6 ay",
         attribute="taksit_6",
-        widget=widgets.CustomDecimalWidget(6),
+        widget=widgets.CustomFloatWidget(6),
     )
     taksit_6_active = fields.Field(
         column_name="Taksit 6 active",
@@ -80,7 +80,7 @@ class TireResource(resources.ModelResource):
     taksit_9 = fields.Field(
         column_name="Taksit 9 ay",
         attribute="taksit_9",
-        widget=widgets.CustomDecimalWidget(9),
+        widget=widgets.CustomFloatWidget(9),
     )
     taksit_9_active = fields.Field(
         column_name="Taksit 9 active",
@@ -90,7 +90,7 @@ class TireResource(resources.ModelResource):
     taksit_12 = fields.Field(
         column_name="Taksit 12 ay",
         attribute="taksit_12",
-        widget=widgets.CustomDecimalWidget(12),
+        widget=widgets.CustomFloatWidget(12),
     )
     taksit_12_active = fields.Field(
         column_name="Taksit 12 active",
@@ -110,7 +110,7 @@ class TireResource(resources.ModelResource):
     kredit_3 = fields.Field(
         column_name="Kredit 3 ay",
         attribute="kredit_3",
-        widget=widgets.CustomDecimalWidget(3),
+        widget=widgets.CustomFloatWidget(3),
     )
     kredit_3_active = fields.Field(
         column_name="Kredit 3 active",
@@ -120,13 +120,13 @@ class TireResource(resources.ModelResource):
     kredit_3_dif = fields.Field(
         column_name="Bahalaşma 3 %",
         attribute="kredit_3_dif",
-        widget=widgets.DecimalWidget(),
+        widget=widgets.FloatWidget(),
     )
 
     kredit_6 = fields.Field(
         column_name="Kredit 6 ay",
         attribute="kredit_6",
-        widget=widgets.CustomDecimalWidget(6),
+        widget=widgets.CustomFloatWidget(6),
     )
     kredit_6_active = fields.Field(
         column_name="Kredit 6 active",
@@ -136,13 +136,13 @@ class TireResource(resources.ModelResource):
     kredit_6_dif = fields.Field(
         column_name="Bahalaşma 6 %",
         attribute="kredit_6_dif",
-        widget=widgets.DecimalWidget(),
+        widget=widgets.FloatWidget(),
     )
 
     kredit_9 = fields.Field(
         column_name="Kredit 9 ay",
         attribute="kredit_9",
-        widget=widgets.CustomDecimalWidget(9),
+        widget=widgets.CustomFloatWidget(9),
     )
     kredit_9_active = fields.Field(
         column_name="Kredit 9 active",
@@ -152,13 +152,13 @@ class TireResource(resources.ModelResource):
     kredit_9_dif = fields.Field(
         column_name="Bahalaşma 9 %",
         attribute="kredit_9_dif",
-        widget=widgets.DecimalWidget(),
+        widget=widgets.FloatWidget(),
     )
 
     kredit_12 = fields.Field(
         column_name="Kredit 12 ay",
         attribute="kredit_12",
-        widget=widgets.CustomDecimalWidget(12),
+        widget=widgets.CustomFloatWidget(12),
     )
     kredit_12_active = fields.Field(
         column_name="Kredit 12 active",
@@ -168,14 +168,14 @@ class TireResource(resources.ModelResource):
     kredit_12_dif = fields.Field(
         column_name="Bahalaşma 12 %",
         attribute="kredit_12_dif",
-        widget=widgets.DecimalWidget(),
+        widget=widgets.FloatWidget(),
     )
 
     price = fields.Field(
-        column_name="price", attribute="price", widget=resource_widget.DecimalWidget()
+        column_name="price", attribute="price", widget=resource_widget.FloatWidget()
     )
     sale = fields.Field(
-        column_name="sale", attribute="sale", widget=resource_widget.DecimalWidget()
+        column_name="sale", attribute="sale", widget=resource_widget.FloatWidget()
     )
     sale_active = fields.Field(
         column_name="sale active",
@@ -186,7 +186,7 @@ class TireResource(resources.ModelResource):
     montaj_balance = fields.Field(
         column_name="Montaj+Balance",
         attribute="montaj_balance",
-        widget=resource_widget.DecimalWidget(),
+        widget=resource_widget.FloatWidget(),
     )
     tire_class = fields.Field(
         column_name="class", attribute="tire_class", widget=widgets.CustomClassWidget()

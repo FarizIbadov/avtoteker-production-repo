@@ -1,4 +1,4 @@
-from import_export.widgets import BooleanWidget, Widget, DecimalWidget
+from import_export.widgets import BooleanWidget, Widget, FloatWidget
 from specific.models import Brand, Serie, Country, Season
 from .models import Size, TireClass
 
@@ -56,7 +56,7 @@ class CustomSeasonWidget(Widget):
         return season
 
 
-class CustomDecimalWidget(DecimalWidget):
+class CustomFloatWidget(FloatWidget):
     def __init__(self, month):
         self.month = month
 

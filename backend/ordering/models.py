@@ -37,8 +37,7 @@ class Order(models.Model):
         else:
             return self.product_title
 
-    def save(self,force_insert=False, force_update=False, using=None,
-             update_fields=None):
+    def save(self, **kwargs):
         if not self.uuid:
             self.uuid = uuid.uuid4()
 
@@ -48,8 +47,7 @@ class Order(models.Model):
             phone = str(phone_number.national_number)[-4:]
             self.order_id = 'T' + id + phone
 
-        super().save(force_insert, force_update, using,
-             update_fields)
+        super().save(**kwargs)
     
     def get_payment_type(self):
         index = self.payment_type - 1
@@ -91,8 +89,7 @@ class OilOrder(models.Model):
         else:
             return self.product_title        
 
-    def save(self,force_insert=False, force_update=False, using=None,
-             update_fields=None):
+    def save(self, **kwargs):
         if not self.uuid:
             self.uuid = uuid.uuid4()
         
@@ -102,8 +99,7 @@ class OilOrder(models.Model):
             phone = str(phone_number.national_number)[-4:]
             self.order_id = 'Y' + id + phone
 
-        super().save(force_insert, force_update, using,
-             update_fields)
+        super().save(**kwargs)
 
     def get_payment_type(self):
         index = self.payment_type - 1
