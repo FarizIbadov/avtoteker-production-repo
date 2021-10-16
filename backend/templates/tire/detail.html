@@ -75,28 +75,7 @@
                 {% include "../components/main-site/image.html" with object=object.brand.country %} 
                 {% include "../components/main-site/image.html" with object=object.manufacturer %}
               </div>
-              <div class="main-list__price-info">
-                {% if object.sale_active %}
-                  <div class="price">
-                      <span class="red-line-trought  font-larger--2 opacity-8">
-                          {{object.price|floatformat:-2}}
-                      </span>
-                  </div>  
-                  <div class="price text-right">
-                      <span class="text-red font-xl">{{object.sale|floatformat:-2}}</span>
-                      <span class="manat">
-                        <img src="{% static 'img/manat.png' %}" alt="₼">
-                      </span>
-                  </div>  
-                {% else %}
-                  <div class="price text-right">
-                      <span class="text-red font-xl">{{object.price|floatformat:-2}}</span>
-                      <span class="manat">
-                        <img src="{% static 'img/manat.png' %}" alt="₼">
-                      </span>
-                  </div>  
-                {% endif %}
-              </div>
+              {% include "../components/tire/price.html" with object=object %}
             </div>
           </div>
           {% include "../components/main-site/third-price.html" with object=object %}

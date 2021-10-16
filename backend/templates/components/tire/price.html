@@ -1,0 +1,22 @@
+<div class="main-list__price-info mt-5 mt-md-2">
+    {% if object.sale_active %}
+        <div class="price">
+            <span class="red-line-trought  font-larger--2 opacity-8">
+                {{object.price|floatformat:-2}}
+            </span>
+        </div>  
+        <div class="price text-right">
+            <span class="text-red font-xl">{{object.sale|floatformat:-2}}</span>
+            <span class="manat">
+            <img src="{% static 'img/manat.png' %}" alt="₼">
+            </span>
+        </div>  
+    {% else %}
+        <div class="price text-right">
+            <span class="text-red font-xl">{{object.price|floatformat:-2}}</span>
+            <span class="manat">
+            <img src="{% static 'img/manat.png' %}" alt="₼">
+            </span>
+        </div>  
+    {% endif %}
+</div>
