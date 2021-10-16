@@ -15,5 +15,4 @@ urlpatterns = [
     path("tires/<str:width>-<str:height>-<str:radius>/", MainListView.as_view(), name="detail-list"),
     path("tires/<int:pk>/<str:slug>/", MainDetailView.as_view(), name="detail"),
     # path("search-tire/",MainSearchView.as_view(),name="search-tire"),
-    path('api/order/',include('ordering.urls'))
 ]
