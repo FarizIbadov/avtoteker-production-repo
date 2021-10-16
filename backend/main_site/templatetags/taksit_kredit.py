@@ -38,7 +38,7 @@ def get_kredit_taksit(value):
         carousel_item_data = {
             "image": kredit_taksit.image.url,
             "title": title,
-            "price": price,
+            "price": round(price, 2),
             "month": month
         }
 
