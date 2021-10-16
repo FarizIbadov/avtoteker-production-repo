@@ -50,7 +50,7 @@ class OilResource(resources.ModelResource):
     taksit_2 = fields.Field(
         column_name="Taksit 2 ay",
         attribute="taksit_2",
-        widget=tire_widgets.CustomDecimalWidget(2),
+        widget=tire_widgets.CustomFloatWidget(2),
     )
     taksit_2_active = fields.Field(
         column_name="Taksit 2 active",
@@ -60,7 +60,7 @@ class OilResource(resources.ModelResource):
     taksit_3 = fields.Field(
         column_name="Taksit 3 ay",
         attribute="taksit_3",
-        widget=tire_widgets.CustomDecimalWidget(3),
+        widget=tire_widgets.CustomFloatWidget(3),
     )
     taksit_3_active = fields.Field(
         column_name="Taksit 3 active",
@@ -70,7 +70,7 @@ class OilResource(resources.ModelResource):
     taksit_6 = fields.Field(
         column_name="Taksit 6 ay",
         attribute="taksit_6",
-        widget=tire_widgets.CustomDecimalWidget(6),
+        widget=tire_widgets.CustomFloatWidget(6),
     )
     taksit_6_active = fields.Field(
         column_name="Taksit 6 active",
@@ -80,7 +80,7 @@ class OilResource(resources.ModelResource):
     taksit_9 = fields.Field(
         column_name="Taksit 9 ay",
         attribute="taksit_9",
-        widget=tire_widgets.CustomDecimalWidget(9),
+        widget=tire_widgets.CustomFloatWidget(9),
     )
     taksit_9_active = fields.Field(
         column_name="Taksit 9 active",
@@ -90,7 +90,7 @@ class OilResource(resources.ModelResource):
     taksit_12 = fields.Field(
         column_name="Taksit 12 ay",
         attribute="taksit_12",
-        widget=tire_widgets.CustomDecimalWidget(12),
+        widget=tire_widgets.CustomFloatWidget(12),
     )
     taksit_12_active = fields.Field(
         column_name="Taksit 12 active",
