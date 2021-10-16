@@ -96,4 +96,4 @@ class TireYearAdmin(admin.ModelAdmin):
 
 @admin.register(models.TireClass)
 class TireClassAdmin(TranslationAdmin):
-    list_display = ('title',)
+    pass
