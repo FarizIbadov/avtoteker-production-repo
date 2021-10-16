@@ -37,8 +37,10 @@ class CustomClassWidget(Widget):
     def render(self, value, obj=None):
         return value.title
       
-
     def clean(self, value, row=None, *args, **kwargs):
+        if value == '-':
+            return None
+            
         tire_class, _ = TireClass.objects.get_or_create(title=value.strip())
         return tire_class
 
