@@ -197,9 +197,9 @@ class Tire(CustomModel):
     campaigns = models.CharField(max_length=100,blank=True,null=True)
 
     @property
-    def free_montage_balance(self):
+    def free_montaj_balance(self):
         try:
-            return int(self.montaj_balance) == 0
+            return round(float(self.montaj_balance), 2) == 0.0
         except ValueError:
             return False
 
