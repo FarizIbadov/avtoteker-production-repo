@@ -199,7 +199,7 @@ class Tire(CustomModel):
     @property
     def free_montaj_balance(self):
         try:
-            return round(float(self.montaj_balance), 2) == 0.0
+            return round(float(self.montaj_balance), 2)
         except ValueError:
             return False
 
