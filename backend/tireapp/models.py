@@ -196,6 +196,13 @@ class Tire(CustomModel):
     stickers = models.CharField(max_length=100,blank=True,null=True)
     campaigns = models.CharField(max_length=100,blank=True,null=True)
 
+    @property
+    def free_montage_balance(self):
+        try:
+            return int(self.montaj_balance) 
+        except TypeError:
+            return False
+
     def get_stickers(self):
         if self.stickers:
             stickers = self.stickers.split("\\")
