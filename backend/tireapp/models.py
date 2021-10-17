@@ -199,7 +199,7 @@ class Tire(CustomModel):
     @property
     def free_montage_balance(self):
         try:
-            return int(self.montaj_balance) 
+            return int(self.montaj_balance) == 0
         except ValueError:
             return False
 
