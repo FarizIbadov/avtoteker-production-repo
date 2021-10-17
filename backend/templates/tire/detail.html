@@ -75,7 +75,7 @@
                 {% include "../components/main-site/image.html" with object=object.brand.country %} 
                 {% include "../components/main-site/image.html" with object=object.manufacturer %}
               </div>
-              {#{% include "../components/tire/price.html" with object=object %}#}
+              {% include "../components/tire/price.html" with object=object %}
             </div>
           </div>
           {% include "../components/main-site/third-price.html" with object=object %}
