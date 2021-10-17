@@ -200,7 +200,7 @@ class Tire(CustomModel):
     def free_montage_balance(self):
         try:
             return int(self.montaj_balance) 
-        except TypeError:
+        except ValueError:
             return False
 
     def get_stickers(self):
