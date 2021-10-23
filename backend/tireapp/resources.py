@@ -207,7 +207,7 @@ class TireResource(resources.ModelResource):
 
     class Meta:
         model = Tire
-        import_id_fields = ("id",'code')
+        import_id_fields = ("id",)
 
         fields = (
             "id",
