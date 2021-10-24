@@ -91,6 +91,7 @@ CKEDITOR_CONFIGS = {
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "app.middleware.ForceDefaultLanguageMiddleware",
     'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
@@ -209,7 +210,9 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = "az"
 ROSETTA_WSGI_AUTO_RELOAD = True
 ROSETTA_UWSGI_AUTO_RELOAD = ROSETTA_WSGI_AUTO_RELOAD
 
-# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_COOKIE_AGE = 1209600 * 4
 
 # LOGGING = None
 

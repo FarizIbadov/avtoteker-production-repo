@@ -17,7 +17,7 @@ urlpatterns += [
     path("admin/", admin.site.urls),
     path("admin-translation/", include('rosetta.urls')),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
-    path('api/order/',include('ordering.urls'))
+    path('order/',include('ordering.urls'))
 ]
 
 if settings.DEBUG:
