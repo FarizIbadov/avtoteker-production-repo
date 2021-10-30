@@ -35,7 +35,6 @@
                     <div class="main-list__sub-row">
                         {% include "../components/main-site/side-info.html" with object=object %}
                         <div>
-
                             <img class="main-list__item-logo mb-1" src="{{object.brand.get_image}}" alt="{{object.brand}}">
                         </div>
                     </div>
@@ -87,15 +86,27 @@
                                 {{ object|get_kredit_taksit|safe}}
                             </div>
                         </div>
-                        <div class="main-list__btn-box">
+                        {#<div class="mt-4 w-100 d-flex align-items-end justify-content-end">
                             <button type="button" data-toggle="modal"
-                                data-target="#order" class="main-list__cart-btn"
+                            data-target="#order" class="d-flex align-items-center justify-content-center btn btn-my-secondary rounded-0 btn-sm detail-mb"
+                            data-max="{{object.quantity}}"
+                            data-price="{{object.sale}}"
+                            data-id="{{object.id}}">
+                                <i class="bi bi-minecart"></i>
+                                <span>
+                                    {% trans 'Səbətə at' %}
+                                </span>
+                            </button>
+                        </div>#}
+                        <div class="mt-2 w-100 d-flex align-items-end justify-content-end">
+                            <button type="button" data-toggle="modal"
+                                data-target="#order" class="d-inline-block btn btn-danger rounded-0 btn-sm order-btn"
                                 data-max="{{object.quantity}}"
                                 data-price="{{object.sale}}"
                                 data-id="{{object.id}}">
                                 {% trans 'Sifariş et' %}
                             </button>
-                            <a href="{{object.get_absolute_url}}" class="main-list__detail-btn">{% trans 'Ətraflı' %}</a>
+                            <a href="{{object.get_absolute_url}}" class="d-inline-block btn btn-sm btn-my-primary rounded-0 detail-btn">{% trans 'Ətraflı' %}</a>
                         </div>
                         {% include '../components/tire/social-box.html' %}
                     </div>
