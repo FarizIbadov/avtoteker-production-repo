@@ -4,7 +4,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class Sticker(models.Model):
     color = ColorField(default="#cccccc")
-    image = models.ImageField(upload_to="sticker")
+    image = models.ImageField(upload_to="sticker", blank=True)
     image_width = models.FloatField(default=50)
     text = models.CharField(max_length=20)
     text_font = models.PositiveSmallIntegerField(default=16)
@@ -15,6 +15,9 @@ class Sticker(models.Model):
 
     def __str__(self):
         return self.text
+
+    def get_image(self):
+        return self.image.url if self.image else ""
 
     def get_content(self):
         return self.description or self.text
