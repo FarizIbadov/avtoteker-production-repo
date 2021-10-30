@@ -1,9 +1,9 @@
 class FilterBySizeMixin:
     def get_filter(self):
         field_to_model = {
-            "width": "size__width",
-            "height": "size__height",
-            "radius": "size__radius",
+            "width": "size__width__icontains",
+            "height": "size__height__icontains",
+            "radius": "size__radius__icontains",
         }
         kwargs = {}
         get_data = self.kwargs
