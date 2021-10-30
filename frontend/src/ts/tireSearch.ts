@@ -89,7 +89,7 @@ class TireSearch {
     if (value) {
       return value;
     } else {
-      return "_";
+      return "-";
     }
   }
 
@@ -145,7 +145,7 @@ class TireSearch {
           } else {
             const action = formDefaultAction.substr(
               0,
-              formDefaultAction.length - 1,
+              formDefaultAction.length,
             );
 
             form.setAttribute("action", action);
@@ -161,7 +161,7 @@ class TireSearch {
     const year = document.getElementById("year") as HTMLSelectElement;
     const trim = document.getElementById("trim") as HTMLSelectElement;
 
-    const makesUrl = make.getAttribute('data-url')!;
+    const makesUrl = make.getAttribute("data-url")!;
     const modelUrl = model.getAttribute("data-url")!;
     const yearUrl = year.getAttribute("data-url")!;
     const trimUrl = trim.getAttribute("data-url")!;

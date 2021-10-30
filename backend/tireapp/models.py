@@ -43,9 +43,9 @@ class OE(models.Model):
         verbose_name_plural = "OE"
 
 class Size(CustomModel):
-    width = models.CharField(max_length=10, null=True)
-    height = models.CharField(max_length=10, null=True)
-    radius = models.CharField(max_length=10, null=True)
+    width = models.CharField(max_length=10, null=True, blank=True) 
+    height = models.CharField(max_length=10, null=True, blank=True)
+    radius = models.CharField(max_length=10, null=True, blank=True)
 
     size_code = models.CharField(max_length=255, null=True)
 
@@ -59,9 +59,7 @@ class Size(CustomModel):
         return "%s-%s-%s" % (self.width,self.height,self.radius)
 
     def save(self, *args,**kwargs):
-        if not self.size_code:
-            self.size_code = "".join([self.width,self.height,self.radius])
-        
+        self.size_code = "".join([self.width,self.height,self.radius])
         super().save(*args,**kwargs)
 
 
@@ -195,6 +193,15 @@ class Tire(CustomModel):
 
     stickers = models.CharField(max_length=100,blank=True,null=True)
     campaigns = models.CharField(max_length=100,blank=True,null=True)
+
+    @property
+    def brand_url(self):
+        return self.brand.get_image()
+
+
+    @property
+    def brand_title(self):
+        return self.brand.title
 
     @property
     def free_montaj_balance(self):

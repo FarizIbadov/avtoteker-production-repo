@@ -16,9 +16,9 @@ def parse_size(request):
     height_def = "" if size[1] == "-" else size[1]
     radius_def = "" if size[2] == "-" else size[2]
 
-    width_obj = SizeField("width",_("en"),width_def)
-    height_obj = SizeField("height",_("hündürlük"),height_def)
-    radius_obj = SizeField("radius",_("radius"),radius_def)
+    width_obj = SizeField("width", _("en"),width_def)
+    height_obj = SizeField("height", _("hündürlük"),height_def)
+    radius_obj = SizeField("radius", _("radius"),radius_def)
     
     return (width_obj, height_obj, radius_obj)
 
@@ -50,6 +50,10 @@ def get_size_action(request):
 
     return reversed_url
 
+@register.simple_tag(name="get_resolved_path")
+def get_resolved_path(request):
+    return resolve(request.path).url_name
+
 def get_size(request):
     size_dict = {}
     resolved_path = resolve(request.path)
@@ -62,6 +66,8 @@ def get_size(request):
     radius = "-" if size_dict.get('radius',"_") == "_" else size_dict['radius']
 
     return (width,height,radius)
+
+
 
 class SizeField:
     queryset = Size.objects.available()

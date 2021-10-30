@@ -32,7 +32,6 @@
   }
 
   &__price-info {
-    margin-top: 10px;
     width: 110px;
   }
 
@@ -110,31 +109,6 @@
     }
   }
 
-  &__btn-box {
-    @extend .mt-4, .w-100, .d-flex, .align-items-end, .justify-content-end;
-  }
-
-  &__cart-btn {
-    @extend .d-inline-block, .btn, .btn-danger, .rounded-0, .btn-sm;
-    width: 100px;
-    margin-right: 10px;
-    box-shadow: none !important;
-
-    @include responsive(max, 450px) {
-      font-size: 12px;
-    }
-  }
-
-  &__detail-btn {
-    @extend .d-inline-block, .btn, .btn-sm, .btn-my-primary, .rounded-0;
-    width: 80px;
-
-    @include responsive(max, 450px) {
-      font-size: 12px;
-      width: 60px;
-    }
-  }
-
   &__side-info {
     max-width: 150px;
     width: 100%;
@@ -187,6 +161,25 @@
     font-size: 24px;
     font-weight: 400 !important;
     letter-spacing: 2px;
+  }
+}
+
+.cart-btn {
+  width: 100px;
+  margin-right: 10px;
+  box-shadow: none !important;
+
+  @include responsive(max, 450px) {
+    font-size: 12px;
+  }
+}
+
+.detail-btn {
+  width: 80px;
+
+  @include responsive(max, 450px) {
+    font-size: 12px;
+    width: 60px;
   }
 }
 
@@ -337,7 +330,6 @@
 .price-3 {
   min-width: 270px !important;
 
-
   background: #fb0;
   line-height: 0;
   margin-left: auto;
@@ -345,7 +337,6 @@
 
   border-radius: 20px;
   height: 50px;
-
 
   display: flex;
   align-items: center;
@@ -366,9 +357,7 @@
 
   .price-container {
     position: relative;
- 
   }
-
 }
 
 .price-manat {
@@ -379,13 +368,12 @@
   top: -5px;
   right: 7px;
 
-  &  img {
+  & img {
     height: 10px;
- 
+
     filter: brightness(0) invert(1);
   }
 }
-
 
 .oe-logo {
   width: 50px;
@@ -395,24 +383,21 @@
   margin-top: 10px !important;
 }
 
-.phone-btn {
-  @extend .bg-my-primary, .text-dark, .py-1, .px-2, .btn ,.btn-sm, .rounded-0, .shadow-none;
-
+.phone-btn,
+.order-btn {
   margin-right: 10px;
   width: 100px;
 
   @include responsive(max, 450px) {
-      font-size: 12px;
-    
-    }
+    font-size: 12px;
+  }
 }
 
 .message-btn {
-  @extend .bg-danger, .text-white, .py-1 , .px-2, .btn ,.btn-sm, .rounded-0, .shadow-none;
   width: 80px;
 
   @include responsive(max, 450px) {
-      font-size: 12px;
-      width: 60px;
+    font-size: 12px;
+    width: 60px;
   }
 }

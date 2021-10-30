@@ -11,9 +11,9 @@ from app.utils import get_button_container
 
 
 class TireForm(forms.ModelForm):
-    width = forms.CharField(widget=forms.TextInput())
-    height = forms.CharField(max_length=10, widget=forms.TextInput())
-    radius = forms.CharField(widget=forms.TextInput())
+    width = forms.CharField(widget=forms.TextInput(), required=False)
+    height = forms.CharField(max_length=10, widget=forms.TextInput(), required=False)
+    radius = forms.CharField(widget=forms.TextInput(), required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
