@@ -10,7 +10,7 @@ class FilterBySizeMixin:
 
         for key, value in field_to_model.items():
             if get_data.get(key,"_") != "_":
-                kwargs[value] = get_data[key]
+                kwargs[value] = get_data[key] if get_data[key] != '-' else ""
             else:
                 continue
 
