@@ -14,6 +14,7 @@ services:
     container_name: avtoteker-web
     build: .
     volumes:
+      - ./static_data:/vol/web
       - static_data:/vol/web
       - ./backend/locale:/app/locale
     env_file: .env
@@ -26,6 +27,7 @@ services:
     build:
       context: ./proxy
     volumes:
+      - ./static_data:/vol/static
       - static_data:/vol/static
       - ./proxy/acme-challenge/:/var/.well-known/acme-challenge/
       # - ./proxy/certbot/conf:/etc/letsencrypt
@@ -35,13 +37,13 @@ services:
       - "443:8443"
     # command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
 
-
   db:
     restart: always
     container_name: avtoteker-db
     image: postgres:12.5-alpine
     env_file: .env
     volumes:
+      - ./pgdata:/var/lib/postgresql/data/
       - pgdata:/var/lib/postgresql/data/
 
   # certbot:
