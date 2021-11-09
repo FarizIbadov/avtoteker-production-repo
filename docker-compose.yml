@@ -41,7 +41,7 @@ services:
     image: postgres:12.5-alpine
     env_file: .env
     volumes:
-      - ./pgdata:/var/lib/postgresql/data/
+      - pgdata:/var/lib/postgresql/data/
 
   # certbot:
   #   image: certbot/certbot
