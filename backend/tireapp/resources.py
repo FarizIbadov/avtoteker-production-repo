@@ -277,7 +277,7 @@ class TireResource(resources.ModelResource):
             'campaigns'
         )
         skip_unchanged = True
-        use_bulk = False
+        use_bulk = True
 
         export_order = (
             "id",
