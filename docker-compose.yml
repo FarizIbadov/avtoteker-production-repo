@@ -14,7 +14,7 @@ services:
     container_name: avtoteker-web
     build: .
     volumes:
-      - static_data:/vol/web
+      - ./static_data:/vol/web
       - ./backend/locale:/app/locale
     env_file: .env
     depends_on:
@@ -26,7 +26,7 @@ services:
     build:
       context: ./proxy
     volumes:
-      - static_data:/vol/static
+      - ./static_data:/vol/static
       - ./proxy/acme-challenge/:/var/.well-known/acme-challenge/
       # - ./proxy/certbot/conf:/etc/letsencrypt
       # - ./proxy/certbot/www:/var/www/certbot
@@ -41,7 +41,7 @@ services:
     image: postgres:12.5-alpine
     env_file: .env
     volumes:
-      - pgdata:/var/lib/postgresql/data/
+      - ./pgdata:/var/lib/postgresql/data/
 
   # certbot:
   #   image: certbot/certbot
@@ -50,7 +50,6 @@ services:
   #     - ./proxy/certbot/conf:/etc/letsencrypt
   #     - ./proxy/certbot/www:/var/www/certbot
   #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-
-volumes:
-  static_data:
-  pgdata:
+# volumes:
+#   static_data:
+#   pgdata:
