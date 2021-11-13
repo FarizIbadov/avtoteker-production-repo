@@ -278,6 +278,7 @@ class TireResource(resources.ModelResource):
         )
         skip_unchanged = True
         use_bulk = True
+        batch_size = 500
 
         export_order = (
             "id",
