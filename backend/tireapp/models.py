@@ -110,9 +110,9 @@ class Tire(CustomModel):
         (12,"12 ay")
     ]
 
-    trim_code = models.CharField(max_length=200, blank=True, null=True)
-    code = models.CharField(max_length=200, blank=True, null=True)
-    slug = models.SlugField(max_length=200, blank=True)
+    trim_code = models.CharField(max_length=255, blank=True, null=True)
+    code = models.CharField(max_length=255, blank=True, null=True)
+    slug = models.SlugField(max_length=255, blank=True)
 
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True)
     serie = models.ForeignKey(Serie, on_delete=models.SET_NULL, null=True)
@@ -121,14 +121,14 @@ class Tire(CustomModel):
     size = models.ForeignKey(Size, on_delete=models.SET_NULL, null=True)
 
     MS = models.BooleanField(default=False)
-    OE = models.CharField(max_length=255,null=True ,default="-")
+    OE = models.CharField(max_length=255, null=True, default="-")
     SL = models.BooleanField(default=False)
     RF = models.BooleanField(default=False)
     ZR = models.BooleanField(default=False)
 
-    tradeware = models.CharField(max_length=10, null=True)
-    weight = models.IntegerField(blank=True)
-    speed = models.CharField(max_length=10, blank=True)
+    tradeware = models.CharField(max_length=255, null=True)
+    weight = models.IntegerField(blank=True, null=True)
+    speed = models.CharField(max_length=255, blank=True, null=True)
     season = models.ForeignKey(Season, on_delete=models.SET_NULL, null=True)
 
     price = models.FloatField(null=True)
@@ -193,8 +193,8 @@ class Tire(CustomModel):
     albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES,blank=True, null=True)
     kredit = models.PositiveSmallIntegerField(choices=KREDIT_CHOICES,blank=True, null=True)
 
-    stickers = models.CharField(max_length=100,blank=True,null=True)
-    campaigns = models.CharField(max_length=100,blank=True,null=True)
+    stickers = models.CharField(max_length=255,blank=True,null=True)
+    campaigns = models.CharField(max_length=255,blank=True,null=True)
 
     @property
     def brand_url(self):
