@@ -121,7 +121,7 @@ class Tire(CustomModel):
     size = models.ForeignKey(Size, on_delete=models.SET_NULL, null=True)
 
     MS = models.BooleanField(default=False)
-    OE = models.CharField(max_length=255, default="-")
+    OE = models.CharField(max_length=255,null=True ,default="-")
     SL = models.BooleanField(default=False)
     RF = models.BooleanField(default=False)
     ZR = models.BooleanField(default=False)
