@@ -11,6 +11,7 @@ from django.core.files import File
 from utils.models import CustomModel
 from sticker.models import Sticker
 from campaign.models import Post
+from .utils import generate_trim_code
 
 from django.utils.translation import gettext as _
 
@@ -109,6 +110,7 @@ class Tire(CustomModel):
         (12,"12 ay")
     ]
 
+    trim_code = models.CharField(max_length=200, blank=True, null=True)
     code = models.CharField(max_length=200, blank=True, null=True)
     slug = models.SlugField(max_length=200, blank=True)
 
@@ -321,10 +323,12 @@ class Tire(CustomModel):
         size = self.size.get_size_for_url()
 
         slug = "_".join([brand,serie,size]).replace("/","") 
-        return slug
+        self.slug = slug
 
     def save(self, *args, **kwargs):
-        self.slug = self.generate_slug()
+        self.generate_slug()
+        self.generate_trim_code()
+
         if not self.albalikart:
             self.albalikart = self.get_active_price("taksit")
         if not self.tamkart:
@@ -337,6 +341,9 @@ class Tire(CustomModel):
             self.kredit = self.get_active_price("kredit")
             
         super().save(*args, **kwargs)
+
+    def generate_trim_code(self):
+        self.trim_code = generate_trim_code(self.code)
 
 
     def get_active_price(self,taksit_kredit_title):

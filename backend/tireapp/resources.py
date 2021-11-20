@@ -2,6 +2,7 @@ from import_export import resources, fields
 from import_export import widgets as resource_widget
 from .models import Tire, OsTireImporterSetting
 from . import widgets
+from .utils import generate_trim_code
 
 import tablib
 
@@ -23,6 +24,10 @@ class TireResource(resources.ModelResource):
             tires = Tire.objects.all()
             tires.backup()
             tires.exclude(id__in=filtered_ids).delete()
+
+    def before_save_instance(self, instance, using_transactions, dry_run):
+        instance.generate_trim_code()
+        instance.generate_slug()
 
 
 
@@ -377,11 +382,12 @@ class OsTireImporter:
 
     def get_tire(self, code):
         self.row_is_included = False
-        filtered_tire = list(filter(self.filter_tire(code), self.updated_tires))
+        trim_code = generate_trim_code(code)
+        filtered_tire = list(filter(self.filter_tire(trim_code), self.updated_tires))
        
         if filtered_tire:
             return filtered_tire[0]   
-        return self.tires.filter(code=code).first()
+        return self.tires.filter(trim_code=trim_code).first()
 
     def process_tire(self, code, quantity):
         tire = self.get_tire(code)
@@ -406,8 +412,8 @@ class OsTireImporter:
 
     def filter_tire(self, code):
         def _filter_tire(value):
-            if code == value.code:
+            if code == value.trim_code:
                 self.row_is_included = True
-            return code == value.code
+            return code == value.trim_code
         return _filter_tire
 
