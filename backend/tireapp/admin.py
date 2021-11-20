@@ -71,7 +71,7 @@ class TireAdmin(ImportExportMixin, OsMixin, CustomModelAdmin):
     form = TireForm
     resource_class = TireResource
     search_fields = ("brand__title","serie__title","quantity","manufacturer__title") 
-    exclude = ("size",)
+    exclude = ("size", "trim_code")
     list_display = ["brand", "serie", "size", "manufacturer","quantity"]
     list_filter = ["brand", "serie", "manufacturer", "size"]
 

@@ -50,6 +50,6 @@ class FilterByField(object):
 
 def generate_trim_code(code):
     splited_code = code.split(" ")
-    trimed_part = list(map(None, splited_code))
+    trimed_part = list(filter(None, splited_code))
     return "".join(trimed_part)
 
