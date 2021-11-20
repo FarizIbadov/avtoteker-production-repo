@@ -400,7 +400,7 @@ class OsTireImporter:
         codes = list(set(filter(None,self.codes)))
         Tire.objects.exclude(code__in=codes).delete()
 
-        Tire.objects.bulk_update(self.updated_tires, batch_size=1000, fields=['quantity'])
+        Tire.objects.bulk_update(self.updated_tires, batch_size=500, fields=['quantity'])
         Tire.objects.filter(pk__in=self.deleted_tires).delete()
 
 
