@@ -49,7 +49,7 @@ class FilterByField(object):
         return kwargs
 
 def generate_trim_code(code):
-    splited_code = self.code.split(" ")
+    splited_code = code.split(" ")
     trimed_part = list(map(None, splited_code))
     return "".join(trimed_part)
 
