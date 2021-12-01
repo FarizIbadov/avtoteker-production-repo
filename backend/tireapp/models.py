@@ -364,6 +364,9 @@ class Tire(CustomModel):
         
         return active_months[-1] if len(active_months) != 0 else 0
 
+    class Meta:
+        ordering = ("-brand__order_number",)
+
 
 
 class OsTireImporterSetting(models.Model):
