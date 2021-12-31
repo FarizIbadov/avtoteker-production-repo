@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.utils.translation import gettext as _
 from . import models
 import phonenumbers
 
@@ -11,7 +12,8 @@ class OilOrderSerializer(serializers.ModelSerializer):
                 raise phonenumbers.NumberParseException("error","error")
             return value
         except phonenumbers.NumberParseException:
-            raise serializers.ValidationError("Telefon Nömrə yanlışdı")
+            message = _("Telefon Nömrə yanlışdı")
+            raise serializers.ValidationError(message)
 
         
 
@@ -21,7 +23,8 @@ class OilOrderSerializer(serializers.ModelSerializer):
             payment_types.index(value)
             return value
         except ValueError:
-            raise serializers.ValidationError("Ödənış üsulu yanlışdı")
+            message = _("Ödənış üsulu yanlışdı")
+            raise serializers.ValidationError(message)
 
     @property
     def data(self):
@@ -49,7 +52,9 @@ class TireOrderSerializer(serializers.ModelSerializer):
                 raise phonenumbers.NumberParseException("error","error")
             return value
         except phonenumbers.NumberParseException:
-            raise serializers.ValidationError("Telefon Nömrə yanlışdı")
+            message = _("Telefon Nömrə yanlışdı")
+            raise serializers.ValidationError(message)
+
 
     def validate_payment_type(self,value):
         payment_types = [1,2,3,4]
@@ -57,12 +62,25 @@ class TireOrderSerializer(serializers.ModelSerializer):
             payment_types.index(value)
             return value
         except ValueError:
-            raise serializers.ValidationError("Ödənış üsulu yanlışdı")
+            message = _("Ödənış üsulu yanlışdı")
+            raise serializers.ValidationError(message)
+
 
     def validate_quantity(self,value):
         if value == 0:
-            raise serializers.ValidationError("Sayi zəhmət olmasa təyin edin")
+            message = _("Sayi zəhmət olmasa təyin edin")
+            raise serializers.ValidationError(message)
         return value
+
+
+    def validate(self, data):
+        taksit_choice, payment_choice = data.get("taksit_choice"), data.get("payment_type")
+        
+        if payment_choice == 4 and taksit_choice == 0:
+            message = _("Xaiş edirik ayı seçin.")
+            raise serializers.ValidationError({"taksit_choice": [message]})
+
+        return data
 
     @property
     def data(self):
@@ -76,7 +94,7 @@ class TireOrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Order
-        fields = ('name','tire','phone','payment_type','quantity','order_id')
+        fields = ('name','tire','phone','payment_type','quantity','order_id', "taksit_choice")
         read_only_fields = ['order_id']
         
 

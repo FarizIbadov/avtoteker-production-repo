@@ -1,4 +1,4 @@
-{% extends "../config/main-base.html" %} 
+{% extends "../config/base.html" %} 
 {% load i18n %}
 
 
@@ -42,7 +42,7 @@
                 {% if forloop.first %}
                   <td class="text-center">
                     <h5 class="mb-0">
-                      <a class="text-my-secondary" href="{{object.get_href}}">{{object.tire}}</a>
+                      <a class="text-secondary-1" href="{{object.get_href}}">{{object.tire}}</a>
                     </h5>
                   </td>
                   <td class="text-center">{{object.get_tire_type}}</td>
@@ -51,7 +51,7 @@
                 {% else %}
                   <td class="text-center border-0">
                     <h5 class="mb-0">
-                      <a class="text-my-secondary" href="{{object.get_href}}">{{object.tire}}</a>
+                      <a class="text-secondary-1" href="{{object.get_href}}">{{object.tire}}</a>
                     </h5>
                   </td>
                   <td class="text-center  border-0">{{object.get_tire_type}}</td>
@@ -64,7 +64,7 @@
         </tbody>
       </table>
     </div>
-    <div class="main-index">
+    <div class="main-container container">
       {% include "../components/main-site/slider.html" %}
       {% include "../components/main-site/map.html" %}
       {% include "../components/main-site/brand-carousel.html" %}

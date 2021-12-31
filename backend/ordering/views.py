@@ -1,15 +1,12 @@
-from rest_framework import permissions,response,status
-from rest_framework.generics import CreateAPIView
-from . import serializers,models
+from django.shortcuts import render
+from django.views.generic import TemplateView
 
+from . import models
 
-class TireOrderAPIView(CreateAPIView):
-    serializer_class = serializers.TireOrderSerializer
-    permission_classes = [permissions.AllowAny]
-    
+class CartView(TemplateView):
+    template_name = "cart/cart.html"
 
-class OilOrderAPIView(CreateAPIView):
-    serializer_class = serializers.OilOrderSerializer
-    permission_classes = [permissions.AllowAny]
-
-    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cart'] = models.Cart.objects.get_cart(self.request)
+        return context

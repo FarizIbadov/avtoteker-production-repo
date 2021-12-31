@@ -25,8 +25,8 @@
 $font-family-sans-serif: Averta_avto;
 
 $theme-colors: (
-  "my-primary": #fb0,
-  "my-secondary": #333,
+  "primary-1": #fb0,
+  "secondary-1": #333,
   "light-2": #eee,
 );
 $pagination-color: #333;
@@ -57,18 +57,18 @@ $custom-checkbox-indicator-indeterminate-bg: #333;
 @import "./main_site/list";
 @import "./main_site/detail";
 
-@import "./components/admin-navbar";
-@import "./components/header/index";
-@import "./components/card";
-@import "./components/import-export";
-@import "./components/alert";
+@import "./components/logo/logo";
+@import "./components/navigation/navigation";
+@import "./components/footer/footer";
+
 @import "./components/icons";
 @import "./components/tire-search";
 @import "./components/flag";
 @import "./components/custom-pagination";
 @import "./components/cart";
-@import "./components/footer";
+
 @import "./components/brand-carousel";
+
 @import "./components/map";
 @import "./components/loader";
 

@@ -7,7 +7,9 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 module.exports = {
   mode: "production",
   entry: {
+    bootstrap: "bootstrap",
     app: path.join(__dirname, "src", "ts", "main.ts"),
+    // cart: path.join(__dirname, "src", "ts", "cart", "App.tsx"),
   },
   devtool: "none",
   resolve: {
@@ -77,7 +79,7 @@ module.exports = {
     new CleanWebpackPlugin({}),
   ],
   output: {
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "..", "backend", "static"),
   },
   optimization: {
@@ -90,5 +92,19 @@ module.exports = {
         },
       }),
     ],
+    splitChunks: {
+      cacheGroups: {
+        react: {
+          test: /[\\/]node_modules[\\/]((react).*)[\\/]/,
+          name: "react",
+          chunks: "all",
+        },
+        commons: {
+          test: /[\\/]node_modules[\\/]((?!react).*)[\\/]/,
+          name: "commons",
+          chunks: "all",
+        },
+      },
+    },
   },
 };

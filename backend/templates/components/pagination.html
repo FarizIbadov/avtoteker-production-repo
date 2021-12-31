@@ -3,7 +3,7 @@
 
 {% if is_paginated %}
 <nav>
-    <ul class="custom-pagination">
+    <ul class="pagination justify-content-center custom-pagination">
         {% if page_obj.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="{% url_encoder request page=1 %}">

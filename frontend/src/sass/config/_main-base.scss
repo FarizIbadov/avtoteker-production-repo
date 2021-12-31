@@ -1,9 +1,9 @@
-.main-container {
-  @extend .d-flex, .flex-column;
-  margin-top: 80px !important;
+main {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh !important;
 
-  &__body {
+  & > div {
     flex: 1;
   }
 }

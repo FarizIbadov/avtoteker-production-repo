@@ -5,14 +5,14 @@
             <img class="w-100" src="{{object.get_OE.image.url}}" alt="{{object.get_OE.title}}">
         </div>
         {% if show_oe %}
-        <span class="bg-my-primary h5 p-1 mb-0 ml-2 text-center">
+        <span class="bg-primary-1 h5 p-1 mb-0 ml-2 text-center">
             {{object.get_OE.title}}
         </span>
         {% endif %}
     </div>
     {% if object.get_year != None and show_year %}
         <div class="d-flex align-items-center justify-content-end">
-        <span class="{% if object.get_year == True %}bg-my-primary {% else %} bg-danger text-white {% endif %} h5 p-1 mb-0 text-center">
+        <span class="{% if object.get_year == True %}bg-primary-1 {% else %} bg-danger text-white {% endif %} h5 p-1 mb-0 text-center">
             {{object.year}}
         </span>
         </div>

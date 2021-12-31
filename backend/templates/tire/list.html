@@ -1,4 +1,4 @@
-{% extends "../config/main-base.html" %}
+{% extends "../config/base.html" %}
 {% load i18n %}
 {% load static %}
 {% load taksit_kredit %}
@@ -88,7 +88,7 @@
                         </div>
                         <!-- <div class="mt-4 w-100 d-flex align-items-end justify-content-end">
                             <button type="button" data-toggle="modal"
-                            data-target="#order" class="d-flex align-items-center justify-content-center btn btn-my-secondary rounded-0 btn-sm detail-mb"
+                            data-target="#order" class="d-flex align-items-center justify-content-center btn btn-secondary-1 rounded-0 btn-sm detail-mb"
                             data-max="{{object.quantity}}"
                             data-price="{{object.sale}}"
                             data-id="{{object.id}}">
@@ -106,7 +106,7 @@
                                 data-id="{{object.id}}">
                                 {% trans 'Sifariş et' %}
                             </button>
-                            <a href="{{object.get_absolute_url}}" class="d-inline-block btn btn-sm btn-my-primary rounded-0 detail-btn">{% trans 'Ətraflı' %}</a>
+                            <a href="{{object.get_absolute_url}}" class="d-inline-block btn btn-sm btn-primary-1 rounded-0 detail-btn">{% trans 'Ətraflı' %}</a>
                         </div>
                         {% include '../components/tire/social-box.html' %}
                     </div>
@@ -118,7 +118,7 @@
         </div>
     </div>
     {% include "../components/pagination.html" %}
-    <div class="main-index">
+    <div class="main-container container">
         {% include "../components/main-site/slider.html" %}
         {% include "../components/main-site/map.html" %}
         {% include "../components/main-site/brand-carousel.html" %}

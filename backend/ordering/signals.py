@@ -15,7 +15,6 @@ def order_save(sender, instance, created, **kwargs):
     if created:
         instance.product_title = instance.tire.__str__()
         instance.product_link = reverse('detail',kwargs={'pk':instance.tire.id,"slug": instance.tire.slug})
-        instance.save()
 
         auth_user = AuthUser.objects.filter(active=True).first()
         if auth_user:
@@ -31,13 +30,14 @@ def order_save(sender, instance, created, **kwargs):
                 "html_message": render_to_string('order-email-detail.html',{"object":instance})
             }
             send_mail(**kwargs)
+
+        instance.save()
     
 @receiver(post_save, sender=OilOrder)
 def oil_order_save(sender, instance, created, **kwargs):
     if created:
         instance.product_title = instance.oil.__str__()
         instance.product_link = reverse('oil-detail',kwargs={'pk':instance.oil.id})
-        instance.save()
 
         auth_user = AuthUser.objects.filter(active=True).first()
         if auth_user:
@@ -53,3 +53,5 @@ def oil_order_save(sender, instance, created, **kwargs):
                 "html_message": render_to_string('order-email-detail.html',{"object":instance})
             }
             send_mail(**kwargs)
+            
+        instance.save()

@@ -1,4 +1,4 @@
-{% extends "../config/main-base.html" %}
+{% extends "../config/base.html" %}
 
 {% block seo %}
 
@@ -9,7 +9,7 @@
 {% block content %}
     {% include "../components/phone-location-link-container.html" %}
     <div class="bg-light-2 text-center py-1">
-        <a class="text-my-secondary" href="{% url 'home' %}">{% trans 'Şın seçiminə qayıtmaq' %}</a>
+        <a class="text-secondary-1" href="{% url 'home' %}">{% trans 'Şın seçiminə qayıtmaq' %}</a>
     </div>
     <div class="container mt-5 mt-md-4">
         {% for object in object_list %}

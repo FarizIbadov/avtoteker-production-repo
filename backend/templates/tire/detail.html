@@ -1,4 +1,4 @@
-{% extends "../config/main-base.html" %} 
+{% extends "../config/base.html" %} 
 {% load static %}
 {% load rating %} 
 {% load taksit_kredit %}
@@ -97,7 +97,7 @@
         
           <!-- <div class="mt-4 w-100 d-flex align-items-end justify-content-end">
             <button type="button" data-toggle="modal"
-              data-target="#order" class="d-inline-block btn btn-my-secondary rounded-0 btn-sm detail-mb"
+              data-target="#order" class="d-inline-block btn btn-secondary-1 rounded-0 btn-sm detail-mb"
               data-max="{{object.quantity}}"
               data-price="{{object.sale}}"
               data-id="{{object.id}}">
@@ -140,12 +140,12 @@
     <ul class="col-md-12 nav nav-tabs nav-justified px-0" id="myTab" role="tablist">
       {% if object.kredit_active %}
       <li class="nav-item" role="presentation">
-        <a class="nav-link active text-my-secondary" id="home-tab" data-toggle="tab" href="#kredit" role="tab" aria-controls="home" aria-selected="true">{% trans 'Kredit' %}</a>
+        <a class="nav-link active text-secondary-1" id="home-tab" data-toggle="tab" href="#kredit" role="tab" aria-controls="home" aria-selected="true">{% trans 'Kredit' %}</a>
       </li>
       {% endif %}
       {% if object.taksit_active %}
       <li class="nav-item" role="presentation">
-        <a class="nav-link  text-my-secondary" id="profile-tab" data-toggle="tab" href="#taksit" role="tab" aria-controls="profile" aria-selected="false">{% trans 'Taksit' %}</a>
+        <a class="nav-link  text-secondary-1" id="profile-tab" data-toggle="tab" href="#taksit" role="tab" aria-controls="profile" aria-selected="false">{% trans 'Taksit' %}</a>
       </li>
       {% endif %}
     </ul>
@@ -170,7 +170,7 @@
   <div class="row justify-content-center px-0 px-md-3">
     <div class="col-md-12 detail-info">
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-my-primary">
+        <div class="detail-banner mr-1 bg-primary-1">
           {% trans 'Montaj+Balans' %}
         </div>
         <div class="detail-banner bg-light">
@@ -178,11 +178,11 @@
         </div>
       </div>
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-my-primary">{% trans 'Disk təmiri' %}</div>
+        <div class="detail-banner mr-1 bg-primary-1">{% trans 'Disk təmiri' %}</div>
         <div class="detail-banner bg-light">{% trans '10 - 15 azn / ədəd' %}</div>
       </div>
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-my-primary">{% trans 'Razval' %}</div>
+        <div class="detail-banner mr-1 bg-primary-1">{% trans 'Razval' %}</div>
         <div class="detail-banner bg-light">
           {{object.razval|floatformat}} {% trans 'azn' %}
         </div>
@@ -190,19 +190,19 @@
 
       {% if object.brand.free_service %}
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-my-primary">{% trans 'Bir illik servis' %}</div>
+        <div class="detail-banner mr-1 bg-primary-1">{% trans 'Bir illik servis' %}</div>
         <div class="detail-banner bg-light">{% trans 'hədiyyə' %}</div>
       </div>
       {% endif %}
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-my-primary">
+        <div class="detail-banner mr-1 bg-primary-1">
          {% trans '2 / 4 təkər üçün ventil' %}
         </div>
         <div class="detail-banner bg-light">{% trans '3 / 5 azn' %}</div>
       </div>
       {% if object.brand.extra_one_year_warranty %}
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-my-primary">{% trans 'Əlavə bir il zəmanət' %}</div>
+        <div class="detail-banner mr-1 bg-primary-1">{% trans 'Əlavə bir il zəmanət' %}</div>
         <div class="detail-banner bg-light">
           {{object.brand.extra_one_year_warranty}}
         </div>
@@ -270,7 +270,7 @@
 </div>
 
 
-<div class="main-index px-0 mb-5">
+<div class="main-container container px-0 mb-5">
         {% include "../components/main-site/map.html" %}
     </div>
 {% endblock content %}

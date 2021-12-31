@@ -16,3 +16,7 @@ interface ErrorData {
 interface OrderResult {
   [key: string]: string;
 }
+
+interface CartSettings {
+  path: string;
+}

@@ -21,7 +21,8 @@
 }
 
 .map-active {
-  @extend .bg-my-secondary, .text-light;
+  background-color: map-get($theme-colors, "secondary-1");
+  color: map-get($theme-colors, "light");
 }
 
 .map-content {

@@ -7,7 +7,6 @@ import "../fonts/Averta_Avto.ttf";
 import "../fonts/346526_2_0-b68b923f95695860fef4e27dbe4c742c.woff2";
 import "../fonts/346526_C_0-2698ac8eb8035cbb2f4007204717b111.woff2";
 import "../fonts/346526_C_0-d543b03fa0c0fb9a4f9f156b4facf083.woff2";
-import "bootstrap";
 import "slick-carousel";
 
 import "./ymaps";

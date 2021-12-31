@@ -9,7 +9,8 @@ urlpatterns = i18n_patterns(
     path("",include("oilapp.urls")),
     path("",include('wheel_size.urls')),
     path("campaigns/",include("campaign.urls")),
-    path("blogs/",include("news.urls")),    
+    path("blogs/",include("news.urls")),  
+    path('',include('ordering.urls'))  
 )
 
 
@@ -17,7 +18,7 @@ urlpatterns += [
     path("admin/", admin.site.urls),
     path("admin-translation/", include('rosetta.urls')),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
-    path('order/',include('ordering.urls'))
+    
 ]
 
 if settings.DEBUG:

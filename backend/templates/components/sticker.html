@@ -5,7 +5,7 @@
             <img class="w-100 h-100 object-fit-cover" src="{{ sticker.get_image }}" alt="{{ sticker.text }}">
         </div>
         {% endif %}
-        <div class="p-1 d-flex justify-content-center align-items-center bg-danger text-light h-100 text-center" style="{% if sticker.get_image %}width: {{ sticker.text_width }}%{% endif %} !important;font-size: {{sticker.text_font}}px !important">
+        <div class="{% if not sticker.get_image %}w-100{% endif %} p-1 d-flex justify-content-center align-items-center bg-danger text-light h-100 text-center" style="{% if sticker.get_image %}width: {{ sticker.text_width }}%{% endif %} !important;font-size: {{sticker.text_font}}px !important">
             {{ sticker.text }}
         </div>
     </div>

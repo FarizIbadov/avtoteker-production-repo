@@ -6,10 +6,10 @@
     @extend .col, .nav-pills, .nav-fill, .pr-0;
 
     & a.nav-link {
-      @extend .text-my-secondary;
+      @extend .text-secondary-1;
 
       &.active {
-        @extend .rounded-0;
+        border-radius: 0;
         background-color: #333 !important;
         color: #fff !important;
 
@@ -72,7 +72,7 @@
     font-size: 20px;
 
     &--main {
-      @extend .btn-my-secondary, .w-100, .p-1;
+      @extend .btn-secondary-1, .w-100, .p-1;
       max-width: 200px !important;
 
       &:disabled {

@@ -161,6 +161,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "az"
 
+ADMIN_LANGUAGE_CODE = "en"
+
 LANGUAGES = (
     ('az', _("Azerbaijani")),
     ('en', _("English")),

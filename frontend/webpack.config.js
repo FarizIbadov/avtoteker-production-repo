@@ -6,12 +6,14 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   mode: "development",
   entry: {
+    bootstrap: "bootstrap",
     app: path.join(__dirname, "src", "ts", "main.ts"),
+    cart: path.join(__dirname, "src", "ts", "cart", "App.tsx"),
   },
   devtool: "inline-source-map",
   devServer: {
     port: 3000,
-    contentBase: path.resolve(__dirname, "..", "mysite", "static"),
+    contentBase: path.resolve(__dirname, "..", "backend", "static"),
     publicPath: "/static/",
     open: true,
     proxy: {
@@ -95,7 +97,7 @@ module.exports = {
     new CleanWebpackPlugin(),
   ],
   output: {
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "..", "backend", "static"),
   },
 };

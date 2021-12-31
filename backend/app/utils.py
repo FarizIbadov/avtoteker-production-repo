@@ -40,6 +40,6 @@ def get_button_container(
 ):
     return Div(
         HTML(f'<a href="{prev_url}" class="btn btn-danger d-inline-block ">Cancel</a>'),
-        Submit("submit", submit_label, css_class="btn btn-my-secondary d-inline-block"),
+        Submit("submit", submit_label, css_class="btn btn-secondary-1 d-inline-block"),
         css_class=btn_container_class,
     )

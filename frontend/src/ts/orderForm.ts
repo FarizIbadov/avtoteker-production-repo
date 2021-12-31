@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class OrderForm {
-  private data = {};
+  data = {};
   errorMessageIds: string[] = [];
   form?: HTMLFormElement;
   orderBtn?: HTMLButtonElement;
@@ -33,6 +33,27 @@ class OrderForm {
       });
       this.form.addEventListener("input", this.disableFormBtn);
       this.form.addEventListener("submit", this.handleSubmit);
+
+      if (this.formClass === ".tire-order") {
+        const paymentField = document.getElementById(
+          "id_payment_type",
+        ) as HTMLSelectElement;
+
+        const taksitChoices = document.getElementById(
+          "id_taksit_choice",
+        ) as HTMLSelectElement;
+        const taksitChoicesContainer = taksitChoices.closest(".col-md")!;
+
+        paymentField.addEventListener("change", e => {
+          const { value } = e.target as HTMLSelectElement;
+
+          if (value === "4") {
+            taksitChoicesContainer.classList.remove("d-none");
+          } else {
+            taksitChoicesContainer.classList.add("d-none");
+          }
+        });
+      }
     }
   };
 
@@ -52,6 +73,16 @@ class OrderForm {
     }
     if (this.modalForm) {
       this.modalForm!.classList.remove("d-none");
+    }
+
+    if (this.formClass === ".tire-order") {
+      const taksitChoices = document.getElementById(
+        "id_taksit_choice",
+      ) as HTMLSelectElement;
+      const taksitChoicesContainer = taksitChoices.closest(".col-md")!;
+
+      taksitChoicesContainer.classList.add("d-none");
+      taksitChoices.setAttribute("value", "0");
     }
   };
 
@@ -90,8 +121,15 @@ class OrderForm {
 
   getFieldValue = (field: Field): FieldData => {
     const { value } = document.getElementById(field.id) as HTMLInputElement;
+
     const name = field.id.replace("id_", "");
-    return { [name]: field.type(value) };
+    let fieldValue: string | number = "";
+
+    if (value) {
+      fieldValue = field.type(value);
+    }
+
+    return { [name]: fieldValue };
   };
 
   postData = () => {
@@ -105,7 +143,7 @@ class OrderForm {
     this.modalTitle!.classList.add("non-visible");
 
     const loadingSpinner = `
-      <div class="text-center text-my-secondary" id="spinner">
+      <div class="text-center text-secondary-1" id="spinner">
         <div class="spinner-border" style="width: 5rem; height: 5rem;" role="status">
           <span class="sr-only">Loading...</span>
         </div>
@@ -155,13 +193,14 @@ class OrderForm {
       const message = value[value.length - 1];
       const fieldId = "id_" + field;
       const input = document.getElementById(fieldId) as HTMLInputElement;
-      input.classList.remove("is-valid");
-      input.classList.add("is-invalid");
+      if (input) {
+        input.classList.remove("is-valid");
+        input.classList.add("is-invalid");
+        const inputContainer = input.closest("div");
+        const feedback = this.createFeedback(fieldId, message);
 
-      const inputContainer = input.closest("div");
-      const feedback = this.createFeedback(fieldId, message);
-
-      inputContainer!.insertAdjacentElement("beforeend", feedback);
+        inputContainer!.insertAdjacentElement("beforeend", feedback);
+      }
     }
   };
 
@@ -185,7 +224,9 @@ class OrderForm {
   removeErrors = () => {
     for (const feedbackId of this.errorMessageIds) {
       const element = document.getElementById(feedbackId) as HTMLElement;
-      element.remove();
+      if (element) {
+        element.remove();
+      }
       const fieldId = feedbackId.replace("_feedback", "");
       const input = document.getElementById(fieldId) as HTMLInputElement;
       input.classList.remove("is-invalid");
@@ -226,6 +267,7 @@ new OrderForm(".tire-order", [
   { id: "id_phone", type: String },
   { id: "id_name", type: String },
   { id: "id_tire", type: Number },
+  { id: "id_taksit_choice", type: String },
 ]);
 
 new OrderForm(".oil-order", [

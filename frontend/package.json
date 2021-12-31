@@ -20,6 +20,10 @@
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.10.4",
     "@types/jquery": "^3.5.5",
+    "@types/react": "^17.0.34",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router": "^5.1.17",
+    "@types/react-router-dom": "^5.3.2",
     "autoprefixer": "^9.8.5",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -48,6 +52,10 @@
     "bootstrap": "4.5.2",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^6.0.1",
+    "react-router-dom": "^6.0.1",
     "slick-carousel": "^1.8.1",
     "ymaps": "^0.2.1"
   }

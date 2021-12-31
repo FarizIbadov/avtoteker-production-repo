@@ -1,6 +1,6 @@
 .flag {
-  @extend .rounded;
   @include square(50px);
+  border-radius: 50%;
   object-fit: contain;
 
   @include responsive(max, 450px) {

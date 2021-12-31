@@ -44,12 +44,12 @@
   }
 
   &__header {
-    @extend .card-header, .text-center, .bg-my-secondary, .text-light;
+    @extend .card-header, .text-center, .bg-secondary-1, .text-light;
 
     &--detail {
       @extend .card-header,
         .text-center,
-        .bg-my-secondary,
+        .bg-secondary-1,
         .text-light,
         .border-bottom-0,
         .px-2;
@@ -128,7 +128,7 @@
       .text-center,
       .justify-content-center,
       .align-items-center,
-      .bg-my-primary,
+      .bg-primary-1,
       .p-1;
 
     font-size: 18px;
@@ -136,8 +136,8 @@
     &.danger {
       @extend .bg-danger, .text-light;
     }
-    &.my-primary {
-      @extend .bg-my-primary;
+    &.primary-1 {
+      @extend .bg-primary-1;
     }
 
     &:not(:last-of-type) {

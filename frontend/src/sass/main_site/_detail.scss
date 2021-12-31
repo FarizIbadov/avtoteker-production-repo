@@ -83,14 +83,13 @@
 
 .detail-qtn {
   @extend .d-inline-flex,
-    .bg-my-primary,
+    .bg-primary-1,
     .align-items-center,
     .justify-content-center,
     .ml-2;
   height: 60px;
   min-width: 60px;
   font-size: 24px;
-  
 
   @include responsive(max, 768px) {
     height: 45px;
