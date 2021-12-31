@@ -139,19 +139,19 @@ class Order(models.Model):
     ]
 
     uuid = models.UUIDField(blank=True,null=True)
-    name = models.CharField(max_length=20,null=True,blank=True)
+    name = models.CharField(max_length=255,null=True,blank=True)
     tire = models.ForeignKey(Tire,on_delete=models.CASCADE,null=True)
-    product_title = models.CharField(blank=True,max_length=50)
-    product_link = models.CharField(blank=True,max_length=150)
+    product_title = models.CharField(blank=True,max_length=255)
+    product_link = models.CharField(blank=True,max_length=255)
     quantity = models.PositiveSmallIntegerField(default=1)
-    phone = models.CharField(max_length=20)
+    phone = models.CharField(max_length=255)
     email = models.EmailField(blank=True,null=True,unique=False)
     payment_type = models.PositiveSmallIntegerField(choices=PAYMENT_CHOICES,default=1) 
     taksit_choice = models.PositiveSmallIntegerField(choices=TAKSIT_CHOICES, blank=True, null=True) 
     order_date = models.DateTimeField(default=timezone.now)
     note = models.TextField(blank=True,null=True)
     remember_me = models.BooleanField(default=False)
-    order_id = models.CharField(blank=True,max_length=20)
+    order_id = models.CharField(blank=True,max_length=255)
 
     def __str__(self):
         if self.tire:
@@ -193,17 +193,17 @@ class OilOrder(models.Model):
     ]
 
     uuid = models.UUIDField(blank=True,null=True)
-    name = models.CharField(max_length=20,null=True,blank=True)
+    name = models.CharField(max_length=255,null=True,blank=True)
     oil = models.ForeignKey(Oil,on_delete=models.CASCADE,null=True)
-    product_title = models.CharField(blank=True,max_length=50)
-    product_link = models.CharField(blank=True,max_length=150)
-    phone = models.CharField(max_length=20)
+    product_title = models.CharField(blank=True,max_length=255)
+    product_link = models.CharField(blank=True,max_length=255)
+    phone = models.CharField(max_length=255)
     email = models.EmailField(blank=True,null=True,unique=False)
     payment_type = models.PositiveSmallIntegerField(choices=PAYMENT_CHOICES,default=1) 
     order_date = models.DateTimeField(default=timezone.now)
     note = models.TextField(blank=True,null=True)
     remember_me = models.BooleanField(default=False)
-    order_id = models.CharField(blank=True,max_length=20)
+    order_id = models.CharField(blank=True,max_length=255)
 
     def __str__(self):
         if self.oil:
