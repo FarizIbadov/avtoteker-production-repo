@@ -8,5 +8,6 @@ USER root
 
 RUN mkdir -p /vol/static
 RUN chmod -R 755 /vol/static
+RUN rm -rf /var/cache/nginx/
 
 USER nginx 
