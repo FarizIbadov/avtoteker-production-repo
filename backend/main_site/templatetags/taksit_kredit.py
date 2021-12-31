@@ -62,7 +62,7 @@ def get_template(items):
                     <img src="%s">
                 </figure>
                 <div class="flex-fill d-flex flex-column justify-content-center h-100">
-                    <div class="px-1 bg-my-primary text-center">%s</div>
+                    <div class="px-1 bg-primary-1 text-center">%s</div>
                     <div class="text-center">%s</div>
                 </div>
             </div>
