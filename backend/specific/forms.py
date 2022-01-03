@@ -75,7 +75,7 @@ class BrandForm(forms.ModelForm):
             "order_number",
             "description",
             'free_service',
-            "extra_one_year_warranty",
+            "extra_1_year_warranty",
             "show_in_slider",
             get_button_container(submit_label, prev_url),
         )

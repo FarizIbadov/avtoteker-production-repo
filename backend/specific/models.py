@@ -66,8 +66,12 @@ class Brand(CustomModel):
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to="brand", blank=True, null=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)
-    free_service = models.BooleanField(default=False)
-    extra_one_year_warranty = models.CharField(max_length=100,blank=True)
+
+    one_year_free_service = models.BooleanField(default=False)
+    two_year_free_service = models.BooleanField(default=False)
+
+    one_year_warranty = models.BooleanField(default=False)
+
     order_number = models.IntegerField(default=1)
     description = RichTextUploadingField(blank=True, null=True)
     show_in_slider = models.BooleanField(default=False)
@@ -90,6 +94,9 @@ class Brand(CustomModel):
             return logo.logo.url
 
         return self.title
+
+    def get_free_service(self):
+        return self.one_year_free_service or self.two_year_free_service
 
 
 

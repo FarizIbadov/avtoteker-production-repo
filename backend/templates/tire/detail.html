@@ -188,9 +188,13 @@
         </div>
       </div>
 
-      {% if object.brand.free_service %}
+      {% if object.brand.get_free_service %}
       <div class="d-flex mt-2">
-        <div class="detail-banner mr-1 bg-primary-1">{% trans 'Bir illik servis' %}</div>
+        {% if object.brand.two_year_free_service %}
+          <div class="detail-banner mr-1 bg-primary-1">{% trans 'Iki illik servis' %}</div>
+        {% else %}
+          <div class="detail-banner mr-1 bg-primary-1">{% trans 'Bir illik servis' %}</div>
+        {% endif %}
         <div class="detail-banner bg-light">{% trans 'hədiyyə' %}</div>
       </div>
       {% endif %}
@@ -200,11 +204,11 @@
         </div>
         <div class="detail-banner bg-light">{% trans '3 / 5 azn' %}</div>
       </div>
-      {% if object.brand.extra_one_year_warranty %}
+      {% if object.brand.one_year_warranty %}
       <div class="d-flex mt-2">
         <div class="detail-banner mr-1 bg-primary-1">{% trans 'Əlavə bir il zəmanət' %}</div>
         <div class="detail-banner bg-light">
-          {{object.brand.extra_one_year_warranty}}
+          {{object.brand.one_year_warranty}}
         </div>
       </div>
       {% endif %}

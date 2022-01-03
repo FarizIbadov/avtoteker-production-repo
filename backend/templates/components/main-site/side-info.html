@@ -10,8 +10,12 @@
     {% if object.free_montaj_balance == 0.0 %}
     <small  class="main-list__side-single danger font-sm">{% trans 'Pulsuz montaj+balans' %}</small>
     {% endif %}
-    {% if object.brand.free_service %}
-    <small title="1 illik pulsuz servis - nağd alış zamanı 4 təkər alınan halda" class="main-list__side-single primary-1">{% trans '1 il servis' %}</small>
+    {% if object.brand.get_free_service %}
+        {% if object.brand.two_year_free_service %}
+            <small title="1 illik pulsuz servis - nağd alış zamanı 4 təkər alınan halda" class="main-list__side-single primary-1">{% trans '2 il servis' %}</small>
+        {% else %}
+            <small title="1 illik pulsuz servis - nağd alış zamanı 4 təkər alınan halda" class="main-list__side-single primary-1">{% trans '1 il servis' %}</small>
+        {% endif %}
     {% endif %}
     {% if object.outlet %}
     <small  class="main-list__side-single danger">{% trans 'Outlet' %}</small>
