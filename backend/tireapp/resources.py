@@ -211,7 +211,19 @@ class TireResource(resources.ModelResource):
     db= fields.Field(attribute="db",widget=resource_widget.IntegerWidget())
     fuel = fields.Field(attribute="fuel",widget=resource_widget.CharWidget())
     contact = fields.Field(attribute="contact",widget=resource_widget.CharWidget())
-    kredit_3_month_price = fields.Field(column_name="kredit initial price %",attribute="kredit_3_month_price",widget=resource_widget.FloatWidget())
+
+    kredit_3_month_price = fields.Field(
+        column_name="kredit 3 month price %",
+        attribute="kredit_3_month_price",
+        widget=resource_widget.FloatWidget()
+    )
+    
+    kredit_6_month_price = fields.Field(
+        column_name="kredit 6 month price %",
+        attribute="kredit_6_month_price",
+        widget=resource_widget.FloatWidget()
+    )
+
     new = fields.Field(attribute="new",widget=widgets.CustomNewBooleanWidget())
     outlet = fields.Field(attribute="outlet",widget=widgets.CustomOutletBooleanWidget())
 
