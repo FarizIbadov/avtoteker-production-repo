@@ -21,8 +21,8 @@
       {% if object.kredit_3_active and object.kredit_3_dif == 0 %}
       <div class="row mb-1">
         <div class="col-4"><div class="bg-danger text-light p-2 text-center">3 {% trans 'ay' %} 0%</div></div>
-        <div class="col-4"><div class="bg-danger text-light p-2 text-center">{{object|get_first_price|floatformat:-2}}</div></div>
-        <div class="col-4"><div class="bg-danger text-light p-2 text-center">{{object|special_kredit_price|floatformat}}</div></div>
+        <div class="col-4"><div class="bg-danger text-light p-2 text-center">{{object|get_3_month_price|floatformat:-2}}</div></div>
+        <div class="col-4"><div class="bg-danger text-light p-2 text-center">{{object|special_kredit_3_month_price|floatformat}}</div></div>
       </div>
       {% endif %}
       {% if object.kredit_6_active %}
@@ -30,6 +30,13 @@
         <div class="col-4"><div class="bg-primary-1 p-2 text-center">6</div></div>
         <div class="col-4"><div class="bg-light p-2 text-center">0</div></div>
         <div class="col-4"><div class="bg-light p-2 text-center">{{object.kredit_6|floatformat:-2}}</div></div>
+      </div>
+      {% endif %}
+      {% if object.kredit_6_active and object.kredit_6_dif == 0 %}
+      <div class="row mb-1">
+        <div class="col-4"><div class="bg-danger text-light p-2 text-center">6 {% trans 'ay' %} 0%</div></div>
+        <div class="col-4"><div class="bg-danger text-light p-2 text-center">{{object|get_6_month_price|floatformat:-2}}</div></div>
+        <div class="col-4"><div class="bg-danger text-light p-2 text-center">{{object|special_kredit_6_month_price|floatformat}}</div></div>
       </div>
       {% endif %}
 

@@ -152,7 +152,7 @@ class TireForm(forms.ModelForm):
     #             ),
     #         ),
     #         'release_date',
-    #         "kredit_initial_price",
+    #         "kredit_3_month_price",
     #         Row(
     #             Column("db"),
     #             Column("fuel"),
@@ -261,7 +261,7 @@ class TireForm(forms.ModelForm):
 #             Row(
 #                 Column("_file", css_class="col-md-4 mt-2"),
 #                 Column(
-#                     Submit("submit", "Import", css_class="btn-my-secondary btn-block"),
+#                     Submit("submit", "Import", css_class="btn-secondary-1 btn-block"),
 #                     css_class="col-md-3 mt-2",
 #                 ),
 #             )
@@ -301,7 +301,7 @@ class TireForm(forms.ModelForm):
 #             Row(
 #                 Column(
 #                     Submit(
-#                         "submit", "Export", css_class="btn-my-primary mt-2  btn-block"
+#                         "submit", "Export", css_class="btn-primary-1 mt-2  btn-block"
 #                     ),
 #                     css_class="col-md-3 d-flex justify-content-end align-items-start",
 #                 ),
@@ -339,7 +339,7 @@ class TireForm(forms.ModelForm):
 #                 Column("per_page", css_class="col-md-2 my-2 align-items-center"),
 #                 Column(
 #                     HTML(
-#                         '<button type="submin" class="btn btn-my-primary btn-block">Paginate</button>',
+#                         '<button type="submin" class="btn btn-primary-1 btn-block">Paginate</button>',
 #                     ),
 #                     css_class="col-md-2 d-flex align-items-center my-2",
 #                 ),

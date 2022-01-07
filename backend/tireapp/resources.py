@@ -211,7 +211,7 @@ class TireResource(resources.ModelResource):
     db= fields.Field(attribute="db",widget=resource_widget.IntegerWidget())
     fuel = fields.Field(attribute="fuel",widget=resource_widget.CharWidget())
     contact = fields.Field(attribute="contact",widget=resource_widget.CharWidget())
-    kredit_initial_price = fields.Field(column_name="kredit initial price %",attribute="kredit_initial_price",widget=resource_widget.FloatWidget())
+    kredit_3_month_price = fields.Field(column_name="kredit initial price %",attribute="kredit_3_month_price",widget=resource_widget.FloatWidget())
     new = fields.Field(attribute="new",widget=widgets.CustomNewBooleanWidget())
     outlet = fields.Field(attribute="outlet",widget=widgets.CustomOutletBooleanWidget())
 
@@ -270,7 +270,7 @@ class TireResource(resources.ModelResource):
             "db",
             "fuel",
             "contact",
-            "kredit_initial_price",
+            "kredit_3_month_price",
             "new",
             "outlet",
             "birkart",
@@ -327,10 +327,11 @@ class TireResource(resources.ModelResource):
             "kredit_3",
             "kredit_3_dif",
             "kredit_3_active",
-            "kredit_initial_price",
+            "kredit_3_month_price",
             "kredit_6",
             "kredit_6_dif",
             "kredit_6_active",
+            "kredit_6_month_price",
             "kredit_9",
             "kredit_9_dif",
             "kredit_9_active",

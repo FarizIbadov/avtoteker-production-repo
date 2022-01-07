@@ -92,22 +92,42 @@ def get_template(items):
     return carousel_container % "".join(item_templates) if item_templates else ""
 
 
-@register.filter(name="special_kredit_price")
-def special_kredit_price(value:Tire):
+@register.filter(name="special_kredit_3_month_price")
+def special_kredit_3_month_price(value:Tire):
     price = float(value.price)
     if value.sale_active:
         price = float(value.sale)
 
-    initial_price = value.kredit_initial_price
-    result = (price - (price * float(initial_price)/100)) / 3
+    kredit_3_price = value.kredit_3_month_price
+    kredit_3_result = (price - (price * float(kredit_3_price)/100)) / 3
 
-    return result
+    return kredit_3_result
 
-@register.filter(name="get_first_price")
-def get_first_price(value):
+@register.filter(name="special_kredit_6_month_price")
+def special_kredit_6_month_price(value:Tire):
     price = float(value.price)
     if value.sale_active:
         price = float(value.sale)
-    initial_price = value.kredit_initial_price
+
+    kredit_6_price = value.kredit_6_month_price
+    kredit_6_result = (price - (price * float(kredit_6_price)/100)) / 6
+
+    return kredit_6_result
+
+@register.filter(name="get_3_month_price")
+def get_3_month_price(value):
+    price = float(value.price)
+    if value.sale_active:
+        price = float(value.sale)
+    initial_price = value.kredit_3_month_price
+    return price * float(initial_price)/100
+
+
+@register.filter(name="get_6_month_price")
+def get_3_month_price(value):
+    price = float(value.price)
+    if value.sale_active:
+        price = float(value.sale)
+    initial_price = value.kredit_6_month_price
     return price * float(initial_price)/100
     

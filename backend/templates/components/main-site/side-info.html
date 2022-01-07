@@ -4,8 +4,12 @@
     {% if object.sale %}
     <small title="sale" class="main-list__side-single danger font-weight-bold">- {{ object.get_percentage|floatformat:-1 }} %</small>
     {% endif %}
-    {% if object.kredit_3_active and object.kredit_3_dif == 0  %}
-    <small title="3 ay faizsiz kreditlə" class="main-list__side-single primary-1">3 ay {{object.kredit_3_dif|floatformat}}%</small>
+    {% if object.kredit_6_active and object.kredit_6_dif == 0  %}
+        <small title="6 ay faizsiz kreditlə" class="main-list__side-single primary-1">
+            6 ay {{object.kredit_6_dif|floatformat}}%
+        </small>
+    {% elif object.kredit_3_active and object.kredit_3_dif == 0  %}
+        <small title="3 ay faizsiz kreditlə" class="main-list__side-single primary-1">3 ay {{object.kredit_3_dif|floatformat}}%</small>
     {% endif %}
     {% if object.free_montaj_balance == 0.0 %}
     <small  class="main-list__side-single danger font-sm">{% trans 'Pulsuz montaj+balans' %}</small>

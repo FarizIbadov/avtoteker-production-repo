@@ -183,7 +183,10 @@ class Tire(CustomModel):
     db = models.PositiveSmallIntegerField(default=72)
     fuel = models.CharField(max_length=255, default="B")
     contact = models.CharField(max_length=255, default="B")
-    kredit_initial_price = models.FloatField(blank=True, default=0)
+
+    kredit_3_month_price = models.FloatField(blank=True, default=0)
+    kredit_6_month_price = models.FloatField(blank=True, default=0)
+
     new = models.BooleanField(default=False)
     outlet = models.BooleanField(default=False)
 
