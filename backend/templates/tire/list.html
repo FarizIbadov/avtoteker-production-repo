@@ -103,7 +103,8 @@
                                 data-target="#order" class="d-inline-block btn btn-danger rounded-0 btn-sm order-btn"
                                 data-max="{{object.quantity}}"
                                 data-price="{{object.sale}}"
-                                data-id="{{object.id}}">
+                                data-id="{{object.id}}"
+                                data-taksit-list="{{object.get_available_taksit_list}}">
                                 {% trans 'Sifariş et' %}
                             </button>
                             <a href="{{object.get_absolute_url}}" class="d-inline-block btn btn-sm btn-primary-1 rounded-0 detail-btn">{% trans 'Ətraflı' %}</a>
