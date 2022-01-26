@@ -369,6 +369,18 @@ class Tire(CustomModel):
         
         return active_months[-1] if len(active_months) != 0 else 0
 
+    def get_available_taksit_list(self):
+        taksit_list = ['taksit_2','taksit_3','taksit_6','taksit_9','taksit_12']
+        available_taksit_list = []
+
+        for taksit in taksit_list:
+            if getattr(self, taksit + "_active"):
+                number = taksit.split("_")[1]
+                available_taksit_list.append(number)
+
+        return ",".join(available_taksit_list)
+
+
     class Meta:
         ordering = ("-brand__order_number",)
 

@@ -31,6 +31,21 @@ listCartBtns.forEach(listCartBtn => {
     const target = e.target as HTMLElement;
     const btn = target.closest(".order-btn") as HTMLButtonElement;
     const id = btn.getAttribute("data-id")!;
+    const taksits = btn.getAttribute("data-taksit-list")!.split(",");
+    const taksitChoices = document.getElementById(
+      "id_taksit_choice",
+    ) as HTMLSelectElement;
+
+    const taksitOptions = taksitChoices.querySelectorAll("option")!;
+
+    taksitOptions.forEach(option => {
+      option.classList.remove("d-none");
+
+      if (!taksits.includes(option.value) && option.value !== "0") {
+        option.classList.add("d-none");
+      }
+    });
+
     if (tireInput) {
       const max = btn.getAttribute("data-max")!;
       tireInput.setAttribute("value", id);
