@@ -23,6 +23,7 @@ class OrderForm(forms.Form):
 
     name = forms.CharField(max_length=20,label=_("Ad:"),required=False)
     quantity = forms.IntegerField(min_value=1,label=_("Say:"),required=True,widget=forms.NumberInput(attrs={"value": 1}))
+    email = forms.EmailField(label=_("Email:"), required=False)
     payment_type = forms.ChoiceField(label=_("Ödənış üsulu:"),choices=PAYMENT_CHOICES,required=True)
     phone = forms.CharField(label=_("Mobil nömrəsi:"),max_length=20,required=True)
     tire = forms.IntegerField(min_value=0,widget=forms.HiddenInput())
@@ -46,6 +47,12 @@ class OrderForm(forms.Form):
             ),
             Row(
                 Column(
+                    Field('email'),
+                    css_class="d-none"
+                )
+            ),
+            Row(
+                Column(
                     Field('taksit_choice',css_class="custom-select"),
                     css_class="d-none"
                 )
@@ -62,10 +69,30 @@ class OilOrderForm(forms.Form):
 
     name = forms.CharField(max_length=20,label=_("Ad:"),required=False)
     quantity = forms.IntegerField(min_value=1,label=_("Say:"),required=True)
-    payment_type = forms.ChoiceField(label=_("Ödənış üsulu:"),choices=PAYMENT_CHOICES,required=True)
-    phone = forms.CharField(label=_("Mobil nömrəsi:"),max_length=20,required=True)
-    oil = forms.IntegerField(min_value=0,widget=forms.HiddenInput())
-    note = forms.CharField(label=_("İstəyinizi yazın:"),widget=forms.Textarea,required=False)
+    email = forms.EmailField(label=_("Email:"), required=False)
+
+    payment_type = forms.ChoiceField(
+        label=_("Ödənış üsulu:"),
+        choices=PAYMENT_CHOICES,
+        required=True
+    )
+
+    phone = forms.CharField(
+        label=_("Mobil nömrəsi:"),
+        max_length=20,
+        required=True
+    )
+
+    oil = forms.IntegerField(
+        min_value=0,
+        widget=forms.HiddenInput()
+    )
+
+    note = forms.CharField(
+        label=_("İstəyinizi yazın:"),
+        widget=forms.Textarea,
+        required=False
+    )
 
     @property
     def helper(self):
@@ -79,7 +106,9 @@ class OilOrderForm(forms.Form):
             ),
             Row(
                 Column(
-                    Field('payment_type',css_class="custom-select"),
+                    Field('payment_type',
+                    css_class="custom-select"
+                ),
                 css_class="col-md")
             ),
             Row(

@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+
 
 class NavigationLink(models.Model):
     title = models.CharField(max_length=20, null=True)
@@ -24,3 +26,5 @@ class Logo(models.Model):
 
     def get_image_url(self):
         return self.logo.url if self.logo else ""
+
+  

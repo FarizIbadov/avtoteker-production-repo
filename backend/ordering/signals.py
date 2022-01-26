@@ -5,23 +5,35 @@ from django.conf import settings
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 
+
 from tireapp.models import Tire
-from emailapp.models import AuthUser,Email
-from .models import Order,OilOrder
+from emailapp.models import AuthUser, Email
+from .models import Order, OilOrder
 
 
 @receiver(post_save, sender=Order)
 def order_save(sender, instance, created, **kwargs):
     if created:
         instance.product_title = instance.tire.__str__()
-        instance.product_link = reverse('detail',kwargs={'pk':instance.tire.id,"slug": instance.tire.slug})
+        instance.product_link = reverse(
+            'detail',
+            kwargs={
+                'pk':instance.tire.pk,
+                "slug": instance.tire.slug 
+            }
+        )
+
+        subject = "Order"
+
+        if instance.payment_type == 2 or instance.payment_type == 4:
+            subject = "Online Payment"
 
         auth_user = AuthUser.objects.filter(active=True).first()
         if auth_user:
             recipient_list = Email.objects.all().values_list("email",flat=True)
             kwargs = {
                 "fail_silently": not settings.DEBUG,
-                "subject": "Order",
+                "subject": subject,
                 "message": "",
                 "auth_user": auth_user.email,
                 "auth_password": auth_user.password,

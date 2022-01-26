@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "import_export",
     'rosetta',
+    'private_storage',
 
     "social.apps.SocialConfig",
     "ordering.apps.OrderingConfig",
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
     'navigation',
     "kredit",
     "kredit_taksit",
+    "kapital_bank",
     "sticker",
     "emailapp",
     "secure_sites",
@@ -87,6 +89,9 @@ CKEDITOR_CONFIGS = {
         "width": "100%"
     },
 }
+
+PRIVATE_STORAGE_ROOT = BASE_DIR / 'private-media' if DEBUG else '/vol/web/private-media'
+PRIVATE_STORAGE_AUTH_FUNCTION = 'private_storage.permissions.allow_staff'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -185,7 +190,7 @@ USE_TZ = True
 
 STATIC_ROOT = "/vol/web/static"
 
-MEDIA_ROOT =  os.path.join(BASE_DIR,"media") if DEBUG else '/vol/web/media'
+MEDIA_ROOT =  BASE_DIR / "media" if DEBUG else '/vol/web/media'
 STATIC_URL = "/static/" if DEBUG else '/static/static/'
 MEDIA_URL = "/media/" if DEBUG else '/static/media/'
 

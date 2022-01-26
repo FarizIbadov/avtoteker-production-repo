@@ -242,11 +242,13 @@ class Tire(CustomModel):
         )
 
     def __str__(self):
-        return "%s - %s - %s - %s" % (
+        return "%s %s %s/%s%s%s" % (
             self.brand,
             self.serie,
-            self.size,
-            self.manufacturer,
+            self.size.width,
+            self.size.height,
+            self.get_ZR(),
+            self.size.radius
         )
 
 

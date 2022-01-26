@@ -1,8 +1,9 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
+from django.urls import reverse
 
 from tireapp.models import Tire
 from oilapp.models import Oil
@@ -153,6 +154,10 @@ class Order(models.Model):
     remember_me = models.BooleanField(default=False)
     order_id = models.CharField(blank=True,max_length=255)
 
+    is_purchased = models.BooleanField(default=False)
+
+    lang_code = models.CharField(max_length=255, blank=True)
+
     def __str__(self):
         if self.tire:
             return '%s' % self.tire
@@ -176,13 +181,57 @@ class Order(models.Model):
         return self.PAYMENT_CHOICES[index][1]
 
 
+    def get_payment_for_email(self):
+        if self.payment_type == 4:
+            return f"BirKartla ({self.taksit_choice} ay)"
+
+        return self.get_payment_type()
+
+
+    def get_absolute_product_link(self):
+        secure_site = SecureSite.objects.filter(active=True).first()
+
+        if secure_site:
+            return secure_site.get_address() + self.product_link
+
+        return self.product_link
+
     def get_absolute_email_url(self):
         secure_site = SecureSite.objects.filter(active=True).first()
         if secure_site:
             address = secure_site.get_address() + self.tire.get_absolute_url()
         else:
-            address = self.get_absolute_email_url()
+            address = self.tire.get_absolute_url()
         return address
+
+    def get_absolute_payment_url(self):
+        secure_site = SecureSite.objects.filter(active=True).first()        
+        address = secure_site.get_address() if secure_site else ""
+
+        uuid = self.uuid
+
+        return address + reverse("payment-view", kwargs={
+            "uuid": uuid
+        })
+
+    def get_total_price(self):
+        return self.quantity * self.tire.get_price()
+
+    def get_lang_code(self):
+        return self.lang_code if self.lang_code != 'tr' else "az"
+
+    def get_description(self):
+
+        if self.payment_type == 4:
+            return f"TAKSIT={self.taksit_choice}"
+
+        return self.get_product_name()
+        
+
+    def get_product_name(self):
+        qtn_text = _('eded')
+        price_text = _("azn")
+        return str(self.tire) + f" - {self.quantity} {qtn_text} * {self.tire.get_price()} {price_text} = {self.get_total_price()}"
 
 
 class OilOrder(models.Model):
@@ -232,7 +281,7 @@ class OilOrder(models.Model):
         if secure_site:
             address = secure_site.get_address() + self.oil.get_absolute_url()
         else:
-            address = self.get_absolute_email_url()
+            address = self.tire.get_absolute_url()
         return address
 
 
@@ -252,5 +301,3 @@ class Result(models.Model):
     def __str__(self): 
         return self.head
 
-
-# class 

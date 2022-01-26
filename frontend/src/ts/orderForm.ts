@@ -39,6 +39,9 @@ class OrderForm {
           "id_payment_type",
         ) as HTMLSelectElement;
 
+        const emailField = document.getElementById("id_email")!;
+        const emailFieldContainer = emailField.closest(".col-md")!;
+
         const taksitChoices = document.getElementById(
           "id_taksit_choice",
         ) as HTMLSelectElement;
@@ -47,10 +50,16 @@ class OrderForm {
         paymentField.addEventListener("change", e => {
           const { value } = e.target as HTMLSelectElement;
 
-          if (value === "4") {
-            taksitChoicesContainer.classList.remove("d-none");
+          if (value === "4" || value === "2") {
+            if (value === "4") {
+              taksitChoicesContainer.classList.remove("d-none");
+            } else {
+              taksitChoicesContainer.classList.add("d-none");
+            }
+
+            emailFieldContainer.classList.remove("d-none");
           } else {
-            taksitChoicesContainer.classList.add("d-none");
+            emailFieldContainer.classList.add("d-none");
           }
         });
       }
@@ -79,10 +88,16 @@ class OrderForm {
       const taksitChoices = document.getElementById(
         "id_taksit_choice",
       ) as HTMLSelectElement;
+      const emailField = document.getElementById("id_email")!;
+
       const taksitChoicesContainer = taksitChoices.closest(".col-md")!;
+      const emailFieldContainer = emailField.closest(".col-md")!;
 
       taksitChoicesContainer.classList.add("d-none");
+      emailFieldContainer.classList.add("d-none");
+
       taksitChoices.setAttribute("value", "0");
+      emailField.setAttribute("value", "");
     }
   };
 
@@ -266,6 +281,7 @@ new OrderForm(".tire-order", [
   { id: "id_payment_type", type: Number },
   { id: "id_phone", type: String },
   { id: "id_name", type: String },
+  { id: "id_email", type: String },
   { id: "id_tire", type: Number },
   { id: "id_taksit_choice", type: String },
 ]);

@@ -39,7 +39,7 @@ class OilOrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.OilOrder
-        fields = ('name','oil','phone','payment_type','note','order_id')
+        fields = ('name','oil','phone','email','payment_type','note','order_id')
         read_only_fields = ['order_id']
 
 
@@ -94,7 +94,7 @@ class TireOrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Order
-        fields = ('name','tire','phone','payment_type','quantity','order_id', "taksit_choice")
+        fields = ('name','tire','phone','email','payment_type','quantity','order_id', "taksit_choice", "lang_code")
         read_only_fields = ['order_id']
         
 

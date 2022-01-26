@@ -1,0 +1,212 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .main-body {
+        color: black;
+
+        background-color: white !important;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: white;
+
+        font-family: Averta_avto, sans-serif;
+        font-weight: 400;
+        letter-spacing: 1px;
+
+        padding-top: 22px;
+        padding-bottom: 25px;
+      }
+
+      .header {
+        max-width: 365px;
+        width: 100%;
+        font-size: 32px;
+        padding: 5px 0;
+        padding-left: 48px;
+      }
+
+      .header.primary {
+        background-color: rgba(229, 229, 229, 0.75);
+      }
+
+      .header.secondary {
+        background-color: #f8d65f;
+      }
+
+      .body {
+        margin-top: 50px;
+        margin-left: 48px;
+
+        max-width: 730px;
+        width: 100%;
+      }
+
+      .code-container,
+      .payment > .payment-title,
+      .payment > .payment-link {
+        width: 100%;
+        font-size: 28px;
+      }
+
+      .code-title {
+        color: black;
+      }
+
+      .code {
+        color: #bd0000;
+        line-height: 58px;
+      }
+
+      .brand-logo {
+        margin-top: 10px;
+        margin-left: 3px;
+        width: 143px;
+      }
+
+      .logo {
+        width: 100%;
+        object-fit: contain;
+      }
+
+      .info {
+        margin: 17px 0;
+
+        font-size: 18px;
+      }
+
+      .info > div {
+        color: black;
+        display: inline-block;
+      }
+
+      .info > .second {
+        margin-left: 10%;
+        margin-right: 10%;
+      }
+
+      .link {
+        display: block;
+        margin-top: 23px;
+
+        text-decoration: none;
+        color: black !important;
+      }
+
+      .phone-number {
+        text-decoration: underline;
+        color: black !important;
+      }
+
+      .payment {
+        margin: 32px 0;
+      }
+
+      .payment-title {
+        color: black;
+      }
+
+      .payment-link {
+        display: block;
+        margin: 10px 0;
+        color: #bd0000 !important;
+
+        text-decoration: none;
+      }
+
+      .payment-contact {
+        margin-top: 20px;
+        font-size: 20px;
+      }
+
+      .footer {
+        max-width: 778px;
+        width: 100%;
+      }
+
+      .footer .logo {
+        display: block;
+
+        padding: 10px;
+        margin: 0 auto;
+
+        width: 136px;
+        height: 136px;
+
+        background-color: #f8d65f;
+        border-radius: 50%;
+
+        object-fit: contain;
+      }
+
+      @media screen and (max-width: 400px) {
+        .info > div {
+          display: block;
+        }
+
+        .info > .second {
+          margin: 10px 0;
+        }
+
+        .footer .logo {
+          margin-left: 37.5%;
+        }
+      }
+    </style>
+  </head>
+  <body class="main-body">
+    <div class="header primary">{% trans 'Sifariş üçün' %}</div>
+    <div class="header secondary">{% trans 'təşəkkür edirik!' %}</div>
+
+    <div class="body">
+      <div class="code-container">
+        <div class="code-title">{% trans 'Sizin sifarişinizin sorğu nömrəniz -' %} </div>
+        <div class="code">{{object.order_id}}</div>
+      </div>
+
+      <div class="brand-logo">
+        <img class="logo" src="cid:brand" alt="brand" />
+      </div>
+
+      <div class="info">
+        <div class="first">{{ object.tire.pk }}</div>
+        <div class="second">{{object.quantity}} {% trans "əd" %} x {{object.tire.get_price}} {% trans "azn" %} = {{object.get_total_price}} {% trans "azn" %}</div>
+        <div class="third">{{ object.get_payment_for_email }}</div>
+      </div>
+      <a
+        class="link"
+        href="{{ object.get_absolute_product_link }}"
+        target="blank"
+        >{{ object.get_absolute_product_link }}</a
+      >
+
+      <div class="payment">
+        {% if online_payment %}
+        <div class="payment-title">{% trans 'Onlayn ödəniş üçün' %}</div>
+        <a
+          class="payment-link"
+          href="{{object.get_absolute_payment_url}}"
+          target="blank"
+          >{{object.get_absolute_payment_url}}</a
+        >
+        {% endif %}
+        <div class="payment-contact">{% trans 'Əlaqə üçün' %} <a class="phone-number" href="tel:{{ phone }}">{{ phone }}</a></div>
+      </div>
+    </div>
+     <div class="footer">
+        <img class="logo" src="cid:logo" alt="avtoteker" />
+    </div>
+  </body>
+</html>

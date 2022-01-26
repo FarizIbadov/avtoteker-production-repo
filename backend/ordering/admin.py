@@ -6,14 +6,17 @@ from .resources import OilOrderResource,TireOrderResource
 
 
 @admin.register(models.Order)
-class OrderAdmin(ExportMixin,admin.ModelAdmin):
+class OrderAdmin(ExportMixin, admin.ModelAdmin):
     readonly_fields = ['customer_id','product','email','phone_number','payment_type','name']
     list_filter = ['remember_me']
     list_display = ['order_title']
-    exclude = ['uuid','phone','tire','product_title','product_link','order_title']
+    exclude = ['uuid','phone','tire','product_title','product_link','order_title', "lang_code"]
     search_fields = ("uuid",)
 
     resource_class = TireOrderResource
+
+    change_form_template = "admin/order/order.html"
+    
 
     def phone_number(self,obj):
         link = "<a href='tel:%s'>%s</a>" % (obj.phone,obj.phone)
