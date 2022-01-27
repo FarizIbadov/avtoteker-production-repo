@@ -26,7 +26,7 @@ def generate_payment_url(order):
 
     data = generate_data(order, security, success_url, cancel_url)
 
-    host_path = os.getcwd() if settings.DEBUG else settings.PRIVATE_STORAGE_ROOT
+    host_path = os.getcwd() if settings.DEBUG else "/vol/web"
 
     crt_file = host_path + security.crt_file.url
     key_file = host_path + security.key_file.url
