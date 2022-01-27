@@ -76,9 +76,18 @@ class TireOrderSerializer(serializers.ModelSerializer):
     def validate(self, data):
         taksit_choice, payment_choice = data.get("taksit_choice"), data.get("payment_type")
         
-        if payment_choice == 4 and taksit_choice == 0:
-            message = _("Xaiş edirik ayı seçin.")
-            raise serializers.ValidationError({"taksit_choice": [message]})
+        if payment_choice == 4:
+            if taksit_choice == 0:
+                message = _("Xaiş edirik ayı seçin.")
+                raise serializers.ValidationError({"taksit_choice": [message]})
+
+            tire = data.get('tire')
+            taksits_raw = tire.get_available_taksit_list().split(",")
+            taksits = list(map(int, taksits_raw))
+
+            if not taksit_choice in taksits:
+                message = _("Bu taksit seçimi hal hazirda  yoxdı")
+                raise serializers.ValidationError({"taksit_choice": [message]})
 
         return data
 

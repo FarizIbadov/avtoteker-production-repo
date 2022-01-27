@@ -26,8 +26,10 @@ def generate_payment_url(order):
 
     data = generate_data(order, security, success_url, cancel_url)
 
-    crt_file = os.getcwd() + security.crt_file.url
-    key_file = os.getcwd() + security.key_file.url
+    host_path = os.getcwd() if settings.DEBUG else settings.PRIVATE_STORAGE_ROOT
+
+    crt_file = host_path + security.crt_file.url
+    key_file = host_path + security.key_file.url
 
     headers = {'Content-Type': 'application/xml'}
 

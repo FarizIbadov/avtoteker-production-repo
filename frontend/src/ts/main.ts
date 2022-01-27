@@ -21,6 +21,11 @@ const form = document.querySelector<HTMLFormElement>(".needs-validation");
 const listCartBtns = document.querySelectorAll<HTMLButtonElement>(".order-btn");
 const tireInput = document.getElementById("id_tire") as HTMLInputElement;
 const oilInput = document.getElementById("id_oil") as HTMLInputElement;
+const taksitChoices = document.getElementById(
+  "id_taksit_choice",
+) as HTMLSelectElement;
+
+const taksitOptions = [...taksitChoices.querySelectorAll("option")!];
 
 const quantityInput = document.getElementById(
   "id_quantity",
@@ -32,17 +37,12 @@ listCartBtns.forEach(listCartBtn => {
     const btn = target.closest(".order-btn") as HTMLButtonElement;
     const id = btn.getAttribute("data-id")!;
     const taksits = btn.getAttribute("data-taksit-list")!.split(",");
-    const taksitChoices = document.getElementById(
-      "id_taksit_choice",
-    ) as HTMLSelectElement;
 
-    const taksitOptions = taksitChoices.querySelectorAll("option")!;
+    taksitChoices.innerHTML = "";
 
     taksitOptions.forEach(option => {
-      option.classList.remove("d-none");
-
-      if (!taksits.includes(option.value) && option.value !== "0") {
-        option.classList.add("d-none");
+      if (taksits.includes(option.value) || option.value === "0") {
+        taksitChoices.insertAdjacentElement("beforeend", option);
       }
     });
 
