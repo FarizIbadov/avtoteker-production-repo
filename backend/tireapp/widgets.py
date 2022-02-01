@@ -39,7 +39,7 @@ class CustomSerieWidget(Widget):
             serie = Serie.objects.create(
                 title=value,
                 brand=brand
-            ).first()
+            )
 
         return serie
 
