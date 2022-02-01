@@ -20,8 +20,11 @@ class CustomBrandWidget(Widget):
 
 class CustomSerieWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
+        brand_title = row['brand']
+        brand, _ = Brand.objects.get_or_create(title=brand_title)
         serie, _ = Serie.objects.get_or_create(
-            title=value
+            title=value,
+            brand=brand
         )
         return serie
 
