@@ -14,18 +14,33 @@ class CustomBooleanWidget(BooleanWidget):
 class CustomBrandWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
         title = value.strip()
-        brand, _ = Brand.objects.get_or_create(title=title)
+        brand = Brand.objects.filter(title=title).first()
+        
+        if not brand:
+            brand = Brand.objects.create(title=title)
+
         return brand
 
 
 class CustomSerieWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
-        brand_title = row['brand']
-        brand, _ = Brand.objects.get_or_create(title=brand_title)
-        serie, _ = Serie.objects.get_or_create(
+        brand_title = row['brand'].strip()
+        brand = Brand.objects.filter(title=brand_title).first()
+        
+        if not brand:
+            brand = Brand.objects.create(title=brand_title)
+
+        serie = Serie.objects.filter(
             title=value,
             brand=brand
-        )
+        ).first()
+
+        if not serie:
+            serie = Serie.objects.create(
+                title=value,
+                brand=brand
+            ).first()
+
         return serie
 
 
