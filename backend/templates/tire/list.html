@@ -72,8 +72,8 @@
                                 </div>
                                 {% include "../components/tire/price.html" with object=object %}
                             </div>
+                            {% include "../components/main-site/third-price.html" with object=object %}
                         </div>
-                        {% include "../components/main-site/third-price.html" with object=object %}
                         <div class="row justify-content-end w-100 no-gutters">
                             {% include "../components/edv.html" with object=object edv=edv %}
                             {% if object.release_date %}

@@ -8,8 +8,13 @@
             </span>
         </div>  
         <div class="price text-right">
-            <span class="text-red font-xl">
+            <span class="text-red position-relative  font-xl">
                 {{object.sale|floatformat:-2}}
+                {% if object.price_3 %}
+                <div class="black-transparent-line-trought">
+                    
+                </div>
+                {% endif %}
             </span>
             <span class="manat">
                 <img src="{% static 'img/manat.png' %}" alt="₼">
@@ -17,8 +22,13 @@
         </div>  
     {% else %}
         <div class="price text-right">
-            <span class="text-red font-xl">
+            <span class="text-red font-xl position-relative">
                 {{object.price|floatformat:-2}}
+                {% if object.price_3 %}
+                <div class="black-transparent-line-trought">
+                    
+                </div>
+                {% endif %}
             </span>
             <span class="manat">
                 <img src="{% static 'img/manat.png' %}" alt="₼">

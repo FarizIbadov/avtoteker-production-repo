@@ -134,7 +134,7 @@ class Tire(CustomModel):
     price = models.FloatField(null=True)
     sale = models.FloatField(blank=True, null=True)
     sale_active = models.BooleanField(default=True)
-    price_3 = models.FloatField(blank=True,null=True)
+    price_3 = models.CharField(max_length=255,blank=True,null=True)
 
 
     taksit_active = models.BooleanField(default=True)
@@ -316,6 +316,22 @@ class Tire(CustomModel):
             self.save()
        
         return self.slug
+
+    def get_price_3(self):    
+        try:
+            float(self.price_3)
+            return self.price_3
+        except ValueError:
+            return self.price_3[0:-1]
+
+    def get_price_3_color(self):
+        try:
+            float(self.price_3)
+            return "r"
+        except ValueError:
+            return self.price_3[-1].lower()
+
+        
 
 
     def generate_slug(self):

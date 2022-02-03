@@ -1,9 +1,22 @@
 .text-red {
-  color: red;
+  color: #ea3223;
 }
 
 .red-line-trought {
-  text-decoration: line-through red;
+  text-decoration: line-through #ea3223;
+}
+
+.black-transparent-line-trought {
+  background-color: #00000060;
+  height: 1px;
+
+  transform: rotate(-15deg);
+
+  position: absolute;
+  top: 50%;
+  left: 0;
+
+  width: 100%;
 }
 
 .font-medium {
