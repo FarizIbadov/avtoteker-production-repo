@@ -39,7 +39,7 @@ def order_save(sender, instance, created, **kwargs):
                 "auth_password": auth_user.password,
                 "from_email": auth_user.email,
                 "recipient_list": list(recipient_list),
-                "html_message": render_to_string('order-email-detail.html',{"object":instance})
+                "html_message": render_to_string('emails/order-email-detail.html',{"object":instance})
             }
             send_mail(**kwargs)
 
@@ -62,7 +62,7 @@ def oil_order_save(sender, instance, created, **kwargs):
                 "auth_password": auth_user.password,
                 "from_email": auth_user.email,
                 "recipient_list": list(recipient_list),
-                "html_message": render_to_string('order-email-detail.html',{"object":instance})
+                "html_message": render_to_string('emails/order-email-detail.html',{"object":instance})
             }
             send_mail(**kwargs)
             

@@ -83,7 +83,7 @@ class EmailSenderAPIView(APIView):
         if phone:
             phone_number = phone.number
 
-        html_message = render_to_string('payment-email.html',{
+        html_message = render_to_string('emails/payment-email.html',{
             "object":order,
             "phone": phone_number,
             "online_payment": security
