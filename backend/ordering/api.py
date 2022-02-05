@@ -90,7 +90,7 @@ class EmailSenderAPIView(APIView):
         })
 
         subject = "Payment"
-        recipient_list = [order.email]
+        recipient_list = [auth_user.email, order.email]
         fail_silently = settings.DEBUG == False
 
         connection = get_connection(
