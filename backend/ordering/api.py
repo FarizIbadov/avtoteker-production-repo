@@ -112,7 +112,13 @@ class EmailSenderAPIView(APIView):
         msg.attach_alternative(html_message, "text/html")
 
         if logo_image is not None:
-            logo_path = settings.MEDIA_ROOT / logo_image.name
+            logo_path = ""
+            
+            if settings.DEBUG:
+                logo_path = settings.MEDIA_ROOT / logo_image.name
+            else:
+                logo_path = settings.MEDIA_ROOT + "/" + logo_image.name
+
             fp = open(logo_path, "rb")
             image = MIMEImage(fp.read())
             fp.close()
@@ -121,7 +127,15 @@ class EmailSenderAPIView(APIView):
 
         if order.tire.brand and order.tire.brand.image:
             brand_image = order.tire.brand.image
-            brand_path = settings.MEDIA_ROOT / brand_image.name
+            
+            brand_path = ""
+
+            if settings.DEBUG:
+                brand_path = settings.MEDIA_ROOT / brand_image.name
+            else: 
+                brand_path = settings.MEDIA_ROOT + "/" + brand_image.name
+
+
             fp = open(brand_path, "rb")
             image = MIMEImage(fp.read())
             fp.close()
