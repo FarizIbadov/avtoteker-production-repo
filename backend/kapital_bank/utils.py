@@ -44,6 +44,7 @@ def generate_payment_url(order):
     if response.status_code >= 400: return cancel_url
 
     xml = response.text
+    print(xml)
     create_order_dict = xmltodict.parse(xml, process_namespaces=True)
 
     order_dict = create_order_dict['TKKPG']['Response']['Order']
