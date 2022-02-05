@@ -37,7 +37,7 @@ def generate_payment_url(order):
         security.service_link, 
         data=data, 
         headers=headers, 
-        verify = settings.DEBUG == False,
+        verify = security.verify,
         cert=(crt_file, key_file)
     )
 

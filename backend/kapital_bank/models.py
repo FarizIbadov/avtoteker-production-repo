@@ -20,6 +20,8 @@ class KapitalPaymentSecurity(models.Model):
         default="https://e-commerce.kapitalbank.az/index.jsp?ORDERID={{ORDERID}}&SESSIONID={{SESSIONID}}"
     )
 
+    verify = models.BooleanField(default=False)
+
     active = models.BooleanField(default=True)
 
     def __str__(self):
