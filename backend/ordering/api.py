@@ -112,39 +112,29 @@ class EmailSenderAPIView(APIView):
         msg.attach_alternative(html_message, "text/html")
 
         if logo_image is not None:
-            logo_path = ""
-            
-            if settings.DEBUG:
-                logo_path = settings.MEDIA_ROOT / logo_image.name
-            else:
-                logo_path = settings.MEDIA_ROOT + "/" + logo_image.name
-
-            fp = open(logo_path, "rb")
-            image = MIMEImage(fp.read())
-            fp.close()
+            logo_mime = self.get_image_mime_type(logo_image)
+            image = MIMEImage(logo_image.read(), _subtype=logo_mime)
             msg.attach(image)
             image.add_header('Content-ID', "<logo>")
 
         if order.tire.brand and order.tire.brand.image:
             brand_image = order.tire.brand.image
-            
-            brand_path = ""
-
-            if settings.DEBUG:
-                brand_path = settings.MEDIA_ROOT / brand_image.name
-            else: 
-                brand_path = settings.MEDIA_ROOT + "/" + brand_image.name
-
-
-            fp = open(brand_path, "rb")
-            image = MIMEImage(fp.read())
-            fp.close()
+            brand_mime = self.get_image_mime_type(brand_image)
+            image = MIMEImage(brand_image.read(), _subtype=brand_mime)
             msg.attach(image)
             image.add_header("Content-ID", "<brand>")
         
         msg.send()
 
         return response.Response()
+
+
+    def get_image_mime_type(self, image):
+        jpg_ext = ["jpeg", "jpg"]
+        ext = image.name.split(".")[1]
+        if ext in jpg_ext:
+            return f"image/{ext}"
+        return "image/png"
 
 
 # class CartItemAPIView(APIView):
