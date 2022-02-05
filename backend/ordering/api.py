@@ -42,7 +42,7 @@ class OilOrderAPIView(CreateAPIView):
 
 class EmailSenderAPIView(APIView):
     def post(self, request, *args, **kwargs):
-        pk = kwargs['pk']
+        pk = kwargs.get('pk')
         order = Order.objects.filter(pk=pk).first()
 
         if not order:
@@ -59,6 +59,7 @@ class EmailSenderAPIView(APIView):
             )
 
         auth_user = AuthUser.objects.filter(active=True).first()
+
         if not auth_user:
             return response.Response(
                 status=status.HTTP_400_BAD_REQUEST,
@@ -99,23 +100,35 @@ class EmailSenderAPIView(APIView):
             fail_silently=fail_silently
         )
 
-        msg = EmailMultiAlternatives(subject, "...", auth_user.email, recipient_list, connection=connection)
+        msg = EmailMultiAlternatives(
+            subject, 
+            "...", 
+            auth_user.email, 
+            recipient_list, 
+            connection=connection
+        )
+
         msg.mixed_subtype = 'related' 
         msg.attach_alternative(html_message, "text/html")
 
-        if logo_image:
-            image = MIMEImage(logo_image.read())
+        if logo_image is not None:
+            logo_path = settings.MEDIA_ROOT / logo_image.name
+            fp = open(logo_path, "rb")
+            image = MIMEImage(fp.read())
+            fp.close()
             msg.attach(image)
             image.add_header('Content-ID', "<logo>")
 
         if order.tire.brand and order.tire.brand.image:
-            image = MIMEImage(order.tire.brand.image.read())
+            brand_image = order.tire.brand.image
+            brand_path = settings.MEDIA_ROOT / brand_image.name
+            fp = open(brand_path, "rb")
+            image = MIMEImage(fp.read())
+            fp.close()
             msg.attach(image)
             image.add_header("Content-ID", "<brand>")
         
         msg.send()
-
-        
 
         return response.Response()
 
