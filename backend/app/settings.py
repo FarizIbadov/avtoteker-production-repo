@@ -71,8 +71,6 @@ INSTALLED_APPS = [
     "adv",
     "adds.apps.AddsConfig",
     "copyright.apps.CopyrightConfig",
-    # "waranty"
-    # "about_us"
 ]
 
 REST_FRAMEWORK = {

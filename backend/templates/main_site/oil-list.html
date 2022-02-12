@@ -57,7 +57,7 @@
                                     {% include "../components/main-site/image.html" with object=object.country %}
                                 </div>
                                 <div class="main-list__price-info mt-5 mr-1">
-                                    {% if object.sale_active %}
+                                    {% if object.sale %}
                                     <div class="price">
                                         <span class="red-line-trought  font-larger--2 opacity-8">
                                             {{object.price|floatformat}}

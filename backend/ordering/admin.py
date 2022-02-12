@@ -2,21 +2,56 @@ from django.contrib import admin
 from import_export.admin import ExportMixin
 from . import models
 from django.utils.html import format_html
-from .resources import OilOrderResource,TireOrderResource
+from .resources import OilOrderResource, TireOrderResource
 
 
 @admin.register(models.Order)
 class OrderAdmin(ExportMixin, admin.ModelAdmin):
-    readonly_fields = ['customer_id','product','email','phone_number','payment_type','name']
+    readonly_fields = ['customer_id','product','email','phone_number','payment_type','name', 'order_id', 'order_date', 'price']
+    
     list_filter = ['remember_me']
     list_display = ['order_title']
-    exclude = ['uuid','phone','tire','product_title','product_link','order_title', "lang_code"]
+    
     search_fields = ("uuid",)
 
     resource_class = TireOrderResource
 
     change_form_template = "admin/order/order.html"
     
+
+    def get_fields(self, request, obj=None):
+        payment_row = ['payment_type']
+        price_row =  ['change_amount', 'by_price']
+
+        if obj.taksit_choice >= 3:
+            payment_row.append('taksit_choice')
+
+        fields = (   
+                ('customer_id', 'order_id'),
+                
+                'name',
+                'email',
+                'phone_number',
+
+                'product',
+                
+                payment_row,
+        
+                price_row, 
+                ('change_percentage', 'by_percentage'),  
+                'price',
+
+                'note',
+                'order_date',
+
+                "quantity",
+                'is_purchased'
+            )
+        return fields
+
+
+    def price(self, obj):
+        return obj.tire_price
 
     def phone_number(self,obj):
         link = "<a href='tel:%s'>%s</a>" % (obj.phone,obj.phone)
@@ -28,7 +63,7 @@ class OrderAdmin(ExportMixin, admin.ModelAdmin):
     def product(self,obj):
         title = self.order_title(obj)
 
-        link = "<a href='%s'>%s</a>" % (obj.product_link,title)
+        link = "<a target='blank' href='%s'>%s</a>" % (obj.product_link,title)
         return format_html(link)
 
     def order_title(self,obj):

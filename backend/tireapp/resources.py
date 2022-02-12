@@ -187,10 +187,10 @@ class TireResource(resources.ModelResource):
     sale = fields.Field(
         column_name="sale", attribute="sale", widget=resource_widget.FloatWidget()
     )
-    sale_active = fields.Field(
-        column_name="sale active",
-        attribute="sale_active",
-        widget=widgets.CustomBooleanWidget()
+    cost = fields.Field(
+        column_name="cost",
+        attribute="cost",
+        widget=resource_widget.FloatWidget()
     )
 
     montaj_balance = fields.Field(
@@ -276,7 +276,7 @@ class TireResource(resources.ModelResource):
             "taksit_12_active",
             "price",
             "sale",
-            "sale_active",
+            "cost",
             "price_3",
             "release_date",
             "db",
@@ -318,7 +318,7 @@ class TireResource(resources.ModelResource):
             "contact",
             "price",
             "sale",
-            "sale_active",
+            "cost",
             "price_3",
             "montaj_balance",
             "razval",

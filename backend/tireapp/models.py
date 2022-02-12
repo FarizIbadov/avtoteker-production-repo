@@ -133,7 +133,7 @@ class Tire(CustomModel):
 
     price = models.FloatField(null=True)
     sale = models.FloatField(blank=True, null=True)
-    sale_active = models.BooleanField(default=True)
+    cost = models.FloatField(null=True, blank=True)
     price_3 = models.CharField(max_length=255,blank=True,null=True)
 
 
@@ -277,6 +277,8 @@ class Tire(CustomModel):
         return self.serie.get_image()
 
     def get_price(self):
+        if self.price_3:
+            return float(self.get_price_3())
         return self.sale if self.sale else self.price
 
     def get_quantity(self):
@@ -318,18 +320,22 @@ class Tire(CustomModel):
         return self.slug
 
     def get_price_3(self):    
-        try:
-            float(self.price_3)
-            return self.price_3
-        except ValueError:
-            return self.price_3[0:-1]
+        if self.price_3:
+            try:
+                float(self.price_3)
+                return self.price_3
+            except ValueError:
+                return self.price_3[0:-1]
+        return None
 
     def get_price_3_color(self):
-        try:
-            float(self.price_3)
-            return "r"
-        except ValueError:
-            return self.price_3[-1].lower()
+        if self.price_3:
+            try:
+                float(self.price_3)
+                return "r"
+            except ValueError:
+                return self.price_3[-1].lower()
+        return None
 
         
 

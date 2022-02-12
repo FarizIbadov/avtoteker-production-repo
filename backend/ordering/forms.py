@@ -9,7 +9,8 @@ class OrderForm(forms.Form):
         (1,_('Nağd')),
         (2,_('Kart ilə')),
         (3,_('Kreditlə')),
-        (4,_('BirKart / TamKart ilə')),
+        (4,_('BirKart')),
+        (5, _("TamKart"))
     ]
 
     TAKSIT_CHOICES = [

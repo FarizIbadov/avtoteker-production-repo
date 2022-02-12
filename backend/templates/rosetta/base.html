@@ -1,4 +1,5 @@
 {% load navigation_list %}
+{% load rosetta i18n %}
 
 {% get_logo as logo %}
 
@@ -25,16 +26,19 @@
         <div id="header">
             <div id="branding">
                   {% if logo %}
-                    <a href="{% url 'admin:index' %}">
+                    <a href="{% url 'rosetta-file-list' po_filter='project' %}">
                     <img src="{{logo.get_image_url}}" class="admin-logo" alt="logo">
                     </a>
                 {% else %}
-                <h1 id="site-name"><a href="{% url 'admin:index' %}">BMS</a></h1>
+                <h1 id="site-name"><a href="{% url 'rosetta-file-list' po_filter='project' %}">Avtoteker</a></h1>
                 {% endif %}
             </div>
             <div id="user-tools">
               <a href="{% url 'admin:index' %}">Admin</a> /
               <a href="{% url 'home' %}">View site</a>
+                {% if po_filter and lang_id and idx %}
+                / <a href="{% url 'rosetta-download-file' po_filter=po_filter lang_id=lang_id idx=idx %}">{% trans "Download this catalog" %}</a>
+                {% endif %}
             </div>
         </div>
         <div class="breadcrumbs">{% block breadcumbs %}{% endblock %}</div>

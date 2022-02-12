@@ -3,6 +3,8 @@
 {% load rating %} 
 {% load taksit_kredit %}
 {% load edv %}
+{% load price_3 %}
+
 {% load i18n %}
 
 {% block seo %}
@@ -12,6 +14,7 @@
 {% endblock seo %}
 
 {% block content %} 
+{% get_price_color object as price_color %}
 {% get_edv as edv %}
 
 {% include "../components/order-modal-form.html" %}
@@ -142,12 +145,12 @@
     <div class="mt-4 col-md-12 tab-content" id="myTabContent">
       {% if object.kredit_active %}
       <div class="tab-pane fade show active" id="kredit" role="tabpanel" aria-labelledby="home-tab">
-        {% include "../components/main-site/kredit-table.html" with object=object %}
+        {% include "../components/main-site/kredit-table.html" with object=object price_color=price_color %}
       </div>
       {% endif %}
       {% if object.taksit_active %}
       <div class="tab-pane fade" id="taksit" role="tabpanel" aria-labelledby="profile-tab">
-        {% include "../components/main-site/taksit-table.html" with object=object %}
+        {% include "../components/main-site/taksit-table.html" with object=object price_color=price_color %}
       </div>
       {% endif %}
     </div>

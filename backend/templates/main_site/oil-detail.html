@@ -7,7 +7,7 @@
 {% block seo %}
   <meta name="description" content="{% trans 'Geniş yağ çeşidi Avtotəkərdə. Orijinal və minimum qiymət. Shell, Mobil1, Ravenol' %}">
 
-  <title>{{object.brand}} {{object.serie}} {{object.viscosity}} - {% if object.sale_active %} {{object.sale}} {% else %} {{object.price}} {% endif %} {% trans 'azn | Yağ seçimi | Avtotəkər' %} </title>
+  <title>{{object.brand}} {{object.serie}} {{object.viscosity}} - {% if object.sale %} {{object.sale}} {% else %} {{object.price}} {% endif %} {% trans 'azn | Yağ seçimi | Avtotəkər' %} </title>
 {% endblock seo %}
 
 {% block content %}
@@ -54,7 +54,7 @@
                 {% include "../components/main-site/image.html" with object=object.country %}
               </div>
               <div class="main-list__price-info mt-3">
-                {% if object.sale_active %}
+                {% if object.sale %}
                   <div class="price">
                       <span class="red-line-trought  font-larger--2 opacity-8">
                           {{object.price|floatformat}}
