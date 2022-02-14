@@ -35,9 +35,9 @@ class OilResource(resources.ModelResource):
         widget=tire_widgets.CustomCountryWidget()
     )
 
-    sale_active = fields.Field(
-        column_name="Sale active",
-        attribute="sale_active",
+    cost = fields.Field(
+        column_name="cost",
+        attribute="cost",
         widget=tire_widgets.CustomBooleanWidget()
     )
 
@@ -114,7 +114,7 @@ class OilResource(resources.ModelResource):
             "description",
             "price",
             "sale",
-            "sale_active",
+            "cost",
             "taksit_active",
             "taksit_2",
             "taksit_2_active",
@@ -146,7 +146,7 @@ class OilResource(resources.ModelResource):
             "description",
             "price",
             "sale",
-            "sale_active",
+            "cost",
             "taksit_active",
             "taksit_2",
             "taksit_2_active",

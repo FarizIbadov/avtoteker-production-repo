@@ -15,7 +15,7 @@ services:
     build: .
     volumes:
       - static_data:/vol/web
-      - ./backend/locale:/app/locale
+      - ./locale:/locale
     env_file: .env
     depends_on:
       - db

@@ -8,7 +8,7 @@ import json
 class TireSizeView(View):
     
     def get(self, request, *args, **kwargs):
-        context =  self.get_context_data()
+        context = self.get_context_data()
 
         self.make_slug = request.GET.get("make")
         self.model_slug = request.GET.get("model")

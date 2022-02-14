@@ -44,13 +44,15 @@ def generate_payment_url(order):
     if response.status_code >= 400: return cancel_url
 
     xml = response.text
-    print(xml)
+    
     create_order_dict = xmltodict.parse(xml, process_namespaces=True)
 
-    order_dict = create_order_dict['TKKPG']['Response']['Order']
-
-    order_id = order_dict['OrderID']
-    session_id = order_dict['SessionID']
+    try:
+        order_dict = create_order_dict['TKKPG']['Response']['Order']
+        order_id = order_dict['OrderID']
+        session_id = order_dict['SessionID']
+    except KeyError:
+        return cancel_url
 
     payment_url = security.payment_link.replace("{{ORDERID}}", order_id).replace("{{SESSIONID}}", session_id)
     

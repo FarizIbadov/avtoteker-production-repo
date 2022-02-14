@@ -105,9 +105,9 @@ class Oil(CustomModel):
     image_url = models.URLField(blank=True)
     des1 = models.CharField(max_length=50)
 
-    price = models.FloatField()
-    sale = models.FloatField()
-    sale_active = models.BooleanField(default=False)
+    price = models.FloatField(null=True, blank=True)
+    sale = models.FloatField(null=True, blank=True)
+    cost = models.FloatField(null=True, blank=True)
 
     taksit_active = models.BooleanField(default=True)
 
