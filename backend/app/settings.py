@@ -207,7 +207,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 LOCALE_PATHS = (
-    BASE_DIR / '../locale',
+    BASE_DIR / '../locale' if DEBUG else "/vol/web/locale",
 )
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = "az"

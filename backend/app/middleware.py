@@ -10,7 +10,7 @@ class ForceDefaultLanguageMiddleware(MiddlewareMixin):
         lang_code = settings.LANGUAGE_CODE
 
         
-        if request.path.startswith("/admin/"): 
+        if request.path.startswith("/admin"): 
             lang_code = getattr(
                 settings, 
                 "ADMIN_LANGUAGE_CODE", 
