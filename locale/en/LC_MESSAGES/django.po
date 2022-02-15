@@ -6,13 +6,13 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-12 07:12+0000\n"
+"POT-Creation-Date: 2022-02-15 13:18+0000\n"
 "PO-Revision-Date: 2021-12-26 08:15+0000\n"
 "Last-Translator: <feyruz.ibadov@avtoteker.az>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language-Team: \n"
+"Language: en \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -323,8 +323,8 @@ msgstr "Cancel"
 msgid "Sifariş"
 msgstr "Order"
 
-#: templates/components/order-modal-form.html:20
-#: templates/tire/detail.html:107 templates/tire/list.html:108
+#: templates/components/order-modal-form.html:20 templates/tire/detail.html:107
+#: templates/tire/list.html:108
 msgid "Sifariş et"
 msgstr "order it"
 
@@ -433,8 +433,8 @@ msgstr ""
 "Are you renewing your tires? Then, welcome to Avtoteker. Here, we can offer "
 "you the best of Horizon, Vitour, Westlake, freight and UHP Kapsen and such "
 "brands, like ZETUM, Kumho, Dunlop, Goodyear, Toyo, Nitto, Yokohama, "
-"Bridgestone, Pirelli, Continental, Michelin. We also offer professional tire"
-" fitting and balancing, wheel repair, wheel alignment, dozens of autorepair "
+"Bridgestone, Pirelli, Continental, Michelin. We also offer professional tire "
+"fitting and balancing, wheel repair, wheel alignment, dozens of autorepair "
 "services and different auto-oils change. You can get our tires and service "
 "offers interest-free with BirKart, TamKart, Bolkart and Albalikart up to 12 "
 "month. Our motto - Minimum price, Maximum tire. Guarantee+ #teker #tire | "
