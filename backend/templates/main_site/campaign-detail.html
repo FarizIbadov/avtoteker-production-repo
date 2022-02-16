@@ -21,7 +21,9 @@
           />
         </div>
         {% endif %}
+        {% if object.video %}
         {% include "../components/video.html" with object=object %}
+        {% endif %}
       </div>
       {% if object.title and object.description and object.extra %}
       <div class="px-md-4">
