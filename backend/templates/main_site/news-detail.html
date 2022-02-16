@@ -22,6 +22,7 @@
                     </div>
                     {% endif %}
                 </div>
+                {% if object.title and object.description and object.extra %}
                 <div class="px-md-4">
                     <div class="d-block mt-5 mb-4">
                         {{object.title|safe}}
@@ -30,6 +31,7 @@
                     <hr>
                     {{object.extra|safe}}
                 </div>
+                {% endif %}
             </div>
            
         </div>

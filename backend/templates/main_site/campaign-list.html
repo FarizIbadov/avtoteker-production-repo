@@ -23,8 +23,11 @@
                     {% if object.image %}
                     <img class="w-100 mb-2" src="{{ object.image.url }}" alt="{{object.slug}}">
                     {% endif %}
+
+                    {% if object.title and object.description %}
                     <a href="{% url 'campaign-detail' object.id %}" class="d-block text-decoration-none mt-4 mb-3">{{object.title|safe}}</a>
                     {{object.description|truncatechars_html:object.truncate|safe}}
+                    {% endif %}
                 </div>
             {% empty %}
                 <h3 class="main-list__empty-text">{% trans 'Kampaniyalar hal hazırda yoxdur' %}
