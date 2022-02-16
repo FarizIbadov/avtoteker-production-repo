@@ -16,9 +16,11 @@
         <div class="main-list__main-row">
             <div class="col mt-2">
                 <div class="row justify-content-center px-md-4 object-fit-contain">
+                    {% if object.image %}
                     <div class="col-md-12">
                         <img class="w-100" src="{{ object.image.url }}" alt="{{object.slug}}">
                     </div>
+                    {% endif %}
                 </div>
                 <div class="px-md-4">
                     <div class="d-block mt-5 mb-4">

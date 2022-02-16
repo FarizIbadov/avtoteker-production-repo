@@ -20,7 +20,9 @@
         <div class="main-list__main-row">
             {% for object in object_list %}
                 <div class="col-md-6 mt-5">
+                    {% if object.image %}
                     <img class="w-100 mb-2" src="{{ object.image.url }}" alt="{{object.slug}}">
+                    {% endif %}
                     <a href="{% url 'campaign-detail' object.id %}" class="d-block text-decoration-none mt-4 mb-3">{{object.title|safe}}</a>
                     {{object.description|truncatechars_html:object.truncate|safe}}
                 </div>
