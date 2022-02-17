@@ -96,18 +96,7 @@
                   {{ object|get_kredit_taksit|safe}}
               </div>
           </div>
-
-          <div class="mt-2 w-100 d-flex align-items-end justify-content-end">
-            <button type="button" data-toggle="modal"
-              data-target="#order" class="d-inline-block btn btn-danger rounded-0 btn-sm detail-mb"
-              data-max="{{object.quantity}}"
-              data-price="{{object.sale}}"
-              data-id="{{object.id}}"
-              data-taksit-list="{{object.get_available_taksit_list}}">
-                  {% trans 'Sifariş et' %}
-              </button>
-          </div>
-          {% include '../components/tire/social-box.html' %}
+          {% include '../components/tire/social-box.html' with object=object detail=True %}
           <div class="d-flex justify-content-end align-items-center ml-auto mt-4">
             <span class="d-inline-block mr-2">{% trans 'Say' %}</span>
             <span class="detail-qtn 

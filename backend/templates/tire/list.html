@@ -86,29 +86,7 @@
                                 {{ object|get_kredit_taksit|safe}}
                             </div>
                         </div>
-                        <!-- <div class="mt-4 w-100 d-flex align-items-end justify-content-end">
-                            <button type="button" data-toggle="modal"
-                            data-target="#order" class="d-flex align-items-center justify-content-center btn btn-secondary-1 rounded-0 btn-sm detail-mb"
-                            data-max="{{object.quantity}}"
-                            data-price="{{object.sale}}"
-                            data-id="{{object.id}}">
-                                <i class="bi bi-minecart"></i>
-                                <span>
-                                    {% trans 'Səbətə at' %}
-                                </span>
-                            </button>
-                        </div> -->
-                        <div class="mt-2 w-100 d-flex align-items-end justify-content-end">
-                            <button type="button" data-toggle="modal"
-                                data-target="#order" class="d-inline-block btn btn-danger rounded-0 btn-sm order-btn"
-                                data-max="{{object.quantity}}"
-                                data-price="{{object.sale}}"
-                                data-id="{{object.id}}"
-                                data-taksit-list="{{object.get_available_taksit_list}}">
-                                {% trans 'Sifariş et' %}
-                            </button>
-                            <a href="{{object.get_absolute_url}}" class="d-inline-block btn btn-sm btn-primary-1 rounded-0 detail-btn">{% trans 'Ətraflı' %}</a>
-                        </div>
+                        
                         {% include '../components/tire/social-box.html' %}
                     </div>
                 </section>

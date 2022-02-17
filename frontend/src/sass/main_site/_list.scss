@@ -397,23 +397,17 @@
 
 .social-box {
   margin-top: 10px !important;
+  min-width: 182px;
 }
 
-.phone-btn,
-.order-btn {
-  margin-right: 10px;
-  width: 100px;
+.social-lg-btn {
+  min-width: 101px;
 
-  @include responsive(max, 450px) {
-    font-size: 12px;
+  &.full {
+    width: 182px;
   }
 }
 
-.message-btn {
-  width: 80px;
-
-  @include responsive(max, 450px) {
-    font-size: 12px;
-    width: 60px;
-  }
+.social-sm-btn {
+  min-width: 81px;
 }
