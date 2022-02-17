@@ -410,4 +410,8 @@
 
 .social-sm-btn {
   min-width: 81px;
+
+  &.full {
+    width: 182px;
+  }
 }
