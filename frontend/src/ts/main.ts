@@ -21,11 +21,14 @@ const form = document.querySelector<HTMLFormElement>(".needs-validation");
 const listCartBtns = document.querySelectorAll<HTMLButtonElement>(".order-btn");
 const tireInput = document.getElementById("id_tire") as HTMLInputElement;
 const oilInput = document.getElementById("id_oil") as HTMLInputElement;
-const taksitChoices = document.getElementById(
-  "id_taksit_choice",
-) as HTMLSelectElement;
+const taksitChoices = document.getElementById("id_taksit_choice");
 
-const taksitOptions = [...taksitChoices.querySelectorAll("option")!];
+
+let taksitOptions: HTMLOptionElement[] = [];
+
+if (taksitChoices) {
+  taksitOptions = [...taksitChoices.querySelectorAll("option")];
+}
 
 const quantityInput = document.getElementById(
   "id_quantity",
@@ -38,11 +41,11 @@ listCartBtns.forEach(listCartBtn => {
     const id = btn.getAttribute("data-id")!;
     const taksits = btn.getAttribute("data-taksit-list")!.split(",");
 
-    taksitChoices.innerHTML = "";
+    taksitChoices!.innerHTML = "";
 
     taksitOptions.forEach(option => {
       if (taksits.includes(option.value) || option.value === "0") {
-        taksitChoices.insertAdjacentElement("beforeend", option);
+        taksitChoices!.insertAdjacentElement("beforeend", option);
       }
     });
 
