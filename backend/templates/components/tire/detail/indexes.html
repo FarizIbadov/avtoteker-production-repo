@@ -1,0 +1,25 @@
+{% load i18n %}
+
+{% if object.tradeware %}
+<div title="{% trans 'treadwear protektorun dərinlik indeksi, yol tutma indeksi, temperatura' %}"  class="main-list__card-text--2  detail-font-larger">
+    {{object.tradeware}}
+</div>
+{% endif %}
+
+{% if object.db %}
+<div class="main-list__card-text--2 detail-font-larger mt-2 detail--db">
+    <span title="{% trans 'səs indeksı' %}">dB {{object.db}}</span> 
+</div>
+{% endif %}
+
+{% if object.fuel %}
+<div class="main-list__card-text--2 detail-font-larger mt-2 detail--fuel">
+    <span class="ml-1" title="{% trans 'yanacağ indeksı' %}">{{object.fuel}}</span>
+</div>
+{% endif %}
+
+{% if object.contact %}
+<div class="main-list__card-text--2 detail-font-larger mt-2 detail--contact">
+    <span class="ml-1" title="{% trans 'yaş yol tutumu indeksı' %}">{{object.contact}}</span>
+</div>
+{% endif %}

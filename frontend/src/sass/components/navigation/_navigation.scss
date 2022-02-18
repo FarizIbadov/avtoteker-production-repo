@@ -2,17 +2,24 @@
   position: sticky;
   top: 0;
   z-index: 10;
+
 }
 
 .navigation {
-
   font-size: 1.1rem;
   min-height: 80px;
+
 }
 
-.navigation-collapse a {
-  color: map-get($theme-colors, "dark")
+.navigation-utils {
+  height: 80px;
 }
+
+.navigation-collapse {
+  & > a {
+    color: map-get($theme-colors, "dark")
+  }
+} 
 
 @include media-breakpoint-up(lg) {
   .navigation-utils {

@@ -60,9 +60,11 @@
                                      {{object.speed}}
                                     </div>
                                 </div>
+                                {% if object.tradeware %}
                                 <div class="main-list__card-text--2">
                                     {{object.tradeware}}
                                 </div>
+                                {% endif %}
                                 <div class="mt-2">
                                     {% include "../components/main-site/image.html" with object=object.season %}
                                 </div>
@@ -75,13 +77,8 @@
                             {% include "../components/main-site/third-price.html" with object=object %}
                         </div>
                         <div class="row justify-content-end w-100 no-gutters">
-                            {% include "../components/edv.html" with object=object edv=edv %}
-                            {% if object.release_date %}
-                                {% include "../components/comming-soon.html" with object=object %}
-                            {% elif object.new %}
-                                {% include "../components/new-product-banner.html" with object=object %}
-                            {% endif %}
-                            {% include "../components/sticker-carousel.html" with object=object %}
+                            {% include "../components/tire/additional-info.html" with object=object edv=edv %}
+                            
                             <div class="col-12"> 
                                 {{ object|get_kredit_taksit|safe}}
                             </div>
