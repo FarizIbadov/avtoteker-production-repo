@@ -93,21 +93,21 @@ class Tire(CustomModel):
     ]
 
     BOLKART_CHOICES = [
-        (0,"Yoxdur"),
-        (2,"2 ay"),
-        (3,"3 ay"),
-        (6,"6 ay"),
-        (9,"9 ay"),
-        (12,"12 ay")
+        (0, "Yoxdur"),
+        (2, "2 ay"),
+        (3, "3 ay"),
+        (6, "6 ay"),
+        (9, "9 ay"),
+        (12, "12 ay")
     ]
 
     ALBALI_CHOICES = [
-        (0,"Yoxdur"),
-        (2,"2 ay"),
-        (3,"3 ay"),
-        (6,"6 ay"),
-        (9,"9 ay"),
-        (12,"12 ay")
+        (0, "Yoxdur"),
+        (2, "2 ay"),
+        (3, "3 ay"),
+        (6, "6 ay"),
+        (9, "9 ay"),
+        (12, "12 ay")
     ]
 
     trim_code = models.CharField(max_length=255, blank=True, null=True)
@@ -126,7 +126,7 @@ class Tire(CustomModel):
     RF = models.BooleanField(default=False)
     ZR = models.BooleanField(default=False)
 
-    tradeware = models.CharField(max_length=255, null=True)
+    tradeware = models.CharField(max_length=255, null=True, blank=True)
     weight = models.IntegerField(blank=True, null=True)
     speed = models.CharField(max_length=255, blank=True, null=True)
     season = models.ForeignKey(Season, on_delete=models.SET_NULL, null=True)
@@ -135,7 +135,6 @@ class Tire(CustomModel):
     sale = models.FloatField(blank=True, null=True)
     cost = models.FloatField(null=True, blank=True)
     price_3 = models.CharField(max_length=255,blank=True,null=True)
-
 
     taksit_active = models.BooleanField(default=True)
 
