@@ -4,12 +4,11 @@ from django.template.response import TemplateResponse
 from django.utils.encoding import force_str
 from django.contrib.messages import add_message, ERROR, SUCCESS
 
-from import_export.forms import ImportForm
 from import_export.formats.base_formats import XLS, XLSX
 
-from .forms import TireForm
+from .forms import TireForm, TireImportForm, OsImportform
 from . import models
-from import_export.admin import ImportExportMixin,ImportMixin
+from import_export.admin import ImportExportMixin,ImportMixin, ExportActionMixin
 from utils.admin import CustomModelAdmin
 from .resources import TireResource, OsTireImporter
 from modeltranslation.admin import TranslationAdmin
@@ -31,7 +30,7 @@ class OsMixin:
         try:
             formats = [XLSX, XLS]
         
-            form = ImportForm(
+            form = OsImportform(
                 formats, 
                 request.POST or None, 
                 request.FILES or None,
@@ -67,7 +66,7 @@ class OsMixin:
         return TemplateResponse(request, "admin/os-tire/os-form.html", context)
 
 @admin.register(models.Tire)
-class TireAdmin(ImportExportMixin, OsMixin, CustomModelAdmin):
+class TireAdmin(ImportExportMixin, ExportActionMixin, OsMixin, CustomModelAdmin):
     form = TireForm
     resource_class = TireResource
     search_fields = ("brand__title","serie__title","quantity","manufacturer__title") 
@@ -76,6 +75,10 @@ class TireAdmin(ImportExportMixin, OsMixin, CustomModelAdmin):
     list_filter = ["brand", "serie", "manufacturer", "size"]
 
     change_list_template = "admin/os-tire/change-list-import-export.html"
+
+    def get_import_form(self):
+        return TireImportForm
+
 
 
 @admin.register(models.Size)

@@ -9,10 +9,7 @@ import tablib
 class TireResource(resources.ModelResource):
     def get_queryset(self):
         return Tire.objects.all()
-    
-    def export(self,queryset,*args,**kwargs):
-        tires = Tire.objects.available()
-        return super().export(tires,*args,**kwargs)
+
 
     def before_import(self,dataset, using_transactions, dry_run, **kwargs):
         imported_ids = []
