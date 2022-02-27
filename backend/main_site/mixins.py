@@ -6,13 +6,12 @@ class FilterBySizeMixin:
             "radius": "size__radius__icontains",
         }
         kwargs = {}
-        get_data = self.kwargs
+   
 
         for key, value in field_to_model.items():
-            if get_data.get(key,"_") != "_":
-                kwargs[value] = get_data[key] if get_data[key] != '-' else ""
+            if self.kwargs.get(key,"_") != "_":
+                kwargs[value] = self.kwargs[key] if self.kwargs[key] != '-' else ""
             else:
                 continue
-
 
         return {**kwargs}

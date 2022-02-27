@@ -98,9 +98,10 @@ class TireImportForm(ImportForm):
         #     self.fields['detail'].initial = True
 
 class OsImportform(ImportForm):
-    brands = forms.ModelChoiceField(
-        queryset=Brand.objects.available(), 
-        widget=forms.CheckboxSelectMultiple(),
-        required=False,
-        blank=True
-    )
+    pass
+    # brands = forms.ModelChoiceField(
+    #     queryset=Brand.objects.available(), 
+    #     widget=forms.CheckboxSelectMultiple(),
+    #     required=False,
+    #     blank=True
+    # )
