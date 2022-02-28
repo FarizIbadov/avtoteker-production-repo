@@ -75,7 +75,7 @@ class TireOrderSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         taksit_choice, payment_choice = data.get("taksit_choice"), data.get("payment_type")
-        
+
         if payment_choice == 4:
             if taksit_choice == 0:
                 message = _("Xaiş edirik ayı seçin.")
