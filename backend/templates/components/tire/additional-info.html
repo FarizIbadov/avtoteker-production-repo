@@ -1,7 +1,5 @@
 {% include "../edv.html" with object=object edv=edv %}
 {% if object.release_date %}
     {% include "../comming-soon.html" with object=object %}
-{% elif object.new %}
-    {% include "../new-product-banner.html" with object=object %}
 {% endif %}
 {% include "../sticker-carousel.html" with object=object %}
