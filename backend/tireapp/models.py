@@ -44,9 +44,9 @@ class OE(models.Model):
         verbose_name_plural = "OE"
 
 class Size(CustomModel):
-    width = models.CharField(max_length=10, null=True, blank=True) 
-    height = models.CharField(max_length=10, null=True, blank=True)
-    radius = models.CharField(max_length=10, null=True, blank=True)
+    width = models.CharField(max_length=255, null=True, blank=True) 
+    height = models.CharField(max_length=255, null=True, blank=True)
+    radius = models.CharField(max_length=255, null=True, blank=True)
 
     size_code = models.CharField(max_length=255, null=True)
 
@@ -282,12 +282,16 @@ class Tire(CustomModel):
 
     def get_quantity(self):
         if self.get_quantity_is_numeric():
-            return self.quantity if int(self.quantity) <= 4 else "4+"
+            return int(float(self.quantity)) if float(self.quantity) <= 4 else "4+"
         else:
             return _("Sorğu ilə")
  
     def get_quantity_is_numeric(self):
-        return self.quantity.isnumeric()
+        try:
+            float(self.quantity)
+            return True
+        except ValueError:
+            return False
 
     def get_ZR(self):
         return "ZR" if self.ZR else "R"

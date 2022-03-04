@@ -26,7 +26,8 @@ class MainListView(FilterBySizeMixin, ListView):
 
     def get_queryset(self):        
         kwargs = self.get_filter()
-        return Tire.objects.available().filter(**kwargs)
+        queryset = Tire.objects.available(**kwargs)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

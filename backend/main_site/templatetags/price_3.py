@@ -18,7 +18,7 @@ def get_taksit(instance, price_color, month):
 
     price_3 = instance.get_price_3()
 
-    if price_3 and price_color and month <= price_color.taksit:
+    if price_3 and price_color and price_color.taksit and month <= price_color.taksit:
         price = float(price_3) / month
 
     return round(price, 2)
