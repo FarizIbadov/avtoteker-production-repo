@@ -17,6 +17,8 @@
 {% get_price_color object as price_color %}
 {% get_edv as edv %}
 
+{% static 'img/manat.png' as manat_price %}
+
 {% include "../components/order-modal-form.html" %}
 {% include "../components/image-preview-modal.html" %}
 {% include "../components/phone-location-link-container.html" %}
@@ -74,10 +76,11 @@
         </div>
         <div class="px-4">
           <div class="row justify-content-end ml-auto no-gutters">
-              {% include "../components/tire/additional-info.html" with object=object edv=edv %}
               <div class="col-12"> 
-                  {{ object|get_kredit_taksit|safe}}
+                  {% get_kredit_taksit object request manat_price as kredit_taksit %}
+                  {{kredit_taksit|safe}}
               </div>
+              {% include "../components/tire/additional-info.html" with object=object edv=edv %}
           </div>
           {% include '../components/tire/social-box.html' with object=object detail=True %}
           <div class="d-flex justify-content-end align-items-center ml-auto mt-4">

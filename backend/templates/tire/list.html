@@ -19,7 +19,7 @@
 
 {% block content %}
     {% get_edv as edv %}
-
+    {% static 'img/manat.png' as manat_price %}
 
     {% include "../components/phone-location-link-container.html" %}
     {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
@@ -77,11 +77,12 @@
                             {% include "../components/main-site/third-price.html" with object=object %}
                         </div>
                         <div class="row justify-content-end w-100 no-gutters">
+                            <div class="col-12"> 
+                                {% get_kredit_taksit object request manat_price as kredit_taksit %}
+                                {{kredit_taksit|safe}}
+                            </div>
                             {% include "../components/tire/additional-info.html" with object=object edv=edv %}
                             
-                            <div class="col-12"> 
-                                {{ object|get_kredit_taksit|safe}}
-                            </div>
                         </div>
                         
                         {% include '../components/tire/social-box.html' %}
