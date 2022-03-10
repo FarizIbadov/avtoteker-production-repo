@@ -1,0 +1,33 @@
+{% load static i18n %}
+{% load taksit_kredit manat %}
+
+{% get_kredit_takist_dataset object request as kredit_takist_dataset %}
+{% get_kredit_taksit_interval as interval %}
+
+{% get_manat_icon as manat_icon %}
+
+<div id="carouselExampleSlidesOnly" class="carousel slide taksit-kredit-container my-2" data-ride="carousel">
+    <div class="carousel-inner h-100 kredit-taksit-item">
+        {% for data in kredit_takist_dataset %}
+            <div class="carousel-item {% if forloop.first %} active {% endif %} h-100 w-100" data-interval="{{interval}}" title="{{data.image.description}}">
+                <div class="d-flex align-items-center  h-100 w-100">
+                    <figure class="kredit-taksit-fig mr-2 d-flex h-100" >
+                        <img src="{{data.image.url}}">
+                    </figure>
+                    <div class="flex-fill d-flex bg-light-2 justify-content-center  align-items-center kredit-taksit-carousel-info">
+                        <div class="text-center">{{data.title}}</div>
+                        <div class="px-1">{% trans '|' %}</div>
+                        <div class="text-center">
+                            <span class='text-danger'>{% trans 'ayda' %} {{data.price|floatformat:"2"}}</span>
+                        </div>
+                        {% if manat_icon %}
+                        <div class="manat">
+                            <img src="{{manat_icon.image.url}}" class="w-100 object-fit-contain" alt="₼">
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div> 

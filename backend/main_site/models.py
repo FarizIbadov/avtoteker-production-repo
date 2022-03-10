@@ -39,3 +39,9 @@ class PriceColor(models.Model):
 
 
 
+class ManatIcon(models.Model):
+    image = models.ImageField(upload_to="manat")
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.image.name
