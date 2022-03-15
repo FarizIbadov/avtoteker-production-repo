@@ -1,5 +1,7 @@
 const kreditTaksitQtnBtns = document.querySelectorAll(".kredit-taksit-qtn-btn");
-const kreditTaksitTotals = document.querySelectorAll(".kredit-taksit-total");
+const kreditTaksitTotals = document.querySelectorAll(
+  ".kredit-taksit-qtn-with-price",
+);
 
 if (kreditTaksitQtnBtns.length > 0) {
     kreditTaksitQtnBtns.forEach(btn => {
@@ -13,10 +15,16 @@ if (kreditTaksitQtnBtns.length > 0) {
 
             if (kreditTaksitTotals.length > 0) {
               kreditTaksitTotals.forEach(total => {
-                const rawTotalPrice = total.getAttribute("data-total")!;
+                const rawTotalPrice = total.getAttribute("data-total") || "0";
                 const totalPrice = +rawTotalPrice.replace(",", ".");
-          
-                total.innerHTML = String(qtn * totalPrice)
+
+                if (qtn * totalPrice == 0) {
+                  total.innerHTML = "0";
+                }
+                else {
+                  const price = (qtn * totalPrice).toFixed(2);
+                  total.innerHTML = String(price);
+                }
               });
             }
         })
