@@ -16,11 +16,7 @@
       <div class="row mb-1">
         <div class="col-4"><div class="{% if price_color.taksit >= 2 %}bg-danger text-white{% else %}bg-primary-1{% endif %} p-2 text-center">2</div></div>
         <div class="col-4"><div class="{% if price_color.taksit >= 2 %}bg-danger text-white{% else %}bg-light{% endif %} p-2 text-center">{% get_taksit object price_color 2 %}</div></div>
-<<<<<<< HEAD
-        <div class="col-4"><div class="{% if price_color.taksit >= 2 %}bg-danger text-white{% else %}bg-light{% endif %} p-2 text-center kredit-taksit-total" data-total="{{total_for_2}}">{{total_for_2}}</div></div>
-=======
         <div class="col-4"><div class="{% if price_color.taksit >= 2 %}bg-danger text-white{% else %}bg-light{% endif %} p-2 text-center kredit-taksit-total" data-total="{{total_for_2|floatformat:-2}}">{{total_for_2|floatformat:-2}}</div></div>
->>>>>>> tire_branch
       </div>
       {% endif %}
       {% if object.taksit_3_active %}
@@ -28,11 +24,7 @@
         {% get_total_price 3 object.taksit_3 as total_for_3 %}
         <div class="col-4"><div class="{% if price_color.taksit >= 3 %}bg-danger text-white{% else %}bg-primary-1{% endif %} p-2 text-center">3</div></div>
         <div class="col-4"><div class="{% if price_color.taksit >= 3 %}bg-danger text-white{% else %}bg-light{% endif %} p-2 text-center">{% get_taksit object price_color 3 %}</div></div>
-<<<<<<< HEAD
-        <div class="col-4"><div class="{% if price_color.taksit >= 3 %}bg-danger text-white{% else %}bg-light{% endif %} p-2 text-center kredit-taksit-total" data-total="{{total_for_3}}">{{total_for_3}}</div></div>
-=======
         <div class="col-4"><div class="{% if price_color.taksit >= 3 %}bg-danger text-white{% else %}bg-light{% endif %} p-2 text-center kredit-taksit-total" data-total="{{total_for_3|floatformat:-2}}">{{total_for_3|floatformat:-2}}</div></div>
->>>>>>> tire_branch
       </div>
       {% endif %}
       {% if object.taksit_6_active %}
@@ -40,11 +32,7 @@
       <div class="row mb-1">
         <div class="col-4"><div class="{% if price_color.taksit >= 6 %}bg-danger text-white{% else %}bg-primary-1{% endif %} p-2 text-center">6</div></div>
         <div class="col-4"><div class="{% if price_color.taksit >= 6 %}bg-danger text-white{% else %}bg-light{% endif %} p-2 text-center">{% get_taksit object price_color 6 %}</div></div>
-<<<<<<< HEAD
-        <div class="col-4"><div class="{% if price_color.taksit >= 6 %}bg-danger text-white{% else %}bg-light{% endif %} p-2 text-center kredit-taksit-total" data-total="{{total_for_6}}">{{total_for_6}}</div></div>
-=======
         <div class="col-4"><div class="{% if price_color.taksit >= 6 %}bg-danger text-white{% else %}bg-light{% endif %} p-2 text-center kredit-taksit-total" data-total="{{total_for_6|floatformat:-2}}">{{total_for_6|floatformat:-2}}</div></div>
->>>>>>> tire_branch
       </div>
       {% endif %}
 
