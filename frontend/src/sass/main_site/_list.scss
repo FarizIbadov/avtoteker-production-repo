@@ -8,7 +8,7 @@
   &__sub-row {
     @extend .row,
       .no-gutters,
-      .px-4,
+    
       .pb-2,
       .justify-content-end,
       .h-100,
@@ -43,7 +43,7 @@
   }
 
   &__card {
-    @extend .card, .mb-3, .py-0;
+    @extend .card, .mb-3, .py-0, .px-4;
   }
 
   &__header {

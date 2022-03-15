@@ -37,10 +37,10 @@
                             <img class="main-list__item-logo mb-1" src="{{object.brand.get_image}}" alt="{{object.brand}}">
                         </div>
                     </div>
-                    <p class="main-list__card-text text-right pr-4 detail-serie-font">
+                    <p class="main-list__card-text text-right  detail-serie-font">
                         {{object.serie}}
                     </p>
-                    <p class="main-list__card-text text-right pr-4">
+                    <p class="main-list__card-text text-right">
                         {{object.get_size|safe}}
                     </p>
                     {% include "../components/tire/detail/oe-year.html" with object=object %}
