@@ -326,9 +326,9 @@ class Tire(CustomModel):
         if self.price_3:
             try:
                 float(self.price_3)
-                return self.price_3
+                return self.price_3.replace(",",'.')
             except ValueError:
-                return self.price_3[0:-1]
+                return self.price_3[0:-1].replace(",",'.')
         return None
 
     def get_price_3_color(self):
