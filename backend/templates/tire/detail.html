@@ -25,9 +25,9 @@
 <hr class="detail-header-line">
 <div class="container mb-5">
   <div class="main-list__main-row">
-    <div class="main-list__col-12 px-0">
+    <div class="main-list__col-12 ">
       <div>
-        <div class="d-flex justify-content-end px-4">
+        <div class="d-flex justify-content-end">
           {% include "../components/main-site/side-info.html" with object=object %}
           <div>
             <img
@@ -39,10 +39,10 @@
           </div>
         </div>
 
-        <p class="main-list__card-text text-right pr-4 detail-serie-font">
+        <p class="main-list__card-text text-right detail-serie-font">
           {{object.serie}}
         </p>
-        <p class="main-list__card-text text-right pr-4">
+        <p class="main-list__card-text text-right">
           {{object.get_size|safe}}
         </p>
 
@@ -50,10 +50,9 @@
 
         {% include "../components/tire/detail/RF.html" %}
 
-        <div class="main-list__sub-row--2 px-4">
+        <div class="main-list__sub-row--2">
           
           {% include "../components/product-image.html" with object=object %}
-          
           <div class="main-list__col-sm--2 w-35 mb-5">
             <div class="main-list__card-body">
               <div class="main-list__card-text--2 detail-font-larger">
@@ -72,7 +71,7 @@
             {% include "../components/main-site/third-price.html" with object=object %}
           </div>
         </div>
-        <div class="px-4">
+        <div>
           <div class="row justify-content-end ml-auto no-gutters">
               <div class="col-12"> 
                   {% include "../components/main-site/kredit-taksit-carousel.html" with object=object request=request %}
@@ -94,43 +93,15 @@
           </div>
         </div>
       </div>
-  </div>
-  {% include "../components/tire/detail/tire-class.html" with object=object %}
-  {% include "../components/tire/detail/OE-description.html" with object=object %}
-  {% include "../components/sticker-descriptions.html" with object=object %}
-  {% include "../components/campaign-descriptions.html" with object=object %}
-  </div>
-  {% if object.kredit_active or object.taksit_active %}
-  <div class="row mb-5 mt-2 px-0 px-md-3">
-    <ul class="col-md-12 nav nav-tabs nav-justified px-0" id="myTab" role="tablist">
-      {% if object.kredit_active %}
-      <li class="nav-item" role="presentation">
-        <a class="nav-link active text-secondary-1" id="home-tab" data-toggle="tab" href="#kredit" role="tab" aria-controls="home" aria-selected="true">{% trans 'Kredit' %}</a>
-      </li>
-      {% endif %}
-      {% if object.taksit_active %}
-      <li class="nav-item" role="presentation">
-        <a class="nav-link  text-secondary-1" id="profile-tab" data-toggle="tab" href="#taksit" role="tab" aria-controls="profile" aria-selected="false">{% trans 'Taksit' %}</a>
-      </li>
-      {% endif %}
-    </ul>
-    <div class="mt-4 col-md-12 tab-content" id="myTabContent">
-      {% if object.kredit_active %}
-      <div class="tab-pane fade show active" id="kredit" role="tabpanel" aria-labelledby="home-tab">
-        {% include "../components/main-site/kredit-table.html" with object=object price_color=price_color %}
-      </div>
-      {% endif %}
-      {% if object.taksit_active %}
-      <div class="tab-pane fade" id="taksit" role="tabpanel" aria-labelledby="profile-tab">
-        {% include "../components/main-site/taksit-table.html" with object=object price_color=price_color %}
-      </div>
-      {% endif %}
     </div>
-    
+    {% include "../components/tire/detail/tire-class.html" with object=object %}
+    {% include "../components/tire/detail/OE-description.html" with object=object %}
+    <div class="detail-content">
+      {% include "../components/sticker-descriptions.html" with object=object %}
+      {% include "../components/campaign-descriptions.html" with object=object %}
+    </div>
   </div>
-  
-  {% endif %}
-
+  {% include "../components/tire/detail/kredit-taksit-table.html" with object=object %}
 
   <div class="row justify-content-center px-0 px-md-3">
     <div class="col-md-12 detail-info">
@@ -240,7 +211,7 @@
 
 
 <div class="main-container container px-0 mb-5">
-        {% include "../components/main-site/map.html" %}
-    </div>
+  {% include "../components/main-site/map.html" %}
+</div>
 {% endblock content %}
 

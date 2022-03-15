@@ -119,6 +119,10 @@ def get_6_month_price(value):
     initial_price = value.kredit_6_month_price
     return price * float(initial_price)/100
 
+@register.simple_tag(name="get_total_price")
+def get_total_price(month, partial_price, initial_price=0):
+    return initial_price + month * partial_price
+
 
 class TaksitKreditCarouselItemData:
     def __init__(self, image, title, price, month, description):

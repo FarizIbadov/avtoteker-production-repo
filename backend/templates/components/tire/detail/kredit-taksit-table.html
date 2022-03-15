@@ -1,0 +1,46 @@
+{% load i18n %}
+
+{% if object.kredit_active or object.taksit_active %}
+  <div class="row mb-5 mt-2 px-0 px-md-3">
+    <div class="col px-md-0 mb-5">
+        <div class="row justify-content-md-between align-items-md-center">
+            <div class="col-md-5">
+                <h4 class="font-weight-normal">{% trans 'Şinlərin say seçimi (əd)' %}</h4>
+            </div>
+            <div class="col-md-5 col-lg-4 mt-3 mt-md-0">
+                <div class="d-flex justify-content-between">
+                    <button class="kredit-taksit-qtn-btn active" data-qtn="1">1</button>
+                    <button class="kredit-taksit-qtn-btn" data-qtn="2">2</button>
+                    <button class="kredit-taksit-qtn-btn" data-qtn="3">3</button>
+                    <button class="kredit-taksit-qtn-btn" data-qtn="4">4</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="col-md-12 nav nav-tabs nav-justified px-0" id="myTab" role="tablist">
+      {% if object.kredit_active %}
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active text-secondary-1" id="home-tab" data-toggle="tab" href="#kredit" role="tab" aria-controls="home" aria-selected="true">{% trans 'Kredit' %}</a>
+      </li>
+      {% endif %}
+      {% if object.taksit_active %}
+      <li class="nav-item" role="presentation">
+        <a class="nav-link  text-secondary-1" id="profile-tab" data-toggle="tab" href="#taksit" role="tab" aria-controls="profile" aria-selected="false">{% trans 'Taksit' %}</a>
+      </li>
+      {% endif %}
+    </ul>
+    <div class="mt-4 col-md-12 tab-content" id="myTabContent">
+      {% if object.kredit_active %}
+      <div class="tab-pane fade show active" id="kredit" role="tabpanel" aria-labelledby="home-tab">
+        {% include "../../main-site/kredit-table.html" with object=object price_color=price_color %}
+      </div>
+      {% endif %}
+      {% if object.taksit_active %}
+      <div class="tab-pane fade" id="taksit" role="tabpanel" aria-labelledby="profile-tab">
+        {% include "../../main-site/taksit-table.html" with object=object price_color=price_color %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  
+  {% endif %}
