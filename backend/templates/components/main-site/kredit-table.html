@@ -49,7 +49,7 @@
       <div class="row mb-1">
         <div class="col-3"><div class="bg-danger text-light p-2 text-center">6 {% trans 'ay' %} 0%</div></div>
         <div class="col-3"><div class="bg-danger text-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{object|get_6_month_price|floatformat:-2}}">{{object|get_6_month_price|floatformat:-2}}</div></div>
-        <div class="col-3"><div class="bg-danger text-light p-2 text-center kredit-taksit-qtn-with-price">{{object|special_kredit_6_month_price|floatformat}}</div></div>
+        <div class="col-3"><div class="bg-danger text-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{object|special_kredit_6_month_price|floatformat:-2}}">{{object|special_kredit_6_month_price|floatformat}}</div></div>
         <div class="col-3"><div class="bg-danger text-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{total_for_6_free|floatformat:-2}}">{{total_for_6_free|floatformat:-2}}</div></div>
       </div>
       {% endif %}
