@@ -4,6 +4,7 @@
 {% load taksit_kredit %}
 {% load size_parser %}
 {% load edv %}
+{% load tire_info %}
 
 
 {% block seo %}
@@ -25,7 +26,14 @@
     {% include "../components/order-modal-form.html" %}
     {% include "../components/image-preview-modal.html" %}
     
-    <h1 class="main-list__heading">{% parse_size_for_list request %}</h1>
+    <div class="d-flex justify-content-center align-items-center mt-3">
+        <!-- {% if request.user.is_superuser %}
+        <button title="{% trans 'Copy tire list info' %}" class="btn shadow-none mr-2 js-bookmark">
+            <i class="bi bi-bookmarks h4"></i>
+        </button>
+        {% endif %} -->
+        <h1 class="main-list__heading">{% parse_size_for_list request %}</h1>
+    </div>
     <div class="main-list">
         <div class="main-list__main-row">
             {% for object in object_list %}
@@ -38,6 +46,14 @@
                         </div>
                     </div>
                     <p class="main-list__card-text text-right  detail-serie-font">
+<<<<<<< HEAD
+=======
+                        <!-- {% if request.user.is_superuser %}
+                        <button data-text="{% get_tire_info object %}" class="btn shadow-none px-0 js-bookmark" title="{% trans 'Copy tire info' %}">
+                            <i class="bi bi-bookmarks h4"></i>
+                        </button>
+                        {% endif %} -->
+>>>>>>> tire_branch
                         {{object.serie}}
                     </p>
                     <p class="main-list__card-text text-right">

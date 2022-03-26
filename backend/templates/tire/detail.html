@@ -6,6 +6,7 @@
 {% load price_3 %}
 
 {% load i18n %}
+{% load tire_info %}
 
 {% block seo %}
   <meta name="description" content="{{object.size.get_size_for_title}} {{object.brand.title}} {{object.serie.title}} {% trans 'Təkər? Avtotəkərdə! Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinləri. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri. BirKartla və TamKartla təkər - 6 ayadək faizsiz taksitlə. #teker #təkər.' %}">
@@ -21,7 +22,16 @@
 {% include "../components/image-preview-modal.html" %}
 {% include "../components/phone-location-link-container.html" %}
 {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
-<h1 class="main-list__heading detail-header">{{object}}</h1>
+
+<div class="d-flex justify-content-center align-items-center mt-3">
+    <!-- {% if request.user.is_superuser %}
+    <button title="{% trans 'Copy tire info' %}" class="btn shadow-none mr-2 js-bookmark" data-text="{% get_tire_info object %}">
+        <i class="bi bi-bookmarks h4"></i>
+    </button>
+    {% endif %} -->
+    <h1 class="main-list__heading detail-header">{{object}}</h1>
+</div>
+
 <hr class="detail-header-line">
 <div class="container mb-5">
   <div class="main-list__main-row">
