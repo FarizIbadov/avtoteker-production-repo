@@ -1,0 +1,634 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-04 14:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: tr \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: app/settings.py:170
+msgid "Azerbaijani"
+msgstr ""
+
+#: app/settings.py:171
+msgid "English"
+msgstr ""
+
+#: app/settings.py:172
+msgid "Russian"
+msgstr ""
+
+#: app/settings.py:173
+msgid "Turkey"
+msgstr ""
+
+#: main_site/templatetags/size_parser.py:19
+msgid "en"
+msgstr ""
+
+#: main_site/templatetags/size_parser.py:20
+msgid "hündürlük"
+msgstr ""
+
+#: main_site/templatetags/size_parser.py:21
+msgid "radius"
+msgstr ""
+
+#: main_site/templatetags/taksit_kredit.py:83
+msgid "{{month}} taksit 0%"
+msgstr ""
+
+#: main_site/templatetags/taksit_kredit.py:86
+msgid "{{month}} ay kreditlə"
+msgstr ""
+
+#: main_site/views.py:18
+msgid "Təkər seçimi"
+msgstr ""
+
+#: main_site/views.py:33 main_site/views.py:45 wheel_size/views.py:29
+msgid "Seçim edin"
+msgstr ""
+
+#: ordering/forms.py:9 ordering/models.py:22
+msgid "Nağd"
+msgstr ""
+
+#: ordering/forms.py:10 ordering/models.py:23
+msgid "Kart ilə"
+msgstr ""
+
+#: ordering/forms.py:11 ordering/models.py:24
+msgid "Kreditlə"
+msgstr ""
+
+#: ordering/forms.py:12 ordering/models.py:25
+msgid "BirKart"
+msgstr ""
+
+#: ordering/forms.py:13 ordering/models.py:26
+msgid "TamKart"
+msgstr ""
+
+#: ordering/forms.py:17 ordering/models.py:30
+msgid "---"
+msgstr ""
+
+#: ordering/forms.py:18 ordering/models.py:31
+msgid "2 ay"
+msgstr ""
+
+#: ordering/forms.py:19 ordering/models.py:32
+msgid "3 ay"
+msgstr ""
+
+#: ordering/forms.py:20 ordering/models.py:33
+msgid "6 ay"
+msgstr ""
+
+#: ordering/forms.py:21 ordering/models.py:34
+msgid "9 ay"
+msgstr ""
+
+#: ordering/forms.py:22 ordering/models.py:35
+msgid "12 ay"
+msgstr ""
+
+#: ordering/forms.py:25 ordering/forms.py:71
+msgid "Ad:"
+msgstr ""
+
+#: ordering/forms.py:26 ordering/forms.py:72
+msgid "Say:"
+msgstr ""
+
+#: ordering/forms.py:27 ordering/forms.py:73
+msgid "Email:"
+msgstr ""
+
+#: ordering/forms.py:28 ordering/forms.py:76
+msgid "Ödənış üsulu:"
+msgstr ""
+
+#: ordering/forms.py:29 ordering/forms.py:82
+msgid "Mobil nömrəsi:"
+msgstr ""
+
+#: ordering/forms.py:31
+msgid "Taksit aylar:"
+msgstr ""
+
+#: ordering/forms.py:93
+msgid "İstəyinizi yazın:"
+msgstr ""
+
+#: ordering/models.py:199
+msgid "eded"
+msgstr ""
+
+#: ordering/models.py:200 templates/emails/payment-email.html:185
+#: templates/tire/detail.html:180
+msgid "azn"
+msgstr ""
+
+#: ordering/serializers.py:15 ordering/serializers.py:55
+msgid "Telefon Nömrə yanlışdı"
+msgstr ""
+
+#: ordering/serializers.py:26 ordering/serializers.py:65
+msgid "Ödənış üsulu yanlışdı"
+msgstr ""
+
+#: ordering/serializers.py:71
+msgid "Sayi zəhmət olmasa təyin edin"
+msgstr ""
+
+#: ordering/serializers.py:81
+msgid "Xaiş edirik ayı seçin."
+msgstr ""
+
+#: ordering/serializers.py:89
+msgid "Bu taksit seçimi hal hazirda  yoxdı"
+msgstr ""
+
+#: templates/admin/order/order.html:18
+msgid "Home"
+msgstr ""
+
+#: templates/admin/order/order.html:21
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: templates/admin/order/order.html:43
+msgid "Please correct the error below."
+msgstr ""
+
+#: templates/admin/order/order.html:43
+msgid "Please correct the errors below."
+msgstr ""
+
+#: templates/admin/order/order.html:66
+msgid "Save"
+msgstr ""
+
+#: templates/admin/order/order.html:69
+msgid "Delete"
+msgstr ""
+
+#: templates/admin/order/order.html:72
+msgid "Send An Email"
+msgstr ""
+
+#: templates/admin/order/order.html:75
+msgid "Close"
+msgstr ""
+
+#: templates/components/campaign-descriptions.html:5
+#: templates/main_site/campaign-list.html:17
+msgid "Kampaniyalar"
+msgstr ""
+
+#: templates/components/comming-soon.html:5
+msgid "Gözlənilir"
+msgstr ""
+
+#: templates/components/edv.html:13
+msgid "- dək"
+msgstr ""
+
+#: templates/components/main-site/brand-carousel.html:7
+#: templates/components/main-site/oil-brand-carousel.html:7
+msgid "Bizim markalar"
+msgstr ""
+
+#: templates/components/main-site/car-tire-search.html:7
+msgid "Marka"
+msgstr ""
+
+#: templates/components/main-site/car-tire-search.html:12
+msgid "Seriya"
+msgstr ""
+
+#: templates/components/main-site/car-tire-search.html:17
+msgid "İl"
+msgstr ""
+
+#: templates/components/main-site/car-tire-search.html:22
+msgid "Model"
+msgstr ""
+
+#: templates/components/main-site/kredit-table.html:8
+#: templates/components/main-site/kredit-table.html:23
+#: templates/components/main-site/kredit-table.html:37
+#: templates/components/main-site/taksit-table.html:6
+msgid "ay"
+msgstr ""
+
+#: templates/components/main-site/kredit-table.html:10
+msgid "ilkin odəniş"
+msgstr ""
+
+#: templates/components/main-site/kredit-table.html:11
+#: templates/components/main-site/taksit-table.html:7
+msgid "aylıq"
+msgstr ""
+
+#: templates/components/main-site/map.html:7
+#: templates/components/phone-location-link-container.html:9
+msgid "Biz xəritədə"
+msgstr ""
+
+#: templates/components/main-site/oil-search.html:11
+msgid "Yağ seçimi"
+msgstr ""
+
+#: templates/components/main-site/oil-search.html:17
+msgid "Qatılıq"
+msgstr ""
+
+#: templates/components/main-site/oil-search.html:28
+#: templates/components/main-site/tire-search.html:33
+msgid "Tap"
+msgstr ""
+
+#: templates/components/main-site/oil-search.html:31
+#: templates/components/main-site/tire-search.html:36
+msgid "Yenidən"
+msgstr ""
+
+#: templates/components/main-site/side-info.html:15
+msgid "Pulsuz montaj+balans"
+msgstr ""
+
+#: templates/components/main-site/side-info.html:19
+msgid "2 il servis"
+msgstr ""
+
+#: templates/components/main-site/side-info.html:21
+msgid "1 il servis"
+msgstr ""
+
+#: templates/components/main-site/side-info.html:25
+msgid "Outlet"
+msgstr ""
+
+#: templates/components/main-site/tire-search.html:15
+msgid "Ölçü ilə"
+msgstr ""
+
+#: templates/components/main-site/tire-search.html:18
+msgid "Maşın ilə"
+msgstr ""
+
+#: templates/components/new-product-banner.html:6
+msgid "Artıq satışda!"
+msgstr ""
+
+#: templates/components/new-product-banner.html:8
+msgid "Yeni"
+msgstr ""
+
+#: templates/components/oil-order-modal-form.html:10
+#: templates/components/oil-order-modal-form.html:20
+#: templates/main_site/oil-detail.html:95 templates/main_site/oil-list.html:98
+msgid "Yağdəyişməyə yazılmaq"
+msgstr ""
+
+#: templates/components/oil-order-modal-form.html:18
+#: templates/components/order-modal-form.html:18
+msgid "İmtina"
+msgstr ""
+
+#: templates/components/order-modal-form.html:10
+msgid "Sifariş"
+msgstr ""
+
+
+#: templates/components/order-modal-form.html:20 templates/tire/detail.html:107
+#: templates/tire/list.html:108
+msgid "Sifariş et"
+msgstr ""
+
+#: templates/components/pagination.html:10
+msgid "İlk"
+msgstr ""
+
+#: templates/components/pagination.html:16
+msgid "Previous"
+msgstr ""
+
+#: templates/components/pagination.html:33
+msgid "Next"
+msgstr ""
+
+#: templates/components/pagination.html:38
+msgid "Sonuncu"
+msgstr ""
+
+#: templates/components/sticker-descriptions.html:6
+msgid "Hədiyyələr və güzəştlər"
+msgstr ""
+
+#: templates/components/tire/detail/RF.html:6
+msgid "Run - Flat (R-F)"
+msgstr ""
+
+#: templates/components/tire/detail/about-brand.html:9
+#: templates/main_site/oil-detail.html:120
+msgid "haqqında"
+msgstr ""
+
+#: templates/components/tire/detail/tire-class.html:14
+msgid "klassa aiddir"
+msgstr ""
+
+#: templates/components/tire/social-box.html:4
+msgid "https://wa.me/message/6ZKMXUJK45HMM1"
+msgstr ""
+
+#: templates/components/tire/social-box.html:4
+msgid "bizə yazın"
+msgstr ""
+
+#: templates/components/tire/social-box.html:6
+msgid "+994124803162"
+msgstr ""
+
+#: templates/components/tire/social-box.html:7
+msgid "zəng et"
+msgstr ""
+
+#: templates/emails/payment-email.html:170
+msgid "Sifariş üçün"
+msgstr ""
+
+#: templates/emails/payment-email.html:171
+msgid "təşəkkür edirik!"
+msgstr ""
+
+#: templates/emails/payment-email.html:175
+msgid "Sizin sifarişinizin sorğu nömrəniz -"
+msgstr ""
+
+#: templates/emails/payment-email.html:185
+msgid "əd"
+msgstr ""
+
+#: templates/emails/payment-email.html:197
+msgid "Onlayn ödəniş üçün"
+msgstr ""
+
+#: templates/emails/payment-email.html:205
+msgid "Əlaqə üçün"
+msgstr ""
+
+#: templates/main_site/about-us.html:5
+msgid "Haqqımızda | #teker #təkər | Avtotəkər"
+msgstr ""
+
+#: templates/main_site/about-us.html:12
+msgid "Şın seçiminə qayıtmaq"
+msgstr ""
+
+#: templates/main_site/campaign-detail.html:4
+#: templates/main_site/campaign-list.html:9
+msgid "Kampaniyalar - sərfəli təkliflər | #teker #təkər | Avtotəkər"
+msgstr ""
+
+#: templates/main_site/campaign-list.html:28
+msgid "Kampaniyalar hal hazırda yoxdur"
+msgstr ""
+
+#: templates/main_site/index.html:5 templates/tire/detail.html:11
+#: templates/tire/list.html:13
+msgid ""
+"Təkər? Avtotəkərdə! Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, "
+"Yokohama və Continental şinləri. Avtotəkərdə peşakar şinomontaj, balans, "
+"razval, yağdəyişmə və çilingər xidmətləri. BirKartla və TamKartla təkər - 6 "
+"ayadək faizsiz taksitlə. #teker #təkər."
+msgstr ""
+
+#: templates/main_site/index.html:7
+msgid ""
+"#teker #təkər | Avtotəkər | Horizon, Vitour, Dunlop, Yokohama, Continental"
+msgstr ""
+
+#: templates/main_site/news-detail.html:7
+msgid "Xəbərlər | #teker #təkər | Avtotəkər"
+msgstr ""
+
+#: templates/main_site/news-list.html:8
+msgid "Blog | #teker #təkər | Avtotəkər"
+msgstr ""
+
+#: templates/main_site/news-list.html:16
+msgid "Blog"
+msgstr ""
+
+#: templates/main_site/news-list.html:27
+msgid "Xəbərlər hal hazırda yoxdur"
+msgstr ""
+
+#: templates/main_site/oil-detail.html:8 templates/main_site/oil-list.html:11
+#: templates/main_site/oil-main.html:5
+msgid ""
+"Geniş yağ çeşidi Avtotəkərdə. Orijinal və minimum qiymət. Shell, Mobil1, "
+"Ravenol"
+msgstr ""
+
+#: templates/main_site/oil-detail.html:10
+msgid "azn | Yağ seçimi | Avtotəkər"
+msgstr ""
+
+#: templates/main_site/oil-list.html:13
+msgid "Yağ seçimi | Avtotəkər | Shell, Mobil1, Ravenol"
+msgstr ""
+
+#: templates/main_site/oil-list.html:101 templates/tire/list.html:110
+msgid "Ətraflı"
+msgstr ""
+
+#: templates/main_site/oil-list.html:108 templates/tire/list.html:117
+msgid "Hal hazırda yoxdur"
+msgstr ""
+
+#: templates/main_site/oil-main.html:7
+msgid "Yağdəyişmə - Yağ seçimi | Avtotəkər | Shell, Mobil1, Ravenol"
+msgstr ""
+
+#: templates/main_site/wheel-size-page.html:9
+msgid "#teker"
+msgstr ""
+
+#: templates/main_site/wheel-size-page.html:9
+msgid "təkər ölçüsü | Avtotəkər"
+msgstr ""
+
+#: templates/main_site/wheel-size-page.html:19
+msgid "Seçimi etmək üçün aşağıdaki şin ölçülərinə toxunun"
+msgstr ""
+
+#: templates/main_site/wheel-size-page.html:25
+msgid "Şin"
+msgstr ""
+
+#: templates/main_site/wheel-size-page.html:28
+msgid "Yer"
+msgstr ""
+
+#: templates/main_site/wheel-size-page.html:31
+msgid "Disk"
+msgstr ""
+
+#: templates/main_site/wheel-size-page.html:34
+msgid "Şin təzyiqi"
+msgstr ""
+
+#: templates/payment/cancel.html:8
+msgid "Dəyərli müştəri, sizin ödənişiniz həyata keçirilmədi."
+msgstr ""
+
+#: templates/payment/cancel.html:12
+msgid "Yenidən ödəniş edin"
+msgstr ""
+
+#: templates/payment/success.html:9
+msgid "Təşəkkür edirik!"
+msgstr ""
+
+#: templates/payment/success.html:12
+msgid "Bizim əməkdaşlar sizinlə ən tez zamanda əlaqə saxlayacaq!"
+msgstr ""
+
+#: templates/payment/success.html:16
+msgid "Sizin sorğu nömrəniz - "
+msgstr ""
+
+#: templates/rosetta/base.html:40
+msgid "Download this catalog"
+msgstr ""
+
+#: templates/tire/detail.html:13 templates/tire/list.html:16
+msgid "| #teker #təkər | Avtotəkər"
+msgstr ""
+
+#: templates/tire/detail.html:112
+msgid "Say"
+msgstr ""
+
+#: templates/tire/detail.html:136
+msgid "Kredit"
+msgstr ""
+
+#: templates/tire/detail.html:141
+msgid "Taksit"
+msgstr ""
+
+#: templates/tire/detail.html:167
+msgid "Montaj+Balans"
+msgstr ""
+
+#: templates/tire/detail.html:170
+msgid "azn / ədəd"
+msgstr ""
+
+#: templates/tire/detail.html:174
+msgid "Disk təmiri"
+msgstr ""
+
+#: templates/tire/detail.html:175
+msgid "10 - 15 azn / ədəd"
+msgstr ""
+
+#: templates/tire/detail.html:178
+msgid "Razval"
+msgstr ""
+
+#: templates/tire/detail.html:187
+msgid "Iki illik servis"
+msgstr ""
+
+#: templates/tire/detail.html:189
+msgid "Bir illik servis"
+msgstr ""
+
+#: templates/tire/detail.html:191
+msgid "hədiyyə"
+msgstr ""
+
+#: templates/tire/detail.html:196
+msgid "2 / 4 təkər üçün ventil"
+msgstr ""
+
+#: templates/tire/detail.html:198
+msgid "3 / 5 azn"
+msgstr ""
+
+#: templates/tire/detail.html:202
+msgid "Əlavə bir il zəmanət"
+msgstr ""
+
+#: templates/tire/detail.html:223
+msgid "Dry"
+msgstr ""
+
+#: templates/tire/detail.html:227
+msgid "Wet"
+msgstr ""
+
+#: templates/tire/detail.html:231
+msgid "Snow"
+msgstr ""
+
+#: templates/tire/detail.html:235
+msgid "Offroad"
+msgstr ""
+
+#: templates/tire/detail.html:241
+msgid "Comfort"
+msgstr ""
+
+#: templates/tire/detail.html:247
+msgid "Noise"
+msgstr ""
+
+#: templates/tire/detail.html:251
+msgid "Treadware"
+msgstr ""
+
+#: templates/tire/detail.html:257
+msgid "Value"
+msgstr ""
+
+#: templates/tire/list.html:97
+msgid "Səbətə at"
+msgstr ""
+
+#: tireapp/models.py:288
+msgid "Sorğu ilə"
+msgstr ""
+
+#: wheel_size/models.py:101
+msgid "Qabaq"
+msgstr ""
+
+#: wheel_size/models.py:103
+msgid "Arxa"
+msgstr ""
+
+#: wheel_size/models.py:104
+msgid "4X4"
+msgstr ""
