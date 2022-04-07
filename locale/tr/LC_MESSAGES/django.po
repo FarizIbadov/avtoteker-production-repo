@@ -316,7 +316,6 @@ msgstr ""
 msgid "Sifariş"
 msgstr ""
 
-
 #: templates/components/order-modal-form.html:20 templates/tire/detail.html:107
 #: templates/tire/list.html:108
 msgid "Sifariş et"

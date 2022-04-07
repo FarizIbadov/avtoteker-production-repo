@@ -223,7 +223,7 @@ class TireResource(resources.ModelResource):
 
     new = fields.Field(attribute="new",widget=widgets.CustomNewBooleanWidget())
     outlet = fields.Field(attribute="outlet",widget=widgets.CustomOutletBooleanWidget())
-
+    
     class Meta:
         model = Tire
         import_id_fields = ("id",)
@@ -288,7 +288,8 @@ class TireResource(resources.ModelResource):
             "albalikart",
             "kredit",
             "stickers",
-            'campaigns'
+            'campaigns',
+            "order_number"
         )
         skip_unchanged = True
         use_bulk = True
@@ -350,7 +351,8 @@ class TireResource(resources.ModelResource):
             "quantity",
             "release_date",
             "new",
-            "outlet"
+            "outlet",
+          
         )
 
 

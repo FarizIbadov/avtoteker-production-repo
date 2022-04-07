@@ -1,4 +1,4 @@
-{{object.brand.title}} {{object.serie.title}} - avtoteker.az{% url 'detail' object.pk object.slug %}
+{{object.brand.title}} {{object.serie.title}} - avtoteker.az{% url 'detail' object.pk object.generate_slug %}
 
 {% if not object.price_3 %}standart qiyməti - {{object.get_price_1_str}} azn{% if object.sale %}, nağd endirimlə - {{object.get_price_2_str}} azn {% endif %} 
 {% else %}{% if object.sale %}standart endirimli qiyməti - {{object.get_price_2_str}} azn ,{% endif %} nağd endirimlə - {{object.get_price_3_str}} azn{% endif %}

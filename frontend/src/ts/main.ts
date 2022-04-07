@@ -16,7 +16,6 @@ import "./tireSearch";
 import "./imagePreview";
 import "./orderForm";
 import "./videoPlayer";
-import "./kreditTaksitTable";
 
 const form = document.querySelector<HTMLFormElement>(".needs-validation");
 const listCartBtns = document.querySelectorAll<HTMLButtonElement>(".order-btn");

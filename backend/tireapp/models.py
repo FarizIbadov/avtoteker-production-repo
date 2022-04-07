@@ -180,8 +180,8 @@ class Tire(CustomModel):
     release_date = models.CharField(max_length=255, blank=True,null=True)
 
     db = models.PositiveSmallIntegerField(default=72)
-    fuel = models.CharField(max_length=255, default="B")
-    contact = models.CharField(max_length=255, default="B")
+    fuel = models.CharField(max_length=255, default="B", null=True)
+    contact = models.CharField(max_length=255, default="B", null=True)
 
     kredit_3_month_price = models.FloatField(blank=True, default=0)
     kredit_6_month_price = models.FloatField(blank=True, default=0)
@@ -197,6 +197,8 @@ class Tire(CustomModel):
 
     stickers = models.CharField(max_length=255,blank=True,null=True)
     campaigns = models.CharField(max_length=255,blank=True,null=True)
+
+    order_number = models.PositiveIntegerField(default=1)
 
     @property
     def brand_url(self):
@@ -407,7 +409,7 @@ class Tire(CustomModel):
 
 
     class Meta:
-        ordering = ("-brand__order_number",)
+        ordering = ("-brand__order_number", "-order_number")
 
 
 

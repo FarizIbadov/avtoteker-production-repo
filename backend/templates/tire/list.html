@@ -27,11 +27,11 @@
     {% include "../components/image-preview-modal.html" %}
     
     <div class="d-flex justify-content-center align-items-center mt-3">
-        <!-- {% if request.user.is_superuser %}
+        {#<!-- {% if request.user.is_superuser %}
         <button title="{% trans 'Copy tire list info' %}" class="btn shadow-none mr-2 js-bookmark">
             <i class="bi bi-bookmarks h4"></i>
         </button>
-        {% endif %} -->
+        {% endif %} -->#}
         <h1 class="main-list__heading">{% parse_size_for_list request %}</h1>
     </div>
     <div class="main-list">
@@ -46,11 +46,11 @@
                         </div>
                     </div>
                     <p class="main-list__card-text text-right  detail-serie-font">
-                        <!-- {% if request.user.is_superuser %}
+                        {#<!-- {% if request.user.is_superuser %}
                         <button data-text="{% get_tire_info object %}" class="btn shadow-none px-0 js-bookmark" title="{% trans 'Copy tire info' %}">
                             <i class="bi bi-bookmarks h4"></i>
                         </button>
-                        {% endif %} -->
+                        {% endif %} -->#}
                         {{object.serie}}
                     </p>
                     <p class="main-list__card-text text-right">
