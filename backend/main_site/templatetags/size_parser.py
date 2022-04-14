@@ -79,8 +79,14 @@ class SizeField:
         self.list = self.get_field_list()
 
     def get_field_list(self):
-        return list(
+        size_items = list(
             self.queryset.values_list(self.field, flat=True)
             .distinct()
             .order_by(self.field)
         )
+
+        for i in range(len(size_items)):
+            if size_items[i] == '':
+                size_items[i] = '-'
+
+        return size_items

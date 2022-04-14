@@ -1,6 +1,6 @@
 from django.urls import path,re_path ,include
 from django.contrib.sitemaps.views import sitemap
-from .views import MainPage, MainListView, MainDetailView
+from .views import MainPage
 from .sitemaps import TireSitemap,OilSitemap
 
 sitemaps = {
@@ -11,7 +11,4 @@ sitemaps = {
 urlpatterns = [
     path("", MainPage.as_view(), name="home"),
     path("sitemap.xml",sitemap,{"sitemaps":sitemaps}),
-    path("tires/", MainListView.as_view(), name="list"),
-    path("tires/<str:width>-<str:height>-<str:radius>/", MainListView.as_view(), name="detail-list"),
-    path("tires/<int:pk>/<str:slug>/", MainDetailView.as_view(), name="detail"),
 ]

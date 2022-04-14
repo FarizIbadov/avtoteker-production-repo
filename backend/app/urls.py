@@ -8,6 +8,7 @@ import private_storage.urls
 
 urlpatterns = i18n_patterns(
     path("", include("main_site.urls")),
+    path("", include("tireapp.urls")),
     path("",include("oilapp.urls")),
     path("",include('wheel_size.urls')),
     path("campaigns/",include("campaign.urls")),

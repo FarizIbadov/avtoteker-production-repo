@@ -16,7 +16,7 @@ from .utils import generate_trim_code
 from django.utils.translation import gettext as _
 
 class TireClass(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, null=True)
 
     def __str__(self):
         return self.title or '-'

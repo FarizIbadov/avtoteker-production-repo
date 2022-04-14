@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "import_export",
     'rosetta',
     'private_storage',
+    'django_filters',
 
     "social.apps.SocialConfig",
     "ordering.apps.OrderingConfig",
