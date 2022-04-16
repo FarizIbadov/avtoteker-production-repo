@@ -5,20 +5,21 @@ from .models import Tire
 from main_site.mixins import FilterBySizeMixin
 from .filters import TireFilter
 
-class TireWarrantyView(ListView):
-    template_name = "tire/warranty.html"
+# class TireWarrantyView(ListView):
+#     template_name = "tire/warranty.html"
 
-    def get_queryset(self):
+#     def get_queryset(self):
         
-        return TireFilter(self.kwargs, Tire.objects.available()).qs
+#         return TireFilter(self.kwargs, Tire.objects.available()).qs
 
     
-class TireListView(ListView):
+class TireListView(FilterBySizeMixin,ListView):
     paginate_by = 8
     template_name = "tire/list.html"
 
     def get_queryset(self):       
-        return TireFilter(self.kwargs, Tire.objects.available()).qs
+        kwargs = self.get_filter()
+        return Tire.objects.available(**kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
