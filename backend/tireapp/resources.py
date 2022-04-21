@@ -289,7 +289,8 @@ class TireResource(resources.ModelResource):
             "kredit",
             "stickers",
             'campaigns',
-            "order_number"
+            "order_number",
+            "international_code"
         )
         skip_unchanged = True
         use_bulk = True
@@ -298,6 +299,7 @@ class TireResource(resources.ModelResource):
         export_order = (
             "id",
             "code",
+            'international_code',
             "brand",
             "serie",
             "manufacturer",

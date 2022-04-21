@@ -12,9 +12,9 @@ register = template.Library()
 def parse_size(request):
     size = get_size(request)
 
-    width_def = "" if size[0] == "-" else size[0]
-    height_def = "" if size[1] == "-" else size[1]
-    radius_def = "" if size[2] == "-" else size[2]
+    width_def = size[0]
+    height_def = size[1]
+    radius_def = size[2]
 
     width_obj = SizeField("width", _("en"),width_def)
     height_obj = SizeField("height", _("hündürlük"),height_def)

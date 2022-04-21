@@ -10,9 +10,9 @@
                 <option value="" selected>{{size.name|capfirst}}</option>
                 {% for dimention in size.list %} 
                     {% if dimention == size.default and resolved_path == 'detail-list' %}
-                    <option value="{% if dimension != '' %}{{dimention}}{% else %} - {% endif %}" selected>{{dimention}}</option>
+                    <option value="{{dimention}}" selected>{% if dimention == "-" %}{% else %}{{dimention}}{% endif %}</option>
                     {% else %}
-                    <option value="{% if dimension != '' %}{{dimention}}{% else %}-{% endif %}">{{dimention}}</option>
+                    <option value="{{dimention}}">{% if dimention == "-" %} {% else %}{{dimention}}{% endif %}</option>
                     {% endif %} 
                 {% endfor %}
             </select>
