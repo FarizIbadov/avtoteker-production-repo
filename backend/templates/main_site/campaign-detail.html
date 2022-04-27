@@ -29,14 +29,20 @@
         {% include "../components/video.html" with object=object %}
         
       </div>
-      {% if object.title and object.description and object.extra %}
       <div class="px-md-4">
+        {% if object.title %}
         <div class="d-block mt-5 mb-4">{{object.title|safe}}</div>
+        {% endif %}
+
+        {% if object.description %}
         {{object.description|safe}}
+        {% endif %}
+
+        {% if object.extra %}
         <hr />
         {{object.extra|safe}}
+        {% endif %}
       </div>
-      {% endif %}
     </div>
   </div>
 </div>

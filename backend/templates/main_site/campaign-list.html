@@ -24,8 +24,11 @@
                     <img class="w-100 mb-2" src="{{ object.image.url }}" alt="{{object.slug}}">
                     {% endif %}
 
-                    {% if object.title and object.description %}
+                    {% if object.title %}
                     <a href="{% url 'campaign-detail' object.id %}" class="d-block text-decoration-none mt-4 mb-3">{{object.title|safe}}</a>
+                    {% endif %}
+
+                    {% if object.description %}
                     {{object.description|truncatechars_html:object.truncate|safe}}
                     {% endif %}
                 </div>
