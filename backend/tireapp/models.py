@@ -156,9 +156,18 @@ class Tire(CustomModel):
     taksit_12_active = models.BooleanField(default=True)
 
     kredit_active = models.BooleanField(default=True)
+
     kredit_3 = models.FloatField(null=True, blank=True)
     kredit_3_dif = models.FloatField(default=0)
     kredit_3_active = models.BooleanField(default=True)
+
+    kredit_4 = models.FloatField(null=True, blank=True)
+    kredit_4_dif = models.FloatField(default=0)
+    kredit_4_active = models.BooleanField(default=True)
+
+    kredit_5 = models.FloatField(null=True, blank=True)
+    kredit_5_dif = models.FloatField(default=0)
+    kredit_5_active = models.BooleanField(default=True)
 
     kredit_6 = models.FloatField(null=True, blank=True)
     kredit_6_dif = models.FloatField(default=0)
@@ -280,9 +289,7 @@ class Tire(CustomModel):
         return self.serie.get_image()
 
     def get_price(self):
-        if self.price_3:
-            return float(self.get_price_3())
-        return self.sale if self.sale else self.price
+        return self.get_price_3() or self.sale or self.price
 
     def get_quantity(self):
         if self.get_quantity_is_numeric():
@@ -326,14 +333,15 @@ class Tire(CustomModel):
        
         return self.slug
 
-    def get_price_3(self):    
+    def get_price_3(self):   
         if self.price_3:
+            price = str(self.price_3).replace(",", ".")
             try:
-                float(self.price_3)
-                return self.price_3.replace(",",'.')
+                return float(price)
             except ValueError:
-                return self.price_3[0:-1].replace(",",'.')
+                return float(price[0:-1])
         return None
+    
 
     def get_price_3_color(self):
         if self.price_3:
@@ -343,6 +351,7 @@ class Tire(CustomModel):
             except ValueError:
                 return self.price_3[-1].lower()
         return None
+       
 
         
 
@@ -358,6 +367,7 @@ class Tire(CustomModel):
 
         slug = "_".join([brand,serie,size]).replace("/","") 
         self.slug = slug
+
 
     def save(self, *args, **kwargs):
         self.generate_slug()
@@ -378,6 +388,79 @@ class Tire(CustomModel):
 
     def generate_trim_code(self):
         self.trim_code = generate_trim_code(self.code)
+
+    def calculate_taksit(self, colors):
+        month_list = [2, 3, 6, 9, 12]
+        taksit_month = 0
+        price = self.sale or self.price
+
+        if self.price_3:
+            color_key = self.get_price_3_color()
+            
+            if color_key:
+                color = colors[color_key]
+
+                if color and color.taksit:
+                    taksit_month = color.taksit
+
+        for month in month_list:
+            taksit_price = 0
+
+            if month <= taksit_month:
+                taksit_price = round(self.get_price_3() / month, 2)
+            else:
+                taksit_price = round(price / month, 2)
+
+            field_name = "taksit_%d" % month
+
+            setattr(self, field_name, taksit_price)
+
+    
+    def calculate_kredit(self, colors):
+        month_list = [3, 4, 5, 6, 9, 12]
+        kredit_month = 0
+        ordinary_price = self.price
+        feeless_price = self.price
+
+        if self.price_3:
+            color_key = self.get_price_3_color()
+        
+        if color_key:
+            color = colors[color_key]
+
+            if color and color.kredit:
+                kredit_month = color.kredit
+
+            if color and color.use_sale:
+                ordinary_price = self.sale
+
+            if color and color.use_price_3_on_feeless:
+                feeless_price = self.get_price_3()
+
+
+        for month in month_list:
+            kredit_price = 0
+
+            if month <= kredit_month:
+                kredit_price = round(ordinary_price/ month, 2)
+            else:
+                kredit_price = round(self.price / month, 2)
+
+            field_name = "kredit_%d" % month
+
+            setattr(self, field_name, kredit_price)
+
+        
+
+        
+
+        
+
+
+
+
+
+
 
 
     def get_active_price(self,taksit_kredit_title):

@@ -65,14 +65,11 @@ def get_kredit_takist_dataset(value, request):
 
 
 @register.filter(name="special_kredit_3_month_price")
-def special_kredit_3_month_price(value:Tire):
+def special_kredit_3_month_price(value, price_color):
     price = float(value.price)
-    if value.sale:
-        price = float(value.sale)
-
-    if value.price_3:
-        price_3 = value.get_price_3()
-        price = float(price_3)
+    
+    if price_color.use_price_3_on_feeless:
+        price = float(value.get_price_3())
 
     kredit_3_price = value.kredit_3_month_price
     kredit_3_result = (price - (price * float(kredit_3_price)/100)) / 3
@@ -80,14 +77,11 @@ def special_kredit_3_month_price(value:Tire):
     return kredit_3_result
 
 @register.filter(name="special_kredit_6_month_price")
-def special_kredit_6_month_price(value:Tire):
+def special_kredit_6_month_price(value, price_color):
     price = float(value.price)
-    if value.sale:
-        price = float(value.sale)
-
-    if value.price_3:
-        price_3 = value.get_price_3()
-        price = float(price_3)
+    
+    if price_color.use_price_3_on_feeless:
+        price = float(value.get_price_3())
 
     kredit_6_price = value.kredit_6_month_price
     kredit_6_result = (price - (price * float(kredit_6_price)/100)) / 6
@@ -95,27 +89,23 @@ def special_kredit_6_month_price(value:Tire):
     return kredit_6_result
 
 @register.filter(name="get_3_month_price")
-def get_3_month_price(value):
+def get_3_month_price(value, price_color):
     price = float(value.price)
-    if value.sale:
-        price = float(value.sale)
 
-    if value.price_3:
-        price_3 = value.get_price_3()
-        price = float(price_3)
-        
+    if price_color.use_price_3_on_feeless:
+        price = float(value.get_price_3())
+
     initial_price = value.kredit_3_month_price
     return price * float(initial_price)/100
 
 
 @register.filter(name="get_6_month_price")
-def get_6_month_price(value):
+def get_6_month_price(value, price_color):
     price = float(value.price)
-    if value.sale:
-        price = float(value.sale)
-    if value.price_3:
-        price_3 = value.get_price_3()
-        price = float(price_3)
+
+    if price_color.use_price_3_on_feeless:
+        price = float(value.get_price_3())
+  
     initial_price = value.kredit_6_month_price
     return price * float(initial_price)/100
 

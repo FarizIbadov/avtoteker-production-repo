@@ -9,4 +9,4 @@ class TireFilter(django_filters.FilterSet):
 
     class Meta:
         model = Tire
-        fields = ("width", "height", "radius")
+        fields = ("size",)

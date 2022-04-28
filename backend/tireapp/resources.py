@@ -1,17 +1,27 @@
 from import_export import resources, fields
 from import_export import widgets as resource_widget
 from .models import Tire, OsTireImporterSetting
+from main_site.models import PriceColor
 from . import widgets
 from .utils import generate_trim_code
 
 import tablib
 
 class TireResource(resources.ModelResource):
+    COLORS = {
+        "r": None,
+        "y": None,
+        "g": None
+    }
+
     def get_queryset(self):
         return Tire.objects.all()
 
 
     def before_import(self,dataset, using_transactions, dry_run, **kwargs):
+        for key in self.COLORS:
+            self.COLORS[key] = PriceColor.objects.filter(color=key).first()
+
         imported_ids = []
         if not dry_run:
             for row in dataset:
@@ -25,6 +35,8 @@ class TireResource(resources.ModelResource):
     def before_save_instance(self, instance, using_transactions, dry_run):
         instance.generate_trim_code()
         instance.generate_slug()
+        instance.calculate_taksit(self.COLORS)
+        instance.calculate_kredit(self.COLORS)
 
 
 
@@ -57,7 +69,7 @@ class TireResource(resources.ModelResource):
     taksit_2 = fields.Field(
         column_name="Taksit 2 ay",
         attribute="taksit_2",
-        widget=widgets.CustomFloatWidget(2),
+        widget=widgets.FloatWidget(),
     )
     taksit_2_active = fields.Field(
         column_name="Taksit 2 active",
@@ -67,7 +79,7 @@ class TireResource(resources.ModelResource):
     taksit_3 = fields.Field(
         column_name="Taksit 3 ay",
         attribute="taksit_3",
-        widget=widgets.CustomFloatWidget(3),
+        widget=widgets.FloatWidget(),
     )
     taksit_3_active = fields.Field(
         column_name="Taksit 3 active",
@@ -77,7 +89,7 @@ class TireResource(resources.ModelResource):
     taksit_6 = fields.Field(
         column_name="Taksit 6 ay",
         attribute="taksit_6",
-        widget=widgets.CustomFloatWidget(6),
+        widget=widgets.FloatWidget(),
     )
     taksit_6_active = fields.Field(
         column_name="Taksit 6 active",
@@ -87,7 +99,7 @@ class TireResource(resources.ModelResource):
     taksit_9 = fields.Field(
         column_name="Taksit 9 ay",
         attribute="taksit_9",
-        widget=widgets.CustomFloatWidget(9),
+        widget=widgets.FloatWidget(),
     )
     taksit_9_active = fields.Field(
         column_name="Taksit 9 active",
@@ -97,7 +109,7 @@ class TireResource(resources.ModelResource):
     taksit_12 = fields.Field(
         column_name="Taksit 12 ay",
         attribute="taksit_12",
-        widget=widgets.CustomFloatWidget(12),
+        widget=widgets.FloatWidget(),
     )
     taksit_12_active = fields.Field(
         column_name="Taksit 12 active",
@@ -117,7 +129,7 @@ class TireResource(resources.ModelResource):
     kredit_3 = fields.Field(
         column_name="Kredit 3 ay",
         attribute="kredit_3",
-        widget=widgets.CustomFloatWidget(3),
+        widget=widgets.FloatWidget(),
     )
     kredit_3_active = fields.Field(
         column_name="Kredit 3 active",
@@ -130,10 +142,42 @@ class TireResource(resources.ModelResource):
         widget=widgets.FloatWidget(),
     )
 
+    kredit_4 = fields.Field(
+        column_name="Kredit 4 ay",
+        attribute="kredit_4",
+        widget=widgets.FloatWidget(),
+    )
+    kredit_4_active = fields.Field(
+        column_name="Kredit 4 active",
+        attribute="kredit_4_active",
+        widget=widgets.CustomBooleanWidget(),
+    )
+    kredit_4_dif = fields.Field(
+        column_name="Bahalaşma 4 %",
+        attribute="kredit_4_dif",
+        widget=widgets.FloatWidget(),
+    )
+
+    kredit_5 = fields.Field(
+        column_name="Kredit 5 ay",
+        attribute="kredit_5",
+        widget=widgets.FloatWidget(),
+    )
+    kredit_5_active = fields.Field(
+        column_name="Kredit 5 active",
+        attribute="kredit_5_active",
+        widget=widgets.CustomBooleanWidget(),
+    )
+    kredit_5_dif = fields.Field(
+        column_name="Bahalaşma 5 %",
+        attribute="kredit_5_dif",
+        widget=widgets.FloatWidget(),
+    )
+
     kredit_6 = fields.Field(
         column_name="Kredit 6 ay",
         attribute="kredit_6",
-        widget=widgets.CustomFloatWidget(6),
+        widget=widgets.FloatWidget(),
     )
     kredit_6_active = fields.Field(
         column_name="Kredit 6 active",
@@ -149,7 +193,7 @@ class TireResource(resources.ModelResource):
     kredit_9 = fields.Field(
         column_name="Kredit 9 ay",
         attribute="kredit_9",
-        widget=widgets.CustomFloatWidget(9),
+        widget=widgets.FloatWidget(),
     )
     kredit_9_active = fields.Field(
         column_name="Kredit 9 active",
@@ -165,7 +209,7 @@ class TireResource(resources.ModelResource):
     kredit_12 = fields.Field(
         column_name="Kredit 12 ay",
         attribute="kredit_12",
-        widget=widgets.CustomFloatWidget(12),
+        widget=widgets.FloatWidget(),
     )
     kredit_12_active = fields.Field(
         column_name="Kredit 12 active",
@@ -224,6 +268,7 @@ class TireResource(resources.ModelResource):
     new = fields.Field(attribute="new",widget=widgets.CustomNewBooleanWidget())
     outlet = fields.Field(attribute="outlet",widget=widgets.CustomOutletBooleanWidget())
     
+
     class Meta:
         model = Tire
         import_id_fields = ("id",)
@@ -254,6 +299,12 @@ class TireResource(resources.ModelResource):
             "kredit_3_dif",
             "kredit_3",
             "kredit_3_active",
+            "kredit_4_dif",
+            "kredit_4",
+            "kredit_4_active",
+            "kredit_5_dif",
+            "kredit_5",
+            "kredit_5_active",
             "kredit_6",
             "kredit_6_active",
             "kredit_9",
@@ -340,6 +391,12 @@ class TireResource(resources.ModelResource):
             "kredit_3_dif",
             "kredit_3_active",
             "kredit_3_month_price",
+            "kredit_4",
+            "kredit_4_dif",
+            "kredit_4_active",
+            "kredit_5",
+            "kredit_5_dif",
+            "kredit_5_active",
             "kredit_6",
             "kredit_6_dif",
             "kredit_6_active",

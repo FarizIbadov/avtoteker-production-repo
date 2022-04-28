@@ -76,20 +76,6 @@ class CustomSeasonWidget(Widget):
         return season
 
 
-class CustomFloatWidget(FloatWidget):
-    def __init__(self, month):
-        self.month = month
-
-    def clean(self, value, row=None, *args, **kwargs):
-        new_value = super().clean(value)
-        if not new_value:
-            if row.get("sale"):
-                new_value = row["sale"] / self.month
-            else:
-                new_value = row.get("price") / self.month
-
-        return new_value
-
 
 class CustomOutletBooleanWidget(CustomBooleanWidget):
     def render(self, value, obj=None):

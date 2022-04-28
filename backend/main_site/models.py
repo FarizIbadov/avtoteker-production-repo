@@ -34,6 +34,9 @@ class PriceColor(models.Model):
         blank=True
     )
 
+    use_sale = models.BooleanField(default=False)
+    use_price_3_on_feeless = models.BooleanField(default=False) 
+
     def __str__(self):
         return "%s" % dict(self.COLORS)[self.color]
 
