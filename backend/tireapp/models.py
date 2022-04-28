@@ -315,6 +315,7 @@ class Tire(CustomModel):
             self.size.radius,
         )
 
+
     def get_size_for_admin(self):
         return "%s %s %s%s" % (
             self.size.width,
@@ -323,8 +324,10 @@ class Tire(CustomModel):
             self.get_ZR(),
         )
 
+
     def get_percentage(self):
         return ((self.price - self.sale) / self.price) * 100
+
  
     def get_slug(self):
         if not self.slug:
@@ -351,10 +354,7 @@ class Tire(CustomModel):
             except ValueError:
                 return self.price_3[-1].lower()
         return None
-       
-
-        
-
+    
 
     def generate_slug(self):
         splited_brand = self.brand.title.lower().split(" ")
@@ -425,17 +425,17 @@ class Tire(CustomModel):
         if self.price_3:
             color_key = self.get_price_3_color()
         
-        if color_key:
-            color = colors[color_key]
+            if color_key:
+                color = colors[color_key]
 
-            if color and color.kredit:
-                kredit_month = color.kredit
+                if color and color.kredit:
+                    kredit_month = color.kredit
 
-            if color and color.use_sale:
-                ordinary_price = self.sale
+                if color and color.use_sale:
+                    ordinary_price = self.sale
 
-            if color and color.use_price_3_on_feeless:
-                feeless_price = self.get_price_3()
+                if color and color.use_price_3_on_feeless:
+                    feeless_price = self.get_price_3()
 
 
         for month in month_list:
@@ -449,18 +449,6 @@ class Tire(CustomModel):
             field_name = "kredit_%d" % month
 
             setattr(self, field_name, kredit_price)
-
-        
-
-        
-
-        
-
-
-
-
-
-
 
 
     def get_active_price(self,taksit_kredit_title):

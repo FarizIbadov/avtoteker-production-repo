@@ -8,8 +8,13 @@ from .filters import TireFilter
 # class TireWarrantyView(ListView):
 #     template_name = "tire/warranty.html"
 
+<<<<<<< HEAD
     # def get_queryset(self):
     #     return TireFilter(self.kwargs, Tire.objects.available()).queryset
+=======
+    def get_queryset(self):
+        return TireFilter(self.kwargs, Tire.objects.available()).queryset
+>>>>>>> tire_branch
 
     
 class TireListView(FilterBySizeMixin,ListView):
