@@ -349,7 +349,7 @@ class Tire(CustomModel):
     def get_price_3_color(self):
         if self.price_3:
             try:
-                float(self.price_3)
+                float(str(self.price_3))
                 return "r"
             except ValueError:
                 return self.price_3[-1].lower()
