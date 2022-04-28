@@ -89,7 +89,7 @@ class TireSearch {
     if (value) {
       return value;
     } else {
-      return "-";
+      return "_";
     }
   }
 
