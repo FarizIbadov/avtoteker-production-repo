@@ -32,61 +32,12 @@ class TireForm(forms.ModelForm):
             height=self.cleaned_data.get("height"),
             radius=self.cleaned_data.get("radius"),
         )[0]
-        self.instance.kredit_3 = self.cleaned_data.get("kredit_3") or self.cleaned_data.get("price") / 3
-        self.instance.kredit_6 = self.cleaned_data.get("kredit_6") or self.cleaned_data.get("price") / 6
-        self.instance.kredit_9 = self.cleaned_data.get("kredit_9") or self.cleaned_data.get("price") / 9
-        self.instance.kredit_12 = (
-            self.cleaned_data.get("kredit_12") or self.cleaned_data.get("price") / 12
-        )
-        self.instance.taksit_2 = self.cleaned_data.get("taksit_2") or self.cleaned_data.get("price") / 2
-        self.instance.taksit_3 = self.cleaned_data.get("taksit_3") or self.cleaned_data.get("price") / 3
-        self.instance.taksit_6 = self.cleaned_data.get("taksit_6") or self.cleaned_data.get("price") / 6
-        self.instance.taksit_9 = self.cleaned_data.get("taksit_9") or self.cleaned_data.get("price") / 9
-        self.instance.taksit_12 = (
-            self.cleaned_data.get("taksit_12") or self.cleaned_data.get("price") / 12
-        )
+        
         return super().save(commit=commit)
 
     class Meta:
         model = Tire
         exclude = ("size",)
-
-        widgets = {
-            "brand": forms.Select(attrs={"class": "custom-select"}),
-            "serie": forms.Select(attrs={"class": "custom-select"}),
-            "manufacturer": forms.Select(attrs={"class": "custom-select"}),
-            "season": forms.Select(attrs={"class": "custom-select"}),
-            "Class": forms.Select(attrs={"class": "custom-select"}),
-            "description": forms.Textarea(attrs={"rows": 7}),
-            "width": forms.TextInput(),
-            "height": forms.TextInput(),
-            "radius": forms.TextInput(),
-            "weight": forms.TextInput(),
-            "montaj_balance": forms.TextInput(),
-            "razval": forms.TextInput(),
-            "year": forms.TextInput(),
-            "USDNO": forms.TextInput(),
-            "USD": forms.TextInput(),
-            "USDOFF": forms.TextInput(),
-            "kredit_3": forms.TextInput(),
-            "kredit_3_dif": forms.TextInput(),
-            "kredit_6": forms.TextInput(),
-            "kredit_6_dif": forms.TextInput(),
-            "kredit_9": forms.TextInput(),
-            "kredit_9_dif": forms.TextInput(),
-            "kredit_12": forms.TextInput(),
-            "kredit_12_dif": forms.TextInput(),
-            "taksit_2": forms.TextInput(),
-            "taksit_2_dif": forms.TextInput(),
-            "taksit_3": forms.TextInput(),
-            "taksit_3_dif": forms.TextInput(),
-            "taksit_6": forms.TextInput(),
-            "taksit_6_dif": forms.TextInput(),
-            "taksit_9": forms.TextInput(),
-            "taksit_9_dif": forms.TextInput(),
-            "taksit_12": forms.TextInput(),
-            "taksit_12_dif": forms.TextInput(),
-        }
 
 class TireImportForm(ImportForm):
     # detail = forms.BooleanField()
@@ -99,9 +50,3 @@ class TireImportForm(ImportForm):
 
 class OsImportform(ImportForm):
     pass
-    # brands = forms.ModelChoiceField(
-    #     queryset=Brand.objects.available(), 
-    #     widget=forms.CheckboxSelectMultiple(),
-    #     required=False,
-    #     blank=True
-    # )

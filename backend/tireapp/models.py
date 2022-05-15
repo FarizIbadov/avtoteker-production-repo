@@ -10,6 +10,7 @@ from django.core.exceptions import ValidationError
 from django.core.files import File
 from utils.models import CustomModel
 from sticker.models import Sticker
+from main_site.models import PriceColor
 from campaign.models import Post
 from .utils import generate_trim_code
 
@@ -370,8 +371,19 @@ class Tire(CustomModel):
 
 
     def save(self, *args, **kwargs):
+        colors = {
+            "r": None,
+            "y": None,
+            "g": None
+        }
         self.generate_slug()
         self.generate_trim_code()
+
+        for key in colors:
+            colors[key] = PriceColor.objects.filter(color=key).first()
+
+        self.calculate_taksit(colors)
+        self.calculate_kredit(colors)
 
         if not self.albalikart:
             self.albalikart = self.get_active_price("taksit")
