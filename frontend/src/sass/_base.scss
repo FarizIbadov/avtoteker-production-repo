@@ -1,6 +1,10 @@
+* {
+   word-break: break-all;
+}
+
 html {
   scroll-behavior: smooth;
-  word-break: break-all;
+ 
 }
 
 *:focus,
