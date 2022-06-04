@@ -41,7 +41,7 @@
               {% if object.serie.serie_sub_logos.count %}
                   {% for sub_logo in object.serie.serie_sub_logos.all %}
                       {% if forloop.first %}
-                      <div class="w-67 mb-1 mt-3">
+                      <div class="w-67 mb-1 mt-4">
                           <img class="main-list__item-logo w-100" src="{{sub_logo.get_image}}" alt="serie-sub-logo">
                       </div>
                       {% endif %}
