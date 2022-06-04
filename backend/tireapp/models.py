@@ -115,7 +115,7 @@ class Tire(CustomModel):
 
     trim_code = models.CharField(max_length=255, blank=True, null=True)
     code = models.CharField(max_length=255, blank=True, null=True)
-    slug = models.SlugField(max_length=255, blank=True)
+    slug = models.SlugField(max_length=255, blank=True, null=True)
 
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True)
     serie = models.ForeignKey(Serie, on_delete=models.SET_NULL, null=True)
@@ -195,8 +195,8 @@ class Tire(CustomModel):
     fuel = models.CharField(max_length=255, default="B", null=True)
     contact = models.CharField(max_length=255, default="B", null=True)
 
-    kredit_3_month_price = models.FloatField(blank=True, default=0)
-    kredit_6_month_price = models.FloatField(blank=True, default=0)
+    kredit_3_month_price = models.FloatField(blank=True,null=True, default=0)
+    kredit_6_month_price = models.FloatField(blank=True,null=True, default=0)
 
     new = models.BooleanField(default=False)
     outlet = models.BooleanField(default=False)
