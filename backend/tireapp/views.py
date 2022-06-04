@@ -13,7 +13,7 @@ from .filters import TireFilter
 
     
 class TireListView(FilterBySizeMixin,ListView):
-    paginate_by = 8
+    # paginate_by = 8
     template_name = "tire/list.html"
 
     def get_data(self):
