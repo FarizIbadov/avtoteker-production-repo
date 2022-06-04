@@ -115,7 +115,7 @@ class Serie(CustomModel):
     description = RichTextUploadingField(blank=True, null=True)
     extra = RichTextUploadingField(blank=True, null=True)
     image_url = models.URLField(blank=True, null=True)
-
+    
     def __str__(self):
         return self.title
 
@@ -140,3 +140,22 @@ class Serie(CustomModel):
 
 
 
+class SubLogo(models.Model):
+    logo = models.ImageField(upload_to="sub-logo/", null=True)
+    serie = models.ForeignKey(Serie, on_delete=models.CASCADE, null=True, related_name="serie_sub_logos")
+
+    order = models.PositiveSmallIntegerField(null=True)
+
+    def get_image(self):
+        if self.logo:
+            return self.logo.url
+
+        logo = Logo.objects.filter(active=True).first()
+
+        if logo:
+            return logo.logo.url
+
+        return "Logo"
+
+    class Meta:
+        ordering = ("order",)

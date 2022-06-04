@@ -34,13 +34,19 @@
       <div>
         <div class="d-flex justify-content-end">
           {% include "../components/main-site/side-info.html" with object=object %}
-          <div>
-            <img
-              class="main-list__item-logo mb-1"
-              src="{{object.brand.get_image}}"
-              title="{{object.brand}}"
-              alt="{{object.brand}}"
-            />
+          <div class="d-flex flex-column align-items-end">
+              <div>
+                  <img class="main-list__item-logo mb-1" src="{{object.brand.get_image}}" alt="{{object.brand}}">
+              </div>
+              {% if object.serie.serie_sub_logos.count %}
+                  {% for sub_logo in object.serie.serie_sub_logos.all %}
+                      {% if forloop.first %}
+                      <div class="w-67 mb-1 mt-2">
+                          <img class="main-list__item-logo w-100" src="{{sub_logo.get_image}}" alt="serie-sub-logo">
+                      </div>
+                      {% endif %}
+                  {% endfor %}
+              {% endif %}
           </div>
         </div>
 

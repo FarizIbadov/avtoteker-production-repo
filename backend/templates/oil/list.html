@@ -86,20 +86,10 @@
                             {% include "../components/sticker-carousel.html" with object=object %}
                         
                             <div class="col-12">
-                            {{ object|get_kredit_taksit|safe }} 
+                            {% include "../components/main-site/kredit-taksit-carousel.html" with object=object request=request %}
                             </div>
                         </div>
-                        <div class="main-list__btn-box d-flex align-items-center">
-                            <button type="button" data-toggle="modal"
-                            data-target="#order" class="main-list__cart-btn oil-button"
-                            data-max="{{object.quantity}}"
-                            data-price="{{object.USD}}"
-                            data-id="{{object.id}}">
-                                {% trans 'Yağdəyişməyə yazılmaq' %}
-                            </button>
-                    
-                            <a href="{% url 'oil-detail' object.id %}" class="main-list__detail-btn">{% trans 'Ətraflı' %}</a>
-                        </div>
+                        {% include '../components/tire/social-box.html' %}
                         
                     </div>
                 </section>

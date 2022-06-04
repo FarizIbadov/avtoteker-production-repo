@@ -83,7 +83,7 @@
             {% include "../components/campaign-descriptions.html" with object=object %}
            
             <div class="col-12">
-              {{ object|get_kredit_taksit|safe }} 
+              {% include "../components/main-site/kredit-taksit-carousel.html" with object=object request=request %}
             </div>
           </div>
           <div class="main-list__btn-box d-flex align-items-center">
