@@ -195,8 +195,8 @@ class Tire(CustomModel):
     fuel = models.CharField(max_length=255, default="B", null=True)
     contact = models.CharField(max_length=255, default="B", null=True)
 
-    kredit_3_month_price = models.FloatField(blank=True,null=True, default=0)
-    kredit_6_month_price = models.FloatField(blank=True,null=True, default=0)
+    kredit_3_month_price = models.FloatField(blank=True, null=True, default=0)
+    kredit_6_month_price = models.FloatField(blank=True, null=True, default=0)
 
     new = models.BooleanField(default=False)
     outlet = models.BooleanField(default=False)
@@ -494,7 +494,7 @@ class Tire(CustomModel):
 
 
     class Meta:
-        ordering = ("-brand__order_number", "-order_number")
+        ordering = ("-brand__order_number",)
 
 
 
