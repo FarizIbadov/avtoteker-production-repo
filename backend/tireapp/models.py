@@ -494,7 +494,7 @@ class Tire(CustomModel):
 
 
     class Meta:
-        ordering = ("-brand__order_number",)
+        ordering = ("-brand__order_number", 'order_number')
 
 
 
