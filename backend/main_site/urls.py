@@ -10,5 +10,6 @@ sitemaps = {
 
 urlpatterns = [
     path("", MainPage.as_view(), name="home"),
+    path("teker-sechimi/", MainPage.as_view(), name="az-home"),
     path("sitemap.xml",sitemap,{"sitemaps":sitemaps}),
 ]
