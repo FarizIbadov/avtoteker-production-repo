@@ -134,7 +134,7 @@ class Tire(CustomModel):
     speed = models.CharField(max_length=255, blank=True, null=True)
     season = models.ForeignKey(Season, on_delete=models.SET_NULL, null=True)
 
-    price = models.FloatField(null=True)
+    price = models.FloatField(null=True, blank=True)
     sale = models.FloatField(blank=True, null=True)
     cost = models.FloatField(null=True, blank=True)
     price_3 = models.CharField(max_length=255,blank=True,null=True)

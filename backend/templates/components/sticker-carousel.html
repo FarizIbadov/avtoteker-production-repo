@@ -5,10 +5,9 @@
 <div class="col-12 my-3">
     <div id="carouselExampleSlidesOnly" class="carousel slide sticker-container ml-auto" data-ride="carousel">
         <div class="carousel-inner h-100">
-            {% if object.new %}
+            {% if object.new or not object.price %}
             <div class="carousel-item {% if object.new %} active {% endif %} h-100 w-100" data-interval="{{ timer }}">
                 {% include "./new-product-banner.html" with object=object %}
-
             </div>
             {% endif %}
             
