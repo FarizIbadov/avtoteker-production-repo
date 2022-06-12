@@ -343,7 +343,6 @@ class TireResource(resources.ModelResource):
             "stickers",
             'campaigns',
             "order_number",
-            "international_code"
         )
         skip_unchanged = True
         use_bulk = True
