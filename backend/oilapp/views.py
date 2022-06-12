@@ -3,11 +3,10 @@ from django.views.generic import TemplateView,ListView,DetailView
 from .models import Oil
 
 class OilMainView(TemplateView):
-    template_name = "main_site/oil-main.html"
+    template_name = "oil/oil-main.html"
 
 class OilListView(ListView):
-    paginate_by = 8
-    template_name = "main_site/oil-list.html"
+    template_name = "oil/oil-list.html"
 
     def get_queryset(self,*args,**kwargs):
         viscosity = self.request.GET.get("viscosity")
@@ -17,7 +16,7 @@ class OilListView(ListView):
         return Oil.objects.available(**kwargs)
         
 class OilDetailView(DetailView):
-    template_name = "main_site/oil-detail.html"
+    template_name = "oil/oil-detail.html"
 
     def get_object(self):
         pk = self.kwargs['pk']
