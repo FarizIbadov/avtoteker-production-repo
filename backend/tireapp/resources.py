@@ -268,7 +268,7 @@ class TireResource(resources.ModelResource):
     new = fields.Field(attribute="new",widget=widgets.CustomNewBooleanWidget())
     outlet = fields.Field(attribute="outlet",widget=widgets.CustomOutletBooleanWidget())
 
-    international_code = fields.Field(attribure='international_code', widget=resource_widget.CharWidget())
+    international_code = fields.Field(attribure="international_code", widget=resource_widget.CharWidget())
     
 
     class Meta:
