@@ -412,7 +412,6 @@ class TireResource(resources.ModelResource):
             "release_date",
             "new",
             "outlet",
-            'international_code'
         )
 
 
