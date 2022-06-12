@@ -1,7 +1,8 @@
 {% load static %}
 
+{% if object.price %}
 <div class="main-list__price-info mt-5 mt-md-2">
-    {% if object.sale and object.price %}
+    {% if object.sale %}
         <div class="price">
             <span class="red-line-trought font-larger--2 opacity-8">
                 {{object.price|floatformat:-2}}
@@ -20,7 +21,7 @@
                 <img src="{% static 'img/manat.png' %}" alt="₼">
             </span>
         </div>  
-    {% elif object.price %}
+    {% else %}
         <div class="price text-right">
             <span class="text-red font-xl position-relative">
                 {{object.price|floatformat:-2}}
@@ -36,3 +37,4 @@
         </div>  
     {% endif %}
 </div>
+{% endif %}
