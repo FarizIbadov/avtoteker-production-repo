@@ -20,7 +20,7 @@
                 <img src="{% static 'img/manat.png' %}" alt="₼">
             </span>
         </div>  
-    {% else %}
+    {% elif object.price %}
         <div class="price text-right">
             <span class="text-red font-xl position-relative">
                 {{object.price|floatformat:-2}}
