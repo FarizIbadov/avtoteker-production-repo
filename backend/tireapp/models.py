@@ -159,27 +159,27 @@ class Tire(CustomModel):
     kredit_active = models.BooleanField(default=True)
 
     kredit_3 = models.FloatField(null=True, blank=True)
-    kredit_3_dif = models.FloatField(default=0)
+    kredit_3_dif = models.FloatField(default=0, null=True)
     kredit_3_active = models.BooleanField(default=True)
 
     kredit_4 = models.FloatField(null=True, blank=True)
-    kredit_4_dif = models.FloatField(default=0)
+    kredit_4_dif = models.FloatField(default=0, null=True)
     kredit_4_active = models.BooleanField(default=True)
 
     kredit_5 = models.FloatField(null=True, blank=True)
-    kredit_5_dif = models.FloatField(default=0)
+    kredit_5_dif = models.FloatField(default=0, null=True)
     kredit_5_active = models.BooleanField(default=True)
 
     kredit_6 = models.FloatField(null=True, blank=True)
-    kredit_6_dif = models.FloatField(default=0)
+    kredit_6_dif = models.FloatField(default=0, null=True)
     kredit_6_active = models.BooleanField(default=True)
 
     kredit_9 = models.FloatField(null=True, blank=True)
-    kredit_9_dif = models.FloatField(default=0)
+    kredit_9_dif = models.FloatField(default=0, null=True)
     kredit_9_active = models.BooleanField(default=True)
 
     kredit_12 = models.FloatField(null=True, blank=True)
-    kredit_12_dif = models.FloatField(default=0)
+    kredit_12_dif = models.FloatField(default=0, null=True)
     kredit_12_active = models.BooleanField(default=True)
 
     montaj_balance = models.CharField(max_length=255,blank=True, null=True)
