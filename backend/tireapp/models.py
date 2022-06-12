@@ -402,65 +402,67 @@ class Tire(CustomModel):
         self.trim_code = generate_trim_code(self.code)
 
     def calculate_taksit(self, colors):
-        month_list = [2, 3, 6, 9, 12]
-        taksit_month = 0
-        price = self.sale or self.price
+        if self.price:
+            month_list = [2, 3, 6, 9, 12]
+            taksit_month = 0
+            price = self.sale or self.price
 
-        if self.price_3:
-            color_key = self.get_price_3_color()
-            
-            if color_key:
-                color = colors[color_key]
+            if self.price_3:
+                color_key = self.get_price_3_color()
+                
+                if color_key:
+                    color = colors[color_key]
 
-                if color and color.taksit:
-                    taksit_month = color.taksit
+                    if color and color.taksit:
+                        taksit_month = color.taksit
 
-        for month in month_list:
-            taksit_price = 0
+            for month in month_list:
+                taksit_price = 0
 
-            if month <= taksit_month:
-                taksit_price = round(self.get_price_3() / month, 2)
-            else:
-                taksit_price = round(price / month, 2)
+                if month <= taksit_month:
+                    taksit_price = round(self.get_price_3() / month, 2)
+                else:
+                    taksit_price = round(price / month, 2)
 
-            field_name = "taksit_%d" % month
+                field_name = "taksit_%d" % month
 
-            setattr(self, field_name, taksit_price)
+                setattr(self, field_name, taksit_price)
 
     
     def calculate_kredit(self, colors):
-        month_list = [3, 4, 5, 6, 9, 12]
-        kredit_month = 0
-        ordinary_price = self.price
-        feeless_price = self.price
+        if self.price:
+            month_list = [3, 4, 5, 6, 9, 12]
+            kredit_month = 0
+            ordinary_price = self.price
+            feeless_price = self.price
 
-        if self.price_3:
-            color_key = self.get_price_3_color()
-        
-            if color_key:
-                color = colors[color_key]
+            if self.price_3:
+                color_key = self.get_price_3_color()
+            
+                if color_key:
+                    color = colors[color_key]
 
-                if color and color.kredit:
-                    kredit_month = color.kredit
+                    if color and color.kredit:
+                        kredit_month = color.kredit
 
-                if color and color.use_sale:
-                    ordinary_price = self.sale
+                    if color and color.use_sale:
+                        ordinary_price = self.sale
 
-                if color and color.use_price_3_on_feeless:
-                    feeless_price = self.get_price_3()
+                    if color and color.use_price_3_on_feeless:
+                        feeless_price = self.get_price_3()
 
 
-        for month in month_list:
-            kredit_price = 0
+            for month in month_list:
+                kredit_price = 0
 
-            if month <= kredit_month:
-                kredit_price = round(ordinary_price/ month, 2)
-            else:
-                kredit_price = round(self.price / month, 2)
+                if month <= kredit_month:
+                    kredit_price = round(ordinary_price/ month, 2)
+                else:
+                    kredit_price = round(self.price / month, 2)
 
-            field_name = "kredit_%d" % month
+                field_name = "kredit_%d" % month
 
-            setattr(self, field_name, kredit_price)
+                setattr(self, field_name, kredit_price)
 
 
     def get_active_price(self,taksit_kredit_title):
