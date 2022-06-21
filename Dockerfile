@@ -39,5 +39,7 @@ RUN mkdir -p /vol/web/static
 # RUN chmod -R 755 /vol/web
 # USER user
 
+RUN chmod 777 -R /tmp && chmod o+t -R /tmp
+
 
 CMD ["entrypoint.sh"]
