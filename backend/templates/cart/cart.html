@@ -1,0 +1,10 @@
+{% extends "../config/base.html" %}
+{% load static %}
+
+{% block seo %}
+    <script src="{% static 'cart.bundle.js' %}" defer></script>
+{% endblock seo %}
+
+{% block content %}
+    <div id="cart" data-path="{{request.path}}"></div>
+{% endblock content %}

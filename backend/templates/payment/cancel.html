@@ -1,0 +1,16 @@
+{% extends '../config/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="pt-3">
+        <p class="h2 text-center">
+            {% trans 'Dəyərli müştəri, sizin ödənişiniz həyata keçirilmədi.' %}
+        </p>
+        <hr>
+        <a href="{% url 'payment-view' object.uuid %}" class="mt-4 d-block h4 text-center text-dark">
+            {% trans 'Yenidən ödəniş edin' %}
+        </a>
+    </div>
+</div>
+{% endblock content %}

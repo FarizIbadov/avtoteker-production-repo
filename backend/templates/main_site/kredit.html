@@ -1,0 +1,32 @@
+{% extends "../config/base.html" %}
+{% load static %}
+{% load size_parser %}
+
+{% block seo %}
+
+  <title>Kreditlər | #teker #təkər | Avtotəkər</title>
+
+{% endblock seo %}
+
+{% block content %}
+    {% include "../components/phone-location-link-container.html" %}
+    {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
+    
+    <h1 class="main-list__heading my-5">Kreditlə təkər</h1>
+
+    <div class="main-list mb-3">
+        <div class="main-list__main-row">
+            <div class="col-md-12">
+                {{object.title|safe}}
+                <hr>
+                {{object.description|truncatechars_html:object.truncate|safe}}
+            </div>
+        </div>
+    </div>
+     <div class="main-container container">
+      
+      {% include "../components/main-site/map.html" %}
+     
+    </div>
+{% endblock content %}
+

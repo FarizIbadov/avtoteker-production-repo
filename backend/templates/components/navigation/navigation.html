@@ -1,0 +1,16 @@
+<header class="header bg-primary-1">
+      <nav class="container navigation navbar-expand-lg navbar-light d-lg-flex align-items-lg-center">
+        <div class="w-100 d-flex align-items-center justify-content-between">
+            {% include "../UI/logo.html" %}
+            <div class="d-flex align-items-center navigation-utils">
+              <button class="border-0 ml-auto navbar-toggler toggler-extra" type="button" data-toggle="collapse" 
+              id="nav-burger"
+              data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              {% include "./lang-dropdown.html" %}
+            </div>
+        </div>
+        {% include "./nav-list.html" %}
+      </nav>
+</header>

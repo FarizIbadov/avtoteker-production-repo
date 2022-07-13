@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load url_tags %}
+
+{% get_current_language as LANGUAGE_CODE %} 
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+
+<div class="dropdown nav-dropdown mr-n3 mx-md-0" id="lang-dropdown">
+    <a class="btn shadow-none text-dark rounded-0 dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ LANGUAGE_CODE|upper }}
+    </a>
+
+    <div class="dropdown-menu rounded-0 mt-0 dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+        {% for language in languages %}
+            <a class="dropdown-item px-0 text-center" href="{% get_region_path request language.code %}">{{language.code|upper}}</a>
+        {% endfor %}
+    </div>
+</div>

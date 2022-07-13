@@ -1,0 +1,9 @@
+{% load copyright %}
+{% get_copyright as copyright %}
+
+<footer class="footer d-flex flex-column">
+    <div class="container py-3">
+        {% include "../UI/logo.html" %}           
+    </div>
+    <p class="copyright bg-secondary-1 text-white text-center mb-0">&copy; Copyright 2006 - {% now "Y" %} | {{copyright}} </p>
+</footer>

@@ -1,0 +1,25 @@
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load get_forms %}
+{% get_tire_form as form %}
+
+<form method="POST" action="{% url 'tire-order' %}" novalidate class="modal fade tire-order" id="order" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{% trans 'Sifariş' %}</h5>
+      </div>
+      <div class="modal-body" id="order-modal-body">
+          <div id="modal-form">
+            {% crispy form %} 
+          </div>
+      </div>
+      <div class="modal-footer"  id="order-modal-footer">
+        <button type="button" class="btn btn-secondary-1" id="cancel-btn" data-dismiss="modal">{% trans 'İmtina' %}</button>
+        <button type="submit" class="btn btn-primary-1" id="order-btn">
+          <span>{% trans 'Sifariş et' %}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,38 @@
+.sub-content {
+  margin-left: 40px;
+}
+
+.main-content-heading,
+.sub-content-heading {
+  display: flex;
+  align-items: center;
+  * {
+    margin-bottom: 0;
+  }
+}
+
+.main-content-symbol {
+  display: inline-block;
+  position: relative;
+  @include square(40px);
+  background-color: map-get($theme-colors, "primary-1");
+
+  & > span {
+    display: inline-block;
+    position: absolute;
+    @include square(50%);
+    background-color: black;
+
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.sub-content-symbol {
+  @extend .main-content-symbol;
+  @include square(30px);
+}
+
+.sub-content-body {
+  margin-left: 55px;
+}

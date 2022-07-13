@@ -1,0 +1,15 @@
+{{object.brand.title}} {{object.serie.title}} - avtoteker.az{% url 'detail' object.pk object.generate_slug %}
+
+{% if not object.price_3 %}standart qiyməti - {{object.get_price_1_str}} azn{% if object.sale %}, nağd endirimlə - {{object.get_price_2_str}} azn {% endif %} 
+{% else %}{% if object.sale %}standart endirimli qiyməti - {{object.get_price_2_str}} azn ,{% endif %} nağd endirimlə - {{object.get_price_3_str}} azn{% endif %}
+{% if object.price_3 %}standart endirimli qiyməti {{object.get_price_2_str}} azn{% else %}standart qiyməti {{object.get_price_1_str}} azn{% endif %}, {{object.get_kredit_for_tire_info}} ayadək faizsiz, ilkin ödənişsiz və komissiyasız, 1 əd üçün aylıq {{object.get_price_1_str}} / {{object.kredit}} aya = {{object.get_kredit_price}}-dan başlayır. 4 əd üçün aylıq üçün isə {{object.get_price_1_str}} x 4 / {{object.kredit}} aya = {{object.get_4_kredit_price}}-dan başlayır
+
+nağd endirimlə 89,99 azn - nağd/nağdsız/taksitli və 4 dəfəyə hissəvi ödəniş üçün
+
+BirKartla, TamKartla 9 ayadək, Bolkartla 6 ayadək, Albalikartla 12 ayadək faizsiz taksitlə.
+
+89,99 / 6 aya = x azndan faizsiz taksitlə əldə etmək mümkündür. 4 əd üçün aylıq üçün isə 89,99 x 4 / 6 aya = x-dan.
+89,99 / 9 aya = x azndan faizsiz taksitlə əldə etmək mümkündür. 4 əd üçün aylıq üçün isə 89,99 x 4 / 9 aya = x-dan.
+89,99 / 12 aya = x azndan faizsiz taksitlə əldə etmək mümkündür. 4 əd üçün aylıq üçün isə 89,99 x 4 / 12 aya = x-dan.
+
+4 dəfəlik nağd endirimli qiymətdən ödəniş üçün 89,99 azn öncədən ödənilməlidir, 3 ay ərzində isə hər ay 89,99 azn

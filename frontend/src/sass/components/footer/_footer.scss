@@ -1,0 +1,11 @@
+.footer {
+  background-color: #eee;
+
+  & > .container {
+    min-height: 150px;
+  }
+}
+
+.copyright {
+  font-size: 14px;
+}

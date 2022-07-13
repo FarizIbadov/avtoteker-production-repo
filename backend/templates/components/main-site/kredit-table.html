@@ -1,0 +1,76 @@
+{% load i18n %}
+
+{% load taksit_kredit %}
+
+
+<div class="row kredit-table">
+    <div class="col-md-12">
+      <div class="row">
+        <h5 class="col-3 text-center kredit-heading">{% trans 'ay' %}
+        </h5>
+        <h5 class="col-3 text-center kredit-heading">{% trans 'ilkin odəniş' %}</h5>
+        <h5 class="col-3 text-center kredit-heading">{% trans 'aylıq' %}</h5>
+        <h5 class="col-3 text-center kredit-heading">{% trans 'ümumi məbləğ' %}</h5>
+      </div>
+     
+      {% if object.kredit_3_active %}
+      {% get_total_price 3 object.kredit_3 as total_for_3 %}
+      <div class="row mb-1">
+        <div class="col-3"><div class="bg-primary-1 p-2 text-center">3</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price">0</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{object.kredit_3|floatformat:-2}}">{{object.kredit_3|floatformat:-2}}</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{total_for_3|floatformat:-2}}">
+          {{total_for_3|floatformat:-2}}
+        </div></div>
+      </div>
+      {% endif %}
+      {% if object.kredit_3_active and object.kredit_3_dif == 0 %}
+      {% get_total_price 3 object|special_kredit_3_month_price:price_color object|get_3_month_price:price_color as total_for_3_free %}
+
+      <div class="row mb-1">
+        <div class="col-3"><div class="bg-danger text-light p-2 text-center">3 {% trans 'ay' %} 0%</div></div>
+        <div class="col-3"><div class="bg-danger text-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{object|get_3_month_price:price_color|floatformat:-2}}">{{object|get_3_month_price:price_color|floatformat:-2}}</div></div>
+        <div class="col-3"><div class="bg-danger text-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{object|special_kredit_3_month_price:price_color|floatformat:-2}}">{{object|special_kredit_3_month_price:price_color|floatformat:-2}}</div></div>
+        <div class="col-3"><div class="bg-danger text-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{total_for_3_free|floatformat:-2}}">{{total_for_3_free|floatformat:-2}}</div></div>
+      </div>
+      {% endif %}
+      {% if object.kredit_6_active %}
+      {% get_total_price 6 object.kredit_6 as total_for_6 %}
+      <div class="row mb-1">
+        <div class="col-3"><div class="bg-primary-1 p-2 text-center">6</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price">0</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{object.kredit_6|floatformat:-2}}">{{object.kredit_6|floatformat:-2}}</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{total_for_6|floatformat:-2}}">{{total_for_6|floatformat:-2}}</div></div>
+      </div>
+      {% endif %}
+
+      {% if object.kredit_6_active and object.kredit_6_dif == 0 %}
+      {% get_total_price 6 object|special_kredit_6_month_price:price_color object|get_6_month_price:price_color as total_for_6_free %}
+      <div class="row mb-1">
+        <div class="col-3"><div class="bg-danger text-light p-2 text-center">6 {% trans 'ay' %} 0%</div></div>
+        <div class="col-3"><div class="bg-danger text-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{object|get_6_month_price:price_color|floatformat:-2}}">{{object|get_6_month_price:price_color|floatformat:-2}}</div></div>
+        <div class="col-3"><div class="bg-danger text-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{object|special_kredit_6_month_price:price_color|floatformat:-2}}">{{object|special_kredit_6_month_price:price_color|floatformat}}</div></div>
+        <div class="col-3"><div class="bg-danger text-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{total_for_6_free|floatformat:-2}}">{{total_for_6_free|floatformat:-2}}</div></div>
+      </div>
+      {% endif %}
+
+      {% if object.kredit_9_active %}
+      {% get_total_price 9 object.kredit_9 as total_for_9 %}
+      <div class="row mb-1">
+        <div class="col-3"><div class="bg-primary-1 p-2 text-center">9</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price">0</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{object.kredit_9|floatformat:-2}}">{{object.kredit_9|floatformat:-2}}</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{total_for_9|floatformat:-2}}">{{total_for_9|floatformat:-2}}</div></div>
+      </div>
+      {% endif %}
+      {% if object.kredit_12_active %}
+      {% get_total_price 12 object.kredit_12 as total_for_12 %}
+      <div class="row mb-1">
+        <div class="col-3"><div class="bg-primary-1 p-2 text-center">12</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price">0</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{object.kredit_12|floatformat:-2}}">{{object.kredit_12|floatformat:-2}}</div></div>
+        <div class="col-3"><div class="bg-light p-2 text-center kredit-taksit-qtn-with-price" data-total="{{total_for_12|floatformat:-2}}">{{total_for_12|floatformat:-2}}</div></div>
+      </div>
+      {% endif %}
+    </div>
+</div>

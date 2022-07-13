@@ -1,0 +1,12 @@
+<div class="sticker-container">
+    <div class="d-flex align-items-center justify-content-end w-100 h-100">
+        {% if sticker.get_image %}
+        <div class="h-100" style="width: {{ sticker.image_width }}% !important;background-color: {{sticker.color}}">
+            <img class="w-100 h-100 object-fit-cover" src="{{ sticker.get_image }}" alt="{{ sticker.text }}">
+        </div>
+        {% endif %}
+        <div class="{% if not sticker.get_image %}w-100{% endif %} p-1 d-flex justify-content-center align-items-center bg-danger text-light h-100 text-center" style="{% if sticker.get_image %}width: {{ sticker.text_width }}%{% endif %} !important;font-size: {{sticker.text_font}}px !important">
+            {{ sticker.text }}
+        </div>
+    </div>
+</div>

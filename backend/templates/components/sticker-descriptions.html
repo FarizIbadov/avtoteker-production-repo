@@ -1,0 +1,23 @@
+{% load i18n %}
+{% load sticker %}
+
+{% if object.get_stickers %}
+<section class="mb-5">
+    <h2 class="text-center">{% trans 'Hədiyyələr və güzəştlər' %}</h2>
+    <hr>
+    {% for sticker in object.get_stickers %}
+        {% if sticker.active %}
+            <div class="container px-0 pb-3">
+                <div class="mb-4">
+                    <div>
+                        {% include "./sticker.html" with sticker=sticker %}
+                    </div>
+                    <div class="mt-3 px-3 px-md-0">
+                        {{sticker.get_content|safe}}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</section>
+{% endif %}

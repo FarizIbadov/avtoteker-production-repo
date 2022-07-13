@@ -1,0 +1,14 @@
+ <div class="d-flex flex-column align-items-end">
+    <div>
+        <img class="main-list__item-logo mb-1" src="{{object.brand.get_image}}" alt="{{object.brand}}">
+    </div>
+    {% if object.serie.serie_sub_logos.count %}
+        {% for sub_logo in object.serie.serie_sub_logos.all %}
+            {% if forloop.first %}
+            <div class="w-100 mb-1 mt-4 d-flex justify-content-end">
+                <img class="main-list__item-logo" src="{{sub_logo.get_image}}" alt="serie-sub-logo">
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>

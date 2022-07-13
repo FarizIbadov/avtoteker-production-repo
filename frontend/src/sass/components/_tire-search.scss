@@ -1,0 +1,90 @@
+.tire-search {
+  background-color: #eeeeee;
+  @extend .py-4;
+
+  &__nav {
+    @extend .col, .nav-pills, .nav-fill, .pr-0;
+
+    & a.nav-link {
+      @extend .text-secondary-1;
+
+      &.active {
+        border-radius: 0;
+        background-color: #333 !important;
+        color: #fff !important;
+
+        &:hover {
+          background-color: #333 !important;
+          color: #fff !important;
+        }
+      }
+    }
+  }
+
+  &__heading {
+    @extend .text-center, .my-4;
+    font-weight: 400;
+  }
+
+  &__container {
+    @extend .container;
+  }
+
+  &__row {
+    @extend .row, .justify-content-between, .mb-5;
+  }
+
+  &__col-md {
+    @extend .col-md, .my-1;
+  }
+
+  &__select {
+    @extend .form-control;
+
+    -webkit-appearance: none;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 20px !important;
+    text-align-last: center;
+    cursor: pointer;
+    margin: 5px 0;
+    border-radius: 0 !important;
+
+    &:focus {
+      background-color: #333 !important;
+      color: #fff !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    &:disabled {
+      background-color: #777;
+    }
+  }
+
+  &__btn-group {
+    @extend .mt-3, .mx-0;
+  }
+
+  &__btn {
+    @extend .border-0, .mx-auto, .d-block;
+    font-size: 20px;
+
+    &--main {
+      @extend .btn-secondary-1, .w-100, .p-1;
+      max-width: 200px !important;
+
+      &:disabled {
+        background-color: #777;
+      }
+    }
+
+    &--outline {
+      @extend .mt-2;
+      color: #333;
+      font-size: 16px !important;
+      background-color: transparent;
+    }
+  }
+}

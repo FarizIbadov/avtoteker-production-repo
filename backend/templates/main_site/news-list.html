@@ -1,0 +1,45 @@
+{% extends "../config/base.html" %}
+{% load static %}
+{% load size_parser %}
+{% load i18n %}
+
+{% block seo %}
+
+  <title>{% trans 'Blog | #teker #təkər | Avtotəkər' %}</title>
+
+{% endblock seo %}
+
+{% block content %}
+    {% include "../components/phone-location-link-container.html" %}
+    {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
+    
+    <h1 class="main-list__heading my-5">{% trans 'Blog' %}</h1>
+
+    <div class="main-list mb-5">
+        <div class="main-list__main-row">
+            {% for object in object_list %}
+                <div class="col-md-6 mt-5">
+                    {% if object.image %}
+                    <img class="w-100 mb-2" src="{{ object.image.url }}" alt="{{object.slug}}">
+                    {% endif %}
+                    
+                    {% if object.title and object.description %}
+                    <a href="{% url 'news-detail' object.id %}" class="d-block text-decoration-none mt-4 mb-3">{{object.title|safe}}</a>
+                    {{object.description|truncatechars_html:object.truncate|safe}}
+                    {% endif %}
+                </div>
+            {% empty %}
+                <h3 class="main-list__empty-text">{% trans 'Xəbərlər hal hazırda yoxdur' %}</h3>
+            {% endfor %}
+        </div>
+    </div>
+    {% include "../components/pagination.html" %}
+     <div class="main-container container">
+      
+      {% include "../components/main-site/map.html" %}
+     
+    </div>
+
+{% endblock content %}
+
+

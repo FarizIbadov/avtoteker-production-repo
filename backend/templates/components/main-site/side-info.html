@@ -1,0 +1,27 @@
+{% load i18n %}
+
+<div class="main-list__side-info">
+    {% if object.sale %}
+    <small title="sale" class="main-list__side-single danger font-weight-bold">- {{ object.get_percentage|floatformat:-1 }} %</small>
+    {% endif %}
+    {% if object.kredit_6_active and object.kredit_6_dif == 0  %}
+        <small title="6 ay faizsiz kreditlə" class="main-list__side-single primary-1">
+            6 ay {{object.kredit_6_dif|floatformat}}%
+        </small>
+    {% elif object.kredit_3_active and object.kredit_3_dif == 0  %}
+        <small title="3 ay faizsiz kreditlə" class="main-list__side-single primary-1">3 ay {{object.kredit_3_dif|floatformat}}%</small>
+    {% endif %}
+    {% if object.free_montaj_balance == 0.0 %}
+    <small  class="main-list__side-single danger font-sm">{% trans 'Pulsuz montaj+balans' %}</small>
+    {% endif %}
+    {% if object.brand.get_free_service %}
+        {% if object.brand.two_year_free_service %}
+            <small title="1 illik pulsuz servis - nağd alış zamanı 4 təkər alınan halda" class="main-list__side-single primary-1">{% trans '2 il servis' %}</small>
+        {% else %}
+            <small title="1 illik pulsuz servis - nağd alış zamanı 4 təkər alınan halda" class="main-list__side-single primary-1">{% trans '1 il servis' %}</small>
+        {% endif %}
+    {% endif %}
+    {% if object.outlet %}
+    <small  class="main-list__side-single danger">{% trans 'Outlet' %}</small>
+    {% endif %}
+</div>

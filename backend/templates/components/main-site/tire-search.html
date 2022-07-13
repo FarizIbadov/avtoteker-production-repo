@@ -1,0 +1,39 @@
+{% load i18n %}
+{% load size_parser %}
+{% get_size_action request as action %}
+
+<form
+  action="{{ action }}"
+  data-action="{% url 'list' %}"
+  class="tire-search"
+  id="tire-search"
+>
+  {{tire_search_title|safe}}
+  <div class="container mb-3">
+    <ul class="tire-search__nav nav" role="tablist">
+        <li class="nav-item" role="presentation" data-action="{% url 'list' %}">
+          <a class="nav-link {{size_link}}" id="size-tab" data-toggle="tab" href="#size" role="tab" aria-controls="size" aria-selected="true">{% trans 'Ölçü ilə' %}</a>
+        </li>
+        <li class="nav-item" role="presentation" data-action="{% url 'search' %}">
+          <a class="nav-link {{car_link}}" id="car-tab" data-toggle="tab" href="#car" role="tab" aria-controls="car" aria-selected="false">{% trans 'Maşın ilə' %}</a>
+        </li>
+    </ul>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane fade {{size_box}} {{size_link}}" id="size" role="tabpanel" aria-labelledby="size-tab">
+      {% include "./size-tire-search.html" %}
+    </div>
+    <div class="tab-pane fade {{car_box}} {{car_link}}" id="car" role="tabpanel" aria-labelledby=" car-tab">
+      {% include "./car-tire-search.html" %}
+    </div>
+  </div>
+  
+  <div class="tire-search__btn-group">
+    <button id="tire-search-submit-btn" class="tire-search__btn tire-search__btn--main" type="submit">
+      {% trans 'Tap' %}
+    </button>
+    <button id="tire-search-reset-btn" class="tire-search__btn tire-search__btn--outline" type="reset">
+      {% trans 'Yenidən' %}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,105 @@
+{% extends "../config/base.html" %}
+{% load i18n %}
+{% load static %}
+{% load taksit_kredit %}
+{% load size_parser %}
+{% load edv %}
+{% load tire_info %}
+
+
+{% block seo %}
+  {% parse_size_for_meta request as size %}
+
+  {% if size and not object_list.is_empty %}
+    <meta name="description" content="{{size}} {% trans 'Təkər? Avtotəkərdə! Horizon, Vitour, Westlake, yük Kapsen, Kumho, Dunlop, Yokohama və Continental şinləri. Avtotəkərdə peşakar şinomontaj, balans, razval, yağdəyişmə və çilingər xidmətləri. BirKartla və TamKartla təkər - 6 ayadək faizsiz taksitlə. #teker #təkər.' %}">
+  {% endif %}
+
+  <title>{% parse_size_for_title request %} {% trans '| #teker #təkər | Avtotəkər' %}</title>
+
+{% endblock seo %}
+
+{% block content %}
+    {% get_edv as edv %}
+
+    {% include "../components/phone-location-link-container.html" %}
+    {% include "../components/main-site/tire-search.html" with size_link="active" size_box="show" %}
+    {% include "../components/order-modal-form.html" %}
+    {% include "../components/image-preview-modal.html" %}
+    
+    <div class="d-flex justify-content-center align-items-center mt-3">
+        
+        <h1 class="main-list__heading">{% parse_size_for_list request %}</h1>
+    </div>
+    <div class="main-list">
+        <div class="main-list__main-row">
+            {% for object in object_list %}
+            <div class="main-list__col-12">
+                <section class="main-list__card rounded-0">
+                    <div class="main-list__sub-row">
+                        {% include "../components/main-site/side-info.html" with object=object %}
+                        {% include "../components/tire/brand-serie.html" with object=object %}
+                       
+                    </div>
+                    <p class="main-list__card-text text-right  detail-serie-font pr-4">
+                        {{object.serie}}
+                    </p>
+                    <p class="main-list__card-text text-right pr-4">
+                        {{object.get_size|safe}}
+                    </p>
+                    {% include "../components/tire/detail/oe-year.html" with object=object %}
+
+                    {% include "../components/tire/detail/RF.html" %}
+                    
+                    <div class="main-list__sub-row--2">
+                        {% include "../components/product-image.html" with object=object %}
+                        <div class="main-list__col-sm--2 w-40 mb-5 mt-2">
+                            <div class="main-list__card-body">
+                                <div class="main-list__card-text--2">
+                                    <div class='ml-2'>
+                                       {% if object.weight %}
+                                        {{object.weight}}
+                                       {% endif %}
+                                     {{object.speed}}
+                                    </div>
+                                </div>
+                                {% if object.tradeware %}
+                                <div class="main-list__card-text--2">
+                                    {{object.tradeware}}
+                                </div>
+                                {% endif %}
+                                <div class="mt-2">
+                                    {% include "../components/main-site/image.html" with object=object.season %}
+                                </div>
+                                <div class="mt-2 mb-4">
+                                    {% include "../components/main-site/image.html" with object=object.brand.country %}
+                                    {% include "../components/main-site/image.html" with object=object.manufacturer %}
+                                </div>
+                                {% include "../components/tire/price.html" with object=object %}
+                            </div>
+                            {% include "../components/main-site/third-price.html" with object=object %}
+                        </div>
+                        <div class="row justify-content-end w-100 no-gutters">
+                            <div class="col-12"> 
+                                {% include "../components/main-site/kredit-taksit-carousel.html" with object=object request=request %}
+                            </div>
+                            {% include "../components/tire/additional-info.html" with object=object edv=edv %}
+                            
+                        </div>
+                        
+                        {% include '../components/tire/social-box.html' %}
+                    </div>
+                </section>
+            </div>
+            {% empty %}
+                <h3 class="main-list__empty-text">{% trans 'Hal hazırda yoxdur' %}</h3>
+            {% endfor %}
+        </div>
+    </div>
+    {% include "../components/pagination.html" %}
+    <div class="main-container container">
+        {% include "../components/main-site/slider.html" %}
+        {% include "../components/main-site/map.html" %}
+        {% include "../components/main-site/brand-carousel.html" %}
+    </div>
+
+{% endblock content %}
