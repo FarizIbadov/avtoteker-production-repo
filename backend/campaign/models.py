@@ -9,6 +9,7 @@ import PIL
 import os
 
 from app.utils import compress
+from main_site.models import SessionKey
 
 class CustomValidators:
     @staticmethod
@@ -33,7 +34,11 @@ class Post(models.Model):
     order = models.PositiveSmallIntegerField(unique=True)
     truncate = models.PositiveSmallIntegerField(default=150)
     stickers = models.ManyToManyField(Sticker,related_name="posts",blank=True)
-    video = models.FileField(upload_to="campaign_video",blank=True,validators=[FileExtensionValidator(allowed_extensions=['mp4'])])
+    video = models.FileField(upload_to="campaign_video", blank=True, validators=[FileExtensionValidator(allowed_extensions=['mp4'])])
+
+    viewed_by = models.ManyToManyField(SessionKey, editable=False)
+
+    created_at = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
         return self.slug

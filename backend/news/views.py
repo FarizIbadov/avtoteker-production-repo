@@ -18,7 +18,16 @@ class NewsDetailView(DetailView):
     model = News
 
     def get_context_data(self,**kwargs):
+
         context = super().get_context_data(**kwargs)
+
+        post = context['object']
+
+        key = self.request.session._SessionBase__session_key
+
+        post.viewed_by.get_or_create(key=key)
+
+
         context['tire_search_title'] = "<h2 class='h2 tire-search__heading'>Təkər seçimi</h2>"
         return context
     

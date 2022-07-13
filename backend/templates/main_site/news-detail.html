@@ -22,9 +22,10 @@
                     </div>
                     {% endif %}
                 </div>
+                {% include "../components/main-site/viewer.html" with object=object %}
                 {% if object.title and object.description %}
                 <div class="px-md-4">
-                    <div class="d-block mt-5 mb-4">
+                    <div class="d-block mt-2 mb-4">
                         {{object.title|safe}}
                     </div>
                     {{object.description|safe}}

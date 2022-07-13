@@ -25,10 +25,12 @@
           />
         </div>
         {% endif %}
+
        
         {% include "../components/video.html" with object=object %}
         
       </div>
+      {% include "../components/main-site/viewer.html" with object=object %}
       <div class="px-md-4">
         {% if object.title %}
         <div class="d-block mt-5 mb-4">{{object.title|safe}}</div>

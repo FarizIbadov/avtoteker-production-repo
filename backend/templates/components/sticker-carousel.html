@@ -13,7 +13,7 @@
             
             {% for sticker in object.get_stickers %}
                 {% if sticker.active %}
-                    <div class="carousel-item {% if forloop.counter0 == 0 and not object.new %} active {% endif %} h-100 w-100" data-interval="{{ timer }}">
+                    <div class="carousel-item {% if forloop.first and not object.new %} active {% endif %} h-100 w-100" data-interval="{{ timer }}">
                         {% include "./sticker.html" with sticker=sticker %}
                     </div>
                 {% endif %}

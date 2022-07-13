@@ -1,5 +1,12 @@
 from django.db import models
 
+
+class SessionKey(models.Model):
+    key = models.TextField()
+    
+    def __str__(self):
+        return self.key
+
 class PriceColor(models.Model):
     COLORS = [
         ('r', 'Red'),
