@@ -12,7 +12,7 @@
         {% for phone in phones %}
         <div class="d-flex align-items-center justify-content-end line-height-1">
             {% include "../components/icon.html" with icon="phone" style="light" link=phone.number %}
-            <a href="{{phone.number}}" class="d-inline-block text-danger font-weight-bold">
+            <a href="{{phone.number}}" class="d-inline-block text-danger font-smaller font-weight-bold">
                 {{phone}} 
             </a>
         </div>
