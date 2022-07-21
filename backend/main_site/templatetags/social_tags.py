@@ -7,11 +7,13 @@ register = template.Library()
 def get_social_media():
     return SocialMedia.objects.all().filter(active=True)[:3]
 
-@register.simple_tag(name="get_phone")
-def get_phone():
-    phone_obj = Phone.objects.all().filter(active=True)
-    phone = PhoneClass(phone_obj)
-    return phone
+@register.simple_tag(name="get_phones")
+def get_phones():
+    phones = Phone.objects.filter(active=True)
+    phone_list = []
+    for phone in phones:
+        phone_list.append(PhoneClass(phone))
+    return phone_list
 
 @register.simple_tag(name="get_addresses")
 def get_addresses():
@@ -27,8 +29,8 @@ def get_addresses():
 class PhoneClass:
     def __init__(self,phone):
         if phone:
-            self.label = phone[0].number
-            splited_number = phone[0].number.split(" ")
+            self.label = phone.number + " " + (phone.label if phone.label else "")
+            splited_number = phone.number.split(" ")
             joined_number = ''.join(splited_number)
             self.number = joined_number.replace('0',"tel:+994",1)
         else:

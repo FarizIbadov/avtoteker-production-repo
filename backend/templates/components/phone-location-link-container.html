@@ -1,18 +1,22 @@
 {% load i18n %}
 {% load social_tags %}
-{% get_phone as phone %}
+{% get_phones as phones %}
 
 <div class="container my-2 h6">
     <div class="row justify-content-between">
-    <div class="col d-flex align-items-center">
+    <div class="col-5 d-flex align-items-center">
         <i class="bi bi-geo-alt-fill"></i>
         <a class="ml-2 text-danger" href="#avto-map">{% trans 'Biz xəritədə' %}</a>
     </div>
-    <div class="col d-flex justify-content-end align-items-center">
+    <div class="col d-flex flex-column justify-content-end align-items-end">
+        {% for phone in phones %}
+        <div class="d-flex align-items-center justify-content-end line-height-1">
             {% include "../components/icon.html" with icon="phone" style="light" link=phone.number %}
-            <span class="text-danger font-weight-bold">
-            {{phone}}
-            </span>
+            <a href="{{phone.number}}" class="d-inline-block text-danger font-weight-bold">
+                {{phone}} 
+            </a>
+        </div>
+        {% endfor %}
     </div>
     </div>
 </div>
