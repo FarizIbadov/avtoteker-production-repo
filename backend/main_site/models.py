@@ -2,7 +2,7 @@ from django.db import models
 
 
 class SessionKey(models.Model):
-    key = models.TextField()
+    key = models.TextField(null=True)
     
     def __str__(self):
         return self.key
