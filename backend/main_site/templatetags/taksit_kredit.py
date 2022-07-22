@@ -71,6 +71,9 @@ def special_kredit_3_month_price(value, price_color):
     if price_color and price_color.use_price_3_on_feeless:
         price = float(value.get_price_3())
 
+    if price_color and price_color.use_sale and value.sale:
+        price = float(value.sale)
+
     kredit_3_price = value.kredit_3_month_price
     kredit_3_result = (price - (price * float(kredit_3_price)/100)) / 3
 
@@ -82,6 +85,9 @@ def special_kredit_6_month_price(value, price_color):
     
     if price_color and price_color.use_price_3_on_feeless:
         price = float(value.get_price_3())
+
+    if price_color and price_color.use_sale and value.sale:
+        price = float(value.sale)
 
     kredit_6_price = value.kredit_6_month_price
     kredit_6_result = (price - (price * float(kredit_6_price)/100)) / 6
@@ -95,8 +101,11 @@ def get_3_month_price(value, price_color):
     if price_color and price_color.use_price_3_on_feeless:
         price = float(value.get_price_3())
 
+    if price_color and price_color.use_sale and value.sale:
+        price = float(value.sale)
+
     initial_price = value.kredit_3_month_price
-    return price * float(initial_price)/100
+    return price * float(initial_price) / 100
 
 
 @register.filter(name="get_6_month_price")
@@ -105,9 +114,12 @@ def get_6_month_price(value, price_color):
 
     if price_color and price_color.use_price_3_on_feeless:
         price = float(value.get_price_3())
+
+    if price_color and price_color.use_sale and value.sale:
+        price = float(value.sale)
   
     initial_price = value.kredit_6_month_price
-    return price * float(initial_price)/100
+    return price * float(initial_price) / 100
 
 @register.simple_tag(name="get_total_price")
 def get_total_price(month, partial_price, initial_price=0):
