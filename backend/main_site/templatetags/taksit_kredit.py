@@ -71,7 +71,7 @@ def special_kredit_3_month_price(value, price_color):
     if price_color and price_color.use_price_3_on_feeless:
         price = float(value.get_price_3())
 
-    if price_color and price_color.use_sale and value.sale:
+    elif price_color and price_color.use_sale:
         price = float(value.sale)
 
     kredit_3_price = value.kredit_3_month_price
@@ -86,7 +86,7 @@ def special_kredit_6_month_price(value, price_color):
     if price_color and price_color.use_price_3_on_feeless:
         price = float(value.get_price_3())
 
-    if price_color and price_color.use_sale and value.sale:
+    elif price_color and price_color.use_sale:
         price = float(value.sale)
 
     kredit_6_price = value.kredit_6_month_price
@@ -101,7 +101,7 @@ def get_3_month_price(value, price_color):
     if price_color and price_color.use_price_3_on_feeless:
         price = float(value.get_price_3())
 
-    if price_color and price_color.use_sale and value.sale:
+    elif price_color and price_color.use_sale:
         price = float(value.sale)
 
     initial_price = value.kredit_3_month_price
@@ -115,7 +115,7 @@ def get_6_month_price(value, price_color):
     if price_color and price_color.use_price_3_on_feeless:
         price = float(value.get_price_3())
 
-    if price_color and price_color.use_sale and value.sale:
+    elif price_color and price_color.use_sale:
         price = float(value.sale)
   
     initial_price = value.kredit_6_month_price
