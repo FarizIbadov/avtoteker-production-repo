@@ -23,9 +23,11 @@ class SocialMedia(models.Model):
         return self.name
 
 class Address(models.Model):
-    address = models.CharField(max_length=40)
-    longitude = models.FloatField(default=49.877367169701486)
-    latidude = models.FloatField(default=40.40432361546929)
+    address = models.CharField(max_length=40, null=True)
+    longitude = models.FloatField(default=49.877367169701486, null=True)
+    latidude = models.FloatField(default=40.40432361546929, null=True)
+    zoom = models.FloatField(default=17, null=True)
+    map_image = models.ImageField(upload_to="map", null=True)
     active = models.BooleanField(default=False)
     new = models.BooleanField(default=True)
     order_number = models.IntegerField(default=0)
@@ -34,6 +36,10 @@ class Address(models.Model):
 
     def __str__(self):
         return self.address
+
+    @property
+    def href(self):
+        return f"https://www.google.com/maps/place/@{self.latidude},{ self.longitude},{self.zoom}z/"
 
     class Meta:
         verbose_name_plural = "Addresses"

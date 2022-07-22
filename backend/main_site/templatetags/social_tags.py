@@ -43,8 +43,8 @@ class PhoneClass:
 class AddressClass:
     def __init__(self,address):
         self.address = address.address
-        self.lon = address.longitude
-        self.lat = address.latidude
+        self.href = address.href
+        self.map_image = address.map_image.url
         self.extra = "<span class='text-danger font-weight-bold'>(tezliklə)</span>" if address.new else "" 
         self.description = address.description
         self.image = address.image
