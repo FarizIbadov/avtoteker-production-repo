@@ -16,8 +16,12 @@ class AvtoMap {
   setMapTabs = () => {
     this.mapTabs.forEach(tab => {
       tab.addEventListener('click', (e) => {
+        this.mapTabs.forEach(tab => {
+          tab.classList.remove('map-active')
+        })
         const target = e.target as HTMLElement
         const currentTab = target.closest("button") as HTMLButtonElement;
+        currentTab.classList.add('map-active')
         const link = currentTab.getAttribute("map-href");
         const image = currentTab.getAttribute("map-url");
         this.setImage(link, image);
@@ -41,6 +45,7 @@ class AvtoMap {
     const img = document.createElement("img");
     const a = document.createElement("a");
     a.classList.add("w-100", "h-100");
+    a.setAttribute('target', 'blank')
     img.classList.add("w-100", "h-100", "object-fit-cover");
 
     if (link) {
