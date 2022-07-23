@@ -39,7 +39,7 @@ class Address(models.Model):
 
     @property
     def href(self):
-        return f"https://www.google.com/maps/place/@{self.latidude},{ self.longitude},{self.zoom}z/"
+        return "https://www.google.com/maps/place/@%f,%f,%fz/" % (self.latidude, self.longitude, self.zoom)
 
     class Meta:
         verbose_name_plural = "Addresses"
