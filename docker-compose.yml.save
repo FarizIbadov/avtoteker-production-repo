@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  wheel-size:
+    restart: always
+    container_name: avto-node-ws
+    build:
+      context: ./node
+    environment:
+      - WHEEL_SIZE_KEY=5f0e624a880add6bc70e73f774ae3db6
+
+  web:
+    restart: always
+    container_name: avtoteker-web
+    build: .
+    volumes:
+      - static_data:/vol/web
+      - ./backend/locale:/app/locale
+    env_file: .env
+    depends_on:
+      - db
+
+  proxy:
+    restart: always
+    container_name: avtoteker-proxy
+    build:
+      context: ./proxy
+    volumes:
+      - static_data:/vol/static
+      - ./proxy/acme-challenge/:/var/.well-known/acme-challenge/
+      # - ./proxy/certbot/conf:/etc/letsencrypt
+      # - ./proxy/certbot/www:/var/www/certbot
+    ports:
+      - "80:8080"
+      - "443:8443"
+    # command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+
+
+  db:
+    restart: always
+    container_name: avtoteker-db
+    image: postgres:12.5-alpine
+    env_file: .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+  # certbot:
+  #   image: certbot/certbot
+  #   container_name: avtoteker-certbot
+  #   volumes:
+  #     - ./proxy/certbot/conf:/etc/letsencrypt
+  #     - ./proxy/certbot/www:/var/www/certbot
+  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+volumes:
+  static_data:
+  pgdata:
