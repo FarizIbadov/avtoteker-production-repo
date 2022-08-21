@@ -32,7 +32,7 @@ class TireResource(resources.ModelResource):
             tires.backup()
             tires.exclude(id__in=filtered_ids).delete()
 
-    def after_save_instance(self, instance, using_transactions, dry_run):
+    def before_save_instance(self, instance, using_transactions, dry_run):
         instance.generate_trim_code()
         instance.generate_slug()
         instance.calculate_taksit(self.COLORS)
