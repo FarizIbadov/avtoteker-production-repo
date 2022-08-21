@@ -1,8 +1,6 @@
 node_modules/
 static_data/static/
 
-pgdata/
-
 private-media/
 
 media/
