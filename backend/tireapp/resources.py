@@ -39,7 +39,6 @@ class TireResource(resources.ModelResource):
         instance.calculate_kredit(self.COLORS)
 
 
-
     id = fields.Field(
         attribute="id",
         widget=resource_widget.IntegerWidget()
@@ -457,7 +456,8 @@ class OsTireImporter:
         filtered_tire = list(filter(self.filter_tire(trim_code), self.updated_tires))
        
         if filtered_tire:
-            return filtered_tire[0]   
+            return filtered_tire[0]  
+
         return self.tires.filter(trim_code=trim_code).first()
 
     def process_tire(self, code, quantity):
@@ -475,7 +475,6 @@ class OsTireImporter:
 
     def process_save(self):
         codes = list(set(filter(None,self.codes)))
-        Tire.objects.exclude(code__in=codes).delete()
 
         Tire.objects.bulk_update(self.updated_tires, batch_size=500, fields=['quantity'])
         Tire.objects.filter(pk__in=self.deleted_tires).delete()
