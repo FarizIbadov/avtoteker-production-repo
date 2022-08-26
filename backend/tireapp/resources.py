@@ -439,7 +439,7 @@ class OsTireImporter:
     def process_import(self):
         for row in self.dataset.dict:
             code = row.get(self.code_field)
-            quantity = int(row.get(self.quantity_field) or 0)
+            quantity = int(row.get(self.quantity_field))
         
             if not code:
                 continue
@@ -475,6 +475,7 @@ class OsTireImporter:
 
     def process_save(self):
         codes = list(set(filter(None,self.codes)))
+        Tire.objects.exclude(code__in=codes).delete()
 
         Tire.objects.bulk_update(self.updated_tires, batch_size=500, fields=['quantity'])
         Tire.objects.filter(pk__in=self.deleted_tires).delete()
