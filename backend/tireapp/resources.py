@@ -7,6 +7,7 @@ from .utils import generate_trim_code
 
 import tablib
 
+
 class TireResource(resources.ModelResource):
     COLORS = {
         "r": None,
@@ -17,8 +18,7 @@ class TireResource(resources.ModelResource):
     def get_queryset(self):
         return Tire.objects.all()
 
-
-    def before_import(self,dataset, using_transactions, dry_run, **kwargs):
+    def before_import(self, dataset, using_transactions, dry_run, **kwargs):
         for key in self.COLORS:
             self.COLORS[key] = PriceColor.objects.filter(color=key).first()
 
@@ -27,7 +27,7 @@ class TireResource(resources.ModelResource):
             for row in dataset:
                 imported_ids.append(row[0])
 
-            filtered_ids = list(filter(None,imported_ids))
+            filtered_ids = list(filter(None, imported_ids))
             tires = Tire.objects.all()
             tires.backup()
             tires.exclude(id__in=filtered_ids).delete()
@@ -38,7 +38,6 @@ class TireResource(resources.ModelResource):
         instance.calculate_taksit(self.COLORS)
         instance.calculate_kredit(self.COLORS)
 
-
     id = fields.Field(
         attribute="id",
         widget=resource_widget.IntegerWidget()
@@ -47,10 +46,10 @@ class TireResource(resources.ModelResource):
     manufacturer = fields.Field(
         attribute="manufacturer", widget=widgets.CustomCountryWidget()
     )
-    season = fields.Field(attribute="season", widget=widgets.CustomSeasonWidget())
+    season = fields.Field(attribute="season",
+                          widget=widgets.CustomSeasonWidget())
     brand = fields.Field(attribute="brand", widget=widgets.CustomBrandWidget())
     serie = fields.Field(attribute="serie", widget=widgets.CustomSerieWidget())
-    
 
     ZR = fields.Field(attribute="ZR", widget=widgets.CustomBooleanWidget())
     MS = fields.Field(
@@ -64,7 +63,7 @@ class TireResource(resources.ModelResource):
         attribute="taksit_active",
         widget=widgets.CustomBooleanWidget()
     )
-    
+
     taksit_2 = fields.Field(
         column_name="Taksit 2 ay",
         attribute="taksit_2",
@@ -248,27 +247,33 @@ class TireResource(resources.ModelResource):
         widget=resource_widget.CharWidget()
     )
 
-    db= fields.Field(attribute="db",widget=resource_widget.IntegerWidget())
-    fuel = fields.Field(attribute="fuel",widget=resource_widget.CharWidget())
-    contact = fields.Field(attribute="contact",widget=resource_widget.CharWidget())
+    db = fields.Field(attribute="db", widget=resource_widget.IntegerWidget())
+    fuel = fields.Field(attribute="fuel", widget=resource_widget.CharWidget())
+    contact = fields.Field(attribute="contact",
+                           widget=resource_widget.CharWidget())
 
     kredit_3_month_price = fields.Field(
         column_name="kredit 3 month price %",
         attribute="kredit_3_month_price",
         widget=resource_widget.FloatWidget()
     )
-    
+
     kredit_6_month_price = fields.Field(
         column_name="kredit 6 month price %",
         attribute="kredit_6_month_price",
         widget=resource_widget.FloatWidget()
     )
 
-    new = fields.Field(attribute="new",widget=widgets.CustomNewBooleanWidget())
-    outlet = fields.Field(attribute="outlet",widget=widgets.CustomOutletBooleanWidget())
+    new = fields.Field(
+        attribute="new", widget=widgets.CustomNewBooleanWidget())
+    outlet = fields.Field(attribute="outlet",
+                          widget=widgets.CustomOutletBooleanWidget())
 
-    international_code = fields.Field(attribute="international_code", widget=resource_widget.CharWidget())
-    
+    international_code = fields.Field(
+        attribute="international_code", widget=resource_widget.CharWidget())
+
+    active = fields.Field(attribute="active",
+                          widget=widgets.CustomNewBooleanWidget())
 
     class Meta:
         model = Tire
@@ -342,6 +347,7 @@ class TireResource(resources.ModelResource):
             "stickers",
             'campaigns',
             "order_number",
+            'active'
         )
         skip_unchanged = True
         use_bulk = True
@@ -411,8 +417,8 @@ class TireResource(resources.ModelResource):
             "release_date",
             "new",
             "outlet",
+            'active'
         )
-
 
 
 class OsTireImporter:
@@ -434,13 +440,12 @@ class OsTireImporter:
         if setting:
             self.code_field = setting.look_up
             self.quantity_field = setting.get_from_field
-            
 
     def process_import(self):
         for row in self.dataset.dict:
             code = row.get(self.code_field)
             quantity = int(row.get(self.quantity_field))
-        
+
             if not code:
                 continue
 
@@ -448,15 +453,15 @@ class OsTireImporter:
             self.process_tire(code, quantity)
 
         self.codes.append("XXX")
-    
 
     def get_tire(self, code):
         self.row_is_included = False
         trim_code = generate_trim_code(code)
-        filtered_tire = list(filter(self.filter_tire(trim_code), self.updated_tires))
-       
+        filtered_tire = list(
+            filter(self.filter_tire(trim_code), self.updated_tires))
+
         if filtered_tire:
-            return filtered_tire[0]  
+            return filtered_tire[0]
 
         return self.tires.filter(trim_code=trim_code).first()
 
@@ -474,12 +479,12 @@ class OsTireImporter:
             self.updated_tires.append(tire)
 
     def process_save(self):
-        codes = list(set(filter(None,self.codes)))
+        codes = list(set(filter(None, self.codes)))
         Tire.objects.exclude(code__in=codes).delete()
 
-        Tire.objects.bulk_update(self.updated_tires, batch_size=500, fields=['quantity'])
+        Tire.objects.bulk_update(
+            self.updated_tires, batch_size=500, fields=['quantity'])
         Tire.objects.filter(pk__in=self.deleted_tires).delete()
-
 
     def filter_tire(self, code):
         def _filter_tire(value):
@@ -487,4 +492,3 @@ class OsTireImporter:
                 self.row_is_included = True
             return code == value.trim_code
         return _filter_tire
-

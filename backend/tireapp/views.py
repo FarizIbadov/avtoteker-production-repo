@@ -8,11 +8,11 @@ from .filters import TireFilter
 # class TireWarrantyView(ListView):
 #     template_name = "tire/warranty.html"
 
-    # def get_queryset(self):
-    #     return TireFilter(self.kwargs, Tire.objects.available()).queryset
+# def get_queryset(self):
+#     return TireFilter(self.kwargs, Tire.objects.available()).queryset
 
-    
-class TireListView(FilterBySizeMixin,ListView):
+
+class TireListView(FilterBySizeMixin, ListView):
     # paginate_by = 8
     template_name = "tire/list.html"
 
@@ -26,13 +26,13 @@ class TireListView(FilterBySizeMixin,ListView):
         data['width'] = "" if width == "_" else width
         data['height'] = "" if height == "_" else height
         data['radius'] = "" if radius == "_" else radius
-        
+
         return data
 
-    def get_queryset(self):       
+    def get_queryset(self):
         return TireFilter(
-            self.get_data(), 
-            Tire.objects.available()
+            self.get_data(),
+            Tire.objects.available(active=True)
         ).qs
 
     def get_context_data(self, **kwargs):

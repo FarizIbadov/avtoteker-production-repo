@@ -201,16 +201,18 @@ class Tire(CustomModel):
     new = models.BooleanField(default=False)
     outlet = models.BooleanField(default=False)
 
-    birkart = models.PositiveSmallIntegerField(choices=BIRKART_CHOICES,blank=True, null=True)
-    tamkart = models.PositiveSmallIntegerField(choices=TAMKART_CHOICES,blank=True, null=True)
-    bolkart = models.PositiveSmallIntegerField(choices=BOLKART_CHOICES,blank=True, null=True)
-    albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES,blank=True, null=True)
-    kredit = models.PositiveSmallIntegerField(choices=KREDIT_CHOICES,blank=True, null=True)
+    birkart = models.PositiveSmallIntegerField(choices=BIRKART_CHOICES, blank=True, null=True)
+    tamkart = models.PositiveSmallIntegerField(choices=TAMKART_CHOICES, blank=True, null=True)
+    bolkart = models.PositiveSmallIntegerField(choices=BOLKART_CHOICES, blank=True, null=True)
+    albalikart = models.PositiveSmallIntegerField(choices=ALBALI_CHOICES, blank=True, null=True)
+    kredit = models.PositiveSmallIntegerField(choices=KREDIT_CHOICES, blank=True, null=True)
 
     stickers = models.CharField(max_length=255,blank=True,null=True)
     campaigns = models.CharField(max_length=255,blank=True,null=True)
 
     order_number = models.PositiveIntegerField(default=1)
+
+    active = models.BooleanField(default=True)
 
     @property
     def brand_url(self):
