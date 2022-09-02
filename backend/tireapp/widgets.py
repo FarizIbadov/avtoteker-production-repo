@@ -15,7 +15,7 @@ class CustomBrandWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
         title = value.strip()
         brand = Brand.objects.filter(title=title).first()
-        
+
         if not brand:
             brand = Brand.objects.create(title=title)
 
@@ -26,7 +26,7 @@ class CustomSerieWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
         brand_title = row['brand'].strip()
         brand = Brand.objects.filter(title=brand_title).first()
-        
+
         if not brand:
             brand = Brand.objects.create(title=brand_title)
 
@@ -54,11 +54,11 @@ class CustomCountryWidget(Widget):
 class CustomClassWidget(Widget):
     def render(self, value, obj=None):
         return value.title
-      
+
     def clean(self, value, row=None, *args, **kwargs):
         if value == '-' or value == None:
             return None
-            
+
         tire_class, _ = TireClass.objects.get_or_create(title=value.strip())
         return tire_class
 
@@ -66,7 +66,8 @@ class CustomClassWidget(Widget):
 class CustomSizeWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
         width, height, radius = str(value).strip().split("\\")
-        size, _ = Size.objects.get_or_create(width=width, height=height, radius=radius)
+        size, _ = Size.objects.get_or_create(
+            width=width, height=height, radius=radius)
         return size
 
 
@@ -74,7 +75,6 @@ class CustomSeasonWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
         season, _ = Season.objects.get_or_create(title=value)
         return season
-
 
 
 class CustomOutletBooleanWidget(CustomBooleanWidget):
@@ -89,6 +89,16 @@ class CustomOutletBooleanWidget(CustomBooleanWidget):
             return True
         return value == "+"
 
+
+class CustomBooleanWidget(CustomBooleanWidget):
+    def render(self, value, obj=None):
+        return super().render(value, obj=None)
+
+    def clean(self, value, row=None, *args, **kwargs):
+        outlet = row.get('outlet').strip()
+        return value == "+"
+
+
 class CustomNewBooleanWidget(CustomBooleanWidget):
     def render(self, value, obj=None):
         return super().render(value, obj=None)
@@ -100,4 +110,3 @@ class CustomNewBooleanWidget(CustomBooleanWidget):
         if not value and outlet == "-":
             return True
         return value == "+"
-

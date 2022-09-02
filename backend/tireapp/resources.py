@@ -273,7 +273,7 @@ class TireResource(resources.ModelResource):
         attribute="international_code", widget=resource_widget.CharWidget())
 
     active = fields.Field(attribute="active",
-                          widget=widgets.CustomNewBooleanWidget())
+                          widget=widgets.CustomBooleanWidget())
 
     class Meta:
         model = Tire
