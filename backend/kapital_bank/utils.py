@@ -54,6 +54,7 @@ def generate_payment_url(order):
     create_order_dict = xmltodict.parse(xml, process_namespaces=True)
 
     # try:
+    print(xml)
     order_dict = create_order_dict['TKKPG']['Response']['Order']
     order_id = order_dict['OrderID']
     session_id = order_dict['SessionID']
