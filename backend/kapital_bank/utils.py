@@ -40,7 +40,7 @@ def generate_payment_url(order):
 
     response = requests.post(
         security.service_link,
-        data=data.replace('ə', 'e').replace('Ə', 'E'),
+        data=data.encode("utf-8"),
         headers=headers,
         verify=security.verify,
         cert=(crt_file, key_file)
