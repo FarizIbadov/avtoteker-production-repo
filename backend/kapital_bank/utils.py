@@ -40,7 +40,7 @@ def generate_payment_url(order):
 
     response = requests.post(
         security.service_link,
-        data=data,
+        data=data.encode('utf-8'),
         headers=headers,
         verify=security.verify,
         cert=(crt_file, key_file)
@@ -50,8 +50,6 @@ def generate_payment_url(order):
         return cancel_url
 
     xml = response.text
-
-    print(xml)
 
     create_order_dict = xmltodict.parse(xml, process_namespaces=True)
 
