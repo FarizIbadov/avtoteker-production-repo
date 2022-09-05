@@ -12,17 +12,19 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET", "j56@jyc()*qnyl1vj^yf5_a5c27kfp5ysf^yeoxl#ul4hn^j^(")
+SECRET_KEY = os.environ.get(
+    "SECRET", "j56@jyc()*qnyl1vj^yf5_a5c27kfp5ysf^yeoxl#ul4hn^j^(")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "1") == '1'
 
-ALLOWED_HOSTS =  ['172.20.10.4', '192.168.0.164', '192.168.0.152','localhost'] if DEBUG else os.environ.get("ALLOWED_HOSTS","").split(",")
+ALLOWED_HOSTS = ['172.20.10.4', '192.168.0.164', '192.168.0.152',
+                 'localhost'] if DEBUG else os.environ.get("ALLOWED_HOSTS", "").split(",")
 
- 
+
 if DEBUG:
-    CORS_ALLOWED_ORIGINS = ['http://localhost:3000','http://localhost:8000']
+    CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:8000']
 else:
     CORS_TRUSTED_ORIGINS = ALLOWED_HOSTS.copy()
 
@@ -89,7 +91,8 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-PRIVATE_STORAGE_ROOT = BASE_DIR / 'private-media' if DEBUG else '/vol/web/private-media'
+PRIVATE_STORAGE_ROOT = BASE_DIR / \
+    'private-media' if DEBUG else '/vol/web/private-media'
 PRIVATE_STORAGE_AUTH_FUNCTION = 'private_storage.permissions.allow_staff'
 
 MIDDLEWARE = [
@@ -133,10 +136,10 @@ DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": os.environ.get("POSTGRES_DB", "avtoteker"),
-        "USER": os.environ.get("POSTGRES_USER", "postgres"), 
+        "USER": os.environ.get("POSTGRES_USER", "postgres"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "3151936f"),
         "HOST": "localhost" if DEBUG else "db",
-        "PORT": "5432",
+        "PORT": "2345" if DEBUG else "5432",
     }
 }
 
@@ -189,7 +192,7 @@ USE_TZ = True
 
 STATIC_ROOT = "/vol/web/static"
 
-MEDIA_ROOT =  BASE_DIR / "media" if DEBUG else '/vol/web/media'
+MEDIA_ROOT = BASE_DIR / "media" if DEBUG else '/vol/web/media'
 STATIC_URL = "/static/" if DEBUG else '/static/static/'
 MEDIA_URL = "/media/" if DEBUG else '/static/media/'
 
@@ -222,20 +225,19 @@ SESSION_COOKIE_AGE = 1209600 * 4
 
 LOGGING = None
 
-if not DEBUG:
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'handlers': {
-            'console': {
-                'class': 'logging.StreamHandler',
-            },
-        },
-        'loggers': {
-            'django': {
-                'handlers': ['console'],
-                'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-            },
-        },
-    }
-
+# if not DEBUG:
+#     LOGGING = {
+#         'version': 1,
+#         'disable_existing_loggers': False,
+#         'handlers': {
+#             'console': {
+#                 'class': 'logging.StreamHandler',
+#             },
+#         },
+#         'loggers': {
+#             'django': {
+#                 'handlers': ['console'],
+#                 'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+#             },
+#         },
+#     }

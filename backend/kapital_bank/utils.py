@@ -4,7 +4,10 @@ from django.conf import settings
 from .models import KapitalPaymentSecurity
 from secure_sites.models import SecureSite
 
-import requests, os, xmltodict
+import requests
+import os
+import xmltodict
+
 
 def generate_payment_url(order):
     secure_site = SecureSite.objects.filter(active=True).first()
@@ -18,11 +21,13 @@ def generate_payment_url(order):
         "uuid": order.uuid,
     })
 
-    if order.is_purchased and not settings.DEBUG: return cancel_url
+    if order.is_purchased and not settings.DEBUG:
+        return cancel_url
 
     security = KapitalPaymentSecurity.objects.filter(active=True).first()
 
-    if not security: return cancel_url
+    if not security:
+        return cancel_url
 
     data = generate_data(order, security, success_url, cancel_url)
 
@@ -34,17 +39,20 @@ def generate_payment_url(order):
     headers = {'Content-Type': 'application/xml'}
 
     response = requests.post(
-        security.service_link, 
-        data=data, 
-        headers=headers, 
-        verify = security.verify,
+        security.service_link,
+        data=data,
+        headers=headers,
+        verify=security.verify,
         cert=(crt_file, key_file)
     )
 
-    if response.status_code >= 400: return cancel_url
+    if response.status_code >= 400:
+        return cancel_url
 
     xml = response.text
-    
+
+    print(xml)
+
     create_order_dict = xmltodict.parse(xml, process_namespaces=True)
 
     try:
@@ -54,9 +62,11 @@ def generate_payment_url(order):
     except KeyError:
         return cancel_url
 
-    payment_url = security.payment_link.replace("{{ORDERID}}", order_id).replace("{{SESSIONID}}", session_id)
-    
+    payment_url = security.payment_link.replace(
+        "{{ORDERID}}", order_id).replace("{{SESSIONID}}", session_id)
+
     return payment_url
+
 
 def generate_data(order, security, success_url, cancel_url):
     data = f"""<?xml version="1.0" encoding="UTF-8"?>
