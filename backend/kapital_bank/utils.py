@@ -53,13 +53,12 @@ def generate_payment_url(order):
 
     create_order_dict = xmltodict.parse(xml, process_namespaces=True)
 
-    try:
-        print(create_order_dict)
-        order_dict = create_order_dict['TKKPG']['Response']['Order']
-        order_id = order_dict['OrderID']
-        session_id = order_dict['SessionID']
-    except KeyError:
-        return cancel_url
+    # try:
+    order_dict = create_order_dict['TKKPG']['Response']['Order']
+    order_id = order_dict['OrderID']
+    session_id = order_dict['SessionID']
+    # except KeyError:
+    #     return cancel_url
 
     payment_url = security.payment_link.replace(
         "{{ORDERID}}", order_id).replace("{{SESSIONID}}", session_id)
