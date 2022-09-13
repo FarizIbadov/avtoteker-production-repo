@@ -38,6 +38,6 @@ services:
     container_name: avtoteker-db
     image: postgres:11-alpine
     env_file: .env
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data/
+    # volumes:
+    #   - ./pgdata:/var/lib/postgresql/data/
 
