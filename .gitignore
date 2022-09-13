@@ -4,5 +4,5 @@ static_data/static/
 private-media/
 
 media/
-
+pgdata/
 locale/
