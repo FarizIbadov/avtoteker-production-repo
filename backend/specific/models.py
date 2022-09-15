@@ -27,11 +27,10 @@ class Season(CustomModel):
         return self.title
 
     def save(self, *args, **kwargs):
-        super().save(*args,**kwargs)
+        super().save(*args, **kwargs)
 
         if self.image:
-            compress(self.image.path, (1024, 1024))
-
+            compress(self.image.path, (720, 720))
 
 
 class Country(CustomModel):
@@ -40,7 +39,6 @@ class Country(CustomModel):
 
     def __str__(self):
         return self.title
-
 
     def get_image(self):
         if self.image:
@@ -54,9 +52,9 @@ class Country(CustomModel):
         return self.title
 
     def save(self, *args, **kwargs):
-        super().save(*args,**kwargs)
+        super().save(*args, **kwargs)
         if self.image:
-            compress(self.image.path, (1024, 1024))
+            compress(self.image.path, (720, 720))
 
     class Meta:
         verbose_name_plural = "Countries"
@@ -80,9 +78,9 @@ class Brand(CustomModel):
         return self.title
 
     def save(self, *args, **kwargs):
-        super().save(*args,**kwargs)
+        super().save(*args, **kwargs)
         if self.image:
-            compress(self.image.path, (1024, 1024))
+            compress(self.image.path, (720, 720))
 
     def get_image(self):
         if self.image:
@@ -97,7 +95,6 @@ class Brand(CustomModel):
 
     def get_free_service(self):
         return self.one_year_free_service or self.two_year_free_service
-
 
 
 class Serie(CustomModel):
@@ -115,17 +112,15 @@ class Serie(CustomModel):
     description = RichTextUploadingField(blank=True, null=True)
     extra = RichTextUploadingField(blank=True, null=True)
     image_url = models.URLField(blank=True, null=True)
-    
+
     def __str__(self):
         return self.title
 
-
     def save(self, *args, **kwargs):
-        super().save(*args,**kwargs)
-        
+        super().save(*args, **kwargs)
+
         if self.image:
             compress(self.image.path, quality=90)
-
 
     def get_image(self):
         if self.image:
@@ -139,10 +134,10 @@ class Serie(CustomModel):
         return self.title
 
 
-
 class SubLogo(models.Model):
     logo = models.ImageField(upload_to="sub-logo/", null=True)
-    serie = models.ForeignKey(Serie, on_delete=models.CASCADE, null=True, related_name="serie_sub_logos")
+    serie = models.ForeignKey(
+        Serie, on_delete=models.CASCADE, null=True, related_name="serie_sub_logos")
 
     order = models.PositiveSmallIntegerField(null=True)
 
