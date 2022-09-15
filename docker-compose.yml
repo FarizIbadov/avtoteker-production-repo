@@ -36,7 +36,7 @@ services:
   db:
     restart: always
     container_name: avtoteker-db
-    image: postgres:11-alpine
+    image: postgres:12.5-alpine
     env_file: .env
     volumes:
       - ./pgdata:/var/lib/postgresql/data/
