@@ -29,8 +29,11 @@ class Season(CustomModel):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
+        self.optimize_image()
+
+    def optimize_image(self):
         if self.image:
-            compress(self.image.path, (720, 720))
+            compress(self.image.path, (480, 480))
 
 
 class Country(CustomModel):
@@ -53,8 +56,12 @@ class Country(CustomModel):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+        self.optimize_image()
+
+    def optimize_image(self):
         if self.image:
-            compress(self.image.path, (720, 720))
+            compress(self.image.path, (480, 480))
 
     class Meta:
         verbose_name_plural = "Countries"
@@ -79,8 +86,12 @@ class Brand(CustomModel):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+        self.optimize_image()
+
+    def optimize_image(self):
         if self.image:
-            compress(self.image.path, (720, 720))
+            compress(self.image.path, (480, 480))
 
     def get_image(self):
         if self.image:
