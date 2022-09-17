@@ -130,8 +130,11 @@ class Serie(CustomModel):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
+        self.optimize_image()
+
+    def optimize_image(self):
         if self.image:
-            compress(self.image.path, quality=90)
+            compress(self.image.path, (480, 480))
 
     def get_image(self):
         if self.image:

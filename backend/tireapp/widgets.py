@@ -19,6 +19,8 @@ class CustomBrandWidget(Widget):
         if not brand:
             brand = Brand.objects.create(title=title)
 
+        brand.optimize_image()
+
         return brand
 
 
@@ -41,6 +43,8 @@ class CustomSerieWidget(Widget):
                 brand=brand
             )
 
+        serie.optimize_image()
+
         return serie
 
 
@@ -48,6 +52,7 @@ class CustomCountryWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
         title = value.strip()
         country, _ = Country.objects.get_or_create(title=title)
+        country.optimize_image()
         return country
 
 
@@ -74,6 +79,7 @@ class CustomSizeWidget(Widget):
 class CustomSeasonWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
         season, _ = Season.objects.get_or_create(title=value)
+        season.optimize_image()
         return season
 
 
