@@ -1,8 +1,8 @@
 node_modules/
-static_data/static/
+# static_data/
 
 private-media/
 
 media/
-pgdata/
+# pgdata/
 locale/
