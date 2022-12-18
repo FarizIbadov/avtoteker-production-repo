@@ -4,7 +4,7 @@ from .models import Oil
 
 
 class OilMainView(TemplateView):
-    template_name = "oil/main.html"
+    template_name = "oil/index.html"
 
 
 class OilListView(ListView):
