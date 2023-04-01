@@ -9,7 +9,7 @@ class KreditTaksitImage(models.Model):
         ("kredit","Kredit"),
     ]
 
-    image = models.ImageField(upload_to="taksit-kredit")
+    image = models.ImageField(upload_to="taksit-kredit", blank=True, null=True)
     name = models.CharField(max_length=20,choices=NAME_FIELD,unique=True)
 
     description = models.TextField(default="Qeyd olunan şinləri nağd endirimli qiymətlərdən {{month}} ayadək faizsiz, ilkin ödənişsiz və komissiyasız əldə edə bilərsiniz")

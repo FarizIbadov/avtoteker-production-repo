@@ -11,9 +11,11 @@
         {% for data in kredit_takist_dataset %}
             <div class="carousel-item {% if forloop.first %} active {% endif %} h-100 w-full" data-interval="{{interval}}" title="{{data.image.description}}">
                 <div class="d-flex align-items-center justify-content-end">
+                    {% if data.image %}
                     <div class="kredit-taksit-fig d-flex  mr-2" >
                         <img src="{{data.image.url}}" alt="{{data.image.description}}">
                     </div>
+                    {% endif %}
                     <div class="kredit-taksit-carousel-info">
                         <div class="my-1">{{data.title|safe}}</div>
                         <div class="my-1">{{data.content|safe}}</div>
