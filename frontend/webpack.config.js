@@ -15,7 +15,7 @@ module.exports = {
     port: 3000,
     contentBase: path.resolve(__dirname, "..", "backend", "static"),
     publicPath: "/static/",
-    open: true,
+    open: 'firefox',
     proxy: {
       "/**": {
         target: "http://localhost:8000",

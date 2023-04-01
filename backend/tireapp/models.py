@@ -67,6 +67,8 @@ class Size(CustomModel):
 
 
 class Tire(CustomModel):
+  
+
     KREDIT_CHOICES =  [
         (0,"Yoxdur"),
         (3,"3 ay"),
@@ -213,6 +215,8 @@ class Tire(CustomModel):
     order_number = models.PositiveIntegerField(default=1)
 
     active = models.BooleanField(default=True)
+
+
 
     @property
     def brand_url(self):

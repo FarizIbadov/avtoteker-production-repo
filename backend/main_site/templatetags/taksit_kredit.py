@@ -23,6 +23,7 @@ def get_kredit_takist_dataset(value, request):
 
     code = request.LANGUAGE_CODE
 
+
     for field in taksit_kredit_fields:
         month = getattr(value,field,None)
 
@@ -34,13 +35,18 @@ def get_kredit_takist_dataset(value, request):
             taksit = _('{{month}} ay 0%')
             title = taksit.replace("{{month}}", str(month))
             price_title = "%s_%d" % ("taksit", month)
+            content = _("<span class='text-danger font-weight-bold'>0%</span>")
         except ValueError:
             kredit = _("{{month}} ay 0%")
             title = kredit.replace('{{month}}', str(month))
             price_title = "%s_%d" % ("kredit" ,month)
-        
+
+            content = _('ayda')
+      
         
         price = getattr(value, price_title, None)
+        
+        content = content.replace("{{price}}", str(price))
 
         if not price:
             continue
@@ -56,7 +62,7 @@ def get_kredit_takist_dataset(value, request):
             title, 
             price, 
             month, 
-            description.replace("{{month}}", str(month))
+            content
         )   
         
         carousel_item_datas.append(carousel_item_data)
@@ -127,10 +133,13 @@ def get_total_price(month, partial_price, initial_price=0):
 
 
 class TaksitKreditCarouselItemData:
-    def __init__(self, image, title, price, month, description):
+    def __init__(self, image, title, price, month, content):
         self.image = image
         self.title = title
         self.price = price
         self.month = month
-        self.description = description
+        self.content = content
+    
 
+
+# {{data.price|floatformat:"2"}} / 
