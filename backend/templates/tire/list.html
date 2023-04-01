@@ -74,11 +74,11 @@
                                     {% include "../components/main-site/image.html" with object=object.brand.country %}
                                     {% include "../components/main-site/image.html" with object=object.manufacturer %}
                                 </div>
-                                {% include "../components/tire/price.html" with object=object %}
                                 
                             </div>
                         </div>
                         <div class="row justify-content-end w-100 no-gutters">
+                            {% include "../components/tire/price.html" with object=object %}
                             {#{% include "../components/tire/additional-info.html" with object=object edv=edv %}#}
                             
                         </div>

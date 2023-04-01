@@ -10,7 +10,7 @@
     <div class="carousel-inner h-100 kredit-taksit-item">
         {% for data in kredit_takist_dataset %}
             <div class="carousel-item {% if forloop.first %} active {% endif %} h-100 w-full" data-interval="{{interval}}" title="{{data.image.description}}">
-                <div class="d-flex align-items-center justify-content-end">
+                <div class="d-flex align-items-center justify-content-end h-100">
                     {% if data.image %}
                     <div class="kredit-taksit-fig d-flex  mr-2" >
                         <img src="{{data.image.url}}" alt="{{data.image.description}}">

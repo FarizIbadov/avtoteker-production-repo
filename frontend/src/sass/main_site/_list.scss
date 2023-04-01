@@ -48,7 +48,7 @@
 
   &__price-info {
     font-family: Rubik !important;
-
+    min-width: 250px
   }
 
   &__col-12 {
@@ -206,6 +206,11 @@
 .kredit-taksit-item {
   font-size: 15px;
   width: 120px;  
+
+  min-height: 55px;
+
+  display: flex;
+  align-items: center;
 
   @media screen and (max-width: 992px) {
     width: 110px;
