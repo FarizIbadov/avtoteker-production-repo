@@ -65,6 +65,10 @@
 .non-sale {
   font-size: 24px;
   padding: 0 12px;
+
+  @media screen and (max-width: 992px) {
+    font-size: 20px !important;
+  }
 }
 
 
@@ -76,6 +80,17 @@
   line-height: 1;
   font-weight: 600 ;
   min-width: 50%;
+
+  @media screen and (max-width: 992px) {
+      min-width: 40% !important;
+
+      .price-cash {
+        font-size: 40px !important;
+        margin-right: 6px !important;
+        
+      }
+  }
+
 
 
   .price-cash {
@@ -113,6 +128,20 @@ div.sub-price {
   width: 31px;
 
   margin: 2px 0;
+
+
+  @media screen and (max-width: 992px) {
+    width: 31px;
+    p {
+      margin-bottom: 0;
+      font-size: 20px !important;
+    }
+    img {
+      width: 20px !important;
+      filter: brightness(0) invert(1);
+    }
+  }
+  
 
   p {
     margin-bottom: 0;
