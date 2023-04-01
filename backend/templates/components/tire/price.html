@@ -22,7 +22,7 @@
                 <hr class="line-through white-line-through">
                 {% endif %}
             </div>  
-            {% if object.get_price_3_color == 'y' %}
+            {% if object.get_price_3_color == 'y' or not object.price_3 %}
                 {% include "../main-site/kredit-taksit-carousel.html" with object=object request=request %}
             {% endif %}
         </div>
@@ -42,7 +42,7 @@
                 {% endif %}
             </div>  
             
-            {% if object.get_price_3_color == 'y' %}
+            {% if object.get_price_3_color == 'y' or not object.price_3 %}
                 {% include "../main-site/kredit-taksit-carousel.html" with object=object request=request %}
             {% endif %}
         </div>
