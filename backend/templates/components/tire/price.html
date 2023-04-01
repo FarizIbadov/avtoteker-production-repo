@@ -2,7 +2,7 @@
 {% load price %}
 
 {% if object.price %}
-<div class="main-list__price-info mb-4 d-flex flex-column align-items-start">
+<div class="main-list__price-info my-4 d-flex flex-column align-items-start">
     {% if object.sale %}
         <div class="non-sale opacity-8 bg-light py-0.5 d-inline-block position-relative overflow-hidden">
             <span >{{object.price|floatformat:-2}}</span>
