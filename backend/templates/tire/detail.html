@@ -51,7 +51,7 @@
         <div class="main-list__sub-row--2-detail">
           
           {% include "../components/product-image.html" with object=object %}
-          <div class="main-list__col-sm--2 w-35 mb-5 mt-2">
+          <div class="main-list__col-sm--2 w-35  mt-2">
             <div class="main-list__card-body">
               <div class="main-list__card-text--2 detail-font-larger">
                 <div class='ml-2'>{{object.weight}} {{object.speed}}</div>
@@ -64,14 +64,16 @@
                 {% include "../components/main-site/image.html" with object=object.brand.country %} 
                 {% include "../components/main-site/image.html" with object=object.manufacturer %}
               </div>
-              {% include "../components/tire/price.html" with object=object %}
             </div>
             {#{% include "../components/main-site/third-price.html" with object=object %}#}
           </div>
         </div>
         <div>
           <div class="row justify-content-end ml-auto no-gutters">
-              {#{% include "../components/tire/additional-info.html" with object=object edv=edv %}#}
+            <div>
+              {% include "../components/tire/price.html" with object=object %}
+              {% include "../components/tire/additional-info.html" with object=object edv=edv %}
+            </div>
           </div>
           {% include '../components/tire/social-box.html' with object=object detail=True %}
           <div class="d-flex justify-content-end align-items-center ml-auto mt-4">

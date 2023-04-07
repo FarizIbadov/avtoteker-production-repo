@@ -18,6 +18,11 @@ import "./orderForm";
 import "./videoPlayer";
 import "./kreditTaksitTable";
 
+import '../img/cart.png'
+import '../img/detail.png'
+import '../img/phone.png'
+import '../img/watsapp.png'
+
 const form = document.querySelector<HTMLFormElement>(".needs-validation");
 const listCartBtns = document.querySelectorAll<HTMLButtonElement>(".order-btn");
 const tireInput = document.getElementById("id_tire") as HTMLInputElement;

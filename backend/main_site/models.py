@@ -55,3 +55,19 @@ class ManatIcon(models.Model):
 
     def __str__(self):
         return self.image.name
+
+
+class TireBottomIcons(models.Model):
+    title = models.CharField(max_length=255, null=True)
+    detail_icon = models.ImageField(upload_to="detail_icons", null=True)
+    cart_icon = models.ImageField(upload_to="cart_icons", null=True)
+    phone_icon = models.ImageField(upload_to="phone_icons", null=True)
+    watsapp_icon = models.ImageField(upload_to="watsapp_icon", null=True)
+
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+    
+

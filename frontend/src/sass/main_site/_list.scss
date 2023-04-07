@@ -48,7 +48,11 @@
 
   &__price-info {
     font-family: Rubik !important;
-    // min-width: 250px
+    width: 280px;
+
+    @media screen and (max-width: 992px) {
+      width: 240px;
+    }
   }
 
   &__col-12 {
@@ -370,21 +374,36 @@
 }
 
 .social-box {
-  margin-top: 10px !important;
-}
+  width: 280px;
 
-.social-lg-btn {
-  min-width: 101px;
+  @media screen and (max-width: 992px) {
+    width: 240px;
+  }
 
-  &.full {
-    width: 182px;
+  img {
+    object-fit: contain;
+  }
+
+  & > a {
+    width: 70px;
+    cursor: pointer;
+  }
+
+  & > div {
+    width: 69%;
+
+    @media screen and (max-width: 992px) {
+      width: 64%;
+    }
+  }
+
+  & > div > * {
+    width: 55px;
+    cursor: pointer;
+
+    @media screen and (max-width: 992px) {
+      width: 45px;
+    }
   }
 }
 
-.social-sm-btn {
-  min-width: 81px;
-
-  &.full {
-    width: 182px;
-  }
-}

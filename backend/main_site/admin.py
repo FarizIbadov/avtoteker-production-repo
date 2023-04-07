@@ -9,3 +9,7 @@ class PriceColorAdmin(admin.ModelAdmin):
 @admin.register(models.ManatIcon)
 class ManatIconAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(models.TireBottomIcons)
+class TireBottomIconsAdmin(admin.ModelAdmin):
+    pass

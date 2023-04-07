@@ -1,26 +1,20 @@
 {% load i18n  %}
+{% load static %}
 
-<div class="mt-2 w-100 d-flex align-items-end justify-content-end flex-column">
-    <div class="d-flex">
-        <button type="button" data-toggle="modal"
-            data-target="#order" class="order-btn btn btn-danger rounded-0 btn-sm social-lg-btn shadow-none {% if detail %} full {% endif %}"
-            data-max="{{object.quantity}}"
-            data-price="{{object.sale}}"
-            data-id="{{object.id}}"
-            data-taksit-list="{{object.get_available_taksit_list}}">
-            {% trans 'Sifariş et' %}
-        </button>
-        
-        {% if not detail %}
-        <a href="{{object.get_absolute_url}}" class="d-inline-block btn btn-sm btn-primary-1 rounded-0 social-sm-btn shadow-none">{% trans 'Ətraflı' %}</a>
-        {% endif %}
-    </div>
+{% load tire_bottom_icons %}
 
-    <div class="d-flex">
-        <a class="social-lg-btn bg-primary-1 text-dark py-1 px-2 btn btn-sm rounded-0 shadow-none" href="{% trans 'https://wa.me/message/6ZKMXUJK45HMM1' %}">{% trans 'bizə yazın' %}</a>
-    
-        <a class="{% if detail %} bg-light-2 text-dark {% else %} bg-danger text-white {% endif %}  py-1 px-2 btn btn-sm rounded-0 shadow-none social-sm-btn" href="tel:{% trans '+994124803162' %}">
-            {% trans 'zəng et' %}
-        </a> 
+{% get_tire_bottom_icons as icons %}
+
+<div class="social-box ml-auto d-flex align-items-center justify-content-end">
+    {% if not detail %}
+    <a class="mr-auto" href="{{object.get_absolute_url}}"><img class="w-100 h-100" src="{% if not icons %}{% static 'img/detail.png' %}{% else %} {{icons.detail_icon.url}} {% endif %}" alt="detail"></a>
+    {% endif %}
+    <div class="d-flex justify-content-between">
+        <a class="order-btn" data-toggle="modal" data-target="#order" data-max="{{object.quantity}}"
+        data-price="{{object.sale}}"
+        data-id="{{object.id}}"
+        data-taksit-list="{{object.get_available_taksit_list}}" ><img class="w-100 h-100" src="{% if not icons %}{% static 'img/cart.png' %}{% else %} {{icons.cart_icon.url}} {% endif %}" alt="cart"></a>
+        <a href="tel:{% trans '+994124803162' %}"><img class="w-100 h-100" src="{% if not icons %}{% static 'img/phone.png' %}{% else %}{{icons.phone_icon.url}}{% endif %}" alt="phone"></a>
+        <a href="{% trans 'https://wa.me/message/6ZKMXUJK45HMM1' %}"><img class="w-100 h-100" src="{% if not icons %}{% static 'img/watsapp.png' %}{% else %}{{icons.watsapp_icon.url}}{% endif %}" alt="watsapp"></a>
     </div>
 </div>
