@@ -48,10 +48,10 @@
 
   &__price-info {
     font-family: Rubik !important;
-    width: 300px;
+    min-width: 300px;
 
     @media screen and (max-width: 992px) {
-      width: 240px;
+      min-width: 240px;
     }
   }
 
@@ -269,6 +269,10 @@
   &--2 {
     background: linear-gradient(110deg, #ffbb00 0 64%, #dc3545 64% 100%);
   }
+
+  @media screen and (max-width: 992px) {
+    font-size: 13px !important;
+  }
 }
 
 .non-visible {
@@ -408,9 +412,9 @@
 }
 
 .sticker-carouser {
-  width: 300px;
+  min-width: 300px;
 
   @media screen and (max-width: 992px) {
-    width: 240px;
+    min-width: 240px;
   }
 }
