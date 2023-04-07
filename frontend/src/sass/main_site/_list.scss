@@ -412,9 +412,11 @@
 }
 
 .sticker-carouser {
-  min-width: 300px;
+  width: 300px;
+
 
   @media screen and (max-width: 992px) {
-    min-width: 240px;
+    width: 240px;
+    font-size: 13px !important;
   }
 }
