@@ -5,7 +5,7 @@
     <ul class="navbar-nav ml-auto nav-extra h-100" id="nav-list">
         {% for navigation in navigations %}
         <li class="nav-item">
-            <a class="nav-link {% if forloop.last %} pr-0 {% endif %}" href="{{ navigation.link }}">{{navigation.title}}</a>
+            <a class="nav-link text-nowrap {% if forloop.last %} pr-0 {% endif %}" href="{{ navigation.link }}">{{navigation.title}}</a>
         </li>
         {% endfor %}
     </ul>
