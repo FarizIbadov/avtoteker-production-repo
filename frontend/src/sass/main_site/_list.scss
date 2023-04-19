@@ -300,11 +300,6 @@
 .video-player {
   position: relative;
   background-color: #333;
-
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
-
   overflow: hidden;
 }
 
@@ -419,5 +414,15 @@
   @media screen and (max-width: 992px) {
     width: 240px;
     font-size: 13px !important;
+  }
+}
+
+
+.price-container {
+  width: 300px;
+
+  @media screen and (max-width: 992px) {
+    width: 240px;
+    
   }
 }
