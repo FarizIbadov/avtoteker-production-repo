@@ -13,6 +13,7 @@ urlpatterns = i18n_patterns(
     path("",include('wheel_size.urls')),
     path("campaigns/",include("campaign.urls")),
     path("blogs/",include("news.urls")),  
+    path("about-us/", include('about.urls')),
     path('',include('ordering.urls')),
     path("", include("kapital_bank.urls")),
 )

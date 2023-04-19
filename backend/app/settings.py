@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     "adv",
     "adds.apps.AddsConfig",
     "copyright.apps.CopyrightConfig",
+    "about",
 ]
 
 REST_FRAMEWORK = {
