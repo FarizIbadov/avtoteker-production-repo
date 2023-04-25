@@ -8,7 +8,7 @@
             <span >{{object.price|floatformat:-2}}</span>
             <hr class="line-through red-line-through">
         </div>
-        <div class="d-flex align-items-center justify-content-between w-100">
+        <div class="d-flex align-items-center justify-content-end w-100">
             <div class="price text-center {% if object.price_3 %} bg-dark {% else %} bg-danger {% endif %} text-white position-relative overflow-hidden">
                 <div class="price-cash">
                     {% split_price object.sale as sale_price %}
@@ -27,7 +27,7 @@
             {% endif %}
         </div>
     {% else %}
-        <div class="d-flex align-items-center justify-content-between w-100">
+        <div class="d-flex align-items-center justify-content-end w-100">
             <div class="price text-center {% if object.price_3 %} bg-dark {% else %} bg-danger {% endif %} text-white position-relative overflow-hidden">
                 <div class="price-cash">
                     {% split_price object.price as price %}
@@ -50,7 +50,7 @@
     {% endif %}
 
     {% if object.price_3 %}
-        <div class="d-flex align-items-center justify-content-between w-100">
+        <div class="d-flex align-items-center justify-content-end w-100">
             <div class="price {{object.get_price_3_color}} text-center">
                 <div class="price-cash">
                     {% split_price object.get_price_3 as third_price %}
