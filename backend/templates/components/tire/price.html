@@ -8,7 +8,7 @@
             <span >{{object.price|floatformat:-2}}</span>
             <hr class="line-through red-line-through">
         </div>
-        <div class="d-flex align-items-center {% if object.get_price_3_color == 'r' %} justify-content-between {% else %} justify-content-end {% endif %} w-100">
+        <div class="d-flex align-items-center {% if object.get_price_3_color == 'y' or not object.price_3 %} justify-content-between {% else %} justify-content-end {% endif %} w-100">
             <div class="price text-center {% if object.price_3 %} bg-dark {% else %} bg-danger {% endif %} text-white position-relative overflow-hidden">
                 <div class="price-cash">
                     {% split_price object.sale as sale_price %}
