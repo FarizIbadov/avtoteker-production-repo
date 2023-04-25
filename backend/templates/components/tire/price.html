@@ -27,7 +27,7 @@
             {% endif %}
         </div>
     {% else %}
-        <div class="d-flex align-items-center {% if object.get_price_3_color == 'y' or not object.price_3 %} justify-content-end {% else %} justify-content-between {% endif %} w-100">
+        <div class="d-flex align-items-center {% if object.get_price_3_color == 'y' or not object.price_3 %} justify-content-between {% else %} justify-content-end {% endif %} w-100">
             <div class="price text-center {% if object.price_3 %} bg-dark {% else %} bg-danger {% endif %} text-white position-relative overflow-hidden">
                 <div class="price-cash">
                     {% split_price object.price as price %}
@@ -50,7 +50,7 @@
     {% endif %}
 
     {% if object.price_3 %}
-        <div class="d-flex align-items-center {% if object.get_price_3_color == 'r' %} justify-content-end {% else %} justify-content-between {% endif %} w-100">
+        <div class="d-flex align-items-center {% if object.get_price_3_color == 'r' %} justify-content-between {% else %} justify-content-end {% endif %} w-100">
             <div class="price {{object.get_price_3_color}} text-center">
                 <div class="price-cash">
                     {% split_price object.get_price_3 as third_price %}
